@@ -37,3 +37,7 @@ export const Row = styled.div`
     }
 
 `;
+
+export const Padding = styled.div`
+    padding: ${props => props.padding || "5px"};
+`;
