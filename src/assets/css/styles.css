@@ -1,0 +1,60 @@
+
+
+html,
+body {
+  height: 100%;
+  margin: 0px;
+}
+
+@font-face {
+  font-family: "Poppins Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Poppins Regular"),
+    url("./../font/Poppins-Regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins ExtraLight";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Poppins ExtraLight"),
+    url("../font/Poppins-ExtraLight.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins Light";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Poppins Light"), url("../font/Poppins-Light.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins SemiBold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Poppins SemiBold"),
+    url("../font/Poppins-SemiBold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Poppins Bold";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Poppins Bold"), url("../font/Poppins-Bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: normal;
+  src: local("Inter Regular"), url("../font/Inter-Regular.ttf") format("truetype");
+}
+
+.t-button-primary {
+  width: 100%;
+  border: none;
+  padding: 10.5px;
+}
+
+

@@ -1,11 +1,14 @@
 import React from "react";
-import { Row } from "../../CrasUi/styles/styles";
+import { Column, Row } from "../../CrasUi/styles/styles";
+import CrasTable from "../../CrasUi/Table";
 
 const HomePage = () => {
     return(
-        <Row>
-            bnv b
-        </Row>
+        <Column>
+            <CrasTable>
+                
+            </CrasTable>
+        </Column>
     )
 }
 
