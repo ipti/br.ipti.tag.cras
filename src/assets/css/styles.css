@@ -51,10 +51,5 @@ body {
   src: local("Inter Regular"), url("../font/Inter-Regular.ttf") format("truetype");
 }
 
-.t-button-primary {
-  width: 100%;
-  border: none;
-  padding: 10.5px;
-}
 
 

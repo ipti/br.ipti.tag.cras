@@ -5,11 +5,11 @@ import Collapse from "@kiwicom/orbit-components/lib/Collapse";
 import LinkList from "@kiwicom/orbit-components/lib/LinkList";
 import TextLink from "@kiwicom/orbit-components/lib/TextLink";
 import { Container } from "./style";
+import { Link } from "react-router-dom";
 
 
 
 const CrasMenu = () => {
-
 
     const items = [
         {
@@ -22,7 +22,8 @@ const CrasMenu = () => {
                 },
                 {
                     label: "Relatorio",
-                    icon: ""
+                    icon: "",
+
                 }
             ]
         },
@@ -30,7 +31,8 @@ const CrasMenu = () => {
             label: "Famílias Referenciadas"
         },
         {
-            label: "Usúarios"
+            label: "Usúarios",
+            path: "/usuarios"
         }
     ]
 
@@ -50,7 +52,9 @@ const CrasMenu = () => {
                                         <LinkList>
                                             {item.items.map((insider, key) => {
                                                 return (
-                                                    <TextLink key={key} type="secondary">{insider.label}</TextLink>
+                                                    <Link to={item.path}>
+                                                        <TextLink key={key} type="secondary">{insider.label}</TextLink>
+                                                    </Link>
                                                 )
                                             })}
                                         </LinkList>
@@ -59,9 +63,11 @@ const CrasMenu = () => {
                             </Padding> :
                                 <Padding padding="10px 10px">
                                     <LinkList>
-                                        <TextLink type="secondary">
-                                            {item.label}
-                                        </TextLink>
+                                        <Link to={item.path}>
+                                            <TextLink type="secondary">
+                                                {item.label}
+                                            </TextLink>
+                                        </Link>
                                     </LinkList>
                                 </Padding>}
                         </>
