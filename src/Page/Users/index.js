@@ -2,76 +2,50 @@ import React from "react";
 import { Column, Padding, Row } from "../../CrasUi/styles/styles";
 import { Container } from "./styles";
 import CrasTable from "../../CrasUi/Table";
-import { Link } from "react-router-dom";
+import { InputText } from "primereact/inputtext";
+import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
 
 const UserPage = () => {
 
-    const items = [{
-        name: "name",
-        items: [
-            {
-                text: <Link to={"/"}> asmklmamakl </Link>
-            },
-            {
-                text: "João Gomes"
-            },
-
-
-        ],
-    },
-    {
-        name: "Email",
-        items: [
-            {
-                text: "jonny@Menezes"
-            },
-            {
-                text: "João@Gomes"
-            },
-        ]
-    },
-    {
-        name: "Tipo de usuario",
-        items: [
-            {
-                text: "Administrador"
-            },
-            {
-                text: "Auxiliar administrativo"
-            },
-        ]
-    },
-    {
-        name: "Data de Cadastro",
-        items: [
-            {
-                text: "10/05/2023"
-            },
-            {
-                text: "10/06/2023"
-            },
-        ]
-    }
+    const columns = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'category', header: 'Category' },
+        { field: 'quantity', header: 'Quantity' }
     ];
 
+    const products = [
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+    ]
 
+    const header = (
+        <Row id="end">
+            <Padding>
+                <div className="p-inputgroup">
+                    <span className="p-inputgroup-addon">
+                        <i className="pi pi-search"></i>
+                    </span>
+                    <InputText placeholder="Username" />
+                </div>
+            </Padding>
+        </Row>
+    );
     return (
         <Container>
             <Column>
-                <Padding>
+                <Padding padding="20px">
                     <h1>
                         Usuarios
                     </h1>
                     <Row>
-                        <button className="t-button-primary">
-                            Adicionar
-                        </button>
-                        <Padding />
-                        <button className="t-button-primary">
-                            Adicionar
-                        </button>
+                        <ButtonPrime label={"Adicionar"} />
                     </Row>
-                    <CrasTable items={items} />
+                    <Padding padding="20px 0">
+                        <CrasTable columns={columns} products={products} header={header} />
+                    </Padding>
                 </Padding>
             </Column>
         </Container>

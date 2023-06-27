@@ -1,44 +1,15 @@
-import Table, {
-    TableBody,
-    TableCell,
-    TableHead,
-    TableRow
-} from "@kiwicom/orbit-components/lib/Table";
-import { Column, Row } from "../styles/styles";
+import { DataTable } from 'primereact/datatable';
+import { Column } from 'primereact/column';
 
 
-const CrasTable = ({items}) => {
+const CrasTable = ({ products, columns, header }) => {
 
-  
     return (
-        <Table>
-            <Row>
-                {items.map((item, index) => {
-                    return (
-                        <Column>
-                            <TableHead>
-                                <TableRow>
-                                    <TableCell key={index}>{item.name}</TableCell>
-                                </TableRow>
-                            </TableHead>
-                            {item.items.map((insider, index) => {
-                                return (
-                                    <TableBody>
-                                        <TableCell>{insider.text}</TableCell>
-                                    </TableBody>
-                                )
-                            })}
-                        </Column>
-                    )
-                })}
-            </Row>
-
-            {/* <TableFooter>
-                <TableRow>
-                    <TableCell>Footer</TableCell>
-                </TableRow>
-            </TableFooter> */}
-        </Table>
+        <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
+            {columns.map((col, i) => (
+                <Column key={col.field} field={col.field} header={col.header} />
+            ))}
+        </DataTable>
     )
 }
 
