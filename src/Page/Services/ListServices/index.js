@@ -1,11 +1,13 @@
 import React from "react";
-import { Column, Padding, Row } from "../../CrasUi/styles/styles";
-import { Container } from "./styles";
-import CrasTable from "../../CrasUi/Table";
+import { Column, Padding, Row } from "../../../CrasUi/styles/styles";
 import { InputText } from "primereact/inputtext";
-import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
+import { Container } from "./style";
+import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
+import CrasTable from "../../../CrasUi/Table";
+import { useNavigate } from "react-router-dom";
 
-const UserPage = () => {
+const ListServicesScreen = () => {
+    const history = useNavigate()
 
     const columns = [
         { field: 'code', header: 'Code' },
@@ -36,12 +38,12 @@ const UserPage = () => {
     return (
         <Container>
             <Column>
-                <Padding padding="20px">
+                <Padding padding="4%">
                     <h1>
-                        Usuarios
+                       Atendimentos
                     </h1>
                     <Row>
-                        <ButtonPrime label={"Adicionar"} />
+                        <ButtonPrime label={"Adicionar"} onClick={() => history("/criar/usuarios", { replace: true })} />
                     </Row>
                     <Padding padding="20px 0">
                         <CrasTable columns={columns} products={products} header={header} />
@@ -52,4 +54,4 @@ const UserPage = () => {
     )
 }
 
-export default UserPage
+export default ListServicesScreen;

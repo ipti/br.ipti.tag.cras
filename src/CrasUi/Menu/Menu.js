@@ -1,11 +1,11 @@
 import React from "react";
-import { Column, Padding } from "../styles/styles";
+import { Padding } from "../styles/styles";
 
 import Collapse from "@kiwicom/orbit-components/lib/Collapse";
 import LinkList from "@kiwicom/orbit-components/lib/LinkList";
 import TextLink from "@kiwicom/orbit-components/lib/TextLink";
-import { Container } from "./style";
 import { Link } from "react-router-dom";
+import { Container } from "./style";
 
 
 
@@ -19,7 +19,8 @@ const CrasMenu = () => {
             items: [
                 {
                     label: "Lista de atendimentos",
-                    icon: ""
+                    icon: "",
+                    path: "services"
                 },
                 {
                     label: "Relatorio",
@@ -45,13 +46,15 @@ const CrasMenu = () => {
             {items.map((item, index) => {
                 return (
                     <>
-                        {item.items ? <Padding padding="0 20px">
-                            <Collapse key={index} label={item.label}>
+                        {item.items ? <Padding key={index} padding="0 20px">
+                            <Collapse label={item.label}>
                                 <Padding padding="0 5px">
                                     <LinkList>
                                         {item.items.map((insider, key) => {
                                             return (
-                                                <TextLink key={key} type="secondary">  {insider.label}</TextLink>
+                                                <Link to={insider.path}>
+                                                    <TextLink key={key} type="secondary">  {insider.label}</TextLink>
+                                                </Link>
                                             )
                                         })}
                                     </LinkList>

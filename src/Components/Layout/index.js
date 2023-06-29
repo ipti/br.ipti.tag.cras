@@ -8,7 +8,7 @@ const Layout = ({children}) => {
         
         <Column style={{height: "100vh"}}>
             <Row  style={{height: "100%"}}>
-                <CrasMenu />
+                <CrasMenu/>
                 <Column style={{width: "100%"}}>
                     <TopBar />
                     <>{children}</>
