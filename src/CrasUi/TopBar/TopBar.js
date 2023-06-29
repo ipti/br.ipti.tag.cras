@@ -1,8 +1,8 @@
 import React from "react";
-import LogoutTopBar from "../../Components/LogoutTopBar";
-import { Column, Padding, Row } from "../styles/styles";
-import { Back, Container } from "./style";
 import { useNavigate } from "react-router-dom";
+import LogoutTopBar from "../../Components/LogoutTopBar";
+import { Column, Padding } from "../styles/styles";
+import { Back, Container } from "./style";
 
 const TopBar = () => {
     const history = useNavigate()

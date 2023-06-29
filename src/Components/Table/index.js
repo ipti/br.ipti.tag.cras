@@ -23,17 +23,15 @@ const Table = ({columns, list, path, name}) => {
     );
     return(
             <Column>
-                <Padding padding="20px">
                     <h1>
                         {name}
                     </h1>
                     <Row>
                         <ButtonPrime label={"Adicionar"} onClick={() => history(path, { replace: true })} />
                     </Row>
-                    <Padding padding="20px 0">
+                    <Padding padding="16px 0">
                         <CrasTable columns={columns} products={list} header={header} />
                     </Padding>
-                </Padding>
             </Column>
     )
 }

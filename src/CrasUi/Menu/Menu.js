@@ -20,7 +20,7 @@ const CrasMenu = () => {
                 {
                     label: "Lista de atendimentos",
                     icon: "",
-                    path: "services"
+                    path: "/atentimento"
                 },
                 {
                     label: "Relatorio",
@@ -29,7 +29,8 @@ const CrasMenu = () => {
             ]
         },
         {
-            label: "Famílias Referenciadas"
+            label: "Famílias Referenciadas",
+            path: "/familia"
         },
         {
             label: "Usúarios",

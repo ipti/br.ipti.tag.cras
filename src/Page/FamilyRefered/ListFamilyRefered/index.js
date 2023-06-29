@@ -1,8 +1,8 @@
 import React from "react";
-import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
+import Table from "../../../Components/Table";
 
-const ListServicesScreen = () => {
+const ListFamilyReferedScreen = () => {
 
     const columns = [
         { field: 'code', header: 'Code' },
@@ -19,11 +19,11 @@ const ListServicesScreen = () => {
     ]
 
 
-    return (
+    return(
         <Container>
-            <Table columns={columns} list={products} path="/criar/atentimento" name="Atendimentos" />
+            <Table columns={columns} list={products} path="/criar/familia" name="Família Referenciadas" />
         </Container>
     )
 }
 
-export default ListServicesScreen;
+export default ListFamilyReferedScreen;
