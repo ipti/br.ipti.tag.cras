@@ -1,6 +1,6 @@
 import React from "react";
 import Table from "../../../Components/Table";
-import { Container } from "./styles";
+import { Container } from "../../../CrasUi/styles/styles";
 
 const UserPage = () => {
 

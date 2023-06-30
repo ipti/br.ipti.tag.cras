@@ -1,10 +1,15 @@
-import React, { useState } from "react";
-import { Container } from "../../../CrasUi/styles/styles";
+import React, { useContext } from "react";
+import { CreateFamilyReferedContext } from "../../../Container/FamilyRefered/CreateFamilyRefered/context/context";
 import Steps from "../../../CrasUi/Steps";
+import { Container } from "../../../CrasUi/styles/styles";
 import FormInfoPerson from "./FormInfoPerson";
+import FormAddress from "./FormAddress";
+import FormFinances from "./FormFinances";
+import FormFamilyComposition from "./FormFamilyComposition";
 
 const CreateFamilyReferedScreen = () => {
-    const [activeStep, setActiveStep] = useState(0)
+
+    const { setActiveStep, activeStep } = useContext(CreateFamilyReferedContext);
 
     const items = [
         {
@@ -32,10 +37,18 @@ const CreateFamilyReferedScreen = () => {
             }
         }
     ];
+
     return (
         <Container>
+            <h1>
+                Criar Familia Referenciada
+            </h1>
             <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} />
-            {activeStep === 0 ? <FormInfoPerson /> : null}
+            {activeStep === 0 ?
+                <FormInfoPerson /> : activeStep === 1 ?
+                    <FormAddress /> : activeStep === 2 ?
+                        <FormFinances /> : activeStep === 3 ?
+                            <FormFamilyComposition /> : null}
         </Container>
     )
 }

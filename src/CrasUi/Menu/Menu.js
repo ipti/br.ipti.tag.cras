@@ -1,15 +1,17 @@
 import React from "react";
-import { Padding } from "../styles/styles";
+import { Column, Padding, Row } from "../styles/styles";
 
 import Collapse from "@kiwicom/orbit-components/lib/Collapse";
 import LinkList from "@kiwicom/orbit-components/lib/LinkList";
 import TextLink from "@kiwicom/orbit-components/lib/TextLink";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Container } from "./style";
 
 
 
 const CrasMenu = () => {
+
+    const history = useNavigate()
 
 
     const items = [
@@ -42,7 +44,11 @@ const CrasMenu = () => {
     return (
         <Container>
             <Padding>
-                <h1>Cras</h1>
+                <Column style={{cursor:"pointer"}} onClick={() => history("/")}>
+                    <Row id="center">
+                        <h1>Cras</h1>
+                    </Row>
+                </Column>
             </Padding>
             {items.map((item, index) => {
                 return (
@@ -53,9 +59,7 @@ const CrasMenu = () => {
                                     <LinkList>
                                         {item.items.map((insider, key) => {
                                             return (
-                                                <Link to={insider.path}>
-                                                    <TextLink key={key} type="secondary">  {insider.label}</TextLink>
-                                                </Link>
+                                                <TextLink key={key} onClick={() => history(insider.path)} type="secondary">  {insider.label}</TextLink>
                                             )
                                         })}
                                     </LinkList>
@@ -64,11 +68,9 @@ const CrasMenu = () => {
                         </Padding> :
                             <Padding padding="10px 20px">
                                 <LinkList>
-                                    <Link to={item.path}>
-                                        <TextLink type="secondary">
-                                            {item.label}
-                                        </TextLink>
-                                    </Link>
+                                    <TextLink onClick={() => history(item.path)} type="secondary">
+                                        {item.label}
+                                    </TextLink>
                                 </LinkList>
                             </Padding>}
                     </>

@@ -3,10 +3,10 @@ import React from "react";
 import { Button } from 'primereact/button';
         
 
-const ButtonPrime = ({label, onClick, icon, iconPos}) => {
+const ButtonPrime = ({label, onClick, icon, iconPos, severity}) => {
     return(
         <div className="card flex justify-content-center">
-            <Button label={label} onClick={onClick} icon={icon} iconPos={iconPos} />
+            <Button label={label} onClick={onClick} icon={icon} iconPos={iconPos} severity={severity} />
         </div>
     )
 }

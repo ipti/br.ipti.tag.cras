@@ -27,7 +27,7 @@ const Table = ({columns, list, path, name}) => {
                         {name}
                     </h1>
                     <Row>
-                        <ButtonPrime label={"Adicionar"} onClick={() => history(path, { replace: true })} />
+                        <ButtonPrime label={"Adicionar"} onClick={() => history(path)} />
                     </Row>
                     <Padding padding="16px 0">
                         <CrasTable columns={columns} products={list} header={header} />

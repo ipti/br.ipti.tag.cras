@@ -1,11 +1,27 @@
 import React from "react";
-import { Column } from "../../CrasUi/styles/styles";
+import Table from "../../Components/Table";
+import { Container } from "../../CrasUi/styles/styles";
 
 const HomePage = () => {
-    return(
-        <Column>
-            
-        </Column>
+    const columns = [
+        { field: 'code', header: 'Code' },
+        { field: 'name', header: 'Name' },
+        { field: 'category', header: 'Category' },
+        { field: 'quantity', header: 'Quantity' }
+    ];
+
+    const products = [
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+    ];
+
+
+    return (
+        <Container>
+            <Table columns={columns} list={products} />
+        </Container>
     )
 }
 

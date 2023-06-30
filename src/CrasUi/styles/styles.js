@@ -48,7 +48,6 @@ export const Container = styled.div`
 height: 100%;
 width: 100%;
 padding: 4%;
-overflow-y: scroll;
 font-size: ${style.typography.font.medium};
 font-family: ${style.typography.types.inter};
 `;

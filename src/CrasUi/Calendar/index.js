@@ -19,7 +19,7 @@ const CrasCalendar = ({ date, setDate, label,...props }) => {
     return (
         <Column>
             <label htmlFor="username">{label}</label>
-            <Calendar value={date} style={{ width: "100%" }} onChange={(e) => setDate(e.value)} locale="es" {...props} />
+            <Calendar value={date} style={{ width: "100%" }} placeholder={label} onChange={(e) => setDate(e.value)} locale="es" {...props} />
         </Column>
     )
 }
