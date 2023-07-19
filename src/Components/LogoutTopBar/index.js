@@ -1,15 +1,14 @@
 import React from "react";
 import { Container } from "./style";
-import { Row } from "../../CrasUi/styles/styles";
+import { Padding, Row } from "../../CrasUi/styles/styles";
 
 
 const LogoutTopBar = () => {
     return (
         <Container>
             <Row>
-                <div>
-                    icon
-                </div>
+            <i className="pi pi-sign-out"></i>
+            <Padding />
                 <div>Sair</div>
             </Row>
         </Container>
