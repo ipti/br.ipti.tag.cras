@@ -7,3 +7,4 @@ export const Box = styled.div`
          width: 50%;
     }
 `;
+

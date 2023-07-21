@@ -1,9 +1,12 @@
 import React from "react";
 import LoginPage from "../../Page/Login";
+import LoginProvider from "../../context/Login/context";
 
 const Login = () => {
-    return(
-        <LoginPage />
+    return (
+        <LoginProvider>
+            <LoginPage />
+        </LoginProvider>
     )
 }
 
