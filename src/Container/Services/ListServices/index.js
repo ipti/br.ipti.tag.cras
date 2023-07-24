@@ -1,12 +1,12 @@
 import React from "react";
 import ListServicesScreen from "../../../Page/Services/ListServices";
-import ListServicesProvider from "./context/context";
+import ServiceProvider from "../../../context/Service/context";
 
 const ListServices = () => {
     return(
-        <ListServicesProvider>
+        <ServiceProvider>
             <ListServicesScreen />
-        </ListServicesProvider>
+        </ServiceProvider>
     )
 }
 

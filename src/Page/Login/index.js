@@ -11,7 +11,6 @@ const LoginPage = () => {
 
     const { handleLogin, initialValue, LoginSchema } = useContext(LoginContext);
 
-    console.log(initialValue)
     return (
         <Column style={{ height: "100vh" }}>
             <Box>
@@ -39,7 +38,7 @@ const LoginPage = () => {
                                     <div style={{ color: "red" }}>{errors.password}</div>
                                 ) : null}
                                 <Padding padding="16px" />
-                                <ButtonPrime label={"Entrar"} />
+                                <ButtonPrime type="submit" label={"Entrar"} />
                             </form>
                         }
                     </Formik>

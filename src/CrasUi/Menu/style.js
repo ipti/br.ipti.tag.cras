@@ -4,4 +4,7 @@ import styles from "../styles/index"
 export const Container = styled.div`
     background-color: ${styles.colors.colorsBaseProductLighter};
     min-width: 230px;
+    @media screen and (max-width: 750px) {
+        display: none;
+    }
 `;

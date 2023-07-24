@@ -13,24 +13,24 @@ const CreateServicesScreen = () => {
                         Novo Atendimentos
                     </h1>
                     <Row>
-                        <div class="col">
+                        <div className="col">
                             <CrasCalendar showIcon />
                         </div>
-                        <div class="col">
+                        <div className="col">
                         </div>
                     </Row>
                     <h3>Dados do atendimento</h3>
                     <Row>
-                        <div class="col"><CrasDropdown label="Serviço" /></div>
-                        <div class="col"><CrasInput label="Solicitação" /></div>
+                        <div className="col"><CrasDropdown label="Serviço" /></div>
+                        <div className="col"><CrasInput label="Solicitação" /></div>
                     </Row>
                     <Row>
-                        <div class="col"><CrasInput label="Providências" /></div>
-                        <div class="col"><CrasInput label="Resultado" /></div>
+                        <div className="col"><CrasInput label="Providências" /></div>
+                        <div className="col"><CrasInput label="Resultado" /></div>
                     </Row>
                     <Row>
-                        <div class="col"><CrasDropdown label="Técnico Responsável" /></div>
-                        <div class="col"><CrasDropdown label="Usuário ou Membro Familiar" /></div>
+                        <div className="col"><CrasDropdown label="Técnico Responsável" /></div>
+                        <div className="col"><CrasDropdown label="Usuário ou Membro Familiar" /></div>
                     </Row>
                     <Padding padding="16px" /> 
                     <Row id="end">

@@ -1,27 +1,30 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
+import { UserContext } from "../../../context/User/context";
 
 const UserPage = () => {
 
 
+
+    const { error, isLoading, user } = useContext(UserContext);
+
+
     const columns = [
-        { field: 'code', header: 'Code' },
-        { field: 'name', header: 'Name' },
-        { field: 'category', header: 'Category' },
-        { field: 'quantity', header: 'Quantity' }
+        {field: 'id', header: 'id' },
+        { field: 'name', header: 'Nome' },
+        { field: 'email', header: 'Email' },
+        { field: 'type_user', header: 'Tipo de usuário' },
     ];
 
-    const products = [
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-    ];
+    const userConvert = user ?  user.map((data ) => ({ ...data, type_user: data.type_user  === 1 ? "administrador" : "user" })) : [];
 
-   return(
+    return (
         <Container>
-            <Table columns={columns} list={products} path="/criar/usuarios" name="Usuários" />
+            {isLoading ?
+                <div>carregando...</div> :
+                <Table columns={columns} list={userConvert} path="/criar/usuarios" name="Usuários" />
+            }
         </Container>
     )
 }

@@ -16,30 +16,30 @@ const FormFinances = () => {
             <Padding padding="16px" />
             <h3>Principais Vulnerabilidades</h3>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Residem em área de ocupação irregular"} /></div>
+                <div className="col"> <CrasCheckbox name={"Residem em área de ocupação irregular"} /></div>
             </Row>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Existência de idosos dependentes na família"} /></div>
+                <div className="col"> <CrasCheckbox name={"Existência de idosos dependentes na família"} /></div>
             </Row>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Existência de deficientes na família"} /></div>
+                <div className="col"> <CrasCheckbox name={"Existência de deficientes na família"} /></div>
             </Row>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Crianças que ficam sozinhos no domicilio"} /></div>
+                <div className="col"> <CrasCheckbox name={"Crianças que ficam sozinhos no domicilio"} /></div>
             </Row>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Desemprego"} /></div>
+                <div className="col"> <CrasCheckbox name={"Desemprego"} /></div>
             </Row>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Baixa renda"} /></div>
+                <div className="col"> <CrasCheckbox name={"Baixa renda"} /></div>
             </Row>
             <Row>
-                <div class="col"> <CrasCheckbox name={"Outros"} /></div>
+                <div className="col"> <CrasCheckbox name={"Outros"} /></div>
             </Row>
             <h3>Situação Financeira e Previdenciária</h3>
             <Row>
-                <div class="col"><CrasInput label="Profissão" /></div>
-                <div class="col">
+                <div className="col"><CrasInput label="Profissão" /></div>
+                <div className="col">
                     <label>Carteira Assinada</label>
                     <Row>
                         <CrasRadioButton selectValue={1} name="Sim" />
@@ -48,8 +48,8 @@ const FormFinances = () => {
                 </div>
             </Row>
             <Row>
-                <div class="col"><CrasInput label="Renda Mensal do usuário" /></div>
-                <div class="col">
+                <div className="col"><CrasInput label="Renda Mensal do usuário" /></div>
+                <div className="col">
                     <label>Reside com:</label>
                     <Row>
                         <CrasRadioButton selectValue={1} name="Família" />
@@ -63,9 +63,9 @@ const FormFinances = () => {
                 Benefício (Benefício do usuário cadastrado)
             </h3>
             <Row>
-                <div class="col"><CrasInput label="LOAS/BPC" /></div>
-                <div class="col"><CrasInput label="Previdência Social" /></div>
-                <div class="col"><CrasInput label="Bolsa Família" /></div>
+                <div className="col"><CrasInput label="LOAS/BPC" /></div>
+                <div className="col"><CrasInput label="Previdência Social" /></div>
+                <div className="col"><CrasInput label="Bolsa Família" /></div>
             </Row>
             <Padding padding="16px" />
             <Row id="end">

@@ -17,34 +17,34 @@ const FormInfoPerson = () => {
                 Dados da Familia
             </h3>
             <Row>
-                <div class="col"><CrasInput label="Pasta" /></div>
-                <div class="col"><CrasInput label="Arquivo" /></div>
-                <div class="col"><CrasInput label="Nº" /></div>
+                <div className="col"><CrasInput label="Pasta" /></div>
+                <div className="col"><CrasInput label="Arquivo" /></div>
+                <div className="col"><CrasInput label="Nº" /></div>
             </Row>
             <Row>
-                <div class="col"><CrasCalendar label="Data Entrada" showIcon /></div>
-                <div class="col"><CrasCalendar label="Data Desligamento" showIcon /></div>
+                <div className="col"><CrasCalendar label="Data Entrada" showIcon /></div>
+                <div className="col"><CrasCalendar label="Data Desligamento" showIcon /></div>
             </Row>
             <Padding padding="8px" />
             <h3>Dados Pessoais</h3>
             <Row>
-                <div class="col"><CrasInput label="Nome" /></div>
-                <div class="col"><CrasInput label="Apelido" /></div>
+                <div className="col"><CrasInput label="Nome" /></div>
+                <div className="col"><CrasInput label="Apelido" /></div>
             </Row>
             <Row>
-                <div class="col"><CrasCalendar label="Data de Nascimento" showIcon /></div>
-                <div class="col"><CrasInput label="Nº Cadastro" /></div>
-                <div class="col"><CrasInput label="NIS" /></div>
+                <div className="col"><CrasCalendar label="Data de Nascimento" showIcon /></div>
+                <div className="col"><CrasInput label="Nº Cadastro" /></div>
+                <div className="col"><CrasInput label="NIS" /></div>
             </Row>
             <Row>
-                <div class="col"><CrasInput label="RG" /></div>
-                <div class="col"><CrasCalendar label="Data de Emissão" showIcon /></div>
-                <div class="col"><CrasDropdown label="UF" /></div>
-                <div class="col"><CrasInput label="Órgão Emissor" /></div>
+                <div className="col"><CrasInput label="RG" /></div>
+                <div className="col"><CrasCalendar label="Data de Emissão" showIcon /></div>
+                <div className="col"><CrasDropdown label="UF" /></div>
+                <div className="col"><CrasInput label="Órgão Emissor" /></div>
             </Row>
             <Row>
-                <div class="col"><CrasInput label="CPF" /></div>
-                <div class="col">
+                <div className="col"><CrasInput label="CPF" /></div>
+                <div className="col">
                     <label>Deficiente Físico ou Mental ?</label>
                     <Row>
                         <CrasRadioButton selectValue={1} name="Sim" />
@@ -54,11 +54,11 @@ const FormInfoPerson = () => {
             </Row>
 
             <Row>
-                <div class="col"><CrasInput label="Mãe" /></div>
-                <div class="col"><CrasInput label="Pai" /></div>
+                <div className="col"><CrasInput label="Mãe" /></div>
+                <div className="col"><CrasInput label="Pai" /></div>
             </Row>
             <Row>
-                <div class="col">
+                <div className="col">
                     <label>Estado Civil</label>
                     <Row>
                         <CrasRadioButton selectValue={1} name="Sim" />
@@ -68,7 +68,7 @@ const FormInfoPerson = () => {
             </Row>
 
             <Row>
-                <div class="col"><CrasDropdown label="Grau de Escolaridade" /></div>
+                <div className="col"><CrasDropdown label="Grau de Escolaridade" /></div>
             </Row>
             <Padding padding="16px" />
             <Row id="end">

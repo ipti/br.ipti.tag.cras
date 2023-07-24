@@ -31,19 +31,19 @@ const FormFamilyComposition = () => {
             {addMember ?
                 <Column>
                     <Row>
-                        <div class="col"><CrasInput label="Nome" /></div>
-                        <div class="col"><CrasInput label="NIS" /></div>
+                        <div className="col"><CrasInput label="Nome" /></div>
+                        <div className="col"><CrasInput label="NIS" /></div>
                     </Row>
                     <Row>
-                        <div class="col"><CrasDropdown label="Parentesco" /></div>
-                        <div class="col"><CrasInput label="Idade" /></div>
-                        <div class="col"><CrasDropdown label="Sexo" /></div>
+                        <div className="col"><CrasDropdown label="Parentesco" /></div>
+                        <div className="col"><CrasInput label="Idade" /></div>
+                        <div className="col"><CrasDropdown label="Sexo" /></div>
                     </Row>
                     <Row>
-                        <div class="col"><CrasInput label="LOAS/BPC" /></div>
-                        <div class="col"><CrasInput label="Previdência Social" /></div>
-                        <div class="col"><CrasInput label="Bolsa Família" /></div>
-                        <div class="col"><CrasInput label="Renda Mensal" /></div>
+                        <div className="col"><CrasInput label="LOAS/BPC" /></div>
+                        <div className="col"><CrasInput label="Previdência Social" /></div>
+                        <div className="col"><CrasInput label="Bolsa Família" /></div>
+                        <div className="col"><CrasInput label="Renda Mensal" /></div>
                     </Row>
                     <Padding padding="16px" />
                     <Row id="end">

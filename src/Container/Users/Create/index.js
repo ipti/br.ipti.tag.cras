@@ -1,6 +1,6 @@
 import React from "react";
-import CreateUserProvider from "./context/context";
 import CreateUserScreen from "../../../Page/Users/CreateUser";
+import CreateUserProvider from "../../../context/CreateUser/context";
 
 const CreateUser = () => {
     return(

@@ -25,6 +25,11 @@ const CrasMenu = () => {
                     path: "/atentimento"
                 },
                 {
+                    label: "Tecnico",
+                    icon: "",
+                    path: "/tecnico"
+                },
+                {
                     label: "Relatorio",
                     icon: ""
                 }

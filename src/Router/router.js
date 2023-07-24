@@ -9,6 +9,7 @@ import ListServices from "../Container/Services/ListServices";
 import CreateServices from "../Container/Services/CreateServices";
 import ListFamilyRefered from "../Container/FamilyRefered/ListFamilyRefered";
 import CreateFamilyRefered from "../Container/FamilyRefered/CreateFamilyRefered";
+import Technician from "../Container/Technician/Technician";
 
 const RoutesCras = () => {
 
@@ -22,6 +23,7 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={CreateServices} />} path="/criar/atentimento" />
                 <Route element={<PrivateRoute Component={ListFamilyRefered} />} path="/familia" />
                 <Route element={<PrivateRoute Component={CreateFamilyRefered} />} path="/criar/familia" />
+                <Route element={<PrivateRoute Component={Technician} />} path="/tecnico" />
                 <Route element={<Login />} path="/login" />
             </Routes>
         </BrowserRouter>

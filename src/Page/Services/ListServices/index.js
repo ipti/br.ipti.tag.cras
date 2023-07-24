@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
+import { ServiceContext } from "../../../context/Service/context";
 
 const ListServicesScreen = () => {
 
+    const { error, isLoading, service } = useContext(ServiceContext)
+
+    console.log(service)
+
     const columns = [
-        { field: 'code', header: 'Code' },
-        { field: 'name', header: 'Name' },
-        { field: 'category', header: 'Category' },
-        { field: 'quantity', header: 'Quantity' }
+        { field: 'id', header: 'id' },
+        { field: 'servico', header: 'Servico' },
+        { field: 'resultado', header: 'Resultado' },
+        { field: 'tecnico', header: 'Tecnico responsavel' }
     ];
 
     const products = [
@@ -19,9 +24,12 @@ const ListServicesScreen = () => {
     ]
 
 
+
     return (
         <Container>
-            <Table columns={columns} list={products} path="/criar/atentimento" name="Atendimentos" />
+            {
+                isLoading ? <div>carregando...</div> : <Table columns={columns} list={service} path="/criar/atentimento" name="Atendimentos" />
+            }
         </Container>
     )
 }

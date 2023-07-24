@@ -14,14 +14,14 @@ const FormAddress = () => {
             <Padding padding="16px" />
             <h3>Endereço</h3>
             <Row>
-                <div class="col"><CrasInput label="Endereço" /></div>
+                <div className="col"><CrasInput label="Endereço" /></div>
             </Row>
             <Row>
-                <div class="col"><CrasInput label="Telefone" /></div>
-                <div class="col"><CrasInput label="Ponto de Referência" /></div>
+                <div className="col"><CrasInput label="Telefone" /></div>
+                <div className="col"><CrasInput label="Ponto de Referência" /></div>
             </Row>
             <Row>
-                <div class="col">
+                <div className="col">
                     <label>Condições de Moradia</label>
                     <Padding />
                     <Row>
@@ -34,7 +34,7 @@ const FormAddress = () => {
             </Row>
             <Row>
             </Row>
-            <div class="col">
+            <div className="col">
                 <label>Tipo de Construção</label>
                 <Padding />
                 <Row>
@@ -45,8 +45,8 @@ const FormAddress = () => {
                 </Row>
             </div>
             <Row>
-                <div class="col"><CrasInput label="Nº de Comodos" /></div>
-                <div class="col"><CrasInput label="Valor" /></div>
+                <div className="col"><CrasInput label="Nº de Comodos" /></div>
+                <div className="col"><CrasInput label="Valor" /></div>
             </Row>
             <Padding padding="16px" />
             <Row id="end">
