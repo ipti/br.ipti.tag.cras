@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import CrasInput from "../../../CrasUi/Input/Input";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasCalendar from "../../../CrasUi/Calendar";
 import CrasDropdown from "../../../CrasUi/Dropdown";
+import { CreateServicesContext } from "../../../context/CreateService/context";
 
 const CreateServicesScreen = () => {
+
+    const {initialValue, service, technician, isLoadingService, isLoadingtechnician} = useContext(CreateServicesContext)
+    
+    console.log(service)
     return (
         <Container>
             <Column>
@@ -21,7 +26,7 @@ const CreateServicesScreen = () => {
                     </Row>
                     <h3>Dados do atendimento</h3>
                     <Row>
-                        <div className="col"><CrasDropdown label="Serviço" /></div>
+                        <div className="col"><CrasDropdown optionLabel={"name"}  options={service} label="Serviço" /></div>
                         <div className="col"><CrasInput label="Solicitação" /></div>
                     </Row>
                     <Row>
@@ -29,7 +34,7 @@ const CreateServicesScreen = () => {
                         <div className="col"><CrasInput label="Resultado" /></div>
                     </Row>
                     <Row>
-                        <div className="col"><CrasDropdown label="Técnico Responsável" /></div>
+                        <div className="col"><CrasDropdown optionLabel={"name"} options={technician} label="Técnico Responsável" /></div>
                         <div className="col"><CrasDropdown label="Usuário ou Membro Familiar" /></div>
                     </Row>
                     <Padding padding="16px" /> 

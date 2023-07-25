@@ -1,15 +1,18 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Login from "../Container/Login";
-import Home from "../Container/Home";
-import PrivateRoute from "./PrivateRoute";
-import Users from "../Container/Users/Users";
-import CreateUser from "../Container/Users/Create";
-import ListServices from "../Container/Services/ListServices";
-import CreateServices from "../Container/Services/CreateServices";
-import ListFamilyRefered from "../Container/FamilyRefered/ListFamilyRefered";
 import CreateFamilyRefered from "../Container/FamilyRefered/CreateFamilyRefered";
+import ListFamilyRefered from "../Container/FamilyRefered/ListFamilyRefered";
+import Home from "../Container/Home";
+import Login from "../Container/Login";
+import CreateServices from "../Container/Services/CreateServices";
+import ListServices from "../Container/Services/ListServices";
+import CreateTechnician from "../Container/Technician/CreateTechnician";
 import Technician from "../Container/Technician/Technician";
+import CreateTypeService from "../Container/TypeService/CreateTypeService";
+import TypeService from "../Container/TypeService/TypeService";
+import CreateUser from "../Container/Users/Create";
+import Users from "../Container/Users/Users";
+import PrivateRoute from "./PrivateRoute";
 
 const RoutesCras = () => {
 
@@ -24,6 +27,9 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={ListFamilyRefered} />} path="/familia" />
                 <Route element={<PrivateRoute Component={CreateFamilyRefered} />} path="/criar/familia" />
                 <Route element={<PrivateRoute Component={Technician} />} path="/tecnico" />
+                <Route element={<PrivateRoute Component={CreateTechnician} />} path="/criar/tecnico" />
+                <Route element={<PrivateRoute Component={TypeService} />} path="/servico" />
+                <Route element={<PrivateRoute Component={CreateTypeService} />} path="/criar/servico" />
                 <Route element={<Login />} path="/login" />
             </Routes>
         </BrowserRouter>

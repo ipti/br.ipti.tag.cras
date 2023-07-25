@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
-import { TechnicianContext } from "../../../context/Technician/context";
+import { TypeServiceContext } from "../../../context/TypeService/TypeService/context";
 
-const TechnicianPage = () => {
+const TypeServicePage = () => {
 
-    const { error, isLoading, technician } = useContext(TechnicianContext);
+
+
+    const { error, isLoading, typesServices } = useContext(TypeServiceContext);
 
 
     const columns = [
@@ -20,13 +22,13 @@ const TechnicianPage = () => {
                 <div>carregando...</div> :
                 <Table
                     columns={columns}
-                    list={technician} 
-                    path="/criar/tecnico"
-                    name="Tecnico"
+                    list={typesServices} 
+                    path="/criar/servico"
+                    name="Serviço"
                 />
             }
         </Container>
     )
 }
 
-export default TechnicianPage;
+export default TypeServicePage;

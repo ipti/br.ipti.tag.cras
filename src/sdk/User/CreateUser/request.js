@@ -1,5 +1,5 @@
-import http from "../../services/axios";
-import { getToken } from "../../services/localstorage";
+import http from "../../../services/axios";
+import { getToken } from "../../../services/localstorage";
 
 
 const config = {

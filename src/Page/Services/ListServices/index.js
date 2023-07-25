@@ -7,7 +7,6 @@ const ListServicesScreen = () => {
 
     const { error, isLoading, service } = useContext(ServiceContext)
 
-    console.log(service)
 
     const columns = [
         { field: 'id', header: 'id' },

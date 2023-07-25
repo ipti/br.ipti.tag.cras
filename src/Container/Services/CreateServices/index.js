@@ -1,6 +1,6 @@
 import React from "react";
-import CreateServicesProvider from "./context/context";
 import CreateServicesScreen from "../../../Page/Services/CreateServices";
+import CreateServicesProvider from "../../../context/CreateService/context";
 
 const CreateServices = () => {
     return(

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TechnicianController } from "../../sdk/Technician/controller";
+import { TechnicianController } from "../../sdk/Technician/Technician/controller";
 
 export const TechnicianState = () => {
 
@@ -12,7 +12,6 @@ export const TechnicianState = () => {
         }
     }, [technicianfetch])
     
-    console.log(technicianfetch)
 
     return{
         technician, isLoading, error

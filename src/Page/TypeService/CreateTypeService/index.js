@@ -3,19 +3,19 @@ import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
-import { CreateTechnicianContext } from "../../../context/CreateTechnician/context";
+import { CreateTypeServiceContext } from "../../../context/TypeService/CreateTypeService/context";
 
-const CreateTechnicianScreen = () => {
+const CreateTypeServiceScreen = () => {
 
-    const {  handleCreateTechnician, CreateSchema, initialValue } = useContext(CreateTechnicianContext);
+    const { CreateSchema, handleCreateTypeService, initialValue } = useContext(CreateTypeServiceContext);
 
     return (
         <Container>
             <Column>
                 <h1>
-                    Novo Tecnico
+                    Novo Serviço
                 </h1>
-                <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTechnician(values)} validationSchema={CreateSchema}>
+                <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTypeService(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -37,10 +37,9 @@ const CreateTechnicianScreen = () => {
                         </form>
                     }
                 </Formik>
-
             </Column>
         </Container>
     )
 }
 
-export default CreateTechnicianScreen;
+export default CreateTypeServiceScreen;

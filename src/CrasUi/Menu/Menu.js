@@ -30,6 +30,11 @@ const CrasMenu = () => {
                     path: "/tecnico"
                 },
                 {
+                    label: "Serviço",
+                    icon: "",
+                    path: "/servico"
+                },
+                {
                     label: "Relatorio",
                     icon: ""
                 }

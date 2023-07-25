@@ -16,7 +16,7 @@ const Table = ({columns, list, path, name}) => {
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-search"></i>
                     </span>
-                    <InputText placeholder="Username" />
+                    <InputText placeholder={name} />
                 </div>
             </Padding>
         </Row>

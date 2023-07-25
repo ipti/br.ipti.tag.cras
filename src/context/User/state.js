@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserController } from "../../sdk/User/controller"
+import { UserController } from "../../sdk/User/Users/controller"
 
 export const UserState = () => {
 

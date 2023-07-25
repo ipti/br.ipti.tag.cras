@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ServiceController } from "../../sdk/Service/controller";
+import { ServiceController } from "../../sdk/Services/Service/controller";
 
 export const ServiceState = () => {
 
@@ -11,6 +11,8 @@ export const ServiceState = () => {
             setService(servicefetch.data.data)
         }
     }, [servicefetch])
+
+    console.log(error)
     
 
     return{
