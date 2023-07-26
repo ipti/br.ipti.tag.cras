@@ -11,14 +11,13 @@ const Table = ({columns, list, path, name}) => {
 
     const header = (
         <Row id="end">
-            <Padding>
-                <div className="p-inputgroup">
+                
+                <div className="p-inputgroup" style={{width: "30%"}}>
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-search"></i>
                     </span>
                     <InputText placeholder={name} />
                 </div>
-            </Padding>
         </Row>
     );
     return(

@@ -3,7 +3,7 @@ import { Calendar } from 'primereact/calendar';
 import { addLocale } from 'primereact/api';
 import { Column } from "../styles/styles";
 
-const CrasCalendar = ({ date, setDate, label,...props }) => {
+const CrasCalendar = ({ date, onChange, label, name,...props }) => {
 
     addLocale('es', {
         firstDayOfWeek: 1,
@@ -19,7 +19,7 @@ const CrasCalendar = ({ date, setDate, label,...props }) => {
     return (
         <Column>
             <label htmlFor="username">{label}</label>
-            <Calendar value={date} style={{ width: "100%" }} placeholder={label} onChange={(e) => setDate(e.value)} locale="es" {...props} />
+            <Calendar name={name} value={date} style={{ width: "100%" }} placeholder={label} onChange={onChange} locale="es" {...props} />
         </Column>
     )
 }

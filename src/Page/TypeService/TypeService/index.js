@@ -22,7 +22,7 @@ const TypeServicePage = () => {
                 <div>carregando...</div> :
                 <Table
                     columns={columns}
-                    list={typesServices} 
+                    list={typesServices}
                     path="/criar/servico"
                     name="Serviço"
                 />

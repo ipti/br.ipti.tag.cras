@@ -3,7 +3,7 @@ import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import { CreateFamilyReferedContext } from "../../../../Container/FamilyRefered/CreateFamilyRefered/context/context";
+import { CreateFamilyReferedContext } from "../../../../context/CreateFamilyRefered/context";
 
 const FormAddress = () => {
 

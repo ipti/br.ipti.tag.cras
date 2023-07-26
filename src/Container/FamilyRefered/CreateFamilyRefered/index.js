@@ -1,6 +1,6 @@
 import React from "react";
-import CreateFamilyProvider from "./context/context";
 import CreateFamilyReferedScreen from "../../../Page/FamilyRefered/CreateFamilyRefered";
+import CreateFamilyProvider from "../../../context/CreateFamilyRefered/context";
 
 const CreateFamilyRefered = () => {
     return(

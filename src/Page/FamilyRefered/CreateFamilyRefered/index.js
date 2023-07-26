@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
-import { CreateFamilyReferedContext } from "../../../Container/FamilyRefered/CreateFamilyRefered/context/context";
 import Steps from "../../../CrasUi/Steps";
 import { Container } from "../../../CrasUi/styles/styles";
 import FormInfoPerson from "./FormInfoPerson";
 import FormAddress from "./FormAddress";
 import FormFinances from "./FormFinances";
 import FormFamilyComposition from "./FormFamilyComposition";
+import { CreateFamilyReferedContext } from "../../../context/CreateFamilyRefered/context";
 
 const CreateFamilyReferedScreen = () => {
 
