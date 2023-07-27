@@ -8,7 +8,7 @@ import { CreateFamilyReferedContext } from "../../../../context/CreateFamilyRefe
 
 const FormFamilyComposition = () => {
     const [addMember, setAddMember] = useState(false)
-    const {backStep, nextStep} = useContext(CreateFamilyReferedContext)
+    const {backStep, nextStep, handleFamiliaRefered} = useContext(CreateFamilyReferedContext)
 
 
     const columns = [
@@ -58,7 +58,7 @@ const FormFamilyComposition = () => {
             <Row id="center">
                 <ButtonPrime label="Voltar" onClick={backStep} />
                 <Padding />
-                <ButtonPrime label="Finalizar" onClick={nextStep} />
+                <ButtonPrime label="Finalizar" onClick={handleFamiliaRefered} />
             </Row>
         </Column>
     )
