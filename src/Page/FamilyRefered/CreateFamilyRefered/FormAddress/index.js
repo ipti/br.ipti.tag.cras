@@ -5,6 +5,8 @@ import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import { CreateFamilyReferedContext } from "../../../../context/CreateFamilyRefered/context";
 import { Formik } from "formik";
+import * as Yup from 'yup';
+
 
 const FormAddress = () => {
 
@@ -17,23 +19,49 @@ const FormAddress = () => {
         condicoes_moradia: dataValues.condicoes_moradia ?? "",
         tipo_construcao: dataValues.tipo_construcao ?? "",
         comodos: dataValues.comodos ?? "",
-        valor_aluguel: dataValues.valor_aluguel ?? ""
+        valor_aluguel: dataValues.valor_aluguel ?? 0
     }
+
+    const validationSchema = Yup.object().shape({
+        endereco: Yup.string().required("Campo obrigatotório"),
+        telefone: Yup.string().required("Campo obrigatotório"),
+        ponto_referencia: Yup.string(),
+        condicoes_moradia: Yup.string().required("Campo obrigatotório"),
+        tipo_construcao: Yup.string().required("Campo obrigatotório"),
+        comodos: Yup.string().required("Campo obrigatotório"),
+        valor_aluguel: Yup.number(),
+    });
 
     return (
         <Column>
             <Padding padding="16px" />
             <h3>Endereço</h3>
-            <Formik initialValues={initialValue} onSubmit={value => nextStep(value)}>
-                {({ values, handleChange, handleSubmit }) => {
+            <Formik initialValues={initialValue} onSubmit={value => nextStep(value)} validationSchema={validationSchema}>
+                {({ values, handleChange, handleSubmit, errors, touched }) => {
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>
-                                <div className="col"><CrasInput name="endereco" onChange={handleChange} value={values.endereco} label="Endereço" /></div>
+                                <div className="col">
+                                    <CrasInput name="endereco" onChange={handleChange} value={values.endereco} label="Endereço" />
+                                    {errors.endereco && touched.endereco ? (
+                                        <div style={{ color: "red" }}>{errors.endereco}</div>
+                                    ) : null}
+                                </div>
                             </Row>
                             <Row>
-                                <div className="col"><CrasInput onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" /></div>
-                                <div className="col"><CrasInput onChange={handleChange} value={values.ponto_referencia} name="ponto_referencia" label="Ponto de Referência" /></div>
+                                <div className="col">
+                                    <CrasInput onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" />
+                                    {errors.telefone && touched.telefone ? (
+                                        <div style={{ color: "red" }}>{errors.telefone}</div>
+                                    ) : null}
+
+                                </div>
+                                <div className="col">
+                                    <CrasInput onChange={handleChange} value={values.ponto_referencia} name="ponto_referencia" label="Ponto de Referência" />
+                                    {errors.ponto_referencia && touched.ponto_referencia ? (
+                                        <div style={{ color: "red" }}>{errors.ponto_referencia}</div>
+                                    ) : null}
+                                </div>
                             </Row>
                             <Row>
                                 <div className="col">
@@ -69,6 +97,9 @@ const FormAddress = () => {
                                             label={"Área de Ocupação"}
                                             name="condicoes_moradia" />
                                     </Row>
+                                    {errors.condicoes_moradia && touched.condicoes_moradia ? (
+                                        <div style={{ color: "red" }}>{errors.condicoes_moradia}</div>
+                                    ) : null}
                                 </div>
                             </Row>
                             <Row>
@@ -106,10 +137,24 @@ const FormAddress = () => {
                                         label={"Taipa"}
                                         name="tipo_construcao" />
                                 </Row>
+                                {errors.tipo_construcao && touched.tipo_construcao ? (
+                                    <div style={{ color: "red" }}>{errors.tipo_construcao}</div>
+                                ) : null}
                             </div>
                             <Row>
-                                <div className="col"><CrasInput name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" /></div>
-                                <div className="col"><CrasInput value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" /></div>
+                                <div className="col">
+                                    <CrasInput name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" />
+                                    {errors.comodos && touched.comodos ? (
+                                        <div style={{ color: "red" }}>{errors.comodos}</div>
+                                    ) : null}
+                                </div>
+
+                                <div className="col">
+                                    <CrasInput value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" />
+                                    {errors.valor_aluguel && touched.valor_aluguel ? (
+                                        <div style={{ color: "red" }}>{errors.valor_aluguel}</div>
+                                    ) : null}
+                                </div>
                             </Row>
                             <Padding padding="16px" />
                             <Row id="end">

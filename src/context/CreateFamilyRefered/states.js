@@ -51,6 +51,16 @@ const CreateFamilyReferedState = () => {
         "Cursos de Aperfeiçoamento e Extensão"
       ];
 
+      const estadosCivis = [
+        'Solteiro(a)',
+        'Casado(a)',
+        'Divorciado(a)',
+        'Viúvo(a)',
+        'Separado(a)',
+        'União Estável',
+        'Outro',
+      ];
+
 
     const nextStep = (values) => {
         console.log(values)
@@ -63,11 +73,7 @@ const CreateFamilyReferedState = () => {
         }
     }
 
-    const backStep = (values) => {
-
-        let data = Object.assign(dataValues, values);
-
-        setDataValues(data);
+    const backStep = () => {
 
         if (activeStep !== 0) {
             setActiveStep(activeStep - 1);
@@ -78,28 +84,31 @@ const CreateFamilyReferedState = () => {
     console.log(dataValues)
 
     const handleFamiliaRefered = () => {
+
         const data = {
             ...dataValues,
-            certidao_nascimento: parseInt(dataValues.certidao_nascimento),
+            certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
             NIS: parseInt(dataValues.NIS),
             renda: parseInt(dataValues.renda),
             bolsa_familia: parseInt(dataValues.bolsa_familia),
             loasbpc: parseInt(dataValues.loasbpc),
             previdencia: parseInt(dataValues.previdencia),
-            ocupacao_irregular: parseInt(dataValues.ocupacao_irregular),
-            crianca_sozinha: parseInt(dataValues.crianca_sozinha),
-            idosos_dependentes: parseInt(dataValues.idosos_dependentes),
-            desempregados: parseInt(dataValues.desempregados),
-            deficientes: parseInt(dataValues.deficientes),
-            baixa_renda: parseInt(dataValues.baixa_renda),
-            outros: parseInt(dataValues.outros),
-            valor_aluguel: parseInt(dataValues.valor_aluguel)
+            valor_aluguel: parseInt(dataValues.valor_aluguel),
+            uf_rg: dataValues.uf_rg.uf,
+            ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
+            crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
+            idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
+            desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
+            deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
+            baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
+            outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
         }
+
 
         console.log(data)
     }
     return {
-        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered
+        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis
     }
 }
 
