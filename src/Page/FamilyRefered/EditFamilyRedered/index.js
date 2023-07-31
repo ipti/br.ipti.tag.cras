@@ -1,15 +1,16 @@
 import React, { useContext } from "react";
 import Steps from "../../../CrasUi/Steps";
 import { Container } from "../../../CrasUi/styles/styles";
-import FormInfoPerson from "./FormInfoPerson";
+import { EditFamilyReferedContext } from "../../../context/FamilyRefered/EditFamilyRefered/context";
 import FormAddress from "./FormAddress";
-import FormFinances from "./FormFinances";
 import FormFamilyComposition from "./FormFamilyComposition";
-import { CreateFamilyReferedContext } from "../../../context/FamilyRefered/CreateFamilyRefered/context";
+import FormFinances from "./FormFinances";
+import FormInfoPerson from "./FormInfoPerson";
 
-const CreateFamilyReferedScreen = () => {
+const EditFamilyReferedScreen = () => {
 
-    const { setActiveStep, activeStep } = useContext(CreateFamilyReferedContext);
+    const { setActiveStep, activeStep } = useContext(EditFamilyReferedContext);
+
 
     const items = [
         {
@@ -53,4 +54,4 @@ const CreateFamilyReferedScreen = () => {
     )
 }
 
-export default CreateFamilyReferedScreen;
+export default EditFamilyReferedScreen;

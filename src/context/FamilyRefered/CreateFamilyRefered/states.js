@@ -1,8 +1,11 @@
 import { useState } from "react"
+import { CreateUserIdentifyController } from "../../../sdk/UserIdentify/CreateUserIdentify/controller";
 
 const CreateFamilyReferedState = () => {
     const [activeStep, setActiveStep] = useState(0);
-    const [dataValues, setDataValues] = useState({})
+    const [dataValues, setDataValues] = useState({});
+
+    const {CreateUserIdentifyRequestMutation} = CreateUserIdentifyController();
 
     const estadosDoBrasil = [
         { uf: 'AC', nome: 'Acre' },
@@ -81,8 +84,6 @@ const CreateFamilyReferedState = () => {
     }
 
 
-    console.log(dataValues)
-
     const handleFamiliaRefered = () => {
 
         const data = {
@@ -103,7 +104,7 @@ const CreateFamilyReferedState = () => {
             baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
             outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
         }
-
+        CreateUserIdentifyRequestMutation.mutate(data);
 
         console.log(data)
     }

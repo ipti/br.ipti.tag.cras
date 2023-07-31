@@ -6,7 +6,8 @@ import * as Yup from 'yup';
 export const CreateServicesState = () => {
 
   const [service, setService] = useState();
-  const [technician, setTechnician] = useState()
+  const [technician, setTechnician] = useState();
+  const [userIdentify, setUserIdentify] = useState();
 
   const initialValue = {
     solicitacao: "",
@@ -29,16 +30,19 @@ export const CreateServicesState = () => {
     id_identificacao_usuario: Yup.object().required('Campo Obrigatório'),
 });
 
-  const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician } = CreateServicesController();
+  const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify } = CreateServicesController();
 
   useEffect(() => {
     if (allService) {
-      setService(allService.data.data)
+      setService(allService.data.data);
     }
     if (allTechnician) {
-      setTechnician(allTechnician.data.data)
+      setTechnician(allTechnician.data.data);
     }
-  }, [allService, allTechnician])
+    if(allUserIdentify){
+      setUserIdentify(allUserIdentify.data.data);
+    }
+  }, [allService, allTechnician, allUserIdentify])
 
 
   const handleCreateService = (data) => {
@@ -71,6 +75,6 @@ export const CreateServicesState = () => {
   }
 
   return {
-    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema
+    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, userIdentify
   }
 }

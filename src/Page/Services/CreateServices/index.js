@@ -9,16 +9,9 @@ import { Formik } from "formik";
 
 const CreateServicesScreen = () => {
 
-    const { initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema } = useContext(CreateServicesContext)
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify } = useContext(CreateServicesContext)
 
-    const user = [
-        {
-            id: 1, name: "jonny",
-        },
-        {
-            id: 2, name: "josé"
-        }
-    ]
+   console.log(userIdentify)
     return (
         <Container>
             <Column>
@@ -82,7 +75,7 @@ const CreateServicesScreen = () => {
                                         <div style={{ color: "red" }}>{errors.tecnico}</div>
                                     ) : null}
                                 </div>
-                                <div className="col"><CrasDropdown onChange={handleChange} value={values.id_identificacao_usuario} name={"id_identificacao_usuario"} optionLabel={"name"} options={user} label="Usuário ou Membro Familiar" />
+                                <div className="col"><CrasDropdown onChange={handleChange} value={values.id_identificacao_usuario} name={"id_identificacao_usuario"} optionLabel={"nome"} options={userIdentify} label="Usuário ou Membro Familiar" />
                                 <Padding />
                                     {errors.id_identificacao_usuario && touched.id_identificacao_usuario ? (
                                         <div style={{ color: "red" }}>{errors.id_identificacao_usuario}</div>

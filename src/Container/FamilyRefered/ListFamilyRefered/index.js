@@ -1,12 +1,12 @@
 import React from "react";
-import ListFamilyReferedProvider from "./context/context";
 import ListFamilyReferedScreen from "../../../Page/FamilyRefered/ListFamilyRefered";
+import UserIdentifyProvider from "../../../context/FamilyRefered/FamilyRefered/context";
 
 const ListFamilyRefered = () => {
     return(
-        <ListFamilyReferedProvider>
+        <UserIdentifyProvider>
             <ListFamilyReferedScreen />
-        </ListFamilyReferedProvider>
+        </UserIdentifyProvider>
     )
 }
 

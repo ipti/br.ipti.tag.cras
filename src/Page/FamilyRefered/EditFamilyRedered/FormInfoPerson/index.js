@@ -1,43 +1,45 @@
 import { Formik } from "formik";
 import React, { useContext } from "react";
+import * as Yup from 'yup';
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCalendar from "../../../../CrasUi/Calendar";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
-import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
-import * as Yup from 'yup';
-import CrasInputMask from "../../../../CrasUi/Input/InputMask";
+import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 
 const FormInfoPerson = () => {
 
-    const { nextStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, estadosCivis } = useContext(CreateFamilyReferedContext);
+    const { nextStep, estadosDoBrasil, escolaridadeNoBrasil, family, estadosCivis } = useContext(EditFamilyReferedContext);
+
+    if(!family) return null;
 
 
     const initialValue = {
-        nome: dataValues.nome ?? "",
-        apelido: dataValues.apelido ?? "",
-        data_nascimento: dataValues.data_nascimento ?? "",
-        certidao_nascimento: dataValues.certidao_nascimento ?? "",
-        pasta: dataValues.pasta ?? "",
-        arquivo: dataValues.arquivo ?? "",
-        nº: dataValues.nº ?? "",
-        NIS: dataValues.NIS ?? "",
-        numero_rg: dataValues.numero_rg ?? "",
-        data_emissao_rg: dataValues.data_emissao_rg ?? "",
-        uf_rg: dataValues.uf_rg ?? "",
-        emissao_rg: dataValues.emissao_rg ?? "",
-        cpf: dataValues.cpf ?? "",
-        deficiente: dataValues.deficiente ?? "",
-        deficiencia: dataValues.deficiencia ?? "",
-        mae: dataValues.mae ?? "",
-        pai: dataValues.pai ?? "",
-        estado_civil: dataValues.estado_civil ?? "",
-        escolaridade: dataValues.escolaridade ?? "",
-        data_inicial: dataValues.data_inicial,
-        data_final: dataValues.data_final
+        nome: family.nome ?? "",
+        apelido: family.apelido ?? "",
+        data_nascimento: family.data_nascimento ?? "",
+        certidao_nascimento: family.certidao_nascimento ?? "",
+        pasta: family.pasta ?? "",
+        arquivo: family.arquivo ?? "",
+        nº: family.nº ?? "",
+        NIS: family.NIS ?? "",
+        numero_rg: family.numero_rg ?? "",
+        data_emissao_rg: family.data_emissao_rg ?? "",
+        uf_rg: family.uf_rg ?? "",
+        emissao_rg: family.emissao_rg ?? "",
+        cpf: family.cpf ?? "",
+        deficiente: family.deficiente === "s" ? "Sim" : family.deficiente === "n" ? "Não" :  "",
+        deficiencia: family.deficiencia ?? "",
+        mae: family.mae ?? "",
+        pai: family.pai ?? "",
+        estado_civil: family.estado_civil ?? "",
+        escolaridade: family.escolaridade ?? "",
+        data_inicial: family.data_inicial,
+        data_final: family.data_final
     }
 
 
@@ -73,7 +75,7 @@ const FormInfoPerson = () => {
             </h3>
             <Formik initialValues={initialValue} onSubmit={values => { nextStep(values) }} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
-                    console.log(values);
+                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>

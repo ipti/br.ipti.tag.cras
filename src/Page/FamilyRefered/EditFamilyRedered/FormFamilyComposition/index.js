@@ -7,8 +7,9 @@ import CrasDropdown from "../../../../CrasUi/Dropdown";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 
 const FormFamilyComposition = () => {
-    const [addMember, setAddMember] = useState(false);
-    const { backStep, handleFamiliaRefered } = useContext(CreateFamilyReferedContext);
+    const [addMember, setAddMember] = useState(false)
+    const {backStep, handleFamiliaRefered} = useContext(CreateFamilyReferedContext)
+
 
     const columns = [
         { field: 'name', header: 'Name' },
