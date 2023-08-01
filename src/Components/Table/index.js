@@ -5,13 +5,12 @@ import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
 import CrasTable from "../../CrasUi/Table";
 import { useNavigate } from "react-router-dom";
 
-const Table = ({columns, list, path, name}) => {
+const Table = ({columns, list, path, name, pathEdit}) => {
 
     const history = useNavigate()
 
     const header = (
         <Row id="end">
-                
                 <div className="p-inputgroup" style={{width: "30%"}}>
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-search"></i>
@@ -29,7 +28,7 @@ const Table = ({columns, list, path, name}) => {
                         <ButtonPrime label={"Adicionar"} onClick={() => history(path)} />
                     </Row>
                     <Padding padding="16px 0">
-                        <CrasTable columns={columns} products={list} header={header} />
+                        <CrasTable columns={columns} products={list} header={header}  pathEdit={pathEdit}/>
                     </Padding>
             </Column>
     )

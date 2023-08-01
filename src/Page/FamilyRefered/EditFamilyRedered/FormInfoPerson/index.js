@@ -17,6 +17,8 @@ const FormInfoPerson = () => {
 
     if(!family) return null;
 
+    console.log(family)
+
 
     const initialValue = {
         nome: family.nome ?? "",
@@ -32,7 +34,7 @@ const FormInfoPerson = () => {
         uf_rg: family.uf_rg ?? "",
         emissao_rg: family.emissao_rg ?? "",
         cpf: family.cpf ?? "",
-        deficiente: family.deficiente === "s" ? "Sim" : family.deficiente === "n" ? "Não" :  "",
+        deficiente: family.deficiente ?? "",
         deficiencia: family.deficiencia ?? "",
         mae: family.mae ?? "",
         pai: family.pai ?? "",
@@ -100,7 +102,7 @@ const FormInfoPerson = () => {
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasCalendar name={"data_inicial"} onChange={handleChange} label="Data Entrada" showIcon />
+                                    <CrasCalendar name={"data_inicial"} date={values.data_inicial}  onChange={handleChange} label="Data Entrada" showIcon />
                                     {errors.data_inicial && touched.data_inicial ? (
                                         <div style={{ color: "red" }}>{errors.data_inicial}</div>
                                     ) : null}

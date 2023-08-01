@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { UserIdentifyController } from "../../../sdk/UserIdentify/UserIdentify/controller";
+import { UserIdentifyController } from "../../../sdk/FamilyRefered/UserIdentify/controller";
 
 export const UserIdentifyState = () => {
 

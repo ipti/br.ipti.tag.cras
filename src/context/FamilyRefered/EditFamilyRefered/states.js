@@ -1,21 +1,31 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { EditFamilyReferedController } from "../../../sdk/UserIdentify/EditFamilyReferd/controller";
+import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 
 const EditFamilyReferedState = () => {
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(3);
     const [dataValues, setDataValues] = useState({});
     const [family, setFamily] = useState();
+    const [member, setMember] = useState()
     const {id} = useParams()
 
-    const {familyReferedfetch} = EditFamilyReferedController(id);
+    const {familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest} = EditFamilyReferedController(id);
 
 
     useEffect(() => {
       if(familyReferedfetch){
         setFamily(familyReferedfetch.data.data)
       }
-    }, [familyReferedfetch])
+      if(membersFamilyRequest){
+        setMember(membersFamilyRequest.data.data)
+      }
+    }, [familyReferedfetch, membersFamilyRequest])
+    
+    const sexo =  [
+        "Masculino",
+        "Feminino",
+        "Outro"
+      ]
     
 
     const estadosDoBrasil = [
@@ -75,6 +85,26 @@ const EditFamilyReferedState = () => {
         'Outro',
       ];
 
+      const parentesco =  [
+          "Pai",
+          "Mãe",
+          "Filho",
+          "Filha",
+          "Avô",
+          "Avó",
+          "Tio",
+          "Tia",
+          "Primo",
+          "Prima",
+          "Sobrinho",
+          "Sobrinha",
+          "Cônjuge",
+          "Companheiro(a)",
+          "Amigo(a)",
+          "Outro"
+        ]
+      
+
 
     const nextStep = (values) => {
         console.log(values)
@@ -120,8 +150,13 @@ const EditFamilyReferedState = () => {
         console.log(data);
     }
 
+
+    const handleCreateFamilyMember = (body) => {
+      CreateFamilyRequestRequestMutation.mutate(body)
+    }
+
     return {
-        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, family
+        activeStep, setActiveStep, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member
     }
 }
 

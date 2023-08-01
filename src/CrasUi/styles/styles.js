@@ -50,4 +50,5 @@ width: 100%;
 padding: 4%;
 font-size: ${style.typography.font.medium};
 font-family: ${style.typography.types.inter};
+background-color: #eff2f4;
 `;
