@@ -5,7 +5,7 @@ import { ServiceContext } from "../../../context/Service/context";
 
 const ListServicesScreen = () => {
 
-    const { error, isLoading, service } = useContext(ServiceContext)
+    const { isLoading, service } = useContext(ServiceContext)
 
 
     const columns = [
@@ -15,12 +15,12 @@ const ListServicesScreen = () => {
         { field: 'tecnico', header: 'Tecnico responsavel' }
     ];
 
-    const products = [
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-        { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-    ]
+    // const products = [
+    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
+    // ]
 
 
 

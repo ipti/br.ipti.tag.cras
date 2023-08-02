@@ -7,7 +7,7 @@ const UserPage = () => {
 
 
 
-    const { error, isLoading, user } = useContext(UserContext);
+    const { isLoading, user } = useContext(UserContext);
 
 
     const columns = [

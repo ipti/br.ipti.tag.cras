@@ -15,6 +15,7 @@ const CreateTechnicianScreen = () => {
                 <h1>
                     Novo Tecnico
                 </h1>
+                <Padding padding="16px" />
                 <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTechnician(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>

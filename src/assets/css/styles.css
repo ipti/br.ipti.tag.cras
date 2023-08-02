@@ -1,10 +1,24 @@
-
+* {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  box-sizing: border-box;
+  font-family: 'Quicksand', 'Poppins', sans-serif;
+}
 
 html,
-body {
+body,
+#root,
+.App {
   height: 100%;
-  margin: 0px;
+  width: 100%;
+  background-color: var(--white);
+  position: fixed;
+  color: #333;
+  -webkit-font-smoothing: antialiased !important;
+  scroll-behavior: smooth;
 }
+
 
 @font-face {
   font-family: "Poppins Regular";
@@ -50,6 +64,3 @@ body {
   font-weight: normal;
   src: local("Inter Regular"), url("../font/Inter-Regular.ttf") format("truetype");
 }
-
-
-

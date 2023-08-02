@@ -60,6 +60,7 @@ const CrasMenu = () => {
                     </Row>
                 </Column>
             </Padding>
+            <Padding padding="32px" />
             {items.map((item, index) => {
                 return (
                     <>

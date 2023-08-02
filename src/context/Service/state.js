@@ -12,7 +12,6 @@ export const ServiceState = () => {
         }
     }, [servicefetch])
 
-    console.log(error)
     
 
     return{

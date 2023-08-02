@@ -66,9 +66,7 @@ const CreateFamilyReferedState = () => {
 
 
     const nextStep = (values) => {
-        console.log(values)
         let data = Object.assign(dataValues, values);
-        console.log(data)
         setDataValues(data);
 
         if (activeStep < 3) {
@@ -107,8 +105,6 @@ const CreateFamilyReferedState = () => {
             outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
         }
         CreateUserIdentifyRequestMutation.mutate(data);
-
-        console.log(data)
     }
     return {
         activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis

@@ -17,8 +17,7 @@ const FormInfoPerson = () => {
 
     if(!family) return null;
 
-    console.log(family)
-
+  
 
     const initialValue = {
         nome: family.nome ?? "",
@@ -77,7 +76,6 @@ const FormInfoPerson = () => {
             </h3>
             <Formik initialValues={initialValue} onSubmit={values => { nextStep(values) }} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
-                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>

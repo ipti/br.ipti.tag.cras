@@ -6,8 +6,8 @@ import TopBar from "../../CrasUi/TopBar/TopBar";
 const Layout = ({children}) => {
     return(
         
-        <Column>
-            <Row>
+        <Column style={{height: "100%"}}>
+            <Row style={{height: "100%"}}>
                 <CrasMenu/>
                 <Column style={{width: "100%"}}>
                     <TopBar />

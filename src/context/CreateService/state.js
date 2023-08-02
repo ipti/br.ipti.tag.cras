@@ -56,8 +56,6 @@ export const CreateServicesState = () => {
     //   date = `${year}-${month}-${day}`
     // }
 
-    console.log(data)
-
     const body = {
       solicitacao: data.solicitacao,
       resultado: data.resultado,
@@ -69,7 +67,6 @@ export const CreateServicesState = () => {
       data: date
     }
 
-    console.log(body)
     CreateServicesRequestMutation.mutate(body)
 
   }

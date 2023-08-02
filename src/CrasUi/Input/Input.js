@@ -6,7 +6,7 @@ const CrasInput = ({label, smallLabel, placeholder, onChange, name, value, type,
     return(
         <Column>
             <label htmlFor="username">{label}</label>
-            <InputText requerid={requerid} type={type} name={name} value={value} placeholder={placeholder} onChange={onChange} />
+            <InputText requerid={requerid} style={{backgroundColor: "#F6F7F7"}} type={type} name={name} value={value} placeholder={placeholder} onChange={onChange} />
             <small id="username-help">
                 {smallLabel}
             </small>

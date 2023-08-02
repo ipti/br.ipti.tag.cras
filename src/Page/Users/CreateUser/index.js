@@ -15,6 +15,7 @@ const CreateUserScreen = () => {
                 <h1>
                     Novo usuário
                 </h1>
+                <Padding padding="16px" />
                 <Formik initialValues={initialValue} onSubmit={(values) => handleCreateUser(values)} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>

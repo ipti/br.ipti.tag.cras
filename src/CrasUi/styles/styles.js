@@ -45,7 +45,9 @@ export const Padding = styled.div`
 `;
 
 export const Container = styled.div`
-height: 100%;
+min-height: 100%;
+height: auto;
+overflow-y: scroll;
 width: 100%;
 padding: 4%;
 font-size: ${style.typography.font.medium};

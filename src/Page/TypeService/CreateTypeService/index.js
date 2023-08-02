@@ -15,6 +15,7 @@ const CreateTypeServiceScreen = () => {
                 <h1>
                     Novo Serviço
                 </h1>
+                <Padding padding="16px" />
                 <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTypeService(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>

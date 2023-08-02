@@ -11,17 +11,16 @@ const CreateServicesScreen = () => {
 
     const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify } = useContext(CreateServicesContext)
 
-   console.log(userIdentify)
     return (
         <Container>
             <Column>
                 <h1>
                     Novo Atendimentos
                 </h1>
+                <Padding padding="16px" />
                 <h3>Dados do atendimento</h3>
                 <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
-                        console.log(values)
                         return <form onSubmit={handleSubmit}>
                             <Row>
                                 <div className="col">

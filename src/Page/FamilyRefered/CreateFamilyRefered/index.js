@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Steps from "../../../CrasUi/Steps";
-import { Container } from "../../../CrasUi/styles/styles";
+import { Container, Padding } from "../../../CrasUi/styles/styles";
 import FormInfoPerson from "./FormInfoPerson";
 import FormAddress from "./FormAddress";
 import FormFinances from "./FormFinances";
@@ -43,12 +43,15 @@ const CreateFamilyReferedScreen = () => {
             <h1>
                 Criar Familia Referenciada
             </h1>
+            <Padding padding="16px" />
             <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} />
             {activeStep === 0 ?
                 <FormInfoPerson /> : activeStep === 1 ?
                     <FormAddress /> : activeStep === 2 ?
                         <FormFinances /> : activeStep === 3 ?
                             <FormFamilyComposition /> : null}
+            <Padding padding="16px" />
+
         </Container>
     )
 }

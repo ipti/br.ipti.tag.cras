@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Column, Padding, Row } from "../../CrasUi/styles/styles";
 import { InputText } from "primereact/inputtext";
 import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const Table = ({columns, list, path, name, pathEdit}) => {
 
-    const history = useNavigate()
+    const history = useNavigate();
+    const [nameFilter, setNameFilter] = useState("")
 
     const header = (
         <Row id="end">
@@ -15,21 +16,26 @@ const Table = ({columns, list, path, name, pathEdit}) => {
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-search"></i>
                     </span>
-                    <InputText placeholder={name} />
+                    <InputText placeholder={name} value={nameFilter} onChange={(e) => setNameFilter(e.target.value)} />
                 </div>
         </Row>
     );
+
+    const filterName =nameFilter !== "" ? list.filter(filt => filt?.nome?.toLowerCase()?.includes(nameFilter)) : list
+
     return(
             <Column>
                     <h1>
                         {name}
                     </h1>
+                    <Padding padding="16px" />
                     <Row>
                         <ButtonPrime label={"Adicionar"} onClick={() => history(path)} />
                     </Row>
                     <Padding padding="16px 0">
-                        <CrasTable columns={columns} products={list} header={header}  pathEdit={pathEdit}/>
+                        <CrasTable columns={columns} products={filterName} header={header}  pathEdit={pathEdit}/>
                     </Padding>
+                    <Padding />
             </Column>
     )
 }

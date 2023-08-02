@@ -13,7 +13,9 @@ const FormFamilyComposition = () => {
     const [addMember, setAddMember] = useState(false)
     const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member } = useContext(EditFamilyReferedContext)
 
-    if (!family) return null
+    if (!family) return null;
+
+    // console.log(member)
 
     const initialValue = {
         renda: 0,

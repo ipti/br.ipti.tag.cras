@@ -5,7 +5,7 @@ import { TechnicianContext } from "../../../context/Technician/context";
 
 const TechnicianPage = () => {
 
-    const { error, isLoading, technician } = useContext(TechnicianContext);
+    const { isLoading, technician } = useContext(TechnicianContext);
 
 
     const columns = [

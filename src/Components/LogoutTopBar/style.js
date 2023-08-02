@@ -3,6 +3,7 @@ import styles from "../../CrasUi/styles/index"
 
 export const Container = styled.div`
     background-color: ${styles.colors.colorsBaseInkLighterActive};
+    
     width: auto;
     padding: 8px;
     color: white;

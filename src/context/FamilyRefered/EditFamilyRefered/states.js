@@ -16,10 +16,13 @@ const EditFamilyReferedState = () => {
       if(familyReferedfetch){
         setFamily(familyReferedfetch.data.data)
       }
+
       if(membersFamilyRequest){
-        setMember(membersFamilyRequest.data.data)
+        const filter = membersFamilyRequest.data.data.filter(member => `${member.id_identificacao_usuario}` === id);
+        setMember(filter)
       }
-    }, [familyReferedfetch, membersFamilyRequest])
+
+    }, [familyReferedfetch, membersFamilyRequest,id])
     
     const sexo =  [
         "Masculino",
@@ -107,9 +110,7 @@ const EditFamilyReferedState = () => {
 
 
     const nextStep = (values) => {
-        console.log(values)
         let data = Object.assign(dataValues, values);
-        console.log(data)
         setDataValues(data);
 
         if (activeStep < 3) {
@@ -127,27 +128,26 @@ const EditFamilyReferedState = () => {
 
     const handleFamiliaRefered = () => {
 
-        const data = {
-            ...dataValues,
-            certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
-            NIS: parseInt(dataValues.NIS),
-            renda: parseInt(dataValues.renda),
-            bolsa_familia: parseInt(dataValues.bolsa_familia),
-            loasbpc: parseInt(dataValues.loasbpc),
-            previdencia: parseInt(dataValues.previdencia),
-            valor_aluguel: parseInt(dataValues.valor_aluguel),
-            uf_rg: dataValues.uf_rg.uf,
-            ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
-            crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-            idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-            desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
-            deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
-            baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
-            outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
-        }
+        // const data = {
+        //     ...dataValues,
+        //     certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
+        //     NIS: parseInt(dataValues.NIS),
+        //     renda: parseInt(dataValues.renda),
+        //     bolsa_familia: parseInt(dataValues.bolsa_familia),
+        //     loasbpc: parseInt(dataValues.loasbpc),
+        //     previdencia: parseInt(dataValues.previdencia),
+        //     valor_aluguel: parseInt(dataValues.valor_aluguel),
+        //     uf_rg: dataValues.uf_rg.uf,
+        //     ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
+        //     crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
+        //     idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
+        //     desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
+        //     deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
+        //     baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
+        //     outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
+        // }
         // CreateUserIdentifyRequestMutation.mutate(data);
 
-        console.log(data);
     }
 
 
