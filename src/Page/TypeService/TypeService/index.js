@@ -12,7 +12,7 @@ const TypeServicePage = () => {
 
     const columns = [
         { field: 'id', header: 'id' },
-        { field: 'name', header: 'Nome' },
+        { field: 'nome', header: 'Nome' },
     ];
 
 

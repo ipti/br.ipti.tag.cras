@@ -22,12 +22,12 @@ const CreateUserScreen = () => {
                             <Row>
                                 <div className="col">
                                     <CrasInput
-                                        name="name"
-                                        value={values.name}
+                                        name="nome"
+                                        value={values.nome}
                                         onChange={handleChange}
                                         label="Nome" />
-                                    {errors.name && touched.name ? (
-                                        <div style={{ color: "red" }}>{errors.name}</div>
+                                    {errors.nome && touched.nome ? (
+                                        <div style={{ color: "red" }}>{errors.nome}</div>
                                     ) : null}
                                 </div>
                                 <div className="col">

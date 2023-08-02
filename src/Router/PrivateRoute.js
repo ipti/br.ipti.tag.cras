@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import Layout from "../Components/Layout";
 
 const PrivateRoute = ({Component}) => {
-  const auth = true; //your logic
+  const auth = true; 
 
   return auth ?
     <Layout>

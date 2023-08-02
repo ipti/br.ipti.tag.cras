@@ -3,7 +3,7 @@ import { CreateUserController } from '../../sdk/User/CreateUser/controller';
 
 export const CreateUserState = () => {
     const initialValue = {
-        name: "",
+        nome: "",
         email: "",
         type_user: "",
         password: "",
@@ -11,7 +11,7 @@ export const CreateUserState = () => {
     }
 
     const CreateUserSchema = Yup.object().shape({
-        name: Yup.string().required("Campo Obrigatório"),
+        nome: Yup.string().required("Campo Obrigatório"),
         email: Yup.string().required('Campo Obrigatório'),
         type_user: Yup.number("Digite um Número").required('Campo Obrigatório'),
         password: Yup.string().required('Campo Obrigatório'),
@@ -22,7 +22,7 @@ export const CreateUserState = () => {
 
     const handleCreateUser = (body) => {
         const data = {
-            name: body.name,
+            nome: body.nome,
             email: body.email,
             type_user: body.type_user,
             password: body.password
