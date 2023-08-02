@@ -7,7 +7,7 @@ const TypeServicePage = () => {
 
 
 
-    const { error, isLoading, typesServices } = useContext(TypeServiceContext);
+    const { isLoading, typesServices } = useContext(TypeServiceContext);
 
 
     const columns = [
