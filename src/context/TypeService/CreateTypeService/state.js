@@ -3,11 +3,11 @@ import { CreateTypesServicesController } from '../../../sdk/TypeService/CreateTy
 
 export const CreateTypeServiceState = () => {
     const initialValue = {
-        name: "",
+        nome: "",
     }
 
     const CreateSchema = Yup.object().shape({
-        name: Yup.string().required("Campo Obrigatório"),
+        nome: Yup.string().required("Campo Obrigatório"),
     })
 
     const { CreateTypesServicesRequestMutation } = CreateTypesServicesController();

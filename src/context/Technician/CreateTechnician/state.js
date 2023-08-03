@@ -1,15 +1,15 @@
 import * as Yup from 'yup';
-import { CreateTechnicianController } from '../../sdk/Technician/CreateTechnician/controller';
+import { CreateTechnicianController } from '../../../sdk/Technician/CreateTechnician/controller';
 
 
 
 export const CreateTechnicianState = () => {
     const initialValue = {
-        name: "",
+        nome: "",
     }
 
     const CreateSchema = Yup.object().shape({
-        name: Yup.string().required("Campo Obrigatório"),
+        nome: Yup.string().required("Campo Obrigatório"),
     })
 
     const { CreateTechnicianRequestMutation } = CreateTechnicianController();

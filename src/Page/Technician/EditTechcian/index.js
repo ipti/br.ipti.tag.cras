@@ -3,20 +3,20 @@ import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
-import { CreateTypeServiceContext } from "../../../context/TypeService/CreateTypeService/context";
+import { CreateTechnicianContext } from "../../../context/Technician/CreateTechnician/context";
 
-const CreateTypeServiceScreen = () => {
+const EditTechnicianScreen = () => {
 
-    const { CreateSchema, handleCreateTypeService, initialValue } = useContext(CreateTypeServiceContext);
+    const {  handleCreateTechnician, CreateSchema, initialValue } = useContext(CreateTechnicianContext);
 
     return (
         <Container>
             <Column>
                 <h1>
-                    Novo Serviço
+                    Novo Tecnico
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTypeService(values)} validationSchema={CreateSchema}>
+                <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTechnician(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -38,9 +38,10 @@ const CreateTypeServiceScreen = () => {
                         </form>
                     }
                 </Formik>
+
             </Column>
         </Container>
     )
 }
 
-export default CreateTypeServiceScreen;
+export default EditTechnicianScreen;

@@ -4,10 +4,11 @@ import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import { Formik } from "formik";
 import { CreateUserContext } from "../../../context/CreateUser/context";
+import CrasDropdown from "../../../CrasUi/Dropdown";
 
 const CreateUserScreen = () => {
 
-    const { handleCreateUser, initialValue, CreateUserSchema } = useContext(CreateUserContext);
+    const { handleCreateUser, initialValue, CreateUserSchema, typeUser } = useContext(CreateUserContext);
 
     return (
         <Container>
@@ -44,12 +45,13 @@ const CreateUserScreen = () => {
                             <Row>
 
                                 <div className="col">
-                                    <CrasInput
+                                    <CrasDropdown
+                                        optionLabel={"nome"}
+                                        options={typeUser}
                                         name="type_user"
                                         value={values.type_user}
                                         onChange={handleChange}
                                         label="Tipo de usuário" />
-
                                     {errors.type_user && touched.type_user ? (
                                         <div style={{ color: "red" }}>{errors.type_user}</div>
                                     ) : null}

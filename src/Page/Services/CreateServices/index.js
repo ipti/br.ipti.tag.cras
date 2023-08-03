@@ -35,7 +35,7 @@ const CreateServicesScreen = () => {
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasDropdown name="servico" value={values.servico} onChange={handleChange} optionLabel={"name"} options={service} label="Serviço" />
+                                    <CrasDropdown name="servico" value={values.servico} onChange={handleChange} optionLabel={"nome"} options={service} label="Serviço" />
                                     <Padding />
                                     {errors.servico && touched.servico ? (
                                         <div style={{ color: "red" }}>{errors.servico}</div>
@@ -68,7 +68,7 @@ const CreateServicesScreen = () => {
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasDropdown optionLabel={"name"} name="tecnico" onChange={handleChange} value={values.tecnico} options={technician} label="Técnico Responsável" />
+                                    <CrasDropdown optionLabel={"nome"} name="tecnico" onChange={handleChange} value={values.tecnico} options={technician} label="Técnico Responsável" />
                                     <Padding />
                                     {errors.tecnico && touched.tecnico ? (
                                         <div style={{ color: "red" }}>{errors.tecnico}</div>

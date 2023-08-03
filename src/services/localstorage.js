@@ -1,5 +1,5 @@
 const TOKEN_KEY = "token";
-const id_key = "ludus-id";
+const id_key = "cras-id";
 
 export const isAuthenticated = () => {
   return localStorage.getItem(TOKEN_KEY) !== null;

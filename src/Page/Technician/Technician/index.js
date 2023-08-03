@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
-import { TechnicianContext } from "../../../context/Technician/context";
+import { TechnicianContext } from "../../../context/Technician/Technician/context";
 
 const TechnicianPage = () => {
 

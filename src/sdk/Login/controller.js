@@ -1,6 +1,7 @@
 import { useMutation } from "react-query";
 import { LoginRequest } from "./request";
 import { useNavigate } from "react-router-dom";
+import { idUser, login, logout } from "../../services/localstorage";
 
 export const LoginController = () => {
     const history = useNavigate();
@@ -12,8 +13,12 @@ export const LoginController = () => {
             console.log(error.response.data.message)
           },
           onSuccess: (data) => {
-            console.log(data);
+            console.log(data.data.data.token);
+            logout()
+            login(data.data.data.token);
+            idUser(data.data.data.id)
             history("/");
+            window.location.reload()
           },
         
         }

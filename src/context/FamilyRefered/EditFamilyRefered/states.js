@@ -4,12 +4,13 @@ import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFami
 
 const EditFamilyReferedState = () => {
     const [activeStep, setActiveStep] = useState(3);
+    const [addMember, setAddMember] = useState(false)
     const [dataValues, setDataValues] = useState({});
     const [family, setFamily] = useState();
     const [member, setMember] = useState()
     const {id} = useParams()
 
-    const {familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest} = EditFamilyReferedController(id);
+    const {familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest} = EditFamilyReferedController(id, setAddMember);
 
 
     useEffect(() => {
@@ -156,7 +157,7 @@ const EditFamilyReferedState = () => {
     }
 
     return {
-        activeStep, setActiveStep, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member
+        activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member
     }
 }
 

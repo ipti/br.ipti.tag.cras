@@ -3,7 +3,7 @@ import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
-import { CreateTechnicianContext } from "../../../context/CreateTechnician/context";
+import { CreateTechnicianContext } from "../../../context/Technician/CreateTechnician/context";
 
 const CreateTechnicianScreen = () => {
 
@@ -22,12 +22,12 @@ const CreateTechnicianScreen = () => {
                             <Row>
                                 <div className="col">
                                     <CrasInput
-                                        name="name"
-                                        value={values.name}
+                                        name="nome"
+                                        value={values.nome}
                                         onChange={handleChange}
                                         label="Nome" />
-                                    {errors.name && touched.name ? (
-                                        <div style={{ color: "red" }}>{errors.name}</div>
+                                    {errors.nome && touched.nome ? (
+                                        <div style={{ color: "red" }}>{errors.nome}</div>
                                     ) : null}
                                 </div>
                             </Row>

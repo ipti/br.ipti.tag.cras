@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { TechnicianController } from "../../sdk/Technician/Technician/controller";
+import { TechnicianController } from "../../../sdk/Technician/Technician/controller";
 
 export const TechnicianState = () => {
 

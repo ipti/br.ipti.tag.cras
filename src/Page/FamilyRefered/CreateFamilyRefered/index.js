@@ -43,8 +43,9 @@ const CreateFamilyReferedScreen = () => {
             <h1>
                 Criar Familia Referenciada
             </h1>
-            <Padding padding="16px" />
+            <Padding padding="32px" />
             <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} />
+            <Padding padding="32px" />
             {activeStep === 0 ?
                 <FormInfoPerson /> : activeStep === 1 ?
                     <FormAddress /> : activeStep === 2 ?

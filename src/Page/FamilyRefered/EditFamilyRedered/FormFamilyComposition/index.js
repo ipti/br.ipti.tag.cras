@@ -10,8 +10,7 @@ import * as Yup from 'yup';
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 const FormFamilyComposition = () => {
-    const [addMember, setAddMember] = useState(false)
-    const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member } = useContext(EditFamilyReferedContext)
+    const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember } = useContext(EditFamilyReferedContext)
 
     if (!family) return null;
 
