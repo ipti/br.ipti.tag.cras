@@ -13,3 +13,7 @@ const AllTechnicianRequest = async () => {
 export const useFetchAllTechnician = () => {
     return useQuery("AllTechnician", () => AllTechnicianRequest());
   };
+
+  export const DeleteTechnicianRequest = async (id) => {
+    return await http.delete(`/technician/${id}`, config);
+}

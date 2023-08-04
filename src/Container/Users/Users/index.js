@@ -1,6 +1,6 @@
 import React from "react";
 import UserPage from "../../../Page/Users/Users";
-import UserProvider from "../../../context/User/context";
+import UserProvider from "../../../context/User/User/context";
 
 const Users = () => {
 

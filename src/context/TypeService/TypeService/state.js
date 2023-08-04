@@ -3,7 +3,7 @@ import { TypesServicesController } from "../../../sdk/TypeService/TypeServices/c
 
 export const TypeServiceState = () => {
 
-    const {typesServicesfetch, isLoading, error } = TypesServicesController();
+    const {typesServicesfetch, isLoading, error, DeleteTypesServicesRequestMutation } = TypesServicesController();
     const [typesServices, setTypesServices] = useState([]);
 
     useEffect(() => {
@@ -12,8 +12,12 @@ export const TypeServiceState = () => {
         }
     }, [typesServicesfetch])
 
+
+    const DeleteTypeServices = (id) => {
+        DeleteTypesServicesRequestMutation.mutate(id)
+    }
     
     return{
-        typesServices, isLoading, error
+        typesServices, isLoading, error, DeleteTypeServices
     }
 }

@@ -3,13 +3,17 @@ import http from "../../../services/axios";
 import { getToken } from "../../../services/localstorage";
 
 const config = {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  };
+  headers: { Authorization: `Bearer ${getToken()}` },
+};
 
 const AllTypesServicesRequest = async () => {
-    return await http.get("/typesServices", config);
+  return await http.get("/typesServices", config);
 }
 
 export const useFetchAllTypesServices = () => {
-    return useQuery("AllTypesServices", () => AllTypesServicesRequest());
-  };
+  return useQuery("AllTypesServices", () => AllTypesServicesRequest());
+};
+
+export const DeleteTypesServicesRequest = async (id) => {
+  return await http.delete(`/typesServices/${id}`, config);
+}

@@ -5,7 +5,6 @@ import Layout from "../Components/Layout";
 import { isAuthenticated } from "../services/localstorage";
 
 const PrivateRoute = ({Component}) => {
-  const auth = true; 
 
   return isAuthenticated() ?
     <Layout>

@@ -3,7 +3,7 @@ import { TechnicianController } from "../../../sdk/Technician/Technician/control
 
 export const TechnicianState = () => {
 
-    const {technicianfetch, isLoading, error } = TechnicianController();
+    const {technicianfetch, isLoading, error, DeleteTechnicianRequestMutation } = TechnicianController();
     const [technician, setTechnician] = useState([]);
 
     useEffect(() => {
@@ -11,9 +11,13 @@ export const TechnicianState = () => {
             setTechnician(technicianfetch.data.data)
         }
     }, [technicianfetch])
+
+    const DeleteTechnician = (id) => {
+        DeleteTechnicianRequestMutation.mutate(id)
+    }
     
 
     return{
-        technician, isLoading, error
+        technician, isLoading, error, DeleteTechnician
     }
 }

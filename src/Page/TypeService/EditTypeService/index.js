@@ -1,25 +1,23 @@
 import { Formik } from "formik";
-import { Toast } from "primereact/toast";
 import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
-import { EditTechnicianContext } from "../../../context/Technician/EditTechnician/context";
+import { EditTypeServiceContext } from "../../../context/TypeService/EditTypeService/contex";
+import { Toast } from "primereact/toast";
 
-const EditTechnicianScreen = () => {
+const EditTypeServiceScreen = () => {
 
-    const { CreateSchema, initialValue, technician, handleEditTechnician, show, toast } = useContext(EditTechnicianContext);
+    const { CreateSchema, handleEditTypeService, initialValue, typeService, toast, show } = useContext(EditTypeServiceContext);
 
     return (
         <Container>
             <Column>
                 <h1>
-                    Editar Tecnico
+                    Editar Serviço
                 </h1>
                 <Padding padding="16px" />
-                {technician ? <Formik initialValues={initialValue}
-                    onSubmit={(values) => {handleEditTechnician(values); show()}}
-                    validationSchema={CreateSchema}>
+                {typeService ? <Formik initialValues={initialValue} onSubmit={(values) => {handleEditTypeService(values); show()}} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -47,4 +45,4 @@ const EditTechnicianScreen = () => {
     )
 }
 
-export default EditTechnicianScreen;
+export default EditTypeServiceScreen;

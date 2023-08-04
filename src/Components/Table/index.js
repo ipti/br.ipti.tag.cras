@@ -5,7 +5,7 @@ import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
 import CrasTable from "../../CrasUi/Table";
 import { useNavigate } from "react-router-dom";
 
-const Table = ({columns, list, path, name, pathEdit}) => {
+const Table = ({columns, list, path, name, pathEdit, delet}) => {
 
     const history = useNavigate();
     const [nameFilter, setNameFilter] = useState("")
@@ -33,7 +33,7 @@ const Table = ({columns, list, path, name, pathEdit}) => {
                         <ButtonPrime label={"Adicionar"} onClick={() => history(path)} />
                     </Row>
                     <Padding padding="16px 0">
-                        <CrasTable columns={columns} products={filterName} header={header}  pathEdit={pathEdit}/>
+                        <CrasTable columns={columns} products={filterName} header={header}  pathEdit={pathEdit} delet={delet}/>
                     </Padding>
                     <Padding />
             </Column>

@@ -7,7 +7,7 @@ const TypeServicePage = () => {
 
 
 
-    const { isLoading, typesServices } = useContext(TypeServiceContext);
+    const { isLoading, typesServices, DeleteTypeServices } = useContext(TypeServiceContext);
 
 
     const columns = [
@@ -25,6 +25,8 @@ const TypeServicePage = () => {
                     list={typesServices}
                     path="/criar/servico"
                     name="Serviço"
+                    pathEdit={"/edit/servico/"}
+                    delet={DeleteTypeServices}
                 />
             }
         </Container>

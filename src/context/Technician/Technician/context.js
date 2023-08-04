@@ -5,9 +5,9 @@ export const TechnicianContext = createContext({});
 
 const TechnicianProvider = ({children}) => {
 
-    const { error, isLoading, technician } = TechnicianState();
+    const { error, isLoading, technician, DeleteTechnician } = TechnicianState();
     return (
-        <TechnicianContext.Provider value={{ error, isLoading, technician }}>
+        <TechnicianContext.Provider value={{ error, isLoading, technician, DeleteTechnician }}>
             {children}
         </TechnicianContext.Provider>
     )

@@ -5,11 +5,11 @@ export const EditTechnicianContext = createContext({});
 
 const EditTechnicianProvider = ({ children }) => {
 
-    const { CreateSchema, handleCreateTechnician, initialValue } = EditTechnicianState();
+    const { CreateSchema, handleEditTechnician, initialValue, technician, show, toast } = EditTechnicianState();
 
 
     return (
-        <EditTechnicianContext.Provider value={{ handleCreateTechnician, initialValue, CreateSchema }}>
+        <EditTechnicianContext.Provider value={{ handleEditTechnician, initialValue, CreateSchema, technician, show, toast }}>
             {children}
         </EditTechnicianContext.Provider>
     )

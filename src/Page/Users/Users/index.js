@@ -1,13 +1,13 @@
 import React, { useContext } from "react";
 import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
-import { UserContext } from "../../../context/User/context";
+import { UserContext } from "../../../context/User/User/context";
 
 const UserPage = () => {
 
 
 
-    const { isLoading, user } = useContext(UserContext);
+    const { isLoading, user, deleteUser } = useContext(UserContext);
 
 
     const columns = [
@@ -23,7 +23,7 @@ const UserPage = () => {
         <Container>
             {isLoading ?
                 <div>carregando...</div> :
-                <Table columns={columns} list={userConvert} path="/criar/usuarios" name="Usuários" />
+                <Table columns={columns} list={userConvert} path="/criar/usuarios" name="Usuários" pathEdit={"/edit/usuarios/"} delet={deleteUser}/>
             }
         </Container>
     )

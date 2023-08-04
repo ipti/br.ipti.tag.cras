@@ -1,5 +1,5 @@
 import * as Yup from 'yup';
-import { CreateUserController } from '../../sdk/User/CreateUser/controller';
+import { CreateUserController } from '../../../sdk/User/CreateUser/controller';
 
 export const CreateUserState = () => {
     const initialValue = {

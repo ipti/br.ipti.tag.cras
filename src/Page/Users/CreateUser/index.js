@@ -3,8 +3,8 @@ import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import { Formik } from "formik";
-import { CreateUserContext } from "../../../context/CreateUser/context";
 import CrasDropdown from "../../../CrasUi/Dropdown";
+import { CreateUserContext } from "../../../context/User/CreateUser/context";
 
 const CreateUserScreen = () => {
 

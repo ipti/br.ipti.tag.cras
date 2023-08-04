@@ -14,3 +14,6 @@ export const useFetchAllUser = () => {
     return useQuery("AllUser", () => AllUserRequest());
   };
 
+  export const DeleteUserRequest = async (id) => {
+    return await http.delete(`/user/${id}`, config);
+  }
