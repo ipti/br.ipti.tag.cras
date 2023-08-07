@@ -7,26 +7,29 @@ import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 import { Formik } from "formik";
 import * as Yup from 'yup';
+import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 const FormFinances = () => {
 
-    const { backStep, nextStep, dataValues } = useContext(CreateFamilyReferedContext)
+    const { backStep, nextStep, family } = useContext(EditFamilyReferedContext)
+
+    if(!family) return null;
 
     const initialValue = {
-        profissao: dataValues.profissao ?? "",
-        renda: dataValues.renda ?? 0,
-        reside_familia: dataValues.reside_familia ?? "",
-        bolsa_familia: dataValues.bolsa_familia ?? 0,
-        loasbpc: dataValues.loasbpc ?? 0,
-        previdencia: dataValues.previdencia ?? 0,
-        carteira_assinada: dataValues.carteira_assinada ?? "",
-        ocupacao_irregular: dataValues.ocupacao_irregular ?? "",
-        crianca_sozinha: dataValues.crianca_sozinha ?? "",
-        idosos_dependentes: dataValues.idosos_dependentes ?? "",
-        desempregados: dataValues.desempregados ?? "",
-        deficientes: dataValues.deficientes ?? "",
-        baixa_renda: dataValues.baixa_renda ?? "",
-        outros: dataValues.outros ?? ""
+        profissao: family.id_situacao_financeira_situacao_financeira.profissao ?? "",
+        renda: family.id_situacao_financeira_situacao_financeira.renda ?? 0,
+        reside_familia: family.id_situacao_financeira_situacao_financeira.reside_familia ?? "",
+        bolsa_familia: family.id_situacao_financeira_situacao_financeira.bolsa_familia ?? 0,
+        loasbpc: family.id_situacao_financeira_situacao_financeira.loasbpc ?? 0,
+        previdencia: family.id_situacao_financeira_situacao_financeira.previdencia ?? 0,
+        carteira_assinada: family.id_situacao_financeira_situacao_financeira.carteira_assinada ?? "",
+        ocupacao_irregular: family.id_situacao_financeira_situacao_financeira.ocupacao_irregular ?? "",
+        crianca_sozinha: family.id_situacao_financeira_situacao_financeira.crianca_sozinha ?? "",
+        idosos_dependentes: family.id_situacao_financeira_situacao_financeira.idosos_dependentes ?? "",
+        desempregados: family.id_situacao_financeira_situacao_financeira.desempregados ?? "",
+        deficientes: family.id_situacao_financeira_situacao_financeira.deficientes ?? "",
+        baixa_renda: family.id_situacao_financeira_situacao_financeira.baixa_renda ?? "",
+        outros: family.id_situacao_financeira_situacao_financeira.outros ?? ""
     }
 
     const validationSchema = Yup.object().shape({

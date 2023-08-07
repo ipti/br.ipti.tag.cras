@@ -10,7 +10,6 @@ const EditUserScreen = () => {
 
     const { typeUser, handleEditUser, EditUserSchema, initialValue, user } = useContext(EditUserContext);
 
-    console.log(user)
 
     return (
         <Container>

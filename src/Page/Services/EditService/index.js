@@ -1,30 +1,30 @@
 import React, { useContext } from "react";
 import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
-import CrasInput from "../../../CrasUi/Input/Input";
-import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
+import { Formik } from "formik";
 import CrasCalendar from "../../../CrasUi/Calendar";
 import CrasDropdown from "../../../CrasUi/Dropdown";
-import { Formik } from "formik";
-import { CreateServicesContext } from "../../../context/Service/CreateService/context";
+import CrasInput from "../../../CrasUi/Input/Input";
+import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
+import { EditServiceContext } from "../../../context/Service/EditService/context";
 
-const CreateServicesScreen = () => {
-
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify } = useContext(CreateServicesContext)
+const EditServicePage = () => {
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, serviceOne } = useContext(EditServiceContext)
 
     return (
         <Container>
             <Column>
                 <h1>
-                    Novo Atendimentos
+                    Editar Atendimentos
                 </h1>
                 <Padding padding="16px" />
                 <h3>Dados do atendimento</h3>
-                <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
+                {serviceOne ? <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
+                        const date = new Date(values.data)
                         return <form onSubmit={handleSubmit}>
                             <Row>
                                 <div className="col">
-                                    <CrasCalendar name="data" date={values.data} onChange={handleChange} showIcon />
+                                    <CrasCalendar name="data" date={date} onChange={handleChange} showIcon />
                                     <Padding />
                                     {errors.data && touched.data ? (
                                         <div style={{ color: "red" }}>{errors.data}</div>
@@ -83,14 +83,14 @@ const CreateServicesScreen = () => {
                             </Row>
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime type="submit" label="Cadastrar" />
+                                <ButtonPrime type="submit" label="Salvar" />
                             </Row>
                         </form>
                     }}
-                </Formik>
+                </Formik> : null}
             </Column>
         </Container>
     )
 }
 
-export default CreateServicesScreen;
+export default EditServicePage;

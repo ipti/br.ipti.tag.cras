@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { CreateServicesController } from "../../sdk/Services/CreateService/controller";
+import { CreateServicesController } from "../../../sdk/Services/CreateService/controller";
 import * as Yup from 'yup';
 
 
@@ -47,8 +47,6 @@ export const CreateServicesState = () => {
 
   const handleCreateService = (data) => {
 
-    var date = "2023-07-21";
-
     // if (data.data) {
     //   let day = data.data.getDay();
     //   let year = data.data.getYear();
@@ -64,7 +62,7 @@ export const CreateServicesState = () => {
       tecnico: data.tecnico.nome,
       id_identificacao_usuario: data.id_identificacao_usuario.id,
       id_membro_familiar: 1,
-      data: date
+      data: data.data
     }
 
     CreateServicesRequestMutation.mutate(body)

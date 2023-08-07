@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Table = ({columns, list, path, name, pathEdit, delet}) => {
 
     const history = useNavigate();
-    const [nameFilter, setNameFilter] = useState("")
+    const [nameFilter, setNameFilter] = useState("");
 
     const header = (
         <Row id="end">

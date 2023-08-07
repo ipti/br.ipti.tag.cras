@@ -16,6 +16,7 @@ import CreateUser from "../Container/Users/Create";
 import Users from "../Container/Users/Users";
 import PrivateRoute from "./PrivateRoute";
 import EditUser from "../Container/Users/Edit";
+import EditService from "../Container/Services/EditService";
 
 const RoutesCras = () => {
 
@@ -27,7 +28,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={CreateUser} />} path="/criar/usuarios" />
                 <Route element={<PrivateRoute Component={EditUser} />} path="/edit/usuarios/:id" />
                 <Route element={<PrivateRoute Component={ListServices} />} path="/atendimento" />
-                <Route element={<PrivateRoute Component={CreateServices} />} path="/criar/atentimento" />
+                <Route element={<PrivateRoute Component={CreateServices} />} path="/criar/atendimento" />
+                <Route element={<PrivateRoute Component={EditService} />} path="/edit/atendimento/:id" />
                 <Route element={<PrivateRoute Component={ListFamilyRefered} />} path="/familia" />
                 <Route element={<PrivateRoute Component={CreateFamilyRefered} />} path="/criar/familia" />
                 <Route element={<PrivateRoute Component={EditFamilyRefered} />} path="/edit/familia/:id" />

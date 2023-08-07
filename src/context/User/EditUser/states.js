@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 export const EditUser = () => {
     const { id } = useParams();
     const [user, setUser] = useState()
+    const [isVerify, setIsVerify] = useState(true);
+    const [isError, setIsError] = useState("");
 
     const typeUser = [
         {id: 1, nome: "Administrador"},
@@ -23,7 +25,7 @@ export const EditUser = () => {
         confirmPassword: Yup.string().label('Confirmar senha').oneOf([Yup.ref('password')], 'Senhas difirentes'),
     });
 
-    const { EditUserRequestMutation, UserRequest } = EditUserController(id);
+    const { EditUserRequestMutation, UserRequest } = EditUserController(id, setIsError, setIsVerify);
 
     useEffect(() => {
       if(UserRequest){
@@ -66,6 +68,6 @@ export const EditUser = () => {
     
     
     return{
-        typeUser, handleEditUser, EditUserSchema, initialValue, user
+        typeUser, handleEditUser, EditUserSchema, initialValue, user, isVerify, isError
     }
 }

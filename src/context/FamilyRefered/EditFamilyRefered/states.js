@@ -3,162 +3,162 @@ import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 
 const EditFamilyReferedState = () => {
-    const [activeStep, setActiveStep] = useState(3);
-    const [addMember, setAddMember] = useState(false)
-    const [dataValues, setDataValues] = useState({});
-    const [family, setFamily] = useState();
-    const [member, setMember] = useState()
-    const {id} = useParams()
+  const [activeStep, setActiveStep] = useState(0);
+  const [addMember, setAddMember] = useState(false)
+  const [dataValues, setDataValues] = useState({});
+  const [family, setFamily] = useState();
+  const [member, setMember] = useState()
+  const { id } = useParams()
 
-    const {familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest} = EditFamilyReferedController(id, setAddMember);
-
-
-    useEffect(() => {
-      if(familyReferedfetch){
-        setFamily(familyReferedfetch.data.data)
-      }
-
-      if(membersFamilyRequest){
-        const filter = membersFamilyRequest.data.data.filter(member => `${member.id_identificacao_usuario}` === id);
-        setMember(filter)
-      }
-
-    }, [familyReferedfetch, membersFamilyRequest,id])
-    
-    const sexo =  [
-        "Masculino",
-        "Feminino",
-        "Outro"
-      ]
-    
-
-    const estadosDoBrasil = [
-        { uf: 'AC', nome: 'Acre' },
-        { uf: 'AL', nome: 'Alagoas' },
-        { uf: 'AP', nome: 'Amapá' },
-        { uf: 'AM', nome: 'Amazonas' },
-        { uf: 'BA', nome: 'Bahia' },
-        { uf: 'CE', nome: 'Ceará' },
-        { uf: 'DF', nome: 'Distrito Federal' },
-        { uf: 'ES', nome: 'Espírito Santo' },
-        { uf: 'GO', nome: 'Goiás' },
-        { uf: 'MA', nome: 'Maranhão' },
-        { uf: 'MT', nome: 'Mato Grosso' },
-        { uf: 'MS', nome: 'Mato Grosso do Sul' },
-        { uf: 'MG', nome: 'Minas Gerais' },
-        { uf: 'PA', nome: 'Pará' },
-        { uf: 'PB', nome: 'Paraíba' },
-        { uf: 'PR', nome: 'Paraná' },
-        { uf: 'PE', nome: 'Pernambuco' },
-        { uf: 'PI', nome: 'Piauí' },
-        { uf: 'RJ', nome: 'Rio de Janeiro' },
-        { uf: 'RN', nome: 'Rio Grande do Norte' },
-        { uf: 'RS', nome: 'Rio Grande do Sul' },
-        { uf: 'RO', nome: 'Rondônia' },
-        { uf: 'RR', nome: 'Roraima' },
-        { uf: 'SC', nome: 'Santa Catarina' },
-        { uf: 'SP', nome: 'São Paulo' },
-        { uf: 'SE', nome: 'Sergipe' },
-        { uf: 'TO', nome: 'Tocantins' }
-      ];
-
-      const escolaridadeNoBrasil = [
-        "Educação Infantil",
-        "Ensino Fundamental I (1º ao 5º ano)",
-        "Ensino Fundamental II (6º ao 9º ano)",
-        "Ensino Médio",
-        "Ensino Técnico",
-        "Ensino Superior - Graduação",
-        "Cursando Ensino Superior",
-        "Pós-graduação (Especialização)",
-        "Pós-graduação (Mestrado)",
-        "Pós-graduação (Doutorado)",
-        "Educação de Jovens e Adultos (EJA) - Ensino Fundamental",
-        "Educação de Jovens e Adultos (EJA) - Ensino Médio",
-        "Cursos Profissionalizantes",
-        "Cursos de Aperfeiçoamento e Extensão"
-      ];
-
-      const estadosCivis = [
-        'Solteiro(a)',
-        'Casado(a)',
-        'Divorciado(a)',
-        'Viúvo(a)',
-        'Separado(a)',
-        'União Estável',
-        'Outro',
-      ];
-
-      const parentesco =  [
-          "Pai",
-          "Mãe",
-          "Filho",
-          "Filha",
-          "Avô",
-          "Avó",
-          "Tio",
-          "Tia",
-          "Primo",
-          "Prima",
-          "Sobrinho",
-          "Sobrinha",
-          "Cônjuge",
-          "Companheiro(a)",
-          "Amigo(a)",
-          "Outro"
-        ]
-      
+  const { familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest, EditFamilyRequestRequestMutation } = EditFamilyReferedController(id, setAddMember);
 
 
-    const nextStep = (values) => {
-        let data = Object.assign(dataValues, values);
-        setDataValues(data);
-
-        if (activeStep < 3) {
-            setActiveStep(activeStep + 1);
-        }
+  useEffect(() => {
+    if (familyReferedfetch) {
+      setFamily(familyReferedfetch.data.data)
     }
 
-    const backStep = () => {
-
-        if (activeStep !== 0) {
-            setActiveStep(activeStep - 1);
-        }
+    if (membersFamilyRequest) {
+      const filter = membersFamilyRequest.data.data.filter(member => `${member.id_identificacao_usuario}` === id);
+      setMember(filter)
     }
 
+  }, [familyReferedfetch, membersFamilyRequest, id])
 
-    const handleFamiliaRefered = () => {
+  const sexo = [
+    "Masculino",
+    "Feminino",
+    "Outro"
+  ]
 
-        // const data = {
-        //     ...dataValues,
-        //     certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
-        //     NIS: parseInt(dataValues.NIS),
-        //     renda: parseInt(dataValues.renda),
-        //     bolsa_familia: parseInt(dataValues.bolsa_familia),
-        //     loasbpc: parseInt(dataValues.loasbpc),
-        //     previdencia: parseInt(dataValues.previdencia),
-        //     valor_aluguel: parseInt(dataValues.valor_aluguel),
-        //     uf_rg: dataValues.uf_rg.uf,
-        //     ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
-        //     crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-        //     idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-        //     desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
-        //     deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
-        //     baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
-        //     outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
-        // }
-        // CreateUserIdentifyRequestMutation.mutate(data);
 
+  const estadosDoBrasil = [
+    { uf: 'AC', nome: 'Acre' },
+    { uf: 'AL', nome: 'Alagoas' },
+    { uf: 'AP', nome: 'Amapá' },
+    { uf: 'AM', nome: 'Amazonas' },
+    { uf: 'BA', nome: 'Bahia' },
+    { uf: 'CE', nome: 'Ceará' },
+    { uf: 'DF', nome: 'Distrito Federal' },
+    { uf: 'ES', nome: 'Espírito Santo' },
+    { uf: 'GO', nome: 'Goiás' },
+    { uf: 'MA', nome: 'Maranhão' },
+    { uf: 'MT', nome: 'Mato Grosso' },
+    { uf: 'MS', nome: 'Mato Grosso do Sul' },
+    { uf: 'MG', nome: 'Minas Gerais' },
+    { uf: 'PA', nome: 'Pará' },
+    { uf: 'PB', nome: 'Paraíba' },
+    { uf: 'PR', nome: 'Paraná' },
+    { uf: 'PE', nome: 'Pernambuco' },
+    { uf: 'PI', nome: 'Piauí' },
+    { uf: 'RJ', nome: 'Rio de Janeiro' },
+    { uf: 'RN', nome: 'Rio Grande do Norte' },
+    { uf: 'RS', nome: 'Rio Grande do Sul' },
+    { uf: 'RO', nome: 'Rondônia' },
+    { uf: 'RR', nome: 'Roraima' },
+    { uf: 'SC', nome: 'Santa Catarina' },
+    { uf: 'SP', nome: 'São Paulo' },
+    { uf: 'SE', nome: 'Sergipe' },
+    { uf: 'TO', nome: 'Tocantins' }
+  ];
+
+  const escolaridadeNoBrasil = [
+    "Educação Infantil",
+    "Ensino Fundamental I (1º ao 5º ano)",
+    "Ensino Fundamental II (6º ao 9º ano)",
+    "Ensino Médio",
+    "Ensino Técnico",
+    "Ensino Superior - Graduação",
+    "Cursando Ensino Superior",
+    "Pós-graduação (Especialização)",
+    "Pós-graduação (Mestrado)",
+    "Pós-graduação (Doutorado)",
+    "Educação de Jovens e Adultos (EJA) - Ensino Fundamental",
+    "Educação de Jovens e Adultos (EJA) - Ensino Médio",
+    "Cursos Profissionalizantes",
+    "Cursos de Aperfeiçoamento e Extensão"
+  ];
+
+  const estadosCivis = [
+    'Solteiro(a)',
+    'Casado(a)',
+    'Divorciado(a)',
+    'Viúvo(a)',
+    'Separado(a)',
+    'União Estável',
+    'Outro',
+  ];
+
+  const parentesco = [
+    "Pai",
+    "Mãe",
+    "Filho",
+    "Filha",
+    "Avô",
+    "Avó",
+    "Tio",
+    "Tia",
+    "Primo",
+    "Prima",
+    "Sobrinho",
+    "Sobrinha",
+    "Cônjuge",
+    "Companheiro(a)",
+    "Amigo(a)",
+    "Outro"
+  ]
+
+
+
+  const nextStep = (values) => {
+    let data = Object.assign(dataValues, values);
+    setDataValues(data);
+
+    if (activeStep < 3) {
+      setActiveStep(activeStep + 1);
     }
+  }
 
+  const backStep = () => {
 
-    const handleCreateFamilyMember = (body) => {
-      CreateFamilyRequestRequestMutation.mutate(body)
+    if (activeStep !== 0) {
+      setActiveStep(activeStep - 1);
     }
+  }
 
-    return {
-        activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member
+
+  const handleFamiliaRefered = () => {
+
+    const data = {
+      ...dataValues,
+      certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
+      NIS: parseInt(dataValues.NIS),
+      renda: parseInt(dataValues.renda),
+      bolsa_familia: parseInt(dataValues.bolsa_familia),
+      loasbpc: parseInt(dataValues.loasbpc),
+      previdencia: parseInt(dataValues.previdencia),
+      valor_aluguel: parseInt(dataValues.valor_aluguel),
+      uf_rg: dataValues.uf_rg.uf,
+      ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
+      crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
+      idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
+      desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
+      deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
+      baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
+      outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
     }
+    EditFamilyRequestRequestMutation.mutate(data);
+
+  }
+
+
+  const handleCreateFamilyMember = (body) => {
+    CreateFamilyRequestRequestMutation.mutate(body)
+  }
+
+  return {
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member
+  }
 }
 
 export default EditFamilyReferedState;

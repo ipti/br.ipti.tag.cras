@@ -17,6 +17,11 @@ const FormInfoPerson = () => {
 
     if(!family) return null;
 
+
+ const valueUf = () => {
+    const value = family ? estadosDoBrasil.find(fil => fil.id === family.id_identificacao_usuario) : ""
+    return value
+  }
   
 
     const initialValue = {
@@ -30,7 +35,7 @@ const FormInfoPerson = () => {
         NIS: family.NIS ?? "",
         numero_rg: family.numero_rg ?? "",
         data_emissao_rg: family.data_emissao_rg ?? "",
-        uf_rg: family.uf_rg ?? "",
+        uf_rg: valueUf() ?? "",
         emissao_rg: family.emissao_rg ?? "",
         cpf: family.cpf ?? "",
         deficiente: family.deficiente ?? "",
@@ -76,6 +81,11 @@ const FormInfoPerson = () => {
             </h3>
             <Formik initialValues={initialValue} onSubmit={values => { nextStep(values) }} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
+
+                    const dateEntry = new Date(values.data_inicial);
+                    const dateExit = new Date(values.data_final);
+                    const dateEmit = new Date(values.data_emissao_rg);
+                    const dateBithrday = new Date(values.data_nascimento)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -100,14 +110,14 @@ const FormInfoPerson = () => {
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasCalendar name={"data_inicial"} date={values.data_inicial}  onChange={handleChange} label="Data Entrada" showIcon />
+                                    <CrasCalendar name={"data_inicial"} date={dateEntry}  onChange={handleChange} label="Data Entrada" showIcon />
                                     {errors.data_inicial && touched.data_inicial ? (
                                         <div style={{ color: "red" }}>{errors.data_inicial}</div>
                                     ) : null}
                                 </div>
                                 <div className="col">
 
-                                    <CrasCalendar name={"data_final"} onChange={handleChange} label="Data Desligamento" showIcon />
+                                    <CrasCalendar name={"data_final"} date={dateExit} onChange={handleChange} label="Data Desligamento" showIcon />
                                     {errors.data_final && touched.data_final ? (
                                         <div style={{ color: "red" }}>{errors.data_final}</div>
                                     ) : null}
@@ -131,7 +141,7 @@ const FormInfoPerson = () => {
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasCalendar label="Data de Nascimento" name="data_nascimento" onChange={handleChange} showIcon />
+                                    <CrasCalendar label="Data de Nascimento" date={dateEmit} name="data_nascimento" onChange={handleChange} showIcon />
                                     {errors.data_nascimento && touched.data_nascimento ? (
                                         <div style={{ color: "red" }}>{errors.data_nascimento}</div>
                                     ) : null}
@@ -157,7 +167,7 @@ const FormInfoPerson = () => {
                                     ) : null}
                                 </div>
                                 <div className="col">
-                                    <CrasCalendar label="Data de Emissão" name="data_emissao_rg" onChange={handleChange} showIcon />
+                                    <CrasCalendar label="Data de Emissão" date={dateEmit} name="data_emissao_rg" onChange={handleChange} showIcon />
                                     {errors.data_emissao_rg && touched.data_emissao_rg ? (
                                         <div style={{ color: "red" }}>{errors.data_emissao_rg}</div>
                                     ) : null}

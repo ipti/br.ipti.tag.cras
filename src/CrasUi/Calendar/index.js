@@ -16,10 +16,11 @@ const CrasCalendar = ({ date, onChange, label, name,...props }) => {
         clear: 'Limpiar'
     });
 
+
     return (
         <Column>
             <label htmlFor="username">{label}</label>
-            <Calendar name={name} value={date} style={{ width: "100%" }} placeholder={label} onChange={onChange} locale="es" {...props} />
+            <Calendar name={name} value={date} style={{ width: "100%" }}  dateFormat="dd/mm/yy" placeholder={label} onChange={onChange} locale="es" {...props} />
         </Column>
     )
 }

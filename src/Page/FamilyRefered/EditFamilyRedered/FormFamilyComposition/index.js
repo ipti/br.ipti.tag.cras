@@ -14,8 +14,6 @@ const FormFamilyComposition = () => {
 
     if (!family) return null;
 
-    // console.log(member)
-
     const initialValue = {
         renda: 0,
         bolsaFamilia: 0,

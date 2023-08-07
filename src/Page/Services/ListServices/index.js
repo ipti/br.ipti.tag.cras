@@ -1,11 +1,11 @@
 import React, { useContext } from "react";
 import Table from "../../../Components/Table";
 import { Container } from "../../../CrasUi/styles/styles";
-import { ServiceContext } from "../../../context/Service/context";
+import { ServiceContext } from "../../../context/Service/Service/context";
 
 const ListServicesScreen = () => {
 
-    const { isLoading, service } = useContext(ServiceContext)
+    const { isLoading, service, deleteService } = useContext(ServiceContext)
 
 
     const columns = [
@@ -27,7 +27,7 @@ const ListServicesScreen = () => {
     return (
         <Container>
             {
-                isLoading ? <div>carregando...</div> : <Table columns={columns} list={service} path="/criar/atentimento" name="Atendimentos" />
+                isLoading ? <div>carregando...</div> : <Table columns={columns} list={service} path="/criar/atendimento" name="Atendimentos" delet={deleteService} pathEdit={"/edit/atendimento/"} />
             }
         </Container>
     )

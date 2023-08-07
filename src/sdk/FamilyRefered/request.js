@@ -19,6 +19,11 @@ const FamilyReferedIdRequest = async (id) => {
   return await http.get(`/userIdentify/${id}`, config)
 }
 
+export const EditUserIdentifyRequest = async (body, id) => {
+  return await http.put(`/userIdentify/${id}`, body, config)
+}
+
+
 export const useFetchAllUserIdentify = () => {
     return useQuery("AllUserIdentify", () => AllUserIdentifyRequest());
   };

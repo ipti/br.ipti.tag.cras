@@ -33,7 +33,6 @@ export const EditTypeServiceState = () => {
         nome: typeService ? typeService.nome : "",
     }
 
-    console.log(initialValue)
 
     const CreateSchema = Yup.object().shape({
         nome: Yup.string().required("Campo Obrigatório"),

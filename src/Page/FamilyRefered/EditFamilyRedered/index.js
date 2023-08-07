@@ -19,22 +19,22 @@ const EditFamilyReferedScreen = () => {
                 setActiveStep(0)
             }
         },
+        // {
+        //     label: 'Endereço',
+        //     command: (event) => {
+        //         setActiveStep(1)
+        //     }
+        // },
         {
-            label: 'Endereço',
+            label: 'Situação Financeira e Previdenciária',
             command: (event) => {
                 setActiveStep(1)
             }
         },
         {
-            label: 'Situação Financeira e Previdenciária',
-            command: (event) => {
-                setActiveStep(2)
-            }
-        },
-        {
             label: 'Composição Familiar',
             command: (event) => {
-                setActiveStep(3)
+                setActiveStep(2)
             }
         }
     ];
@@ -45,12 +45,12 @@ const EditFamilyReferedScreen = () => {
                 Criar Familia Referenciada
             </h1>
             <Padding padding="32px" />
-            <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} />
+            <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} readOnly={false} />
             <Padding padding="32px" />
             {activeStep === 0 ?
                 <FormInfoPerson /> : activeStep === 1 ?
-                    <FormAddress /> : activeStep === 2 ?
-                        <FormFinances /> : activeStep === 3 ?
+                    // <FormAddress /> : activeStep === 2 ?
+                        <FormFinances /> : activeStep === 2 ?
                             <FormFamilyComposition /> : null}
                             <Padding padding="16px"/>
         </Container>

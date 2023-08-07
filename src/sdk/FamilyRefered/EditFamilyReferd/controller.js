@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { useFetchFamilyReferedId } from "../request"
+import { EditUserIdentifyRequest, useFetchFamilyReferedId } from "../request"
 import { CreateFamilyMemberRequest, useFetchAllFamilyMember } from "../MemberFamily/request";
 
 export const EditFamilyReferedController = (id, setAddMember) => {
@@ -22,7 +22,23 @@ export const EditFamilyReferedController = (id, setAddMember) => {
         }
       );
 
+      const EditFamilyRequestRequestMutation  = useMutation(
+        (data) => EditUserIdentifyRequest(data, id),
+        {
+          onError: (error) => {
+            console.log(error.response.data.message)
+          },
+          onSuccess: (data) => {
+            refetch()
+            setAddMember(false)
+            console.log(data);
+          },
+        }
+      );
+
+      
+
     return {
-        familyReferedfetch, isLoading, error, CreateFamilyRequestRequestMutation, membersFamilyRequest
+        familyReferedfetch, isLoading, error, CreateFamilyRequestRequestMutation, membersFamilyRequest, EditFamilyRequestRequestMutation
     }
 }
