@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
@@ -8,9 +8,20 @@ import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 
 import * as Yup from 'yup';
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
+import EditMemberFamily from "./EditMemberFamily";
 
 const FormFamilyComposition = () => {
-    const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember } = useContext(EditFamilyReferedContext)
+    const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember, deleteMember } = useContext(EditFamilyReferedContext)
+    const [idMember, setIdMember] = useState("")
+    const [open, setOpen] = useState(false)
+
+    const editMember = (params) => {
+        console.log(params)
+        setOpen(true);
+        setIdMember(params.id)
+    }
+
+    console.log(idMember)
 
     if (!family) return null;
 
@@ -42,21 +53,19 @@ const FormFamilyComposition = () => {
     const columns = [
         { field: 'id', header: 'id' },
         { field: 'nome', header: 'Name' },
-        { field: 'nis', header: 'NIS' },
         { field: 'parentesco', header: 'Parentesco' },
         { field: 'idade', header: 'Idade' },
         { field: 'sexo', header: 'Sexo' },
-        { field: 'beneficio', header: 'Beneficio' },
-        { field: 'acoes', header: 'Ações' },
     ];
 
     return (
         <Column>
             <Padding padding="16px" />
-            {!addMember ? <Row id="end">
+            {!addMember && !open ? <Row id="end">
                 <ButtonPrime onClick={() => setAddMember(true)} label="Adicionar Membro" />
             </Row> : null}
             <h3>Composição Familiar</h3>
+            <Padding padding="8px"/>
             {addMember ?
                 <Column>
                     <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => handleCreateFamilyMember(value)}>
@@ -135,8 +144,10 @@ const FormFamilyComposition = () => {
 
                     </Formik>
                 </Column>
-                : <CrasTable products={member} columns={columns} />
+                : null
             }
+            {open ? <EditMemberFamily setOpen={setOpen} id={idMember} schema={schema} /> : null}
+            {!open && !addMember ? <CrasTable delet={deleteMember} products={member} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
             <Row id="center">
                 <ButtonPrime label="Voltar" onClick={backStep} />

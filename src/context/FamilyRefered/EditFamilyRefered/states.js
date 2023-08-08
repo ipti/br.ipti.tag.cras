@@ -10,7 +10,7 @@ const EditFamilyReferedState = () => {
   const [member, setMember] = useState()
   const { id } = useParams()
 
-  const { familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest, EditFamilyRequestRequestMutation } = EditFamilyReferedController(id, setAddMember);
+  const { familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest, DeleteMemberFamilyRequestMutation, EditFamilyRequestRequestMutation } = EditFamilyReferedController(id, setAddMember);
 
 
   useEffect(() => {
@@ -32,6 +32,10 @@ const EditFamilyReferedState = () => {
   ]
 
 
+
+  const deleteMember = (id) => {
+    DeleteMemberFamilyRequestMutation.mutate(id)
+  }
   const estadosDoBrasil = [
     { uf: 'AC', nome: 'Acre' },
     { uf: 'AL', nome: 'Alagoas' },
@@ -137,7 +141,7 @@ const EditFamilyReferedState = () => {
       bolsa_familia: parseInt(dataValues.bolsa_familia),
       loasbpc: parseInt(dataValues.loasbpc),
       previdencia: parseInt(dataValues.previdencia),
-      valor_aluguel: parseInt(dataValues.valor_aluguel),
+      valor_aluguel: dataValues.valor_aluguel ? parseInt(dataValues.valor_aluguel) : 0,
       uf_rg: dataValues.uf_rg.uf,
       ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
       crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
@@ -147,6 +151,7 @@ const EditFamilyReferedState = () => {
       baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
       outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
     }
+
     EditFamilyRequestRequestMutation.mutate(data);
 
   }
@@ -157,7 +162,7 @@ const EditFamilyReferedState = () => {
   }
 
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember
   }
 }
 

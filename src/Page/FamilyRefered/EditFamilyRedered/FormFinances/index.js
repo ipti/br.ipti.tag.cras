@@ -1,12 +1,11 @@
+import { Formik } from "formik";
 import React, { useContext } from "react";
-import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
+import * as Yup from 'yup';
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
-import { Formik } from "formik";
-import * as Yup from 'yup';
+import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 const FormFinances = () => {
