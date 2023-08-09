@@ -58,8 +58,8 @@ export const CreateServicesState = () => {
       solicitacao: data.solicitacao,
       resultado: data.resultado,
       encaminhamento: data.encaminhamento,
-      servico: data.servico.nome,
-      tecnico: data.tecnico.nome,
+      servico: data.servico.id,
+      tecnico: data.tecnico.id,
       id_identificacao_usuario: data.id_identificacao_usuario.id,
       id_membro_familiar: 1,
       data: data.data

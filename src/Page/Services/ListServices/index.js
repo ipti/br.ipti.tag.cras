@@ -5,7 +5,7 @@ import { ServiceContext } from "../../../context/Service/Service/context";
 
 const ListServicesScreen = () => {
 
-    const { isLoading, service, deleteService } = useContext(ServiceContext)
+    const { isLoading, service, deleteService, typeService, technician } = useContext(ServiceContext)
 
 
     const columns = [
@@ -15,19 +15,14 @@ const ListServicesScreen = () => {
         { field: 'tecnico', header: 'Tecnico responsavel' }
     ];
 
-    // const products = [
-    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-    //     { code: 'code', name: 'Code', category: 'category', quantity: "quantity" },
-    // ]
+    console.log(technician)
 
-
+    const ServiceConvert = service ? service.map((data) => ({ ...data, servico: typeService.find(fil => fil.id === data.servico).nome, tecnico: technician.find(fil => fil.id === data.tecnico).nome })) : [];
 
     return (
         <Container>
             {
-                isLoading ? <div>carregando...</div> : <Table columns={columns} list={service} path="/criar/atendimento" name="Atendimentos" delet={deleteService} pathEdit={"/edit/atendimento/"} />
+                isLoading ? <div>carregando...</div> : <Table columns={columns} list={ServiceConvert} path="/criar/atendimento" name="Atendimentos" delet={deleteService} pathEdit={"/edit/atendimento/"} />
             }
         </Container>
     )

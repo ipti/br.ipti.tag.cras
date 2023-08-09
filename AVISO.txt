@@ -1,6 +1,8 @@
-Lembrar de mudar o tecnico e servico para id e não nome
+Lembrar de mudar o tecnico e servico para id e não nome - feito
 
-Edit Membro familiar
+Trocar idade de membro familiar para data de nascimento
+
+Edit Membro familiar 
 
 Include de endereço não está funcionando
 

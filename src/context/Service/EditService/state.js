@@ -28,12 +28,12 @@ export const EditServicesState = () => {
   }
 
   const valueService = () => {
-    const value = serviceOne ? service.find(fil => fil.nome === serviceOne.servico) : ""
+    const value = serviceOne ? service.find(fil => fil.id === serviceOne.servico) : ""
     return value
   }
 
   const valueTechnician = () => {
-    const value = serviceOne ? technician.find(fil => fil.nome === serviceOne.tecnico) : ""
+    const value = serviceOne ? technician.find(fil => fil.id === serviceOne.tecnico) : ""
     return value
   }
 
@@ -71,7 +71,6 @@ export const EditServicesState = () => {
 
 
   const handleCreateService = (data) => {
-
 
     const body = {
       solicitacao: data.solicitacao,

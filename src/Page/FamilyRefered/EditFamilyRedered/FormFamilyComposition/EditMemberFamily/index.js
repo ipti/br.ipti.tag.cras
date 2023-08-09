@@ -6,6 +6,7 @@ import CrasInput from "../../../../../CrasUi/Input/Input";
 import { Column, Padding, Row } from "../../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../../context/FamilyRefered/EditFamilyRefered/context";
 import { EditMemberController } from "../../../../../sdk/FamilyRefered/MemberFamily/EditMember/controller";
+import CrasCalendar from "../../../../../CrasUi/Calendar";
 
 const EditMemberFamily = ({ schema, setOpen, id }) => {
     const [oneMember, setOneMember] = useState()
@@ -13,12 +14,13 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
     const { sexo, parentesco } = useContext(EditFamilyReferedContext)
 
     const { oneMemberFamily, EditFamilyMemberRequestMutation } = EditMemberController(id);
+    
 
     const handleEditMember = (body) => {
         EditFamilyMemberRequestMutation.mutate(body)
     }
 
-  
+
 
     useEffect(() => {
         if (oneMemberFamily) {
@@ -28,8 +30,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
 
 
     if (!oneMember) return null;
-
-
+    
     const initialValue = {
         renda: oneMember.renda ?? 0,
         bolsaFamilia: oneMember.bolsaFamilia ?? 0,
@@ -37,7 +38,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
         previdencia: oneMember.previdencia ?? 0,
         nome: oneMember.nome ?? "",
         parentesco: oneMember.parentesco ?? "",
-        idade: oneMember.idade ?? "",
+        date_nascimento: oneMember.date_nascimento ?? "",
         sexo: oneMember.sexo ?? "",
         nis: oneMember.nis ?? 0,
     }
@@ -46,6 +47,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
         <Column>
             <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => handleEditMember(value)}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
+                    const dateBithrday = new Date(values.date_nascimento )
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -70,9 +72,9 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
                                     ) : null}
                                 </div>
                                 <div className="col">
-                                    <CrasInput label="Idade" value={values.idade} name={"idade"} onChange={handleChange} />
-                                    {errors.idade && touched.idade ? (
-                                        <div style={{ color: "red" }}>{errors.idade}</div>
+                                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name={"date_nascimento"} showIcon onChange={handleChange} />
+                                    {errors.date_nascimento && touched.date_nascimento ? (
+                                        <div style={{ color: "red" }}>{errors.date_nascimento}</div>
                                     ) : null}
                                 </div>
                                 <div className="col">
@@ -110,7 +112,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
                             </Row>
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime label="Canelar" onClick={() => setOpen(false)} severity="danger" />
+                                <ButtonPrime label="Canelar" onClick={() => {setOpen(false); setOneMember([])}} severity="danger" />
                                 <Padding />
                                 <ButtonPrime label="Salvar membro" type="submit" />
                             </Row>

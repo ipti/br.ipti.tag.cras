@@ -5,9 +5,9 @@ export const ServiceContext = createContext({});
 
 const ServiceProvider = ({children}) => {
 
-    const { error, isLoading, service, deleteService } = ServiceState();
+    const { error, isLoading, service, deleteService, typeService, technician } = ServiceState();
     return (
-        <ServiceContext.Provider value={{ error, isLoading, service, deleteService }}>
+        <ServiceContext.Provider value={{ error, isLoading, service, deleteService, typeService, technician }}>
             {children}
         </ServiceContext.Provider>
     )

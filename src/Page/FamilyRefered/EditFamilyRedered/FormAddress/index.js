@@ -10,16 +10,18 @@ import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/Edit
 
 const FormAddress = () => {
 
-    const { backStep, nextStep, dataValues } = useContext(EditFamilyReferedContext);
+    const { backStep, nextStep, family } = useContext(EditFamilyReferedContext);
+
+    if (!family) return null;
 
     const initialValue = {
-        endereco: dataValues.endereco ?? "",
-        telefone: dataValues.telefone ?? "",
-        ponto_referencia: dataValues.ponto_referencia ?? "",
-        condicoes_moradia: dataValues.condicoes_moradia ?? "",
-        tipo_construcao: dataValues.tipo_construcao ?? "",
-        comodos: dataValues.comodos ?? "",
-        valor_aluguel: dataValues.valor_aluguel ?? 0
+        endereco: family.id_endereco_endereco.endereco ?? "",
+        telefone: family.id_endereco_endereco.telefone ?? "",
+        ponto_referencia: family.id_endereco_endereco.ponto_referencia ?? "",
+        condicoes_moradia: family.id_endereco_endereco.condicoes_moradia ?? "",
+        tipo_construcao: family.id_endereco_endereco.tipo_construcao ?? "",
+        comodos: family.id_endereco_endereco.comodos ?? "",
+        valor_aluguel: family.id_endereco_endereco.valor_aluguel ?? 0
     }
 
     const validationSchema = Yup.object().shape({

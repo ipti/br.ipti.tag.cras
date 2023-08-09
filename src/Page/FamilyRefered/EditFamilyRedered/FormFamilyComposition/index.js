@@ -9,6 +9,7 @@ import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 import * as Yup from 'yup';
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 import EditMemberFamily from "./EditMemberFamily";
+import CrasCalendar from "../../../../CrasUi/Calendar";
 
 const FormFamilyComposition = () => {
     const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember, deleteMember } = useContext(EditFamilyReferedContext)
@@ -16,12 +17,9 @@ const FormFamilyComposition = () => {
     const [open, setOpen] = useState(false)
 
     const editMember = (params) => {
-        console.log(params)
         setOpen(true);
         setIdMember(params.id)
     }
-
-    console.log(idMember)
 
     if (!family) return null;
 
@@ -32,7 +30,7 @@ const FormFamilyComposition = () => {
         previdencia: 0,
         nome: "",
         parentesco: "",
-        idade: "",
+        date_nascimento: "",
         sexo: "",
         nis: 0,
         id_identificacao_usuario: family.id
@@ -45,7 +43,7 @@ const FormFamilyComposition = () => {
         previdencia: Yup.number().required().min(0),
         nome: Yup.string().required(),
         parentesco: Yup.string().required(),
-        idade: Yup.number().required().positive().integer(),
+        date_nascimento: Yup.string().required("Campo obrigatório"),
         sexo: Yup.string().required().oneOf(['Masculino', 'Feminino', 'Outro']),
         nis: Yup.number().required().min(0),
     });
@@ -54,7 +52,7 @@ const FormFamilyComposition = () => {
         { field: 'id', header: 'id' },
         { field: 'nome', header: 'Name' },
         { field: 'parentesco', header: 'Parentesco' },
-        { field: 'idade', header: 'Idade' },
+        { field: 'date_nascimento', header: 'Data de nascimento' },
         { field: 'sexo', header: 'Sexo' },
     ];
 
@@ -70,6 +68,7 @@ const FormFamilyComposition = () => {
                 <Column>
                     <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => handleCreateFamilyMember(value)}>
                         {({ values, handleChange, handleSubmit, errors, touched }) => {
+                            const dateBithrday = new Date(values.date_nascimento)
                             return (
                                 <form onSubmit={handleSubmit}>
                                     <Row>
@@ -94,9 +93,9 @@ const FormFamilyComposition = () => {
                                             ) : null}
                                         </div>
                                         <div className="col">
-                                            <CrasInput label="Idade" value={values.idade} name={"idade"} onChange={handleChange} />
-                                            {errors.idade && touched.idade ? (
-                                                <div style={{ color: "red" }}>{errors.idade}</div>
+                                            <CrasCalendar label="Data de Nascimento" date={dateBithrday} name={"date_nascimento"} showIcon onChange={handleChange} />
+                                            {errors.date_nascimento && touched.date_nascimento ? (
+                                                <div style={{ color: "red" }}>{errors.date_nascimento}</div>
                                             ) : null}
                                         </div>
                                         <div className="col">

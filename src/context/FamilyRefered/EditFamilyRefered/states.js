@@ -152,6 +152,8 @@ const EditFamilyReferedState = () => {
       outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
     }
 
+    console.log(data)
+
     EditFamilyRequestRequestMutation.mutate(data);
 
   }

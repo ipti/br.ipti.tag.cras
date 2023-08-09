@@ -10,6 +10,9 @@ const ListFamilyReferedScreen = () => {
     const columns = [
         {field: "id", header: "id"},
         { field: 'nome', header: 'Nome' },
+        {field: "data_nascimento", header: "Data de Nascimento"},
+        {field: "data_inicial", header: "Data de Entrada"},
+
     ];
 
 
