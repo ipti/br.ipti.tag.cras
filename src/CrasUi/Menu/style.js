@@ -8,3 +8,8 @@ export const Container = styled.div`
         display: none;
     }
 `;
+
+export const TopBar = styled.div`
+    width: 25%;
+    height: 4px
+`;

@@ -17,6 +17,8 @@ body,
   color: #333;
   -webkit-font-smoothing: antialiased !important;
   scroll-behavior: smooth;
+
+
 }
 
 
@@ -63,4 +65,11 @@ body,
   font-style: normal;
   font-weight: normal;
   src: local("Inter Regular"), url("../font/Inter-Regular.ttf") format("truetype");
+}
+
+.t-button-primary {
+  width: 100%;
+  border: none;
+  padding: 10.5px;
+  margin-right: 0px;
 }

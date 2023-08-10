@@ -24,12 +24,13 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
 
     useEffect(() => {
         if (oneMemberFamily) {
-            setOneMember(oneMemberFamily.data.data)
+            if(oneMemberFamily.data.data.id === id) setOneMember(oneMemberFamily.data.data)
         }
-    }, [oneMemberFamily])
+    }, [oneMemberFamily, id])
 
 
     if (!oneMember) return null;
+
     
     const initialValue = {
         renda: oneMember.renda ?? 0,
@@ -112,7 +113,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
                             </Row>
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime label="Canelar" onClick={() => {setOpen(false); setOneMember([])}} severity="danger" />
+                                <ButtonPrime label="Canelar" onClick={() => {setOpen(false); setOneMember()}} severity="danger" />
                                 <Padding />
                                 <ButtonPrime label="Salvar membro" type="submit" />
                             </Row>

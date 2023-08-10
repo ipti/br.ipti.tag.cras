@@ -52,6 +52,8 @@ const FormInfoPerson = () => {
         NIS: Yup.number(),
         numero_rg: Yup.string().required("Campo obrigatório"),
         data_emissao_rg: Yup.string().required("Campo obrigatório"),
+        data_inicial: Yup.string().required("Campo obrigatório"),
+        data_final: Yup.string().required("Campo obrigatório"),
         uf_rg: Yup.object().required("Campo obrigatório"),
         emissao_rg: Yup.string().required("Campo obrigatório"),
         cpf: Yup.string().required("Campo obrigatório"),
@@ -61,8 +63,6 @@ const FormInfoPerson = () => {
         pai: Yup.string().required("Campo obrigatório"),
         estado_civil: Yup.string(),
         escolaridade: Yup.string().required("Campo obrigatório"),
-        data_inicial: Yup.string(),
-        data_final: Yup.string(),
     });
 
     return (

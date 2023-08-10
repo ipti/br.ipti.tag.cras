@@ -31,7 +31,7 @@ const CreateFamilyReferedScreen = () => {
             }
         },
         {
-            label: 'Composição Familiar',
+            label: 'Concluir',
             command: (event) => {
                 setActiveStep(3)
             }

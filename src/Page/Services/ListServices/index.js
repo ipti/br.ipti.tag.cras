@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Table from "../../../Components/Table";
-import { Container } from "../../../CrasUi/styles/styles";
+import { Container, Padding } from "../../../CrasUi/styles/styles";
 import { ServiceContext } from "../../../context/Service/Service/context";
 
 const ListServicesScreen = () => {
@@ -15,7 +15,6 @@ const ListServicesScreen = () => {
         { field: 'tecnico', header: 'Tecnico responsavel' }
     ];
 
-    console.log(technician)
 
     const ServiceConvert = service ? service.map((data) => ({ ...data, servico: typeService.find(fil => fil.id === data.servico).nome, tecnico: technician.find(fil => fil.id === data.tecnico).nome })) : [];
 
@@ -24,6 +23,7 @@ const ListServicesScreen = () => {
             {
                 isLoading ? <div>carregando...</div> : <Table columns={columns} list={ServiceConvert} path="/criar/atendimento" name="Atendimentos" delet={deleteService} pathEdit={"/edit/atendimento/"} />
             }
+            <Padding padding="16px" />
         </Container>
     )
 }

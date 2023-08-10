@@ -1,20 +1,33 @@
-import React, { useContext } from "react";
-import CrasCard from "../../CrasUi/Card";
-import CrasInput from "../../CrasUi/Input/Input";
-import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
-import { Column, Padding } from "../../CrasUi/styles/styles";
-import { Box } from "./style";
-import { LoginContext } from "../../context/Login/context";
 import { Formik } from "formik";
+import React, { useContext } from "react";
+import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
+import CrasInput from "../../CrasUi/Input/Input";
+import { Column, Padding, Row } from "../../CrasUi/styles/styles";
+import TagLogin from "../../assets/images/taglogin.svg";
+import { LoginContext } from "../../context/Login/context";
+import { Box, Container, TopBar } from "./style";
 
 const LoginPage = () => {
 
     const { handleLogin, initialValue, LoginSchema } = useContext(LoginContext);
 
     return (
-        <Column style={{ height: "100vh" }}>
-            <Box>
-                <CrasCard title={"Login"}>
+        <Container>
+
+            <Column style={{ height: "100%" }}>
+                <Row>
+                    <TopBar style={{ backgroundColor: "#667DF4" }} />
+                    <TopBar style={{ backgroundColor: "#F45A5A" }} />
+                    <TopBar style={{ backgroundColor: "#66D654" }} />
+                    <TopBar style={{ backgroundColor: "#EADA48" }} />
+                </Row>
+                <img style={{
+                    margin: "20px",
+                    position: "absolute"
+                }} src={TagLogin} alt=""></img>
+                <Box>
+                    <p id="titleLogin">Cras Online </p>
+                    <p id="subTitleLogin">Entre com as suas credenciais </p>
                     <Formik initialValues={initialValue} validationSchema={LoginSchema} onSubmit={(values) => handleLogin(values)}>
                         {({
                             values,
@@ -26,13 +39,13 @@ const LoginPage = () => {
                             isSubmitting,
                         }) =>
                             <form onSubmit={handleSubmit}>
-                                <CrasInput name={"email"} onChange={handleChange} value={values.email} label="Email" placeholder="Digite o seu email" />
+                                <CrasInput name={"email"} type={"email"} onChange={handleChange} value={values.email} label="Email" placeholder="Digite o seu email" />
                                 <Padding />
                                 {errors.email && touched.email ? (
                                     <div style={{ color: "red" }}>{errors.email}</div>
                                 ) : null}
                                 <Padding />
-                                <CrasInput name={"password"} onChange={handleChange} value={values.password} label="Senha" placeholder="Digite sua senha" />
+                                <CrasInput type={"password"} name={"password"} onChange={handleChange} value={values.password} label="Senha" placeholder="Digite sua senha" />
                                 <Padding />
                                 {errors.password && touched.password ? (
                                     <div style={{ color: "red" }}>{errors.password}</div>
@@ -42,9 +55,9 @@ const LoginPage = () => {
                             </form>
                         }
                     </Formik>
-                </CrasCard>
-            </Box>
-        </Column>
+                </Box>
+            </Column>
+        </Container>
     )
 }
 

@@ -5,7 +5,7 @@ export const Container = styled.div`
     background-color: ${styles.colors.colorsBaseInkLighterActive};
     
     width: auto;
-    padding: 8px;
+    padding: 6px 12px;
     color: white;
     border-radius: 10px;
     cursor: pointer;

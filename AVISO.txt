@@ -1,13 +1,17 @@
 Lembrar de mudar o tecnico e servico para id e não nome - feito
 
-Trocar idade de membro familiar para data de nascimento
+Trocar idade de membro familiar para data de nascimento feito
 
-Edit Membro familiar 
+Edit Membro familiar feito
 
-Include de endereço não está funcionando
+Include de endereço não está funcionando feito
 
-Colocar mensagens ao fazer alterações
+Colocar mensagens ao fazer alterações - pendente
 
-verificar se o jwt é valido ou se venceu
+verificar se o jwt é valido ou se venceu - pendente
 
 Melhorar design
+
+Não tá excluindo do banco user
+
+verificar create familia, verificar atributos nulos

@@ -24,7 +24,7 @@ const CreateServicesScreen = () => {
                         return <form onSubmit={handleSubmit}>
                             <Row>
                                 <div className="col">
-                                    <CrasCalendar name="data" date={values.data} onChange={handleChange} showIcon />
+                                    <CrasCalendar label={"Data do atendimento"} name="data" date={values.data} onChange={handleChange} showIcon />
                                     <Padding />
                                     {errors.data && touched.data ? (
                                         <div style={{ color: "red" }}>{errors.data}</div>
@@ -89,6 +89,7 @@ const CreateServicesScreen = () => {
                     }}
                 </Formik>
             </Column>
+            <Padding padding="16px"/>
         </Container>
     )
 }

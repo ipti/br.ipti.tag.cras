@@ -89,6 +89,7 @@ const EditServicePage = () => {
                     }}
                 </Formik> : null}
             </Column>
+            <Padding padding="16px"/>
         </Container>
     )
 }
