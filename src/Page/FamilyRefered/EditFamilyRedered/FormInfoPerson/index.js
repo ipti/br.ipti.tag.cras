@@ -141,7 +141,7 @@ const FormInfoPerson = () => {
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasCalendar label="Data de Nascimento" date={dateEmit} name="data_nascimento" onChange={handleChange} showIcon />
+                                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="data_nascimento" onChange={handleChange} showIcon />
                                     {errors.data_nascimento && touched.data_nascimento ? (
                                         <div style={{ color: "red" }}>{errors.data_nascimento}</div>
                                     ) : null}

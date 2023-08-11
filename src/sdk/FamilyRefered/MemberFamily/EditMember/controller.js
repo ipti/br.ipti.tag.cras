@@ -1,7 +1,7 @@
 import { useMutation } from "react-query";
 import { EditFamilyMember, useFetchOneFamilyMember } from "../request"
 
-export const EditMemberController = (id) => {
+export const EditMemberController = (id, setOpen) => {
     const {data: oneMemberFamily, refetch} = useFetchOneFamilyMember(id)
 
 
@@ -13,7 +13,7 @@ export const EditMemberController = (id) => {
           },
           onSuccess: (data) => {
             refetch()
-            // setAddMember(false)
+            setOpen(false)
             console.log(data);
           },
         }

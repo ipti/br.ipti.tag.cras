@@ -2,7 +2,7 @@ import { useMutation } from "react-query";
 import { CreateFamilyMemberRequest, DeleteFamilyMember, useFetchAllFamilyMember } from "../MemberFamily/request";
 import { EditUserIdentifyRequest, useFetchFamilyReferedId } from "../request";
 
-export const EditFamilyReferedController = (id, setAddMember) => {
+export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError) => {
 
     const {data: familyReferedfetch, isLoading, error } = useFetchFamilyReferedId(id);
 
@@ -14,11 +14,13 @@ export const EditFamilyReferedController = (id, setAddMember) => {
         {
           onError: (error) => {
             console.log(error.response.data.message)
+            setIsError(error.response.data.message)
           },
           onSuccess: (data) => {
             refetch()
             setAddMember(false)
             console.log(data);
+            setIsVerify(true)
           },
         }
       );
@@ -28,11 +30,14 @@ export const EditFamilyReferedController = (id, setAddMember) => {
         {
           onError: (error) => {
             console.log(error.response.data.message)
+            setIsError(error.response.data.message)
+
           },
           onSuccess: (data) => {
             refetch()
             setAddMember(false)
             console.log(data);
+            setIsVerify(true)
           },
         }
       );
@@ -42,11 +47,15 @@ export const EditFamilyReferedController = (id, setAddMember) => {
         {
           onError: (error) => {
             console.log(error.response.data.message)
+            setIsError(error.response.data.message)
+
           },
           onSuccess: (data) => {
             refetch()
             setAddMember(false)
             console.log(data);
+            setIsVerify(true)
+
           },
         }
       );

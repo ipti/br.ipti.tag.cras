@@ -1,16 +1,37 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 
 const EditFamilyReferedState = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [addMember, setAddMember] = useState(false)
+  const [open, setOpen] = useState(false)
   const [dataValues, setDataValues] = useState({});
   const [family, setFamily] = useState();
   const [member, setMember] = useState()
   const { id } = useParams()
 
-  const { familyReferedfetch, CreateFamilyRequestRequestMutation, membersFamilyRequest, DeleteMemberFamilyRequestMutation, EditFamilyRequestRequestMutation } = EditFamilyReferedController(id, setAddMember);
+  const [isVerify, setIsVerify] = useState(true)
+  const [isError, setIsError] = useState("")
+
+  const toast = useRef(null);
+
+
+  const show = () => {
+    if (isVerify) {
+      toast.current.show({ severity: 'success', summary: 'Success', detail: 'Alteração feita com Sucesso!' });
+    } else {
+      toast.current.show({ severity: 'error', summary: 'Error', detail: isError });
+    }
+  }
+
+  const {
+    familyReferedfetch,
+    CreateFamilyRequestRequestMutation,
+    membersFamilyRequest,
+    DeleteMemberFamilyRequestMutation,
+    EditFamilyRequestRequestMutation
+  } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen);
 
 
   useEffect(() => {
@@ -152,8 +173,7 @@ const EditFamilyReferedState = () => {
       outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
     }
 
-    console.log(data)
-
+    show()
     EditFamilyRequestRequestMutation.mutate(data);
 
   }
@@ -164,7 +184,7 @@ const EditFamilyReferedState = () => {
   }
 
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen
   }
 }
 

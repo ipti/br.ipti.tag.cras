@@ -12,9 +12,8 @@ import EditMemberFamily from "./EditMemberFamily";
 import CrasCalendar from "../../../../CrasUi/Calendar";
 
 const FormFamilyComposition = () => {
-    const { backStep, handleFamiliaRefered, sexo, handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember, deleteMember } = useContext(EditFamilyReferedContext)
+    const { backStep, handleFamiliaRefered, sexo, open, setOpen,handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember, deleteMember } = useContext(EditFamilyReferedContext)
     const [idMember, setIdMember] = useState("")
-    const [open, setOpen] = useState(false)
 
     const editMember = (params) => {
         setOpen(true);

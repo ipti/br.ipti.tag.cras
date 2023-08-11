@@ -6,10 +6,12 @@ import FormAddress from "./FormAddress";
 import FormFamilyComposition from "./FormFamilyComposition";
 import FormFinances from "./FormFinances";
 import FormInfoPerson from "./FormInfoPerson";
+import { Toast } from "primereact/toast";
+
 
 const EditFamilyReferedScreen = () => {
 
-    const { setActiveStep, activeStep } = useContext(EditFamilyReferedContext);
+    const { setActiveStep, activeStep, toast } = useContext(EditFamilyReferedContext);
 
 
     const items = [
@@ -53,6 +55,8 @@ const EditFamilyReferedScreen = () => {
                         <FormFinances /> : activeStep === 3 ?
                             <FormFamilyComposition /> : null}
                             <Padding padding="16px"/>
+                            <Toast ref={toast} />
+
         </Container>
     )
 }

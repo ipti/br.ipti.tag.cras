@@ -13,7 +13,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
 
     const { sexo, parentesco } = useContext(EditFamilyReferedContext)
 
-    const { oneMemberFamily, EditFamilyMemberRequestMutation } = EditMemberController(id);
+    const { oneMemberFamily, EditFamilyMemberRequestMutation } = EditMemberController(id, setOpen);
     
 
     const handleEditMember = (body) => {
@@ -24,13 +24,12 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
 
     useEffect(() => {
         if (oneMemberFamily) {
-            if(oneMemberFamily.data.data.id === id) setOneMember(oneMemberFamily.data.data)
+            setOneMember(oneMemberFamily.data.data)
         }
-    }, [oneMemberFamily, id])
+    }, [oneMemberFamily])
 
 
     if (!oneMember) return null;
-
     
     const initialValue = {
         renda: oneMember.renda ?? 0,
@@ -113,7 +112,7 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
                             </Row>
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime label="Canelar" onClick={() => {setOpen(false); setOneMember()}} severity="danger" />
+                                <ButtonPrime label="Canelar" onClick={() => {setOpen(false); setOneMember([])}} severity="danger" />
                                 <Padding />
                                 <ButtonPrime label="Salvar membro" type="submit" />
                             </Row>

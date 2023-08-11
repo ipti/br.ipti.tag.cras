@@ -15,8 +15,10 @@ const ListServicesScreen = () => {
         { field: 'tecnico', header: 'Tecnico responsavel' }
     ];
 
+    if(!technician && !typeService) return null
 
-    const ServiceConvert = service ? service.map((data) => ({ ...data, servico: typeService.find(fil => fil.id === data.servico).nome, tecnico: technician.find(fil => fil.id === data.tecnico).nome })) : [];
+
+    const ServiceConvert = service ? service.map((data) => ({ ...data, servico: typeService.find(fil => fil.id === data.servico)?.nome, tecnico: technician.find(fil => fil.id === data.tecnico)?.nome })) : [];
 
     return (
         <Container>
