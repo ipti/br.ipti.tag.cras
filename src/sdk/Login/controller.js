@@ -10,7 +10,7 @@ export const LoginController = () => {
         (data) => LoginRequest(data),
         {
           onError: (error) => {
-            console.log(error.response.data.message)
+            console.log(error.response.statusText)
           },
           onSuccess: (data) => {
             console.log(data.data.data.token);

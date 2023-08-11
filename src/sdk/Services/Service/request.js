@@ -7,7 +7,11 @@ const config = {
 };
 
 const ALLServiceRequest = async () => {
-  return await http.get("/service", config);
+  try{
+    return await http.get("/service", config);
+  }catch(err){
+    console.log(err)
+  }
 }
 
 export const useFetchAllService = () => {
