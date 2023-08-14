@@ -2,6 +2,7 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../CrasUi/Input/Input";
+import CrasMessage from "../../CrasUi/Message";
 import { Column, Padding, Row } from "../../CrasUi/styles/styles";
 import TagLogin from "../../assets/images/taglogin.svg";
 import { LoginContext } from "../../context/Login/context";
@@ -9,7 +10,8 @@ import { Box, Container, TopBar } from "./style";
 
 const LoginPage = () => {
 
-    const { handleLogin, initialValue, LoginSchema } = useContext(LoginContext);
+    const { handleLogin, initialValue, LoginSchema, error } = useContext(LoginContext);
+
 
     return (
         <Container>
@@ -27,16 +29,18 @@ const LoginPage = () => {
                 }} src={TagLogin} alt=""></img>
                 <Box>
                     <p id="titleLogin">Cras Online </p>
-                    <p id="subTitleLogin">Entre com as suas credenciais </p>
+                    <Row id="center">
+                        <Padding>
+                            {error ? <CrasMessage severity="error" text={error} /> : null}
+                        </Padding>
+                    </Row>
                     <Formik initialValues={initialValue} validationSchema={LoginSchema} onSubmit={(values) => handleLogin(values)}>
                         {({
                             values,
                             errors,
                             touched,
                             handleChange,
-                            handleBlur,
                             handleSubmit,
-                            isSubmitting,
                         }) =>
                             <form onSubmit={handleSubmit}>
                                 <CrasInput name={"email"} type={"email"} onChange={handleChange} value={values.email} label="Email" placeholder="Digite o seu email" />
@@ -45,6 +49,7 @@ const LoginPage = () => {
                                     <div style={{ color: "red" }}>{errors.email}</div>
                                 ) : null}
                                 <Padding />
+                                {/* <Password style={{width: "100%"}} value={values.password} name="password"  onChange={handleChange} toggleMask /> */}
                                 <CrasInput type={"password"} name={"password"} onChange={handleChange} value={values.password} label="Senha" placeholder="Digite sua senha" />
                                 <Padding />
                                 {errors.password && touched.password ? (

@@ -41,21 +41,30 @@ const EditFamilyReferedScreen = () => {
         }
     ];
 
+    const larguraTela = window.innerWidth;
+
+
     return (
         <Container>
             <h1>
                 Criar Familia Referenciada
             </h1>
-            <Padding padding="32px" />
-            <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} readOnly={true} />
-            <Padding padding="32px" />
+            {larguraTela > 700 ?
+                <>
+                    <Padding padding="32px" />
+                    <Steps activeIndex={activeStep} items={items} setActiveIndex={setActiveStep} readOnly={true} />
+                    <Padding padding="32px" />
+                </>
+                : null
+            }
+         
             {activeStep === 0 ?
                 <FormInfoPerson /> : activeStep === 1 ?
                     <FormAddress /> : activeStep === 2 ?
                         <FormFinances /> : activeStep === 3 ?
                             <FormFamilyComposition /> : null}
-                            <Padding padding="16px"/>
-                            <Toast ref={toast} />
+            <Padding padding="16px" />
+            <Toast ref={toast} />
 
         </Container>
     )

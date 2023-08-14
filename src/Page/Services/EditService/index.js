@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
+import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { Formik } from "formik";
 import CrasCalendar from "../../../CrasUi/Calendar";
 import CrasDropdown from "../../../CrasUi/Dropdown";
@@ -17,70 +17,68 @@ const EditServicePage = () => {
                     Editar Atendimentos
                 </h1>
                 <Padding padding="16px" />
-                <h3>Dados do atendimento</h3>
                 {serviceOne ? <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
                         const date = new Date(values.data)
                         return <form onSubmit={handleSubmit}>
-                            <Row>
-                                <div className="col">
+                            <h3>Dados do atendimento</h3>
+                            <Grid checkMockup={[{}]}>
+                                <Column>
                                     <CrasCalendar name="data" date={date} onChange={handleChange} showIcon />
                                     <Padding />
                                     {errors.data && touched.data ? (
-                                        <div style={{ color: "red" }}>{errors.data}</div>
+                                        <div style={{ color: "red" }}>{errors.data}<Padding /></div>
                                     ) : null}
-                                </div>
-                                <div className="col">
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className="col">
+                                </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
                                     <CrasDropdown name="servico" value={values.servico} onChange={handleChange} optionLabel={"nome"} options={service} label="Serviço" />
                                     <Padding />
                                     {errors.servico && touched.servico ? (
-                                        <div style={{ color: "red" }}>{errors.servico}</div>
+                                        <div style={{ color: "red" }}>{errors.servico}<Padding /></div>
                                     ) : null}
-                                </div>
-                                <div className="col">
+                                </Column>
+                                <Column>
                                     <CrasInput name="solicitacao" value={values.solicitacao} onChange={handleChange} label="Solicitação" />
                                     <Padding />
                                     {errors.solicitacao && touched.solicitacao ? (
-                                        <div style={{ color: "red" }}>{errors.solicitacao}</div>
+                                        <div style={{ color: "red" }}>{errors.solicitacao}<Padding /></div>
                                     ) : null}
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className="col">
+                                </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
                                     <CrasInput name="encaminhamento" value={values.encaminhamento} onChange={handleChange} label="Providências" />
                                     <Padding />
                                     {errors.encaminhamento && touched.encaminhamento ? (
-                                        <div style={{ color: "red" }}>{errors.encaminhamento}</div>
+                                        <div style={{ color: "red" }}>{errors.encaminhamento}<Padding /></div>
                                     ) : null}
 
-                                </div>
-                                <div className="col">
+                                </Column>
+                                <Column>
                                     <CrasInput name="resultado" value={values.resultado} onChange={handleChange} label="Resultado" />
                                     <Padding />
                                     {errors.resultado && touched.resultado ? (
-                                        <div style={{ color: "red" }}>{errors.resultado}</div>
+                                        <div style={{ color: "red" }}>{errors.resultado}<Padding /></div>
                                     ) : null}
-                                </div>
-                            </Row>
-                            <Row>
-                                <div className="col">
+                                </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
                                     <CrasDropdown optionLabel={"nome"} name="tecnico" onChange={handleChange} value={values.tecnico} options={technician} label="Técnico Responsável" />
                                     <Padding />
                                     {errors.tecnico && touched.tecnico ? (
-                                        <div style={{ color: "red" }}>{errors.tecnico}</div>
+                                        <div style={{ color: "red" }}>{errors.tecnico}<Padding /></div>
                                     ) : null}
-                                </div>
-                                <div className="col"><CrasDropdown onChange={handleChange} value={values.id_identificacao_usuario} name={"id_identificacao_usuario"} optionLabel={"nome"} options={userIdentify} label="Usuário ou Membro Familiar" />
-                                <Padding />
+                                </Column>
+                                <Column><CrasDropdown onChange={handleChange} value={values.id_identificacao_usuario} name={"id_identificacao_usuario"} optionLabel={"nome"} options={userIdentify} label="Usuário ou Membro Familiar" />
+                                    <Padding />
                                     {errors.id_identificacao_usuario && touched.id_identificacao_usuario ? (
-                                        <div style={{ color: "red" }}>{errors.id_identificacao_usuario}</div>
+                                        <div style={{ color: "red" }}>{errors.id_identificacao_usuario}<Padding /></div>
                                     ) : null}
-                                </div>
-                            </Row>
+                                </Column>
+                            </Grid>
                             <Padding padding="16px" />
                             <Row id="end">
                                 <ButtonPrime type="submit" label="Salvar" />
@@ -89,7 +87,7 @@ const EditServicePage = () => {
                     }}
                 </Formik> : null}
             </Column>
-            <Padding padding="16px"/>
+            <Padding padding="16px" />
         </Container>
     )
 }

@@ -8,12 +8,12 @@ import { Container, TopBar } from "./style";
 
 
 
-const CrasMenu = () => {
+const CrasMenu = ({viewdMenu}) => {
 
     const [active, setActive] = useState(1)
 
     return (
-        <Container>
+        <Container active={viewdMenu}>
             <Row>
                 <TopBar style={{ backgroundColor: "#667DF4" }} />
                 <TopBar style={{ backgroundColor: "#F45A5A" }} />

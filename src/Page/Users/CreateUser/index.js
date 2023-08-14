@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
-import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
+import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { Formik } from "formik";
 import CrasDropdown from "../../../CrasUi/Dropdown";
 import { CreateUserContext } from "../../../context/User/CreateUser/context";
@@ -20,31 +20,32 @@ const CreateUserScreen = () => {
                 <Formik initialValues={initialValue} onSubmit={(values) => handleCreateUser(values)} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
-                            <Row>
-                                <div className="col">
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
                                     <CrasInput
                                         name="nome"
                                         value={values.nome}
                                         onChange={handleChange}
                                         label="Nome" />
+                                    <Padding />
                                     {errors.nome && touched.nome ? (
-                                        <div style={{ color: "red" }}>{errors.nome}</div>
+                                        <div style={{ color: "red" }}>{errors.nome}<Padding /></div>
                                     ) : null}
-                                </div>
-                                <div className="col">
+                                </Column>
+                                <Column>
                                     <CrasInput
                                         name="email"
                                         value={values.email}
                                         onChange={handleChange}
                                         label="Email" />
+                                    <Padding />
                                     {errors.email && touched.email ? (
-                                        <div style={{ color: "red" }}>{errors.email}</div>
+                                        <div style={{ color: "red" }}>{errors.email}<Padding /></div>
                                     ) : null}
-                                </div>
-                            </Row>
-                            <Row>
-
-                                <div className="col">
+                                </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}, {}, {}]}>
+                                <Column>
                                     <CrasDropdown
                                         optionLabel={"nome"}
                                         options={typeUser}
@@ -52,35 +53,36 @@ const CreateUserScreen = () => {
                                         value={values.type_user}
                                         onChange={handleChange}
                                         label="Tipo de usuário" />
+                                    <Padding />
                                     {errors.type_user && touched.type_user ? (
-                                        <div style={{ color: "red" }}>{errors.type_user}</div>
+                                        <div style={{ color: "red" }}>{errors.type_user}<Padding /></div>
                                     ) : null}
-                                </div>
-                                <div className="col">
+                                </Column>
+                                <Column>
                                     <CrasInput
                                         type="password"
                                         value={values.password}
                                         onChange={handleChange}
                                         name="password"
                                         label="Senha" />
-
+                                    <Padding />
                                     {errors.password && touched.password ? (
-                                        <div style={{ color: "red" }}>{errors.password}</div>
+                                        <div style={{ color: "red" }}>{errors.password}<Padding /></div>
                                     ) : null}
-                                </div>
-                                <div className="col">
+                                </Column>
+                                <Column>
                                     <CrasInput
                                         type="password"
                                         value={values.confirmPassword}
                                         onChange={handleChange}
                                         name="confirmPassword"
                                         label="Confirmar Senha" />
-
+                                    <Padding />
                                     {errors.confirmPassword && touched.confirmPassword ? (
-                                        <div style={{ color: "red" }}>{errors.confirmPassword}</div>
+                                        <div style={{ color: "red" }}>{errors.confirmPassword}<Padding /></div>
                                     ) : null}
-                                </div>
-                            </Row>
+                                </Column>
+                            </Grid>
                             <Padding padding="16px" />
                             <Row id="end">
                                 <ButtonPrime type="submit" label="Cadastrar" />

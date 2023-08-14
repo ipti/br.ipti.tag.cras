@@ -10,9 +10,12 @@ const Table = ({columns, list, path, name, pathEdit, delet}) => {
     const history = useNavigate();
     const [nameFilter, setNameFilter] = useState("");
 
+    const larguraTela = window.innerWidth;
+
+
     const header = (
         <Row id="end">
-                <div className="p-inputgroup" style={{width: "30%"}}>
+                <div className="p-inputgroup" style={{width: larguraTela < 700 ? "60%" : "30%"}}>
                     <span className="p-inputgroup-addon">
                         <i className="pi pi-search"></i>
                     </span>

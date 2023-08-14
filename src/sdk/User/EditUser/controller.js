@@ -6,12 +6,12 @@ import { useNavigate } from "react-router-dom";
 export const EditUserController = (id, setIsError, setIsVerify) => {
   const history = useNavigate();
 
-    const {data: UserRequest, refetch, error} = useFetchOneUser(id);
+    const {data: UserRequest, refetch} = useFetchOneUser(id);
 
-    if (error?.response.status === 401 | 403) {
-      logout();
-      history("/login")
-    }
+    // if (error?.response.status === 401 | 403) {
+    //   logout();
+    //   history("/login")
+    // }
 
     const EditUserRequestMutation = useMutation(
         (data) => EditUserRequest(data, id),

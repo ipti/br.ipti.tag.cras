@@ -6,7 +6,7 @@ import styles from "../../CrasUi/styles";
 
 export const Box = styled.div`
     margin: auto;
-    width: 40%;
+    width: 30%;
 
 
 

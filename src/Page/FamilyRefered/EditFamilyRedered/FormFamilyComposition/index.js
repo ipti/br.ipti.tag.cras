@@ -4,7 +4,7 @@ import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasTable from "../../../../CrasUi/Table";
-import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
+import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 
 import * as Yup from 'yup';
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
@@ -12,7 +12,7 @@ import EditMemberFamily from "./EditMemberFamily";
 import CrasCalendar from "../../../../CrasUi/Calendar";
 
 const FormFamilyComposition = () => {
-    const { backStep, handleFamiliaRefered, sexo, open, setOpen,handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember, deleteMember } = useContext(EditFamilyReferedContext)
+    const { backStep, handleFamiliaRefered, sexo, open, setOpen, handleCreateFamilyMember, parentesco, family, member, addMember, setAddMember, deleteMember } = useContext(EditFamilyReferedContext)
     const [idMember, setIdMember] = useState("")
 
     const editMember = (params) => {
@@ -62,7 +62,7 @@ const FormFamilyComposition = () => {
                 <ButtonPrime onClick={() => setAddMember(true)} label="Adicionar Membro" />
             </Row> : null}
             <h3>Composição Familiar</h3>
-            <Padding padding="8px"/>
+            <Padding padding="8px" />
             {addMember ?
                 <Column>
                     <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => handleCreateFamilyMember(value)}>
@@ -70,66 +70,76 @@ const FormFamilyComposition = () => {
                             const dateBithrday = new Date(values.date_nascimento)
                             return (
                                 <form onSubmit={handleSubmit}>
-                                    <Row>
-                                        <div className="col">
+                                    <Grid checkMockup={[{}, {}]}>
+                                        <Column>
                                             <CrasInput name="nome" onChange={handleChange} value={values.nome} label="Nome" />
+                                            <Padding />
                                             {errors.nome && touched.nome ? (
-                                                <div style={{ color: "red" }}>{errors.nome}</div>
+                                                <div style={{ color: "red" }}>{errors.nome}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                        <div className="col">
+                                        </Column>
+                                        <Column>
                                             <CrasInput label="NIS" value={values.nis} name={"nis"} onChange={handleChange} />
+                                            <Padding />
                                             {errors.nis && touched.nis ? (
-                                                <div style={{ color: "red" }}>{errors.nis}</div>
+                                                <div style={{ color: "red" }}>{errors.nis}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                    </Row>
-                                    <Row>
-                                        <div className="col">
+                                        </Column>
+                                    </Grid>
+                                    <Grid checkMockup={[{}, {}, {}]}>
+                                        <Column>
                                             <CrasDropdown label="Parentesco" options={parentesco} optionLabel={""} value={values.parentesco} name="parentesco" onChange={handleChange} />
+                                            <Padding />
                                             {errors.parentesco && touched.parentesco ? (
-                                                <div style={{ color: "red" }}>{errors.parentesco}</div>
+                                                <div style={{ color: "red" }}>{errors.parentesco}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                        <div className="col">
+                                        </Column>
+                                        <Column>
                                             <CrasCalendar label="Data de Nascimento" date={dateBithrday} name={"date_nascimento"} showIcon onChange={handleChange} />
+                                            <Padding />
                                             {errors.date_nascimento && touched.date_nascimento ? (
-                                                <div style={{ color: "red" }}>{errors.date_nascimento}</div>
+                                                <div style={{ color: "red" }}>{errors.date_nascimento}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                        <div className="col">
+                                        </Column>
+                                        <Column>
                                             <CrasDropdown label="Sexo" options={sexo} name="sexo" value={values.sexo} onChange={handleChange} optionLabel={""} />
+                                            <Padding />
                                             {errors.sexo && touched.sexo ? (
-                                                <div style={{ color: "red" }}>{errors.sexo}</div>
+                                                <div style={{ color: "red" }}>{errors.sexo}<Padding />
+                                                </div>
                                             ) : null}
-                                        </div>
-                                    </Row>
-                                    <Row>
-                                        <div className="col">
+                                        </Column>
+                                    </Grid>
+                                    <Grid checkMockup={[{}, {}, {}, {}]}>
+                                        <Column>
                                             <CrasInput label="LOAS/BPC" value={values.loas} name={"loas"} onChange={handleChange} />
+                                            <Padding />
                                             {errors.loas && touched.loas ? (
-                                                <div style={{ color: "red" }}>{errors.loas}</div>
+                                                <div style={{ color: "red" }}>{errors.loas}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                        <div className="col">
+                                        </Column>
+                                        <Column>
                                             <CrasInput label="Previdência Social" value={values.previdencia} name={"previdencia"} onChange={handleChange} />
+                                            <Padding />
                                             {errors.previdencia && touched.previdencia ? (
-                                                <div style={{ color: "red" }}>{errors.previdencia}</div>
+                                                <div style={{ color: "red" }}>{errors.previdencia}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                        <div className="col">
+                                        </Column>
+                                        <Column>
                                             <CrasInput label="Bolsa Família" value={values.bolsaFamilia} onChange={handleChange} name={"bolsaFamilia"} />
+                                            <Padding />
                                             {errors.bolsaFamilia && touched.bolsaFamilia ? (
-                                                <div style={{ color: "red" }}>{errors.bolsaFamilia}</div>
+                                                <div style={{ color: "red" }}>{errors.bolsaFamilia}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                        <div className="col">
+                                        </Column>
+                                        <Column>
                                             <CrasInput label="Renda Mensal" value={values.renda} onChange={handleChange} name={"renda"} />
+                                            <Padding />
                                             {errors.renda && touched.renda ? (
-                                                <div style={{ color: "red" }}>{errors.renda}</div>
+                                                <div style={{ color: "red" }}>{errors.renda}<Padding /></div>
                                             ) : null}
-                                        </div>
-                                    </Row>
+                                        </Column>
+                                    </Grid>
                                     <Padding padding="16px" />
                                     <Row id="end">
                                         <ButtonPrime label="Canelar" onClick={() => setAddMember(false)} severity="danger" />

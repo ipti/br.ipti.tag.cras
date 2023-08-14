@@ -5,7 +5,7 @@ export const Container = styled.div`
     background-color: ${styles.colors.colorsBaseProductLighter};
     min-width: 230px;
     @media screen and (max-width: 750px) {
-        display: none;
+        display: ${props => props.active ? "" : "none" };
     }
 `;
 
