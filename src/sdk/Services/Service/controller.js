@@ -14,7 +14,6 @@ export const ServiceController = () => {
     const {data: typeServicesrequest} = useFetchAllTypesServices()
     const {data: technicianRequest} = useFetchAllTechnician()
 
-    console.log(error)
 
     // if (error?.response.status === 401 | 403) {
     //     logout();

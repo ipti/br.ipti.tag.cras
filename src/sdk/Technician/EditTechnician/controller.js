@@ -14,7 +14,6 @@ export const EditTechnicianController = (id, setIsError, setIsVerify) => {
     (data) => EditTechnicianRequest(data, id),
     {
       onError: (error) => {
-        console.log(error.response.data.message)
         setIsError(error.response.data.message)
         if (error.response.status === 401 | 403) {
           logout();
@@ -32,6 +31,6 @@ export const EditTechnicianController = (id, setIsError, setIsVerify) => {
   );
 
   return {
-    technicianRequest, EditTechnicianRequestMutation
+    technicianRequest, EditTechnicianRequestMutation, refetch
   }
 }

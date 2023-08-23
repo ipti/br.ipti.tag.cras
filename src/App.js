@@ -16,11 +16,13 @@ import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import { QueryClientProvider } from "react-query";
 import queryClient from "./services/react-query";
 import "/node_modules/primeflex/primeflex.css";
+// import { ReactQueryDevtools } from 'react-query'
 
 
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
+      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
       <Routes />
     </QueryClientProvider>
   )

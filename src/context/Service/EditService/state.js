@@ -1,16 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import * as Yup from 'yup';
 import { EditServicesController } from "../../../sdk/Services/EditService/controller";
+import queryClient from "../../../services/react-query";
 
 
 export const EditServicesState = () => {
   const { id } = useParams()
 
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+      queryClient.removeQueries({ queryKey: "OneService" })
+      setLoading(true);
+  }, [])
+
   const [service, setService] = useState();
   const [technician, setTechnician] = useState();
   const [userIdentify, setUserIdentify] = useState();
-  const [serviceOne, setServiceOne] = useState()
+  const [serviceOne, setServiceOne] = useState();
+  const [isVerify, setIsVerify] = useState(true)
+  const [isError, setIsError] = useState("")
 
   const Schema = Yup.object().shape({
     solicitacao: Yup.string().required("Campo Obrigatório"),
@@ -37,9 +46,18 @@ export const EditServicesState = () => {
     return value
   }
 
+  const toast = useRef(null);
+
+  const show = () => {
+      if (isVerify) {
+          toast.current.show({ severity: 'success', summary: 'Success', detail: 'Alteração feita com Sucesso!' });
+      } else {
+          toast.current.show({ severity: 'error', summary: 'Error', detail: isError });
+      }
+  }
 
 
-  const { EditServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, oneService } = EditServicesController(id);
+  const { EditServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, oneService } = EditServicesController(id, setIsVerify, setIsError);
 
   const initialValue = {
     solicitacao: serviceOne ? serviceOne.solicitacao : "",
@@ -62,10 +80,10 @@ export const EditServicesState = () => {
     if (allUserIdentify) {
       setUserIdentify(allUserIdentify.data.data);
     }
-    if (oneService) {
+    if (oneService && loading) {
       setServiceOne(oneService.data.data)
     }
-  }, [allService, allTechnician, allUserIdentify, oneService])
+  }, [allService, allTechnician, allUserIdentify, oneService, loading])
 
 
 
@@ -76,8 +94,8 @@ export const EditServicesState = () => {
       solicitacao: data.solicitacao,
       resultado: data.resultado,
       encaminhamento: data.encaminhamento,
-      servico: data.servico.nome,
-      tecnico: data.tecnico.nome,
+      servico: data.servico.id,
+      tecnico: data.tecnico.id,
       id_identificacao_usuario: data.id_identificacao_usuario.id,
       id_membro_familiar: 1,
       data: data.data

@@ -2,11 +2,19 @@ import { useEffect, useRef, useState } from 'react';
 import * as Yup from 'yup';
 import { EditTechnicianController } from '../../../sdk/Technician/EditTechnician/controller';
 import { useParams } from 'react-router-dom';
+import queryClient from '../../../services/react-query';
 // import { CreateTechnicianController } from '../../sdk/Technician/CreateTechnician/controller';
 
 
 
 export const EditTechnicianState = () => {
+
+    const [loading, setLoading] = useState(false)
+    useEffect(() => {
+        queryClient.removeQueries({ queryKey: "OneTechnician" })
+        setLoading(true);
+    }, [])
+
     const { id } = useParams()
     const [isVerify, setIsVerify] = useState(true)
     const [isError, setIsError] = useState("")
@@ -27,10 +35,10 @@ export const EditTechnicianState = () => {
     const {technicianRequest, EditTechnicianRequestMutation} = EditTechnicianController(id, setIsError, setIsVerify)
 
     useEffect(() => {
-      if(technicianRequest){
+      if(technicianRequest && loading){
         setTechnician(technicianRequest.data.data)
       }
-    }, [technicianRequest])
+    }, [technicianRequest, loading])
     
 
     const initialValue = {

@@ -1,8 +1,16 @@
 import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
+import queryClient from "../../../services/react-query";
 
 const EditFamilyReferedState = () => {
+
+  const [loading, setLoading] = useState(false)
+  useEffect(() => {
+      queryClient.removeQueries({ queryKey: "FamilyReferedId" })
+      setLoading(true);
+  }, [])
+
   const [activeStep, setActiveStep] = useState(0);
   const [addMember, setAddMember] = useState(false)
   const [open, setOpen] = useState(false)
@@ -35,7 +43,7 @@ const EditFamilyReferedState = () => {
 
 
   useEffect(() => {
-    if (familyReferedfetch) {
+    if (familyReferedfetch && loading) {
       setFamily(familyReferedfetch.data.data)
     }
 
@@ -44,7 +52,7 @@ const EditFamilyReferedState = () => {
       setMember(filter)
     }
 
-  }, [familyReferedfetch, membersFamilyRequest, id])
+  }, [familyReferedfetch, membersFamilyRequest, id, loading])
 
   const sexo = [
     "Masculino",

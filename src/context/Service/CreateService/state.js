@@ -47,13 +47,6 @@ export const CreateServicesState = () => {
 
   const handleCreateService = (data) => {
 
-    // if (data.data) {
-    //   let day = data.data.getDay();
-    //   let year = data.data.getYear();
-    //   let month = data.data.getMonth();
-    //   date = `${year}-${month}-${day}`
-    // }
-
     const body = {
       solicitacao: data.solicitacao,
       resultado: data.resultado,

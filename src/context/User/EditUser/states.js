@@ -2,12 +2,14 @@ import * as Yup from 'yup';
 import { EditUserController } from '../../../sdk/User/EditUser/controller';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import queryClient from '../../../services/react-query';
 
 export const EditUser = () => {
     const { id } = useParams();
     const [user, setUser] = useState()
     const [isVerify, setIsVerify] = useState(true);
     const [isError, setIsError] = useState("");
+    const [loading, setLoading] = useState(false)
 
     const typeUser = [
         {id: 1, nome: "Administrador"},
@@ -27,11 +29,17 @@ export const EditUser = () => {
 
     const { EditUserRequestMutation, UserRequest } = EditUserController(id, setIsError, setIsVerify);
 
+
     useEffect(() => {
-      if(UserRequest){
+        queryClient.removeQueries({ queryKey: "OneUser" })
+        setLoading(true);
+      }, [])
+
+    useEffect(() => {
+      if(UserRequest && loading){
         setUser(UserRequest.data.data)
       }
-    }, [UserRequest])
+    }, [UserRequest, loading])
 
     const valueTypeUser = () => {
         const value = user ? typeUser.find(fil => fil.id === user.type_user) : ""

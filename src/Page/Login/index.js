@@ -15,7 +15,6 @@ const LoginPage = () => {
 
     return (
         <Container>
-
             <Column style={{ height: "100%" }}>
                 <Row>
                     <TopBar style={{ backgroundColor: "#667DF4" }} />
