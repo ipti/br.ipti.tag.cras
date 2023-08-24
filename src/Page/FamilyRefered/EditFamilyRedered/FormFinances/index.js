@@ -12,7 +12,7 @@ const FormFinances = () => {
 
     const { backStep, nextStep, family } = useContext(EditFamilyReferedContext)
 
-    if(!family) return null;
+    if (!family) return null;
 
     const initialValue = {
         profissao: family.id_situacao_financeira_situacao_financeira.profissao ?? "",
@@ -22,13 +22,13 @@ const FormFinances = () => {
         loasbpc: family.id_situacao_financeira_situacao_financeira.loasbpc ?? 0,
         previdencia: family.id_situacao_financeira_situacao_financeira.previdencia ?? 0,
         carteira_assinada: family.id_situacao_financeira_situacao_financeira.carteira_assinada ?? "",
-        ocupacao_irregular: family.id_situacao_financeira_situacao_financeira.ocupacao_irregular ?? "",
-        crianca_sozinha: family.id_situacao_financeira_situacao_financeira.crianca_sozinha ?? "",
-        idosos_dependentes: family.id_situacao_financeira_situacao_financeira.idosos_dependentes ?? "",
-        desempregados: family.id_situacao_financeira_situacao_financeira.desempregados ?? "",
-        deficientes: family.id_situacao_financeira_situacao_financeira.deficientes ?? "",
-        baixa_renda: family.id_situacao_financeira_situacao_financeira.baixa_renda ?? "",
-        outros: family.id_situacao_financeira_situacao_financeira.outros ?? ""
+        ocupacao_irregular: family.id_vulnerabilidade_vulnerabilidade.ocupacao_irregular === 1 ? [family.id_vulnerabilidade_vulnerabilidade.ocupacao_irregular] : [],
+        crianca_sozinha: family.id_vulnerabilidade_vulnerabilidade.crianca_sozinha === 1 ? [family.id_vulnerabilidade_vulnerabilidade.crianca_sozinha] : [],
+        idosos_dependentes: family.id_vulnerabilidade_vulnerabilidade.idosos_dependentes === 1 ? [family.id_vulnerabilidade_vulnerabilidade.idosos_dependentes] : [],
+        desempregados: family.id_vulnerabilidade_vulnerabilidade.desempregados === 1 ? [family.id_vulnerabilidade_vulnerabilidade.desempregados] : [],
+        deficientes: family.id_vulnerabilidade_vulnerabilidade.deficientes === 1 ? [family.id_vulnerabilidade_vulnerabilidade.deficientes] : [],
+        baixa_renda: family.id_vulnerabilidade_vulnerabilidade.baixa_renda ? [family.id_vulnerabilidade_vulnerabilidade.baixa_renda] : [],
+        outros: family.id_vulnerabilidade_vulnerabilidade.outros === 1 ? [family.id_vulnerabilidade_vulnerabilidade.outros] : []
     }
 
     const validationSchema = Yup.object().shape({

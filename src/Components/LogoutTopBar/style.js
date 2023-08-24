@@ -9,7 +9,7 @@ export const Container = styled.div`
     color: white;
     border-radius: 10px;
     cursor: pointer;
-    :hover{
+    :hover {
         background-color: ${styles.colors.colorsBaseInkLightHover};
     }
 `;

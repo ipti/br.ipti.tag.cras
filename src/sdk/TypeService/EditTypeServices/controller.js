@@ -3,7 +3,7 @@ import { EdittypesServicesRequest, useFetchOneTypesServices } from "./request";
 import { logout } from "../../../services/localstorage";
 import { useNavigate } from "react-router-dom";
 
-export const EditTypesServicesController = (id, setIsError, setIsVerify) => {
+export const EditTypesServicesController = (id, setIsError, setIsVerify, show) => {
   const history = useNavigate();
 
   const { data: TypeServiceRequest, refetch } = useFetchOneTypesServices(id);
@@ -14,7 +14,7 @@ export const EditTypesServicesController = (id, setIsError, setIsVerify) => {
       onError: (error) => {
         console.log(error.response.data.message)
         setIsError(error.response.data.message)
-
+        show()
         if (error.response.status === 401 | 403) {
           logout();
           history("/login")
@@ -25,6 +25,7 @@ export const EditTypesServicesController = (id, setIsError, setIsVerify) => {
         console.log(data);
         refetch()
         setIsVerify(true)
+        show()
       },
 
     }

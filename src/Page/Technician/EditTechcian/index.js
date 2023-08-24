@@ -8,7 +8,7 @@ import { EditTechnicianContext } from "../../../context/Technician/EditTechnicia
 
 const EditTechnicianScreen = () => {
 
-    const { CreateSchema, initialValue, technician, handleEditTechnician, show, toast } = useContext(EditTechnicianContext);
+    const { CreateSchema, initialValue, technician, handleEditTechnician, toast } = useContext(EditTechnicianContext);
 
     return (
         <Container>
@@ -18,7 +18,7 @@ const EditTechnicianScreen = () => {
                 </h1>
                 <Padding padding="16px" />
                 {technician ? <Formik initialValues={initialValue}
-                    onSubmit={(values) => {handleEditTechnician(values); show()}}
+                    onSubmit={(values) => {handleEditTechnician(values); }}
                     validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>

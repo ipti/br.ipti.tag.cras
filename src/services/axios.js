@@ -3,6 +3,6 @@ import axios from "axios";
 // require('dotenv').config();
 
 const http = axios.create({
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://tag-cras.azurewebsites.net/",
 });
 export default http;

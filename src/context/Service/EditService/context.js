@@ -5,11 +5,11 @@ export const EditServiceContext = createContext({});
 
 const EditServiceProvider = ({children}) => {
 
-    const { Schema, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne } = EditServicesState();
+    const { Schema, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne, toast, show } = EditServicesState();
 
 
     return (
-        <EditServiceContext.Provider value={{ Schema, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne }}>
+        <EditServiceContext.Provider value={{ Schema, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne, toast, show }}>
             {children}
         </EditServiceContext.Provider>
     )

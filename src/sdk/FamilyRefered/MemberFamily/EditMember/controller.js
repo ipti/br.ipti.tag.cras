@@ -3,9 +3,9 @@ import { EditFamilyMember, useFetchOneFamilyMember } from "../request"
 import { logout } from "../../../../services/localstorage";
 import { useNavigate } from "react-router-dom";
 
-export const EditMemberController = (id, setOpen) => {
+export const EditMemberController = (id, setOpen, toast) => {
   const history = useNavigate();
-  const { data: oneMemberFamily, refetch, error } = useFetchOneFamilyMember(id)
+  const { data: oneMemberFamily, refetch } = useFetchOneFamilyMember(id)
 
   // if (error?.response.status === 401 | 403) {
   //   logout();
@@ -27,6 +27,7 @@ export const EditMemberController = (id, setOpen) => {
         refetch()
         setOpen(false)
         console.log(data);
+        toast.current.show({ severity: 'success', summary: 'Success', detail: 'Alteração feita com Sucesso!' });
       },
     }
   );

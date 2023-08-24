@@ -18,9 +18,9 @@ const EditMemberFamily = ({ schema, setOpen, id }) => {
         setLoading(true)
     }, [])
 
-    const { sexo, parentesco } = useContext(EditFamilyReferedContext)
+    const { sexo, parentesco, toast } = useContext(EditFamilyReferedContext)
 
-    const { oneMemberFamily, EditFamilyMemberRequestMutation } = EditMemberController(id, setOpen);
+    const { oneMemberFamily, EditFamilyMemberRequestMutation } = EditMemberController(id, setOpen, toast);
 
 
     const handleEditMember = (body) => {

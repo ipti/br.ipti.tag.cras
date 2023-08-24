@@ -8,7 +8,7 @@ import { Toast } from "primereact/toast";
 
 const EditTypeServiceScreen = () => {
 
-    const { CreateSchema, handleEditTypeService, initialValue, typeService, toast, show } = useContext(EditTypeServiceContext);
+    const { CreateSchema, handleEditTypeService, initialValue, typeService, toast } = useContext(EditTypeServiceContext);
 
     return (
         <Container>
@@ -17,7 +17,7 @@ const EditTypeServiceScreen = () => {
                     Editar Serviço
                 </h1>
                 <Padding padding="16px" />
-                {typeService ? <Formik initialValues={initialValue} onSubmit={(values) => {handleEditTypeService(values); show()}} validationSchema={CreateSchema}>
+                {typeService ? <Formik initialValues={initialValue} onSubmit={(values) => {handleEditTypeService(values)}} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
                             <Row>

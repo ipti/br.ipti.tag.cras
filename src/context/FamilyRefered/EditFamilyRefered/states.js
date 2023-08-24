@@ -7,8 +7,8 @@ const EditFamilyReferedState = () => {
 
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-      queryClient.removeQueries({ queryKey: "FamilyReferedId" })
-      setLoading(true);
+    queryClient.removeQueries({ queryKey: "FamilyReferedId" })
+    setLoading(true);
   }, [])
 
   const [activeStep, setActiveStep] = useState(0);
@@ -39,7 +39,7 @@ const EditFamilyReferedState = () => {
     membersFamilyRequest,
     DeleteMemberFamilyRequestMutation,
     EditFamilyRequestRequestMutation
-  } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen);
+  } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
 
   useEffect(() => {
@@ -153,7 +153,7 @@ const EditFamilyReferedState = () => {
   }
 
   const backStep = () => {
-
+    
     if (activeStep !== 0) {
       setActiveStep(activeStep - 1);
     }
@@ -172,13 +172,13 @@ const EditFamilyReferedState = () => {
       previdencia: parseInt(dataValues.previdencia),
       valor_aluguel: dataValues.valor_aluguel ? parseInt(dataValues.valor_aluguel) : 0,
       uf_rg: dataValues.uf_rg.uf,
-      ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
-      crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-      idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-      desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
-      deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
-      baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
-      outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
+      ocupacao_irregular: dataValues.ocupacao_irregular.length === 0  || dataValues.ocupacao_irregular[0] === 0 ? 0 : 1,
+      crianca_sozinha: dataValues.crianca_sozinha.length === 0  || dataValues.crianca_sozinha[0] === 0 ? 0 : 1,
+      idosos_dependentes: dataValues.crianca_sozinha.length === 0  || dataValues.crianca_sozinha[0] === 0 ? 0 : 1,
+      desempregados: dataValues.desempregados.length === 0  || dataValues.desempregados[0] === 0 ? 0 : 1,
+      deficientes: dataValues.deficientes.length === 0  || dataValues.deficientes[0] === 0 ? 0 : 1,
+      baixa_renda: dataValues.baixa_renda.length === 0  || dataValues.baixa_renda[0] === 0 ? 0 : 1,
+      outros: dataValues.outros.length === 0 || dataValues.outros[0] === 0 ? 0 : 1
     }
 
     show()
