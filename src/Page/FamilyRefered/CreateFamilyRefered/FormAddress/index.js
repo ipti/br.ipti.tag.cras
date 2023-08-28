@@ -38,6 +38,7 @@ const FormAddress = () => {
             <h3>Endereço</h3>
             <Formik initialValues={initialValue} onSubmit={value => nextStep(value)} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
+                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}]}>

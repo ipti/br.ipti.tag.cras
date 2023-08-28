@@ -21,6 +21,7 @@
     "react-router-dom": "^6.13.0",
     "react-scripts": "5.0.1",
     "styled-components": "^5.3.10",
+    "use-mask-input": "^3.3.3",
     "web-vitals": "^2.1.4",
     "yup": "^1.2.0"
   },
