@@ -57,7 +57,7 @@ export const EditServicesState = () => {
   }
 
 
-  const { EditServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, oneService } = EditServicesController(id, setIsVerify, setIsError);
+  const { EditServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, oneService } = EditServicesController(id, setIsVerify, setIsError, show);
 
   const initialValue = {
     solicitacao: serviceOne ? serviceOne.solicitacao : "",
@@ -107,6 +107,6 @@ export const EditServicesState = () => {
 
 
   return {
-    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, Schema, userIdentify, serviceOne
+    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, Schema, userIdentify, serviceOne, toast, show
   }
 }

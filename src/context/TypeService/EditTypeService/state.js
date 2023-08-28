@@ -29,7 +29,7 @@ export const EditTypeServiceState = () => {
 
     const [typeService, setTypeService] = useState();
 
-    const { EditTypesServicesRequestMutation, TypeServiceRequest } = EditTypesServicesController(id, setIsError, setIsVerify);
+    const { EditTypesServicesRequestMutation, TypeServiceRequest } = EditTypesServicesController(id, setIsError, setIsVerify,show);
 
 
     useEffect(() => {

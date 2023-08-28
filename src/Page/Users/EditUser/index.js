@@ -5,10 +5,11 @@ import CrasDropdown from "../../../CrasUi/Dropdown";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { EditUserContext } from "../../../context/User/EditUser/context";
+import { Toast } from "primereact/toast";
 
 const EditUserScreen = () => {
 
-    const { typeUser, handleEditUser, EditUserSchema, initialValue, user } = useContext(EditUserContext);
+    const { typeUser, handleEditUser, EditUserSchema, initialValue, user, toast } = useContext(EditUserContext);
 
 
     return (
@@ -94,6 +95,8 @@ const EditUserScreen = () => {
                     </Formik>
                     : null}
             </Column>
+            <Toast ref={toast} />
+
         </Container>
     )
 }

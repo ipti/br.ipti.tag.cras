@@ -5,9 +5,9 @@ export const EditUserContext = createContext({});
 
 const EditUserProvider = ({children}) => {
 
-    const { typeUser, handleEditUser, EditUserSchema, initialValue, user } = EditUser();
+    const { typeUser, handleEditUser, EditUserSchema, initialValue, user, toast } = EditUser();
     return (
-        <EditUserContext.Provider value={{ typeUser, handleEditUser, EditUserSchema, initialValue, user }}>
+        <EditUserContext.Provider value={{ typeUser, handleEditUser, EditUserSchema, initialValue, user, toast }}>
             {children}
         </EditUserContext.Provider>
     )

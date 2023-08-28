@@ -6,9 +6,10 @@ import CrasDropdown from "../../../CrasUi/Dropdown";
 import CrasInput from "../../../CrasUi/Input/Input";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import { EditServiceContext } from "../../../context/Service/EditService/context";
+import { Toast } from "primereact/toast";
 
 const EditServicePage = () => {
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, serviceOne } = useContext(EditServiceContext)
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, serviceOne, toast } = useContext(EditServiceContext)
 
     return (
         <Container>
@@ -88,6 +89,8 @@ const EditServicePage = () => {
                 </Formik> : null}
             </Column>
             <Padding padding="16px" />
+            <Toast ref={toast} />
+
         </Container>
     )
 }

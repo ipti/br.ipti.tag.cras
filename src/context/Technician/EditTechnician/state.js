@@ -32,7 +32,7 @@ export const EditTechnicianState = () => {
 
     const [technician, setTechnician] = useState();
 
-    const {technicianRequest, EditTechnicianRequestMutation} = EditTechnicianController(id, setIsError, setIsVerify)
+    const {technicianRequest, EditTechnicianRequestMutation} = EditTechnicianController(id, setIsError, setIsVerify, show)
 
     useEffect(() => {
       if(technicianRequest && loading){
@@ -56,6 +56,6 @@ export const EditTechnicianState = () => {
 
 
     return {
-        handleEditTechnician, CreateSchema, initialValue, technician, show,toast
+        handleEditTechnician, CreateSchema, initialValue, technician, show, toast
     }
 }

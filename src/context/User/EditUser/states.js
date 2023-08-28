@@ -3,6 +3,7 @@ import { EditUserController } from '../../../sdk/User/EditUser/controller';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import queryClient from '../../../services/react-query';
+import { useRef } from 'react';
 
 export const EditUser = () => {
     const { id } = useParams();
@@ -19,6 +20,8 @@ export const EditUser = () => {
         {id: 5, nome: "Operador Cadastro Único"}
     ]
 
+    
+
     const EditUserSchema = Yup.object().shape({
         nome: Yup.string().required("Campo Obrigatório"),
         email: Yup.string().required('Campo Obrigatório'),
@@ -27,7 +30,22 @@ export const EditUser = () => {
         confirmPassword: Yup.string().label('Confirmar senha').oneOf([Yup.ref('password')], 'Senhas difirentes'),
     });
 
-    const { EditUserRequestMutation, UserRequest } = EditUserController(id, setIsError, setIsVerify);
+
+
+
+
+    const toast = useRef(null);
+
+    const show = () => {
+        if (isVerify) {
+            toast.current.show({ severity: 'success', summary: 'Success', detail: 'Alteração feita com Sucesso!' });
+        } else {
+            toast.current.show({ severity: 'error', summary: 'Error', detail: isError });
+        }
+    }
+
+
+    const { EditUserRequestMutation, UserRequest } = EditUserController(id, setIsError, setIsVerify, show);
 
 
     useEffect(() => {
@@ -76,6 +94,6 @@ export const EditUser = () => {
     
     
     return{
-        typeUser, handleEditUser, EditUserSchema, initialValue, user, isVerify, isError
+        typeUser, handleEditUser, EditUserSchema, initialValue, user, isVerify, isError, toast
     }
 }

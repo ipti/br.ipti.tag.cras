@@ -22,7 +22,6 @@ import "/node_modules/primeflex/primeflex.css";
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      {/* <ReactQueryDevtools initialIsOpen={true} /> */}
       <Routes />
     </QueryClientProvider>
   )

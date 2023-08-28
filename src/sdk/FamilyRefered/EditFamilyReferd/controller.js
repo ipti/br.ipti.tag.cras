@@ -4,7 +4,7 @@ import { EditUserIdentifyRequest, useFetchFamilyReferedId } from "../request";
 import { logout } from "../../../services/localstorage";
 import { useNavigate } from "react-router-dom";
 
-export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError) => {
+export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
 
   const { data: familyReferedfetch, isLoading, error } = useFetchFamilyReferedId(id);
 
@@ -38,6 +38,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
       onError: (error) => {
         console.log(error.response.data.message)
         setIsError(error.response.data.message)
+        show()
         if (error.response.status === 401 | 403) {
           logout();
           history("/login")
@@ -48,6 +49,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
         setAddMember(false)
         console.log(data);
         setIsVerify(true)
+        show()
       },
     }
   );

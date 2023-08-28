@@ -6,7 +6,7 @@ import { EditServiceRequest, useFetchOneService } from "./request";
 import { logout } from "../../../services/localstorage";
 import { useNavigate } from "react-router-dom";
 
-export const EditServicesController = (id, setIsError, setIsVerify) => {
+export const EditServicesController = (id, setIsError, setIsVerify, show) => {
     const history = useNavigate();
 
 
@@ -22,6 +22,7 @@ export const EditServicesController = (id, setIsError, setIsVerify) => {
             onError: (error) => {
                 console.log(error.response.data.message)
                 setIsError(error.response.data.message)
+                show()
                 if (error.response.status === (401 || 403)) {
                     logout();
                     history("/login")
@@ -30,6 +31,7 @@ export const EditServicesController = (id, setIsError, setIsVerify) => {
             onSuccess: (data) => {
                 console.log(data);
                 setIsVerify(true)
+                show()
             },
         }
     );
