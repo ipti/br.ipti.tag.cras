@@ -2,6 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 import queryClient from "../../../services/react-query";
+import * as Yup from 'yup';
+
 
 const EditFamilyReferedState = () => {
 
@@ -153,32 +155,32 @@ const EditFamilyReferedState = () => {
   }
 
   const backStep = () => {
-    
+
     if (activeStep !== 0) {
       setActiveStep(activeStep - 1);
     }
   }
 
 
-  const handleFamiliaRefered = () => {
+  const handleFamiliaRefered = (values) => {
 
     const data = {
-      ...dataValues,
-      certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
-      NIS: parseInt(dataValues.NIS),
-      renda: parseInt(dataValues.renda),
-      bolsa_familia: parseInt(dataValues.bolsa_familia),
-      loasbpc: parseInt(dataValues.loasbpc),
-      previdencia: parseInt(dataValues.previdencia),
-      valor_aluguel: dataValues.valor_aluguel ? parseInt(dataValues.valor_aluguel) : 0,
-      uf_rg: dataValues.uf_rg.uf,
-      ocupacao_irregular: dataValues.ocupacao_irregular.length === 0  || dataValues.ocupacao_irregular[0] === 0 ? 0 : 1,
-      crianca_sozinha: dataValues.crianca_sozinha.length === 0  || dataValues.crianca_sozinha[0] === 0 ? 0 : 1,
-      idosos_dependentes: dataValues.crianca_sozinha.length === 0  || dataValues.crianca_sozinha[0] === 0 ? 0 : 1,
-      desempregados: dataValues.desempregados.length === 0  || dataValues.desempregados[0] === 0 ? 0 : 1,
-      deficientes: dataValues.deficientes.length === 0  || dataValues.deficientes[0] === 0 ? 0 : 1,
-      baixa_renda: dataValues.baixa_renda.length === 0  || dataValues.baixa_renda[0] === 0 ? 0 : 1,
-      outros: dataValues.outros.length === 0 || dataValues.outros[0] === 0 ? 0 : 1
+      ...values,
+      certidao_nascimento: values.certidao_nascimento ? parseInt(values.certidao_nascimento) : "",
+      NIS: parseInt(values.NIS),
+      renda: parseInt(values.renda),
+      bolsa_familia: parseInt(values.bolsa_familia),
+      loasbpc: parseInt(values.loasbpc),
+      previdencia: parseInt(values.previdencia),
+      valor_aluguel: values.valor_aluguel ? parseInt(values.valor_aluguel) : 0,
+      uf_rg: values.uf_rg.uf,
+      ocupacao_irregular: values.ocupacao_irregular.length === 0 || values.ocupacao_irregular[0] === 0 ? 0 : 1,
+      crianca_sozinha: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
+      idosos_dependentes: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
+      desempregados: values.desempregados.length === 0 || values.desempregados[0] === 0 ? 0 : 1,
+      deficientes: values.deficientes.length === 0 || values.deficientes[0] === 0 ? 0 : 1,
+      baixa_renda: values.baixa_renda.length === 0 || values.baixa_renda[0] === 0 ? 0 : 1,
+      outros: values.outros.length === 0 || values.outros[0] === 0 ? 0 : 1
     }
 
     show()
@@ -190,6 +192,30 @@ const EditFamilyReferedState = () => {
   const handleCreateFamilyMember = (body) => {
     CreateFamilyRequestRequestMutation.mutate(body)
   }
+
+  const validationSchema = Yup.object().shape({
+    nome: Yup.string().required("Campo obrigatório"),
+    apelido: Yup.string().required("Campo obrigatório"),
+    data_nascimento: Yup.string().required("Campo obrigatório"),
+    certidao_nascimento: Yup.number(),
+    pasta: Yup.string(),
+    arquivo: Yup.string(),
+    nº: Yup.string(),
+    NIS: Yup.number(),
+    numero_rg: Yup.string().required("Campo obrigatório"),
+    data_emissao_rg: Yup.string().required("Campo obrigatório"),
+    uf_rg: Yup.object().required("Campo obrigatório"),
+    emissao_rg: Yup.string().required("Campo obrigatório"),
+    cpf: Yup.string().required("Campo obrigatório"),
+    deficiente: Yup.string().required("Campo obrigatório"),
+    deficiencia: Yup.string(),
+    mae: Yup.string().required("Campo obrigatório"),
+    pai: Yup.string().required("Campo obrigatório"),
+    estado_civil: Yup.string(),
+    escolaridade: Yup.string().required("Campo obrigatório"),
+    data_inicial: Yup.string(),
+    data_final: Yup.string(),
+  });
 
   return {
     activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen

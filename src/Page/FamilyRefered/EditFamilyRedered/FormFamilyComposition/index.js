@@ -157,11 +157,6 @@ const FormFamilyComposition = () => {
             {open ? <EditMemberFamily setOpen={setOpen} id={idMember} schema={schema} /> : null}
             {!open && !addMember ? <CrasTable delet={deleteMember} products={member} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
-            <Row id="center">
-                <ButtonPrime label="Voltar" onClick={backStep} />
-                <Padding />
-                <ButtonPrime label="Finalizar" onClick={handleFamiliaRefered} />
-            </Row>
         </Column>
     )
 };
