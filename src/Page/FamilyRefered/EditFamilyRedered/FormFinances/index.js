@@ -1,46 +1,16 @@
-import { Formik } from "formik";
 import React, { useContext } from "react";
-import * as Yup from 'yup';
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 const FormFinances = ({ values, errors, touched, handleChange }) => {
 
-    const { backStep, nextStep, family } = useContext(EditFamilyReferedContext)
+    const {family } = useContext(EditFamilyReferedContext)
 
     if (!family) return null;
-
-    const initialValue = {
-        profissao: family.id_situacao_financeira_situacao_financeira.profissao ?? "",
-        renda: family.id_situacao_financeira_situacao_financeira.renda ?? 0,
-        reside_familia: family.id_situacao_financeira_situacao_financeira.reside_familia ?? "",
-        bolsa_familia: family.id_situacao_financeira_situacao_financeira.bolsa_familia ?? 0,
-        loasbpc: family.id_situacao_financeira_situacao_financeira.loasbpc ?? 0,
-        previdencia: family.id_situacao_financeira_situacao_financeira.previdencia ?? 0,
-        carteira_assinada: family.id_situacao_financeira_situacao_financeira.carteira_assinada ?? "",
-        ocupacao_irregular: family.id_vulnerabilidade_vulnerabilidade.ocupacao_irregular === 1 ? [family.id_vulnerabilidade_vulnerabilidade.ocupacao_irregular] : [],
-        crianca_sozinha: family.id_vulnerabilidade_vulnerabilidade.crianca_sozinha === 1 ? [family.id_vulnerabilidade_vulnerabilidade.crianca_sozinha] : [],
-        idosos_dependentes: family.id_vulnerabilidade_vulnerabilidade.idosos_dependentes === 1 ? [family.id_vulnerabilidade_vulnerabilidade.idosos_dependentes] : [],
-        desempregados: family.id_vulnerabilidade_vulnerabilidade.desempregados === 1 ? [family.id_vulnerabilidade_vulnerabilidade.desempregados] : [],
-        deficientes: family.id_vulnerabilidade_vulnerabilidade.deficientes === 1 ? [family.id_vulnerabilidade_vulnerabilidade.deficientes] : [],
-        baixa_renda: family.id_vulnerabilidade_vulnerabilidade.baixa_renda ? [family.id_vulnerabilidade_vulnerabilidade.baixa_renda] : [],
-        outros: family.id_vulnerabilidade_vulnerabilidade.outros === 1 ? [family.id_vulnerabilidade_vulnerabilidade.outros] : []
-    }
-
-    const validationSchema = Yup.object().shape({
-        profissao: Yup.string().required('Profissão é obrigatória'),
-        carteira_assinada: Yup.string(),
-        renda: Yup.number(),
-        reside_familia: Yup.string().required('Informação sobre residir com a família é obrigatória'),
-        bolsa_familia: Yup.number(),
-        loasbpc: Yup.number(),
-        previdencia: Yup.number(),
-    });
-
 
     return (
         <Column>
@@ -93,7 +63,9 @@ const FormFinances = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput value={values.renda} name={"renda"} onChange={handleChange} label="Renda Mensal do usuário" />
+                    <CrasInputNumber mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true} value={values.renda} name={"renda"} onChange={handleChange} label="Renda Mensal do usuário" />
                     <Padding />
                     {errors.renda && touched.renda ? (
                         <div style={{ color: "red" }}>{errors.renda}<Padding /></div>
@@ -117,21 +89,27 @@ const FormFinances = ({ values, errors, touched, handleChange }) => {
             </h3>
             <Grid checkMockup={[{}, {}, {}]}>
                 <Column>
-                    <CrasInput value={values.loasbpc} name={"loasbpc"} onChange={handleChange} label="LOAS/BPC" />
+                    <CrasInputNumber mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true}  value={values.loasbpc} name={"loasbpc"} onChange={handleChange} label="LOAS/BPC" />
                     <Padding />
                     {errors.loasbpc && touched.loasbpc ? (
                         <div style={{ color: "red" }}>{errors.loasbpc}</div>
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput value={values.previdencia} name={"previdencia"} onChange={handleChange} label="Previdência Social" />
+                    <CrasInputNumber mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true}  value={values.previdencia} name={"previdencia"} onChange={handleChange} label="Previdência Social" />
                     <Padding />
                     {errors.previdencia && touched.previdencia ? (
                         <div style={{ color: "red" }}>{errors.previdencia}</div>
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput value={values.bolsa_familia} name={"bolsa_familia"} onChange={handleChange} label="Bolsa Família" />
+                    <CrasInputNumber mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true}  value={values.bolsa_familia} name={"bolsa_familia"} onChange={handleChange} label="Bolsa Família" />
                     <Padding />
                     {errors.bolsa_familia && touched.bolsa_familia ? (
                         <div style={{ color: "red" }}>{errors.bolsa_familia}</div>
@@ -139,8 +117,8 @@ const FormFinances = ({ values, errors, touched, handleChange }) => {
                 </Column>
             </Grid>
             <Padding padding="16px" />
-            
-            
+
+
         </Column>
     )
 }

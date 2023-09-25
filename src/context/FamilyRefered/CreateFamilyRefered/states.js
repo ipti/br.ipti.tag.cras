@@ -95,6 +95,7 @@ const CreateFamilyReferedState = () => {
             valor_aluguel: parseInt(dataValues.valor_aluguel),
             uf_rg: dataValues.uf_rg.uf,
             cpf: dataValues.cpf.replace(/\D/g, ''),
+            comodos: dataValues.comodos.toString(),
             numero_rg: dataValues.numero_rg.replace(/\D/g, ''),
             ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
             crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,

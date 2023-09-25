@@ -6,6 +6,8 @@ import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
+import CrasInputMask from "../../../../CrasUi/Input/InputMask";
+import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 
 
 const FormAddress = () => {
@@ -18,7 +20,7 @@ const FormAddress = () => {
         ponto_referencia: dataValues.ponto_referencia ?? "",
         condicoes_moradia: dataValues.condicoes_moradia ?? "",
         tipo_construcao: dataValues.tipo_construcao ?? "",
-        comodos: dataValues.comodos ?? "",
+        comodos: dataValues.comodos ?? 0,
         valor_aluguel: dataValues.valor_aluguel ?? 0
     }
 
@@ -52,7 +54,7 @@ const FormAddress = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" />
+                                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" />
                                     <Padding />
                                     {errors.telefone && touched.telefone ? (
                                         <div style={{ color: "red" }}>{errors.telefone}<Padding /></div>
@@ -147,14 +149,16 @@ const FormAddress = () => {
                             </div>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" />
+                                    <CrasInputNumber  showButtons={true} name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" />
                                     <Padding />
                                     {errors.comodos && touched.comodos ? (
                                         <div style={{ color: "red" }}>{errors.comodos}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" />
+                                    <CrasInputNumber mode="currency"
+                                        currency="BRL"
+                                        locale="pt-BR" showButtons={true} value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" />
                                     <Padding />
                                     {errors.valor_aluguel && touched.valor_aluguel ? (
                                         <div style={{ color: "red" }}>{errors.valor_aluguel}<Padding /></div>

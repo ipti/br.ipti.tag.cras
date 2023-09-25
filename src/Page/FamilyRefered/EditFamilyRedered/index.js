@@ -8,6 +8,7 @@ import FormFinances from "./FormFinances";
 import FormInfoPerson from "./FormInfoPerson";
 import { Toast } from "primereact/toast";
 import { Formik } from "formik";
+import * as Yup from 'yup';
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 
 
@@ -125,11 +126,48 @@ const EditFamilyReferedScreen = () => {
         valor_aluguel: family?.id_endereco_endereco.valor_aluguel ?? 0
     }
 
+    const validationSchema = Yup.object().shape({
+        nome: Yup.string().required("Campo obrigatório"),
+        apelido: Yup.string().required("Campo obrigatório"),
+        data_nascimento: Yup.string().required("Campo obrigatório"),
+        certidao_nascimento: Yup.number(),
+        pasta: Yup.string(),
+        arquivo: Yup.string(),
+        nº: Yup.string(),
+        NIS: Yup.number(),
+        numero_rg: Yup.string().required("Campo obrigatório"),
+        data_emissao_rg: Yup.string().required("Campo obrigatório"),
+        uf_rg: Yup.object().required("Campo obrigatório"),
+        emissao_rg: Yup.string().required("Campo obrigatório"),
+        cpf: Yup.string().required("Campo obrigatório"),
+        deficiente: Yup.string().required("Campo obrigatório"),
+        deficiencia: Yup.string(),
+        mae: Yup.string().required("Campo obrigatório"),
+        pai: Yup.string().required("Campo obrigatório"),
+        estado_civil: Yup.string(),
+        escolaridade: Yup.string().required("Campo obrigatório"),
+        data_inicial: Yup.string(),
+        data_final: Yup.string(),
+        profissao: Yup.string().required('Profissão é obrigatória'),
+        carteira_assinada: Yup.string(),
+        renda: Yup.number(),
+        reside_familia: Yup.string().required('Informação sobre residir com a família é obrigatória'),
+        bolsa_familia: Yup.number(),
+        loasbpc: Yup.number(),
+        previdencia: Yup.number(),
+        endereco: Yup.string().required("Campo obrigatotório"),
+        telefone: Yup.string().required("Campo obrigatotório"),
+        ponto_referencia: Yup.string(),
+        condicoes_moradia: Yup.string().required("Campo obrigatotório"),
+        tipo_construcao: Yup.string().required("Campo obrigatotório"),
+        comodos: Yup.string().required("Campo obrigatotório"),
+        valor_aluguel: Yup.number(),
+    });
 
     return (
         <Container>
             <h1>
-                Criar Familia Referenciada
+                Editar Familia Referenciada
             </h1>
             {larguraTela > 700 ?
                 <>
@@ -147,25 +185,28 @@ const EditFamilyReferedScreen = () => {
                     console.log(values)
                     handleFamiliaRefered(values)
                 }}
-            // validationSchema={validationSchema}
+                validationSchema={validationSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
                     console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
-                            <Row id="start">
+                            {errors.nome}
+                             <Row style={{width: "30%"}} id="start">
                                 <ButtonPrime label="Salvar" type="submit" />
                             </Row>
                             {activeStep === 0 ?
                                 <FormInfoPerson values={values} errors={errors} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?
                                     <FormAddress values={values} errors={errors} touched={touched} handleChange={handleChange} /> : activeStep === 2 ?
-                                        <FormFinances values={values} errors={errors} touched={touched} handleChange={handleChange} /> : activeStep === 3 ?
-                                            <FormFamilyComposition /> : null}
+                                        <FormFinances values={values} errors={errors} touched={touched} handleChange={handleChange} /> : null}
                         </form>
+
                     )
                 }
                 }
             </Formik>
+            {activeStep === 3 ?
+                <FormFamilyComposition /> : null}
             <Padding padding="16px" />
             <Toast ref={toast} />
 

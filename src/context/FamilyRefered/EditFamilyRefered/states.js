@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 import queryClient from "../../../services/react-query";
-import * as Yup from 'yup';
+
 
 
 const EditFamilyReferedState = () => {
@@ -164,6 +164,8 @@ const EditFamilyReferedState = () => {
 
   const handleFamiliaRefered = (values) => {
 
+
+    console.log(values.comodos.toString())
     const data = {
       ...values,
       certidao_nascimento: values.certidao_nascimento ? parseInt(values.certidao_nascimento) : "",
@@ -172,6 +174,7 @@ const EditFamilyReferedState = () => {
       bolsa_familia: parseInt(values.bolsa_familia),
       loasbpc: parseInt(values.loasbpc),
       previdencia: parseInt(values.previdencia),
+      comodos: values.comodos.toString(),
       valor_aluguel: values.valor_aluguel ? parseInt(values.valor_aluguel) : 0,
       uf_rg: values.uf_rg.uf,
       ocupacao_irregular: values.ocupacao_irregular.length === 0 || values.ocupacao_irregular[0] === 0 ? 0 : 1,
@@ -193,30 +196,7 @@ const EditFamilyReferedState = () => {
     CreateFamilyRequestRequestMutation.mutate(body)
   }
 
-  const validationSchema = Yup.object().shape({
-    nome: Yup.string().required("Campo obrigatório"),
-    apelido: Yup.string().required("Campo obrigatório"),
-    data_nascimento: Yup.string().required("Campo obrigatório"),
-    certidao_nascimento: Yup.number(),
-    pasta: Yup.string(),
-    arquivo: Yup.string(),
-    nº: Yup.string(),
-    NIS: Yup.number(),
-    numero_rg: Yup.string().required("Campo obrigatório"),
-    data_emissao_rg: Yup.string().required("Campo obrigatório"),
-    uf_rg: Yup.object().required("Campo obrigatório"),
-    emissao_rg: Yup.string().required("Campo obrigatório"),
-    cpf: Yup.string().required("Campo obrigatório"),
-    deficiente: Yup.string().required("Campo obrigatório"),
-    deficiencia: Yup.string(),
-    mae: Yup.string().required("Campo obrigatório"),
-    pai: Yup.string().required("Campo obrigatório"),
-    estado_civil: Yup.string(),
-    escolaridade: Yup.string().required("Campo obrigatório"),
-    data_inicial: Yup.string(),
-    data_final: Yup.string(),
-  });
-
+ 
   return {
     activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen
   }

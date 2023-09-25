@@ -43,7 +43,7 @@ const FormInfoPerson = () => {
 
     const validationSchema = Yup.object().shape({
         nome: Yup.string().required("Campo obrigatório"),
-        apelido: Yup.string().required("Campo obrigatório"),
+        apelido: Yup.string(),
         data_nascimento: Yup.string().required("Campo obrigatório"),
         certidao_nascimento: Yup.number(),
         pasta: Yup.string(),
@@ -53,7 +53,7 @@ const FormInfoPerson = () => {
         numero_rg: Yup.string().required("Campo obrigatório"),
         data_emissao_rg: Yup.string().required("Campo obrigatório"),
         data_inicial: Yup.string().required("Campo obrigatório"),
-        data_final: Yup.string().required("Campo obrigatório"),
+        data_final: Yup.string(),
         uf_rg: Yup.object().required("Campo obrigatório"),
         emissao_rg: Yup.string().required("Campo obrigatório"),
         cpf: Yup.string().required("Campo obrigatório"),

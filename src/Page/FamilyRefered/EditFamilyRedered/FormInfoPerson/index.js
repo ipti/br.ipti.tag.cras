@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import * as Yup from 'yup';
 import CrasCalendar from "../../../../CrasUi/Calendar";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
@@ -21,30 +20,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
     const dateBithrday = new Date(values.data_nascimento)
 
 
-    const validationSchema = Yup.object().shape({
-        nome: Yup.string().required("Campo obrigatório"),
-        apelido: Yup.string().required("Campo obrigatório"),
-        data_nascimento: Yup.string().required("Campo obrigatório"),
-        certidao_nascimento: Yup.number(),
-        pasta: Yup.string(),
-        arquivo: Yup.string(),
-        nº: Yup.string(),
-        NIS: Yup.number(),
-        numero_rg: Yup.string().required("Campo obrigatório"),
-        data_emissao_rg: Yup.string().required("Campo obrigatório"),
-        uf_rg: Yup.object().required("Campo obrigatório"),
-        emissao_rg: Yup.string().required("Campo obrigatório"),
-        cpf: Yup.string().required("Campo obrigatório"),
-        deficiente: Yup.string().required("Campo obrigatório"),
-        deficiencia: Yup.string(),
-        mae: Yup.string().required("Campo obrigatório"),
-        pai: Yup.string().required("Campo obrigatório"),
-        estado_civil: Yup.string(),
-        escolaridade: Yup.string().required("Campo obrigatório"),
-        data_inicial: Yup.string(),
-        data_final: Yup.string(),
-    });
-
+  
     return (
         <Column>
             <Padding padding="16px" />

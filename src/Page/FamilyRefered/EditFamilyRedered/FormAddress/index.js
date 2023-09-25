@@ -1,8 +1,7 @@
-import { Formik } from "formik";
 import React, { useContext } from "react";
-import * as Yup from 'yup';
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputMask from "../../../../CrasUi/Input/InputMask";
+import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
@@ -10,29 +9,9 @@ import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/Edit
 
 const FormAddress = ({ values, errors, touched, handleChange }) => {
 
-    const { backStep, nextStep, family } = useContext(EditFamilyReferedContext);
+    const {family } = useContext(EditFamilyReferedContext);
 
     if (!family) return null;
-
-    const initialValue = {
-        endereco: family.id_endereco_endereco.endereco ?? "",
-        telefone: family.id_endereco_endereco.telefone ?? "",
-        ponto_referencia: family.id_endereco_endereco.ponto_referencia ?? "",
-        condicoes_moradia: family.id_endereco_endereco.condicoes_moradia ?? "",
-        tipo_construcao: family.id_endereco_endereco.tipo_construcao ?? "",
-        comodos: family.id_endereco_endereco.comodos ?? "",
-        valor_aluguel: family.id_endereco_endereco.valor_aluguel ?? 0
-    }
-
-    const validationSchema = Yup.object().shape({
-        endereco: Yup.string().required("Campo obrigatotório"),
-        telefone: Yup.string().required("Campo obrigatotório"),
-        ponto_referencia: Yup.string(),
-        condicoes_moradia: Yup.string().required("Campo obrigatotório"),
-        tipo_construcao: Yup.string().required("Campo obrigatotório"),
-        comodos: Yup.string().required("Campo obrigatotório"),
-        valor_aluguel: Yup.number(),
-    });
 
     return (
         <Column>
@@ -49,7 +28,7 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" />
+                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" />
                     <Padding />
                     {errors.telefone && touched.telefone ? (
                         <div style={{ color: "red" }}>{errors.telefone}<Padding /></div>
@@ -144,14 +123,16 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
             </div>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" />
+                    <CrasInputNumber showButtons={true} name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" />
                     <Padding />
                     {errors.comodos && touched.comodos ? (
                         <div style={{ color: "red" }}>{errors.comodos}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" />
+                    <CrasInputNumber  mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true} value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" />
                     <Padding />
                     {errors.valor_aluguel && touched.valor_aluguel ? (
                         <div style={{ color: "red" }}>{errors.valor_aluguel}<Padding /></div>
@@ -159,7 +140,6 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
                 </Column>
             </Grid>
             <Padding padding="16px" />
-           
         </Column>
     )
 }

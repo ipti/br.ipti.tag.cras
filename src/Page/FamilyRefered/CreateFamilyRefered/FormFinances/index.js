@@ -1,11 +1,12 @@
+import { Formik } from "formik";
 import React, { useContext } from "react";
-import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
+import * as Yup from 'yup';
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import { Formik } from "formik";
-import * as Yup from 'yup';
+import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 
 const FormFinances = () => {
@@ -95,7 +96,9 @@ const FormFinances = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput value={values.renda} name={"renda"} onChange={handleChange} label="Renda Mensal do usuário" />
+                                    <CrasInputNumber mode="currency"
+                                        currency="BRL"
+                                        locale="pt-BR" showButtons={true} value={values.renda} name={"renda"} onChange={handleChange} label="Renda Mensal do usuário" />
                                     <Padding />
                                     {errors.renda && touched.renda ? (
                                         <div style={{ color: "red" }}>{errors.renda}<Padding /></div>
@@ -107,7 +110,6 @@ const FormFinances = () => {
                                         <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.reside_familia === "Familia"} value={"Familia"} name={"reside_familia"} label="Família" />
                                         <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.reside_familia === "Sozinho"} value={"Sozinho"} name={"reside_familia"} label="Sozinho" />
                                         <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.reside_familia === "Outros"} value={"Outros"} name={"reside_familia"} label="Outros" />
-
                                     </Row>
                                     {errors.reside_familia && touched.reside_familia ? (
                                         <div style={{ color: "red" }}>{errors.reside_familia}</div>
@@ -119,21 +121,27 @@ const FormFinances = () => {
                             </h3>
                             <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
-                                    <CrasInput value={values.loasbpc} name={"loasbpc"} onChange={handleChange} label="LOAS/BPC" />
+                                    <CrasInputNumber mode="currency"
+                                        currency="BRL"
+                                        locale="pt-BR" showButtons={true} value={values.loasbpc} name={"loasbpc"} onChange={handleChange} label="LOAS/BPC" />
                                     <Padding />
                                     {errors.loasbpc && touched.loasbpc ? (
                                         <div style={{ color: "red" }}>{errors.loasbpc}</div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput value={values.previdencia} name={"previdencia"} onChange={handleChange} label="Previdência Social" />
+                                    <CrasInputNumber mode="currency"
+                                        currency="BRL"
+                                        locale="pt-BR" showButtons={true} value={values.previdencia} name={"previdencia"} onChange={handleChange} label="Previdência Social" />
                                     <Padding />
                                     {errors.previdencia && touched.previdencia ? (
                                         <div style={{ color: "red" }}>{errors.previdencia}</div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput value={values.bolsa_familia} name={"bolsa_familia"} onChange={handleChange} label="Bolsa Família" />
+                                    <CrasInputNumber mode="currency"
+                                        currency="BRL"
+                                        locale="pt-BR" showButtons={true} value={values.bolsa_familia} name={"bolsa_familia"} onChange={handleChange} label="Bolsa Família" />
                                     <Padding />
                                     {errors.bolsa_familia && touched.bolsa_familia ? (
                                         <div style={{ color: "red" }}>{errors.bolsa_familia}</div>

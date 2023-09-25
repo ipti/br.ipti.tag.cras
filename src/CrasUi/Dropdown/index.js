@@ -4,7 +4,7 @@ import { Column } from "../styles/styles";
 const CrasDropdown = ({ value, setValue, options, optionLabel, placeholder, label, name, onChange }) => {
     return (
         <Column>
-            <label htmlFor="username">{label}</label>
+            <label htmlFor="username" style={{marginBottom: "8px", marginLeft: "4px"}}>{label}</label>
             <Dropdown name={name} value={value} onChange={onChange} options={options} optionLabel={optionLabel}
                 placeholder={label} />
         </Column>

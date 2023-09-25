@@ -10,9 +10,10 @@ export const CreateUserIdentifyController = () => {
         (data) => CreateUserIdentifyRequest(data),
         {
           onError: (error) => {
+            console.log(error)
             if (error.response.status === 401 | 403) {
               logout();
-              history("/login")
+              // history("/login")
             }
             console.log(error.response.data.message)
           },
