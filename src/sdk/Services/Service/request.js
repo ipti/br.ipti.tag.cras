@@ -1,15 +1,23 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken } from "../../../services/localstorage";
+import { getToken, logout } from "../../../services/localstorage";
 
 const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
 };
 
 const ALLServiceRequest = async () => {
-  try{
-    return await http.get("/service", config);
-  }catch(err){
+  try {
+    return await http.get("/service", config).then(response => response.data)
+      .catch(err => {
+        console.log(err)
+        if (err.response.status === 401 || err.response.status === 403) {
+          logout()
+          window.location.reload()
+        }
+        throw err;
+      });;
+  } catch (err) {
     console.log(err)
   }
 }

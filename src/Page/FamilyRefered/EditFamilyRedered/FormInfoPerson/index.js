@@ -18,8 +18,6 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
     const dateExit = new Date(values.data_final);
     const dateEmit = new Date(values.data_emissao_rg);
     const dateBithrday = new Date(values.data_nascimento)
-
-
   
     return (
         <Column>
@@ -59,7 +57,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasCalendar name={"data_final"} date={dateExit} onChange={handleChange} label="Data Desligamento" showIcon />
+                    <CrasCalendar name={"data_final"} date={ values.data_final ? dateExit : values.data_final} onChange={handleChange} label="Data Desligamento" showIcon />
                     <Padding />
                     {errors.data_final && touched.data_final ? (
                         <div style={{ color: "red" }}>{errors.data_final}<Padding /></div>

@@ -73,7 +73,9 @@ const FormInfoPerson = () => {
             </h3>
             <Formik initialValues={initialValue} onSubmit={values => { nextStep(values) }} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
-                                        console.log(values)
+                   const dateEntry = new Date(values.data_inicial);
+                   const dateEmit = new Date(values.data_emissao_rg);
+                   const dateBithrday = new Date(values.data_nascimento)
 
                     return (
                         <form onSubmit={handleSubmit}>
@@ -102,17 +104,10 @@ const FormInfoPerson = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasCalendar name={"data_inicial"} onChange={handleChange} label="Data Entrada" showIcon />
+                                    <CrasCalendar name={"data_inicial"} date={dateEntry} onChange={handleChange} label="Data Entrada" showIcon />
                                     <Padding />
                                     {errors.data_inicial && touched.data_inicial ? (
                                         <div style={{ color: "red" }}>{errors.data_inicial}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                                <Column>
-                                    <CrasCalendar name={"data_final"} onChange={handleChange} label="Data Desligamento" showIcon />
-                                    <Padding />
-                                    {errors.data_final && touched.data_final ? (
-                                        <div style={{ color: "red" }}>{errors.data_final}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
@@ -136,7 +131,7 @@ const FormInfoPerson = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
-                                    <CrasCalendar label="Data de Nascimento" name="data_nascimento" onChange={handleChange} showIcon />
+                                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="data_nascimento" onChange={handleChange} showIcon />
                                     <Padding />
                                     {errors.data_nascimento && touched.data_nascimento ? (
                                         <div style={{ color: "red" }}>{errors.data_nascimento}<Padding /></div>
@@ -166,7 +161,7 @@ const FormInfoPerson = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasCalendar label="Data de Emissão" name="data_emissao_rg" onChange={handleChange} showIcon />
+                                    <CrasCalendar date={dateEmit} label="Data de Emissão" name="data_emissao_rg" onChange={handleChange} showIcon />
                                     <Padding />
                                     {errors.data_emissao_rg && touched.data_emissao_rg ? (
                                         <div style={{ color: "red" }}>{errors.data_emissao_rg}<Padding /></div>

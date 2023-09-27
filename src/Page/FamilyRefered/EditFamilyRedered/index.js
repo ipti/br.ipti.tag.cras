@@ -147,7 +147,6 @@ const EditFamilyReferedScreen = () => {
         estado_civil: Yup.string(),
         escolaridade: Yup.string().required("Campo obrigatório"),
         data_inicial: Yup.string(),
-        data_final: Yup.string(),
         profissao: Yup.string().required('Profissão é obrigatória'),
         carteira_assinada: Yup.string(),
         renda: Yup.number(),
@@ -188,11 +187,22 @@ const EditFamilyReferedScreen = () => {
                 validationSchema={validationSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
-                    console.log(values)
+
+                    var erroList = [];
+
+                    for (const chave in errors) {
+                        if (errors.hasOwnProperty(chave) && touched.hasOwnProperty(chave)) {
+                            erroList.push(`${chave}: ${errors[chave]}`)
+                        }
+                    }
                     return (
                         <form onSubmit={handleSubmit}>
-                            {errors.nome}
-                             <Row style={{width: "30%"}} id="start">
+                            {erroList.map((item) => {
+                                return (
+                                    <div style={{ color: "red" }}>{item}<Padding /></div>
+                                )
+                            })}
+                            <Row style={{ width: "30%" }} id="start">
                                 <ButtonPrime label="Salvar" type="submit" />
                             </Row>
                             {activeStep === 0 ?
@@ -200,7 +210,6 @@ const EditFamilyReferedScreen = () => {
                                     <FormAddress values={values} errors={errors} touched={touched} handleChange={handleChange} /> : activeStep === 2 ?
                                         <FormFinances values={values} errors={errors} touched={touched} handleChange={handleChange} /> : null}
                         </form>
-
                     )
                 }
                 }

@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken } from "../../../services/localstorage";
+import { getToken, logout } from "../../../services/localstorage";
 
 const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
@@ -11,11 +11,27 @@ export const CreateFamilyMemberRequest = async (body) => {
 }
 
 const getAllFamilyMember = async () => {
-  return await http.get("/familymember", config)
+  return await http.get("/familymember", config).then(response => response.data)
+  .catch(err => {
+      if (err.response.status === 401 || err.response.status === 403) {
+          logout()
+          window.location.reload()
+      }
+      alert(err)
+      throw err;
+  });
 }
 
 const getOneFamilyMember = async (id) => {
-  return await http.get(`/familymember/${id}`, config)
+  return await http.get(`/familymember/${id}`, config).then(response => response.data)
+  .catch(err => {
+      if (err.response.status === 401 || err.response.status === 403) {
+          logout()
+          window.location.reload()
+      }
+      alert(err)
+      throw err;
+  });
 }
 
 export const DeleteFamilyMember = async (id) => {

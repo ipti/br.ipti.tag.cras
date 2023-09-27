@@ -34,7 +34,7 @@ export const EditTypeServiceState = () => {
 
     useEffect(() => {
         if (TypeServiceRequest && loading) {
-            setTypeService(TypeServiceRequest.data.data)
+            setTypeService(TypeServiceRequest.data)
         }
     }, [TypeServiceRequest, loading])
 

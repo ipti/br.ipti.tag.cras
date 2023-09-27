@@ -86,7 +86,8 @@ const CreateFamilyReferedState = () => {
 
         const data = {
             ...dataValues,
-            certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
+            certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : 0,
+            apelido: dataValues.apelido === "" ? "." : dataValues.apelido,
             NIS: parseInt(dataValues.NIS),
             renda: parseInt(dataValues.renda),
             bolsa_familia: parseInt(dataValues.bolsa_familia),
@@ -95,6 +96,7 @@ const CreateFamilyReferedState = () => {
             valor_aluguel: parseInt(dataValues.valor_aluguel),
             uf_rg: dataValues.uf_rg.uf,
             cpf: dataValues.cpf.replace(/\D/g, ''),
+            data_final: dataValues.data_final ?? null,
             comodos: dataValues.comodos.toString(),
             numero_rg: dataValues.numero_rg.replace(/\D/g, ''),
             ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,

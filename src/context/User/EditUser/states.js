@@ -55,7 +55,7 @@ export const EditUser = () => {
 
     useEffect(() => {
       if(UserRequest && loading){
-        setUser(UserRequest.data.data)
+        setUser(UserRequest.data)
       }
     }, [UserRequest, loading])
 

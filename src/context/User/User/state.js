@@ -12,7 +12,7 @@ export const UserState = () => {
 
     useEffect(() => {
         if(userfetch){
-            setUser(userfetch.data.data)
+            setUser(userfetch.data)
         }
     }, [userfetch])
     

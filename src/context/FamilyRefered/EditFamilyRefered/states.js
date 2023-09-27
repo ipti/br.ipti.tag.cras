@@ -46,11 +46,11 @@ const EditFamilyReferedState = () => {
 
   useEffect(() => {
     if (familyReferedfetch && loading) {
-      setFamily(familyReferedfetch.data.data)
+      setFamily(familyReferedfetch.data)
     }
 
     if (membersFamilyRequest) {
-      const filter = membersFamilyRequest.data.data.filter(member => `${member.id_identificacao_usuario}` === id);
+      const filter = membersFamilyRequest.data.filter(member => `${member.id_identificacao_usuario}` === id);
       setMember(filter)
     }
 

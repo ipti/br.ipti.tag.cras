@@ -36,7 +36,7 @@ export const EditTechnicianState = () => {
 
     useEffect(() => {
       if(technicianRequest && loading){
-        setTechnician(technicianRequest.data.data)
+        setTechnician(technicianRequest.data)
       }
     }, [technicianRequest, loading])
     

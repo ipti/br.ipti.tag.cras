@@ -8,7 +8,7 @@ export const UserIdentifyState = () => {
 
     useEffect(() => {
         if(userIdentifyfetch){
-            setUserIdentifify(userIdentifyfetch.data.data)
+            setUserIdentifify(userIdentifyfetch.data)
         }
     }, [userIdentifyfetch])
     
