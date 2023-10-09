@@ -1,15 +1,14 @@
 import { Formik } from "formik";
+import { Toast } from "primereact/toast";
 import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
-import CrasDropdown from "../../../CrasUi/Dropdown";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { EditUserContext } from "../../../context/User/EditUser/context";
-import { Toast } from "primereact/toast";
 
 const EditUserScreen = () => {
 
-    const { typeUser, handleEditUser, EditUserSchema, initialValue, user, toast } = useContext(EditUserContext);
+    const { handleEditUser, EditUserSchema, initialValue, user, toast } = useContext(EditUserContext);
 
 
     return (
@@ -26,13 +25,13 @@ const EditUserScreen = () => {
                                 <Grid checkMockup={[{}, {}]}>
                                     <Column>
                                         <CrasInput
-                                            name="nome"
-                                            value={values.nome}
+                                            name="name"
+                                            value={values.name}
                                             onChange={handleChange}
                                             label="Nome" />
                                         <Padding />
-                                        {errors.nome && touched.nome ? (
-                                            <div style={{ color: "red" }}>{errors.nome}<Padding /></div>
+                                        {errors.name && touched.name ? (
+                                            <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                         ) : null}
                                     </Column>
                                     <Column>
@@ -49,16 +48,14 @@ const EditUserScreen = () => {
                                 </Grid>
                                 <Grid checkMockup={[{}, {}, {}]}>
                                     <Column>
-                                        <CrasDropdown
-                                            optionLabel={"nome"}
-                                            options={typeUser}
-                                            name="type_user"
-                                            value={values.type_user}
+                                        <CrasInput
+                                            name="username"
+                                            value={values.username}
                                             onChange={handleChange}
-                                            label="Tipo de usuário" />
+                                            label="Nome de usuário" />
                                         <Padding />
-                                        {errors.type_user && touched.type_user ? (
-                                            <div style={{ color: "red" }}>{errors.type_user}<Padding /></div>
+                                        {errors.username && touched.username ? (
+                                            <div style={{ color: "red" }}>{errors.username}<Padding /></div>
                                         ) : null}
                                     </Column>
                                     <Column>
@@ -88,7 +85,7 @@ const EditUserScreen = () => {
                                 </Grid>
                                 <Padding padding="16px" />
                                 <Row id="end">
-                                    <ButtonPrime type="submit" label="Cadastrar" />
+                                    <ButtonPrime type="submit" label="Salvar" />
                                 </Row>
                             </form>
                         }

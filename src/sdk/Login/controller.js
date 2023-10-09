@@ -15,8 +15,9 @@ export const LoginController = ({setError}) => {
           },
           onSuccess: (data) => {
             logout()
-            login(data.data.data.token);
-            idUser(data.data.data.id)
+            console.log(data.data.access_token)
+            login(data.data.access_token);
+            idUser(data.data.user.id)
             history("/");
             window.location.reload()
           },

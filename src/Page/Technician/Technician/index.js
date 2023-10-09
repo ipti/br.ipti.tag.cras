@@ -10,7 +10,7 @@ const TechnicianPage = () => {
 
     const columns = [
         { field: 'id', header: 'id' },
-        { field: 'nome', header: 'Nome' },
+        { field: 'name', header: 'Nome' },
     ];
 
 
@@ -22,7 +22,7 @@ const TechnicianPage = () => {
                     columns={columns}
                     list={technician} 
                     path="/criar/tecnico"
-                    name="Tecnico"
+                    name="Técnico"
                     pathEdit={"/edit/tecnico/"}
                     delet={DeleteTechnician}
                 />

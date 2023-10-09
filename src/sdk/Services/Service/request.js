@@ -8,15 +8,14 @@ const config = {
 
 const ALLServiceRequest = async () => {
   try {
-    return await http.get("/service", config).then(response => response.data)
+    return await http.get("/attendance", config).then(response => response.data)
       .catch(err => {
-        console.log(err)
         if (err.response.status === 401 || err.response.status === 403) {
-          logout()
+          logout();
           window.location.reload()
         }
         throw err;
-      });;
+      });
   } catch (err) {
     console.log(err)
   }

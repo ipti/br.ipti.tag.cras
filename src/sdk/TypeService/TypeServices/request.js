@@ -7,7 +7,7 @@ const config = {
 };
 
 const AllTypesServicesRequest = async () => {
-  return await http.get("/typesServices", config).then(response => response.data)
+  return await http.get("/task", config).then(response => response.data)
   .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
           logout()

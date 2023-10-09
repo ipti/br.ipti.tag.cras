@@ -1,14 +1,13 @@
+import { Formik } from "formik";
 import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
-import { Formik } from "formik";
-import CrasDropdown from "../../../CrasUi/Dropdown";
 import { CreateUserContext } from "../../../context/User/CreateUser/context";
 
 const CreateUserScreen = () => {
 
-    const { handleCreateUser, initialValue, CreateUserSchema, typeUser } = useContext(CreateUserContext);
+    const { handleCreateUser, initialValue, CreateUserSchema } = useContext(CreateUserContext);
 
     return (
         <Container>
@@ -17,19 +16,19 @@ const CreateUserScreen = () => {
                     Novo usuário
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={initialValue} onSubmit={(values) => handleCreateUser(values)} validationSchema={CreateUserSchema}>
-                    {({ values, handleChange, errors, touched, handleSubmit }) =>
+                <Formik initialValues={initialValue} onSubmit={(values) => {handleCreateUser(values); console.log(values)}} validationSchema={CreateUserSchema}>
+                    {({ values, handleChange, errors, touched, handleSubmit }) => 
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasInput
-                                        name="nome"
-                                        value={values.nome}
+                                        name="name"
+                                        value={values.name}
                                         onChange={handleChange}
                                         label="Nome" />
                                     <Padding />
-                                    {errors.nome && touched.nome ? (
-                                        <div style={{ color: "red" }}>{errors.nome}<Padding /></div>
+                                    {errors.name && touched.name ? (
+                                        <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
@@ -46,16 +45,14 @@ const CreateUserScreen = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
-                                    <CrasDropdown
-                                        optionLabel={"nome"}
-                                        options={typeUser}
-                                        name="type_user"
-                                        value={values.type_user}
+                                    <CrasInput
+                                        name="username"
+                                        value={values.username}
                                         onChange={handleChange}
-                                        label="Tipo de usuário" />
+                                        label="Nome de usuário" />
                                     <Padding />
-                                    {errors.type_user && touched.type_user ? (
-                                        <div style={{ color: "red" }}>{errors.type_user}<Padding /></div>
+                                    {errors.username && touched.username ? (
+                                        <div style={{ color: "red" }}>{errors.username}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
@@ -90,7 +87,6 @@ const CreateUserScreen = () => {
                         </form>
                     }
                 </Formik>
-
             </Column>
         </Container>
     )

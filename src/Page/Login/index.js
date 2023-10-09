@@ -42,10 +42,10 @@ const LoginPage = () => {
                             handleSubmit,
                         }) =>
                             <form onSubmit={handleSubmit}>
-                                <CrasInput name={"email"} type={"email"} onChange={handleChange} value={values.email} label="Email" placeholder="Digite o seu email" />
+                                <CrasInput name={"username"} onChange={handleChange} value={values.username} label="Nome do usuário" placeholder="Digite o nome de usuário" />
                                 <Padding />
-                                {errors.email && touched.email ? (
-                                    <div style={{ color: "red" }}>{errors.email}</div>
+                                {errors.username && touched.username ? (
+                                    <div style={{ color: "red" }}>{errors.username}</div>
                                 ) : null}
                                 <Padding />
                                 {/* <Password style={{width: "100%"}} value={values.password} name="password"  onChange={handleChange} toggleMask /> */}

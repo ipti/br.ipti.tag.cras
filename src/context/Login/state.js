@@ -5,23 +5,23 @@ import * as Yup from 'yup';
 export const LoginState = () => {
     const [error, setError] = useState()
     const initialValue = {
-        email: "",
+        username: "",
         password: ""
     }
 
     const LoginSchema = Yup.object().shape({
         password: Yup.string()
-          .required('Campo Obrigatório'),
-        email: Yup.string().email('email inválido').required('Campo Obrigatório'),
-      });
+            .required('Campo Obrigatório'),
+        username: Yup.string().required('Campo Obrigatório'),
+    });
 
-    const {LoginRequestMutation} = LoginController({setError});
+    const { LoginRequestMutation } = LoginController({ setError });
 
     const handleLogin = (body) => {
         LoginRequestMutation.mutate(body)
     }
-    
-    return{
+
+    return {
         initialValue, handleLogin, LoginSchema, error
     }
 }

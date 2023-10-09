@@ -32,30 +32,39 @@ export const EditTechnicianState = () => {
 
     const [technician, setTechnician] = useState();
 
-    const {technicianRequest, EditTechnicianRequestMutation} = EditTechnicianController(id, setIsError, setIsVerify, show)
+    const {technicianRequest, EditTechnicianRequestMutation, userfetch} = EditTechnicianController(id, setIsError, setIsVerify, show)
+
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        if (userfetch) {
+            setUser(userfetch)
+        }
+    }, [userfetch])
 
     useEffect(() => {
       if(technicianRequest && loading){
-        setTechnician(technicianRequest.data)
+        setTechnician(technicianRequest)
       }
     }, [technicianRequest, loading])
-    
 
     const initialValue = {
-        nome: technician ? technician.nome : "",
+        name: technician ? technician.name : "",
+        user_fk: (user && technician) ? user.find(props => props.id === technician?.user_fk) : ""
     }
 
     const CreateSchema = Yup.object().shape({
-        nome: Yup.string().required("Campo Obrigatório"),
+        name: Yup.string().required("Campo Obrigatório"),
+        user_fk: Yup.object().required("Campo Obrigatório")
     })
 
 
     const handleEditTechnician = (body) => {
-        EditTechnicianRequestMutation.mutate(body)
+        EditTechnicianRequestMutation.mutate({...body, user_fk: body.user_fk.id})
     }
 
 
     return {
-        handleEditTechnician, CreateSchema, initialValue, technician, show, toast
+        handleEditTechnician, CreateSchema, initialValue, technician, show, toast, user
     }
 }

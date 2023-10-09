@@ -2,9 +2,12 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { CreateTechnicianRequest } from "./request";
 import { logout } from "../../../services/localstorage";
+import { useFetchAllUser } from "../../User/Users/request";
 
 export const CreateTechnicianController = () => {
   const history = useNavigate();
+
+  const { data: userfetch, isLoading, error, refetch } = useFetchAllUser()
 
   const CreateTechnicianRequestMutation = useMutation(
     (data) => CreateTechnicianRequest(data),
@@ -26,6 +29,6 @@ export const CreateTechnicianController = () => {
   );
 
   return {
-    CreateTechnicianRequestMutation
+    CreateTechnicianRequestMutation, userfetch, isLoading, error, refetch
   }
 }

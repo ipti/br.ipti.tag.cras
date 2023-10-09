@@ -2,10 +2,14 @@ import { useMutation } from "react-query";
 import { EditTechnicianRequest, useFetchOneTechnician } from "./request";
 import { logout } from "../../../services/localstorage";
 import { useNavigate } from "react-router-dom";
+import { useFetchAllUser } from "../../User/Users/request";
 
 export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
 
   const { data: technicianRequest, refetch } = useFetchOneTechnician(id);
+
+  const { data: userfetch, isLoading, error } = useFetchAllUser()
+
 
   const history = useNavigate();
 
@@ -16,7 +20,7 @@ export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
       onError: (error) => {
         setIsError(error.response.data.message)
         show()
-        if (error.response.status === 401 | 403) {
+        if (error.response.status === 401 || error.response.status === 403) {
           logout();
           history("/login")
         }
@@ -33,6 +37,6 @@ export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
   );
 
   return {
-    technicianRequest, EditTechnicianRequestMutation, refetch
+    technicianRequest, EditTechnicianRequestMutation, refetch, userfetch, isLoading, error
   }
 }
