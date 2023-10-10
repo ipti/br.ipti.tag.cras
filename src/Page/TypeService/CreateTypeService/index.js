@@ -22,12 +22,12 @@ const CreateTypeServiceScreen = () => {
                             <Row>
                                 <div className="col">
                                     <CrasInput
-                                        name="nome"
-                                        value={values.nome}
+                                        name="name"
+                                        value={values.name}
                                         onChange={handleChange}
                                         label="Nome" />
-                                    {errors.nome && touched.nome ? (
-                                        <div style={{ color: "red" }}>{errors.nome}</div>
+                                    {errors.name && touched.name ? (
+                                        <div style={{ color: "red" }}>{errors.name}</div>
                                     ) : null}
                                 </div>
                             </Row>

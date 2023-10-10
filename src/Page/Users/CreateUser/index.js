@@ -4,10 +4,11 @@ import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { CreateUserContext } from "../../../context/User/CreateUser/context";
+import CrasDropdown from "../../../CrasUi/Dropdown";
 
 const CreateUserScreen = () => {
 
-    const { handleCreateUser, initialValue, CreateUserSchema } = useContext(CreateUserContext);
+    const { handleCreateUser, initialValue, CreateUserSchema, role } = useContext(CreateUserContext);
 
     return (
         <Container>
@@ -19,7 +20,7 @@ const CreateUserScreen = () => {
                 <Formik initialValues={initialValue} onSubmit={(values) => {handleCreateUser(values); console.log(values)}} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) => 
                         <form onSubmit={handleSubmit}>
-                            <Grid checkMockup={[{}, {}]}>
+                            <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
                                     <CrasInput
                                         name="name"
@@ -42,6 +43,20 @@ const CreateUserScreen = () => {
                                         <div style={{ color: "red" }}>{errors.email}<Padding /></div>
                                     ) : null}
                                 </Column>
+                                <Column>
+                                    <CrasDropdown
+                                        optionLabel={"name"}
+                                        options={role}
+                                        name="role"
+                                        value={values.role}
+                                        onChange={handleChange}
+                                        label="Tipo de usuário" />
+                                    <Padding />
+                                    {errors.role && touched.role ? (
+                                        <div style={{ color: "red" }}>{errors.role}<Padding /></div>
+                                    ) : null}
+                                </Column>
+
                             </Grid>
                             <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>

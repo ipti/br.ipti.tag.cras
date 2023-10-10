@@ -10,9 +10,9 @@ export const CreateServicesController = () => {
     const history = useNavigate();
 
 
-    const { data: allService, isLoading: isLoadingService, error: errorService } = useFetchAllTypesServices();
+    // const { data: allService, isLoading: isLoadingService, error: errorService } = useFetchAllTypesServices();
     const { data: allTechnician, isLoading: isLoadingtechnician, error: errorTechnician } = useFetchAllTechnician();
-    const { data: allUserIdentify, isLoading: isLoadingUserIdentify, error: errorUserIdentify } = useFetchAllUserIdentify();
+    // const { data: allUserIdentify, isLoading: isLoadingUserIdentify, error: errorUserIdentify } = useFetchAllUserIdentify();
 
     // if (errorService?.response.status === 401 | 403) {
     //     logout();
@@ -38,14 +38,9 @@ export const CreateServicesController = () => {
 
     return {
         CreateServicesRequestMutation,
-        isLoadingService,
-        errorService,
-        allService,
+        
         allTechnician,
         isLoadingtechnician,
         errorTechnician,
-        allUserIdentify,
-        isLoadingUserIdentify,
-        errorUserIdentify
     }
 }

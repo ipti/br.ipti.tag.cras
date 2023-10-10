@@ -1,10 +1,9 @@
-import React, { useContext } from "react";
-import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
-import CrasInput from "../../../CrasUi/Input/Input";
-import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
-import CrasCalendar from "../../../CrasUi/Calendar";
-import CrasDropdown from "../../../CrasUi/Dropdown";
 import { Formik } from "formik";
+import React, { useContext } from "react";
+import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
+import CrasDropdown from "../../../CrasUi/Dropdown";
+import CrasInput from "../../../CrasUi/Input/Input";
+import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { CreateServicesContext } from "../../../context/Service/CreateService/context";
 
 const CreateServicesScreen = () => {
@@ -22,15 +21,6 @@ const CreateServicesScreen = () => {
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
                         return <form onSubmit={handleSubmit}>
                             <h3>Dados do atendimento</h3>
-                            <Grid checkMockup={[{}]}>
-                                <Column>
-                                    <CrasCalendar name="data"  onChange={handleChange} showIcon />
-                                    <Padding />
-                                    {errors.data && touched.data ? (
-                                        <div style={{ color: "red" }}>{errors.data}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                            </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasDropdown name="servico" value={values.servico} onChange={handleChange} optionLabel={"nome"} options={service} label="Serviço" />
@@ -66,7 +56,7 @@ const CreateServicesScreen = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasDropdown optionLabel={"nome"} name="tecnico" onChange={handleChange} value={values.tecnico} options={technician} label="Técnico Responsável" />
+                                    <CrasDropdown optionLabel={"name"} name="tecnico" onChange={handleChange} value={values.tecnico} options={technician} label="Técnico Responsável" />
                                     <Padding />
                                     {errors.tecnico && touched.tecnico ? (
                                         <div style={{ color: "red" }}>{errors.tecnico}<Padding /></div>

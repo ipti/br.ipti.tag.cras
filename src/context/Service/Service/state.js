@@ -11,13 +11,13 @@ export const ServiceState = () => {
 
     useEffect(() => {
         if (servicefetch) {
-            setService(servicefetch.data)
+            setService(servicefetch)
         }
         if (typeServicesrequest) {
-            setTypeService(typeServicesrequest.data)
+            setTypeService(typeServicesrequest)
         }
         if (technicianRequest) {
-            setTechnician(technicianRequest.data)
+            setTechnician(technicianRequest)
         }
     }, [servicefetch, typeServicesrequest, technicianRequest])
 

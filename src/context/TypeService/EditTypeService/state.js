@@ -34,17 +34,17 @@ export const EditTypeServiceState = () => {
 
     useEffect(() => {
         if (TypeServiceRequest && loading) {
-            setTypeService(TypeServiceRequest.data)
+            setTypeService(TypeServiceRequest)
         }
     }, [TypeServiceRequest, loading])
 
     const initialValue = {
-        nome: typeService ? typeService.nome : "",
+        name: typeService ? typeService.name : "",
     }
 
 
     const CreateSchema = Yup.object().shape({
-        nome: Yup.string().required("Campo Obrigatório"),
+        name: Yup.string().required("Campo Obrigatório"),
     })
 
 

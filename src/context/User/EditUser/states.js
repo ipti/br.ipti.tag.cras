@@ -16,11 +16,17 @@ export const EditUser = () => {
         name: Yup.string().required("Campo Obrigatório"),
         email: Yup.string().required('Campo Obrigatório'),
         username: Yup.string().required('Campo Obrigatório'),
+        role: Yup.object().required('Campo Obrigatório'),
         password: Yup.string(),
         confirmPassword: Yup.string().label('Confirmar senha').oneOf([Yup.ref('password')], 'Senhas difirentes'),
     });
 
 
+    const role = [
+        {id: "SECRETARY", name: "Secretário ou administrador"},
+        {id: "TECHNICIAN", name: "Técnico"},
+        {id: "USER", name: "Usuário"},
+    ]
 
 
 
@@ -56,6 +62,7 @@ export const EditUser = () => {
         name: user ? user.name : "",
         email: user ? user.email :  "",
         username: user ? user.username : "",
+        role: user ? role.find(props => props.id === user.role) : "",
         password: "",
         confirmPassword: ""
     }
@@ -67,13 +74,15 @@ export const EditUser = () => {
             name: body.name,
             email: body.email,
             username: body.username,
+            role: body.role.id
         }
 
         const data = {
             name: body.name,
             email: body.email,
             username: body.username,
-            password: body.password
+            password: body.password,
+            role: body.role.id
         }
 
         EditUserRequestMutation.mutate(body.password !== "" ? data : datanotpassword);
@@ -81,6 +90,6 @@ export const EditUser = () => {
     
     
     return{
-         handleEditUser, EditUserSchema, initialValue, user, isVerify, isError, toast
+         handleEditUser, EditUserSchema, initialValue, user, isVerify, isError, toast, role
     }
 }

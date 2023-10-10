@@ -5,9 +5,9 @@ import * as Yup from 'yup';
 
 export const CreateServicesState = () => {
 
-  const [service, setService] = useState();
+  const [service, setService] = useState([]);
   const [technician, setTechnician] = useState();
-  const [userIdentify, setUserIdentify] = useState();
+  const [userIdentify, setUserIdentify] = useState([]);
 
   const initialValue = {
     solicitacao: "",
@@ -33,15 +33,15 @@ export const CreateServicesState = () => {
   const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify } = CreateServicesController();
 
   useEffect(() => {
-    if (allService) {
-      setService(allService.data.data);
-    }
+    // if (allService) {
+    //   setService(allService);
+    // }
     if (allTechnician) {
-      setTechnician(allTechnician.data.data);
+      setTechnician(allTechnician);
     }
-    if(allUserIdentify){
-      setUserIdentify(allUserIdentify.data.data);
-    }
+    // if(allUserIdentify){
+    //   setUserIdentify(allUserIdentify);
+    // }
   }, [allService, allTechnician, allUserIdentify])
 
 

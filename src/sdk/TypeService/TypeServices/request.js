@@ -22,5 +22,5 @@ export const useFetchAllTypesServices = () => {
 };
 
 export const DeleteTypesServicesRequest = async (id) => {
-  return await http.delete(`/typesServices/${id}`, config);
+  return await http.delete(`/task/${id}`, config);
 }

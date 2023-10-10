@@ -7,7 +7,7 @@ const config = {
 };
 
 const OneTypesServicesRequest = async (id) => {
-    return await http.get(`/typesServices/${id}`, config).then(response => response.data)
+    return await http.get(`/task/${id}`, config).then(response => response.data)
     .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
             logout()
@@ -23,5 +23,5 @@ export const useFetchOneTypesServices= (id) => {
 
 
 export const EdittypesServicesRequest = async (body, id) => {
-    return await http.put(`/typesServices/${id}`, body, config);
+    return await http.put(`/task/${id}`, body, config);
 }
