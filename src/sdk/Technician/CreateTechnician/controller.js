@@ -17,8 +17,8 @@ export const CreateTechnicianController = () => {
         if (error.response.status === 401 | 403) {
           logout();
           history("/login")
-      }
-  
+        }
+
       },
       onSuccess: (data) => {
         console.log(data);

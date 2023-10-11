@@ -37,6 +37,8 @@ const CrasMenu = ({viewdMenu}) => {
                 <Padding />
                 <Item text={"Familias"} funcActiv={() => setActive(4)} active={active === 4 ? true : false} path={"/familia"} icon={"pi pi-users"} />
                 <Padding />
+                <Item text={"Beneficios"} funcActiv={() => setActive(4)} active={active === 4 ? true : false} path={"/beneficios"} icon={"pi pi-users"} />
+                <Padding />
                 <Item text={"Usuários"} funcActiv={() => setActive(5)} active={active === 5 ? true : false} path="/usuarios" icon={"pi pi-user"} />
             </Padding>
         </Container>

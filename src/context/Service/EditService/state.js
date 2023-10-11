@@ -72,16 +72,16 @@ export const EditServicesState = () => {
 
   useEffect(() => {
     if (allService) {
-      setService(allService.data);
+      setService(allService);
     }
     if (allTechnician) {
-      setTechnician(allTechnician.data);
+      setTechnician(allTechnician);
     }
     if (allUserIdentify) {
-      setUserIdentify(allUserIdentify.data);
+      setUserIdentify(allUserIdentify);
     }
     if (oneService && loading) {
-      setServiceOne(oneService.data)
+      setServiceOne(oneService)
     }
   }, [allService, allTechnician, allUserIdentify, oneService, loading])
 

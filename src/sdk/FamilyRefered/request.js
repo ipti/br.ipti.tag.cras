@@ -8,7 +8,7 @@ const config = {
   };
 
  const AllUserIdentifyRequest = async () => {
-    return await http.get("/userIdentify", config).then(response => response.data)
+    return await http.get("/user-identify", config).then(response => response.data)
     .catch(err => {
         if (err.response.status === 401) {
             logout()
@@ -20,11 +20,11 @@ const config = {
 }
 
 export const CreateUserIdentifyRequest = async (body) => {
-  return await http.post("/userIdentify", body, config)
+  return await http.post("/user-identify", body, config)
 }
 
 const FamilyReferedIdRequest = async (id) => {
-  return await http.get(`/userIdentify/${id}`, config).then(response => response.data)
+  return await http.get(`/user-identify/${id}`, config).then(response => response.data)
   .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
           logout()

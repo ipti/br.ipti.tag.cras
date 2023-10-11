@@ -1,10 +1,8 @@
 import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
-import { useFetchAllTechnician } from "../../Technician/Technician/request";
-import { useFetchAllTypesServices } from "../../TypeService/TypeServices/request";
-import { CreateServiceRequest } from "./request";
-import { useFetchAllUserIdentify } from "../../FamilyRefered/request";
 import { logout } from "../../../services/localstorage";
+import { useFetchAllTechnician } from "../../Technician/Technician/request";
+import { CreateServiceRequest } from "./request";
 
 export const CreateServicesController = () => {
     const history = useNavigate();

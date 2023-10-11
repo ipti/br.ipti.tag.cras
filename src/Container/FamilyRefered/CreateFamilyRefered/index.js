@@ -9,4 +9,5 @@ const CreateFamilyRefered = () => {
         </CreateFamilyProvider>
     )
 }
+
 export default CreateFamilyRefered;

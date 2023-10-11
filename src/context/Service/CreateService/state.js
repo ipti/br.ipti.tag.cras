@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import { CreateServicesController } from "../../../sdk/Services/CreateService/controller";
 import * as Yup from 'yup';
+import { CreateServicesController } from "../../../sdk/Services/CreateService/controller";
 
 
 export const CreateServicesState = () => {
 
-  const [service, setService] = useState([]);
+  // const [service, setService] = useState([]);
   const [technician, setTechnician] = useState();
-  const [userIdentify, setUserIdentify] = useState([]);
+  // const [userIdentify, setUserIdentify] = useState([]);
 
   const initialValue = {
     solicitacao: "",
@@ -63,6 +63,6 @@ export const CreateServicesState = () => {
   }
 
   return {
-    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, userIdentify
+    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema
   }
 }
