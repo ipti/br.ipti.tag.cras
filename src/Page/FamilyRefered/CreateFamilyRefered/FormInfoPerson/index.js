@@ -1,14 +1,14 @@
 import { Formik } from "formik";
 import React, { useContext } from "react";
+import * as Yup from 'yup';
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCalendar from "../../../../CrasUi/Calendar";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
-import * as Yup from 'yup';
-import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 
 
 const FormInfoPerson = () => {
@@ -17,27 +17,27 @@ const FormInfoPerson = () => {
 
 
     const initialValue = {
-        nome: dataValues.nome ?? "",
-        apelido: dataValues.apelido ?? "",
-        data_nascimento: dataValues.data_nascimento ?? "",
-        certidao_nascimento: dataValues.certidao_nascimento ?? "",
-        pasta: dataValues.pasta ?? "",
-        arquivo: dataValues.arquivo ?? "",
-        nº: dataValues.nº ?? "",
-        NIS: dataValues.NIS ?? "",
-        numero_rg: dataValues.numero_rg ?? "",
-        data_emissao_rg: dataValues.data_emissao_rg ?? "",
+        name: dataValues.name ?? "",
+        surname: dataValues.surname ?? "",
+        birthday: dataValues.birthday ?? "",
+        birth_certificate: dataValues.birth_certificate ?? "",
+        folder: dataValues.folder ?? "",
+        archive: dataValues.arquivo ?? "",
+        number: dataValues.nº ?? "",
+        nis: dataValues.nis ?? "",
+        rg_number: dataValues.rg_number ?? "",
+        rg_date_emission: dataValues.rg_date_emission ?? "",
         uf_rg: dataValues.uf_rg ?? "",
-        emissao_rg: dataValues.emissao_rg ?? "",
+        emission_rg: dataValues.emission_rg ?? "",
         cpf: dataValues.cpf ?? "",
-        deficiente: dataValues.deficiente ?? "",
-        deficiencia: dataValues.deficiencia ?? "",
-        mae: dataValues.mae ?? "",
-        pai: dataValues.pai ?? "",
-        estado_civil: dataValues.estado_civil ?? "",
-        escolaridade: dataValues.escolaridade ?? "",
-        data_inicial: dataValues.data_inicial,
-        data_final: dataValues.data_final
+        is_deficiency: dataValues.is_deficiency ?? "",
+        deficiency: dataValues.deficiency ?? "",
+        mother: dataValues.mother ?? "",
+        father: dataValues.father ?? "",
+        marital_status: dataValues.marital_status ?? "",
+        escolarity: dataValues.escolarity ?? "",
+        initial_date: dataValues.initial_date,
+        final_date: dataValues.final_date
     }
 
 
@@ -45,7 +45,7 @@ const FormInfoPerson = () => {
         name: Yup.string().required("Campo obrigatório"),
         surname: Yup.string(),
         birthday: Yup.string().required("Campo obrigatório"),
-        certidao_nascimento: Yup.number(),
+        birth_certificate: Yup.number(),
         folder: Yup.string(),
         archive: Yup.string(),
         number: Yup.string(),
@@ -55,13 +55,13 @@ const FormInfoPerson = () => {
         initial_date: Yup.string().required("Campo obrigatório"),
         final_date: Yup.string(),
         uf_rg: Yup.object().required("Campo obrigatório"),
-        emissao_rg: Yup.string().required("Campo obrigatório"),
+        emission_rg: Yup.string().required("Campo obrigatório"),
         cpf: Yup.string().required("Campo obrigatório"),
         is_deficiency: Yup.string().required("Campo obrigatório"),
         deficiency: Yup.string(),
         mother: Yup.string().required("Campo obrigatório"),
         father: Yup.string().required("Campo obrigatório"),
-        estado_civil: Yup.string(),
+        marital_status: Yup.string().required("Campo obrigatório"),
         escolarity: Yup.string().required("Campo obrigatório"),
     });
 
@@ -73,41 +73,43 @@ const FormInfoPerson = () => {
             </h3>
             <Formik initialValues={initialValue} onSubmit={values => { nextStep(values) }} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
-                   const dateEntry = new Date(values.data_inicial);
-                   const dateEmit = new Date(values.data_emissao_rg);
-                   const dateBithrday = new Date(values.data_nascimento)
+                    const dateEntry = new Date(values.initial_date);
+                    const dateEmit = new Date(values.rg_date_emission);
+                    const dateBithrday = new Date(values.birthday)
+
+                    console.log(errors)
 
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
-                                    <CrasInput label="Pasta" name={"pasta"} onChange={handleChange} value={values.pasta} />
+                                    <CrasInput label="Pasta" name={"folder"} onChange={handleChange} value={values.folder} />
                                     <Padding />
-                                    {errors.pasta && touched.pasta ? (
-                                        <div style={{ color: "red" }}>{errors.pasta} <Padding /></div>
+                                    {errors.folder && touched.folder ? (
+                                        <div style={{ color: "red" }}>{errors.folder} <Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Arquivo" name="arquivo" onChange={handleChange} value={values.arquivo} />
+                                    <CrasInput label="Arquivo" name="archive" onChange={handleChange} value={values.archive} />
                                     <Padding />
-                                    {errors.arquivo && touched.arquivo ? (
-                                        <div style={{ color: "red" }}>{errors.arquivo}<Padding /></div>
+                                    {errors.archive && touched.archive ? (
+                                        <div style={{ color: "red" }}>{errors.archive}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Nº" name="nº" onChange={handleChange} value={values.nº} />
+                                    <CrasInput label="Número" name="number" onChange={handleChange} value={values.number} />
                                     <Padding />
-                                    {errors.nº && touched.nº ? (
-                                        <div style={{ color: "red" }}>{errors.nº}<Padding /></div>
+                                    {errors.number && touched.number ? (
+                                        <div style={{ color: "red" }}>{errors.number}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasCalendar name={"data_inicial"} date={dateEntry} onChange={handleChange} label="Data Entrada" showIcon />
+                                    <CrasCalendar name={"initial_date"} date={dateEntry} onChange={handleChange} label="Data Entrada" showIcon />
                                     <Padding />
-                                    {errors.data_inicial && touched.data_inicial ? (
-                                        <div style={{ color: "red" }}>{errors.data_inicial}<Padding /></div>
+                                    {errors.initial_date && touched.initial_date ? (
+                                        <div style={{ color: "red" }}>{errors.initial_date}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
@@ -115,56 +117,56 @@ const FormInfoPerson = () => {
                             <h3>Dados Pessoais</h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput label="Nome" name="nome" onChange={handleChange} value={values.nome} />
+                                    <CrasInput label="Nome" name="name" onChange={handleChange} value={values.name} />
                                     <Padding />
-                                    {errors.nome && touched.nome ? (
-                                        <div style={{ color: "red" }}>{errors.nome}<Padding /></div>
+                                    {errors.name && touched.name ? (
+                                        <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Apelido" name="apelido" onChange={handleChange} value={values.apelido} />
+                                    <CrasInput label="Apelido" name="surname" onChange={handleChange} value={values.surname} />
                                     <Padding />
-                                    {errors.apelido && touched.apelido ? (
-                                        <div style={{ color: "red" }}>{errors.apelido}<Padding /></div>
+                                    {errors.surname && touched.surname ? (
+                                        <div style={{ color: "red" }}>{errors.surname}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
-                                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="data_nascimento" onChange={handleChange} showIcon />
+                                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="birthday" onChange={handleChange} showIcon />
                                     <Padding />
-                                    {errors.data_nascimento && touched.data_nascimento ? (
-                                        <div style={{ color: "red" }}>{errors.data_nascimento}<Padding /></div>
+                                    {errors.birthday && touched.birthday ? (
+                                        <div style={{ color: "red" }}>{errors.birthday}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Nº Cadastro" name={"certidao_nascimento"} onChange={handleChange} value={values.certidao_nascimento} />
+                                    <CrasInput label="Certificado" name={"birth_certificate"} onChange={handleChange} value={values.birth_certificate} />
                                     <Padding />
-                                    {errors.certidao_nascimento && touched.certidao_nascimento ? (
-                                        <div style={{ color: "red" }}>{errors.certidao_nascimento}<Padding /></div>
+                                    {errors.birth_certificate && touched.birth_certificate ? (
+                                        <div style={{ color: "red" }}>{errors.birth_certificate}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="NIS" name="NIS" onChange={handleChange} value={values.NIS} />
+                                    <CrasInput label="NIS" name="nis" onChange={handleChange} value={values.nis} />
                                     <Padding />
-                                    {errors.NIS && touched.NIS ? (
-                                        <div style={{ color: "red" }}>{errors.NIS}<Padding /></div>
+                                    {errors.nis && touched.nis ? (
+                                        <div style={{ color: "red" }}>{errors.nis}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}, {}, {}, {}]}>
                                 <Column>
-                                    <CrasInputMask mask={"99.999-9999"} label="RG" name="numero_rg" onChange={handleChange} value={values.numero_rg} />
+                                    <CrasInputMask mask={"99.999-9999"} label="RG" name="rg_number" onChange={handleChange} value={values.rg_number} />
                                     <Padding />
-                                    {errors.numero_rg && touched.numero_rg ? (
-                                        <div style={{ color: "red" }}>{errors.numero_rg}<Padding /></div>
+                                    {errors.rg_number && touched.rg_number ? (
+                                        <div style={{ color: "red" }}>{errors.rg_number}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasCalendar date={dateEmit} label="Data de Emissão" name="data_emissao_rg" onChange={handleChange} showIcon />
+                                    <CrasCalendar date={dateEmit} label="Data de Emissão" name="rg_date_emission" onChange={handleChange} showIcon />
                                     <Padding />
-                                    {errors.data_emissao_rg && touched.data_emissao_rg ? (
-                                        <div style={{ color: "red" }}>{errors.data_emissao_rg}<Padding /></div>
+                                    {errors.rg_date_emission && touched.rg_date_emission ? (
+                                        <div style={{ color: "red" }}>{errors.rg_date_emission}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
@@ -175,10 +177,10 @@ const FormInfoPerson = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Órgão Emissor" name="emissao_rg" onChange={handleChange} value={values.emissao_rg} />
+                                    <CrasInput label="Órgão Emissor" name="emission_rg" onChange={handleChange} value={values.emission_rg} />
                                     <Padding />
-                                    {errors.emissao_rg && touched.emissao_rg ? (
-                                        <div style={{ color: "red" }}>{errors.emissao_rg}<Padding /></div>
+                                    {errors.emission_rg && touched.emission_rg ? (
+                                        <div style={{ color: "red" }}>{errors.emission_rg}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
@@ -193,47 +195,47 @@ const FormInfoPerson = () => {
                                 <Column>
                                     <label>Deficiente Físico ou Mental ?</label>
                                     <Row>
-                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.deficiente === "Sim"} value={"Sim"} name="deficiente" label={"Sim"} />
-                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.deficiente === "Não"} value={"Não"} name="deficiente" label="Não" />
+                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.is_deficiency === "Sim"} value={"Sim"} name="is_deficiency" label={"Sim"} />
+                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.is_deficiency === "Não"} value={"Não"} name="is_deficiency" label="Não" />
                                     </Row>
                                     <Padding />
-                                    {errors.deficiente && touched.deficiente ? (
-                                        <div style={{ color: "red" }}>{errors.deficiente}<Padding /></div>
+                                    {errors.is_deficiency && touched.is_deficiency ? (
+                                        <div style={{ color: "red" }}>{errors.is_deficiency}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput label="Mãe" name="mae" onChange={handleChange} value={values.mae} />
+                                    <CrasInput label="Mãe" name="mother" onChange={handleChange} value={values.mother} />
                                     <Padding />
-                                    {errors.mae && touched.mae ? (
-                                        <div style={{ color: "red" }}>{errors.mae}<Padding /></div>
+                                    {errors.mother && touched.mother ? (
+                                        <div style={{ color: "red" }}>{errors.mother}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Pai" name={"pai"} onChange={handleChange} value={values.pai} />
+                                    <CrasInput label="Pai" name={"father"} onChange={handleChange} value={values.father} />
                                     <Padding />
-                                    {errors.pai && touched.pai ? (
-                                        <div style={{ color: "red" }}>{errors.pai}<Padding /></div>
+                                    {errors.father && touched.father ? (
+                                        <div style={{ color: "red" }}>{errors.father}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}]}>
                                 <Column>
-                                    <CrasDropdown options={estadosCivis} optionLabel={""} value={values.estado_civil} label={"Estado civil"} onChange={handleChange} name="estado_civil" />
+                                    <CrasDropdown options={estadosCivis} optionLabel={""} value={values.marital_status} label={"Estado civil"} onChange={handleChange} name="marital_status" />
                                     <Padding />
-                                    {errors.estado_civil && touched.estado_civil ? (
-                                        <div style={{ color: "red" }}>{errors.estado_civil}<Padding /></div>
+                                    {errors.marital_status && touched.marital_status ? (
+                                        <div style={{ color: "red" }}>{errors.marital_status}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
 
                             <Grid checkMockup={[{}]}>
                                 <Column>
-                                    <CrasDropdown options={escolaridadeNoBrasil} optionLabel={""} label="Grau de Escolaridade" name="escolaridade" onChange={handleChange} value={values.escolaridade} />
+                                    <CrasDropdown options={escolaridadeNoBrasil} optionLabel={""} label="Grau de Escolaridade" name="escolarity" onChange={handleChange} value={values.escolarity} />
                                     <Padding />
-                                    {errors.escolaridade && touched.escolaridade ? (
-                                        <div style={{ color: "red" }}>{errors.escolaridade}<Padding />
+                                    {errors.escolarity && touched.escolarity ? (
+                                        <div style={{ color: "red" }}>{errors.escolarity}<Padding />
                                         </div>
                                     ) : null}
                                 </Column>

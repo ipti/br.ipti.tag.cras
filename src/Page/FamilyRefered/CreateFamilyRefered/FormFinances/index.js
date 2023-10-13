@@ -5,7 +5,6 @@ import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
-import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 
@@ -14,31 +13,25 @@ const FormFinances = () => {
     const { backStep, nextStep, dataValues } = useContext(CreateFamilyReferedContext)
 
     const initialValue = {
-        profissao: dataValues.profissao ?? "",
-        renda: dataValues.renda ?? 0,
-        reside_familia: dataValues.reside_familia ?? "",
-        bolsa_familia: dataValues.bolsa_familia ?? 0,
-        loasbpc: dataValues.loasbpc ?? 0,
-        previdencia: dataValues.previdencia ?? 0,
-        carteira_assinada: dataValues.carteira_assinada ?? "",
-        ocupacao_irregular: dataValues.ocupacao_irregular ?? "",
-        crianca_sozinha: dataValues.crianca_sozinha ?? "",
-        idosos_dependentes: dataValues.idosos_dependentes ?? "",
-        desempregados: dataValues.desempregados ?? "",
-        deficientes: dataValues.deficientes ?? "",
-        baixa_renda: dataValues.baixa_renda ?? "",
-        outros: dataValues.outros ?? ""
+        profission: dataValues.profission ?? "",
+        income: dataValues.income ?? 0,
+        irregular_ocupation: dataValues.irregular_ocupation ?? "",
+        alone_child: dataValues.alone_child ?? "",
+        dependent_elderly: dataValues.dependent_elderly ?? "",
+        unemployed: dataValues.unemployed ?? "",
+        deficient: dataValues.deficient ?? "",
+        low_income: dataValues.low_income ?? "",
+        others: dataValues.others ?? ""
     }
 
     const validationSchema = Yup.object().shape({
-        profissao: Yup.string().required('Profissão é obrigatória'),
-        carteira_assinada: Yup.string(),
-        renda: Yup.number(),
-        reside_familia: Yup.string().required('Informação sobre residir com a família é obrigatória'),
-        bolsa_familia: Yup.number(),
-        loasbpc: Yup.number(),
-        previdencia: Yup.number(),
+        profission: Yup.string().required('Profissão é obrigatória'),
+        income: Yup.number().required("Campo Obrigatorio"),
     });
+
+
+    
+    
 
 
     return (
@@ -51,39 +44,39 @@ const FormFinances = () => {
                         <form onSubmit={handleSubmit}>
                             <Row>
                                 <div className="col">
-                                    <CrasCheckbox checked={values.ocupacao_irregular[0] === 1} name={"ocupacao_irregular"} value={1} onChange={handleChange} label={"Residem em área de ocupação irregular"} />
+                                    <CrasCheckbox checked={values.irregular_ocupation[0] === 1} name={"irregular_ocupation"} value={1} onChange={handleChange} label={"Residem em área de ocupação irregular"} />
                                 </div>
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasCheckbox name={"idosos_dependentes"} value={1} checked={values.idosos_dependentes[0] === 1} onChange={handleChange} label={"Existência de idosos dependentes na família"} />
+                                    <CrasCheckbox name={"dependent_elderly"} value={1} checked={values.dependent_elderly[0] === 1} onChange={handleChange} label={"Existência de idosos dependentes na família"} />
                                 </div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"deficientes"} value={1} checked={values.deficientes[0] === 1} onChange={handleChange} label={"Existência de deficientes na família"} /></div>
+                                <div className="col"> <CrasCheckbox name={"deficient"} value={1} checked={values.deficient[0] === 1} onChange={handleChange} label={"Existência de deficient na família"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"crianca_sozinha"} value={1} checked={values.crianca_sozinha[0] === 1} onChange={handleChange} label={"Crianças que ficam sozinhos no domicilio"} /></div>
+                                <div className="col"> <CrasCheckbox name={"alone_child"} value={1} checked={values.alone_child[0] === 1} onChange={handleChange} label={"Crianças que ficam sozinhos no domicilio"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"desempregados"} value={1} checked={values.desempregados[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
+                                <div className="col"> <CrasCheckbox name={"unemployed"} value={1} checked={values.unemployed[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"baixa_renda"} value={1} checked={values.baixa_renda[0] === 1} onChange={handleChange} label={"Baixa renda"} /></div>
+                                <div className="col"> <CrasCheckbox name={"low_income"} value={1} checked={values.low_income[0] === 1} onChange={handleChange} label={"Baixa income"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"outros"} value={1} checked={values.outros[0] === 1} onChange={handleChange} label={"Outros"} /></div>
+                                <div className="col"> <CrasCheckbox name={"others"} value={1} checked={values.others[0] === 1} onChange={handleChange} label={"Outros"} /></div>
                             </Row>
                             <h3>Situação Financeira e Previdenciária</h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name="profissao" onChange={handleChange} value={values.profissao} label="Profissão" />
+                                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
                                     <Padding />
-                                    {errors.profissao && touched.profissao ? (
-                                        <div style={{ color: "red" }}>{errors.profissao}<Padding /></div>
+                                    {errors.profission && touched.profission ? (
+                                        <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                <Column>
+                                {/* <Column>
                                     <label>Carteira Assinada</label>
                                     <Row>
                                         <CrasRadioButton selectValue={1} name="carteira_assinada" value={"Sim"} onChange={handleChange} checked={values.carteira_assinada === "Sim"} label={"Sim"} />
@@ -92,19 +85,19 @@ const FormFinances = () => {
                                     {errors.carteira_assinada && touched.carteira_assinada ? (
                                         <div style={{ color: "red" }}>{errors.carteira_assinada}<Padding /></div>
                                     ) : null}
-                                </Column>
+                                </Column> */}
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasInputNumber mode="currency"
                                         currency="BRL"
-                                        locale="pt-BR" showButtons={true} value={values.renda} name={"renda"} onChange={handleChange} label="Renda Mensal do usuário" />
+                                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal do usuário" />
                                     <Padding />
-                                    {errors.renda && touched.renda ? (
-                                        <div style={{ color: "red" }}>{errors.renda}<Padding /></div>
+                                    {errors.income && touched.income ? (
+                                        <div style={{ color: "red" }}>{errors.income}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                <Column>
+                                {/* <Column>
                                     <label>Reside com:</label>
                                     <Row>
                                         <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.reside_familia === "Familia"} value={"Familia"} name={"reside_familia"} label="Família" />
@@ -114,12 +107,12 @@ const FormFinances = () => {
                                     {errors.reside_familia && touched.reside_familia ? (
                                         <div style={{ color: "red" }}>{errors.reside_familia}</div>
                                     ) : null}
-                                </Column>
+                                </Column> */}
                             </Grid>
                             <h3>
                                 Benefício (Benefício do usuário cadastrado)
                             </h3>
-                            <Grid checkMockup={[{}, {}, {}]}>
+                            {/* <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
                                     <CrasInputNumber mode="currency"
                                         currency="BRL"
@@ -147,7 +140,7 @@ const FormFinances = () => {
                                         <div style={{ color: "red" }}>{errors.bolsa_familia}</div>
                                     ) : null}
                                 </Column>
-                            </Grid>
+                            </Grid> */}
                             <Padding padding="16px" />
                             <Row id="end">
                                 <Padding />
