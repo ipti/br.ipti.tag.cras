@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import * as Yup from 'yup';
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
@@ -7,10 +7,15 @@ import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
+import CrasDropdown from "../../../../CrasUi/Dropdown";
 
 const FormFinances = () => {
 
-    const { backStep, nextStep, dataValues } = useContext(CreateFamilyReferedContext)
+    const { backStep, nextStep, dataValues, benefitsfetch, } = useContext(CreateFamilyReferedContext)
+
+    const [visibleAddBenefits, setvisibleAddBenefits] = useState();
+
+    const [benefits, setbenefits] = useState()
 
     const initialValue = {
         profission: dataValues.profission ?? "",
@@ -29,9 +34,11 @@ const FormFinances = () => {
         income: Yup.number().required("Campo Obrigatorio"),
     });
 
+    const [benefits_fk, setbenefits_fk] = useState()
+    const [value, setvalue] = useState()
 
-    
-    
+
+
 
 
     return (
@@ -62,7 +69,7 @@ const FormFinances = () => {
                                 <div className="col"> <CrasCheckbox name={"unemployed"} value={1} checked={values.unemployed[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"low_income"} value={1} checked={values.low_income[0] === 1} onChange={handleChange} label={"Baixa income"} /></div>
+                                <div className="col"> <CrasCheckbox name={"low_income"} value={1} checked={values.low_income[0] === 1} onChange={handleChange} label={"Baixa renda"} /></div>
                             </Row>
                             <Row>
                                 <div className="col"> <CrasCheckbox name={"others"} value={1} checked={values.others[0] === 1} onChange={handleChange} label={"Outros"} /></div>
@@ -141,6 +148,33 @@ const FormFinances = () => {
                                     ) : null}
                                 </Column>
                             </Grid> */}
+                            {benefits ? <>{benefits.map((item) => {
+                                return (
+                                    <>asdsfqwewr</>
+                                )
+                            })}</> : null}
+                            {visibleAddBenefits ? <>
+                                <Grid checkMockup={[{}, {}]}>
+                                    <Column>
+                                        <CrasDropdown label={"Beneficios"} onChange={(e) => setbenefits_fk(e.target.value)} value={benefits_fk} optionLabel={"description"} options={benefitsfetch} />
+                                    </Column>
+                                    <Column>
+                                        <CrasInputNumber mode="currency"
+                                            currency="BRL"
+                                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"value"} />
+                                    </Column>
+                                </Grid>
+                                <Row id="start">
+                                    <Padding padding="8px" />
+                                    <ButtonPrime label={"Criar"} />
+                                    <Padding />
+                                    <ButtonPrime onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} severity={"danger"} label={"Cancelar"} />
+                                </Row>
+                            </>
+                                : null}
+                            {!visibleAddBenefits ? <Row id="start" >
+                                <ButtonPrime label={"Adicionar Beneficio"} icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
+                            </Row> : null}
                             <Padding padding="16px" />
                             <Row id="end">
                                 <Padding />

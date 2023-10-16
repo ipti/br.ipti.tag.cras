@@ -2,10 +2,12 @@ import { useState } from "react"
 import { CreateUserIdentifyController } from "../../../sdk/FamilyRefered/CreateUserIdentify/controller";
 
 const CreateFamilyReferedState = () => {
-    const [activeStep, setActiveStep] = useState(0);
+    const [activeStep, setActiveStep] = useState(2);
     const [dataValues, setDataValues] = useState({});
 
-    const {CreateUserIdentifyRequestMutation} = CreateUserIdentifyController();
+    const {CreateUserIdentifyRequestMutation, benefitsfetch, isLoading, error} = CreateUserIdentifyController();
+
+    console.log(benefitsfetch)
 
     const estadosDoBrasil = [
         { uf: 'AC', nome: 'Acre' },
@@ -110,7 +112,7 @@ const CreateFamilyReferedState = () => {
         CreateUserIdentifyRequestMutation.mutate(data);
     }
     return {
-        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis
+        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, benefitsfetch, isLoading, error
     }
 }
 

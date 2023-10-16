@@ -1,5 +1,5 @@
 import { Formik } from "formik";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import * as Yup from 'yup';
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
@@ -18,11 +18,9 @@ const FormAddress = () => {
 
     const { backStep, nextStep, dataValues } = useContext(CreateFamilyReferedContext);
 
-    const { data: state } = useFetchAllState()
+    const [city, setcity] = useState([])
 
-    console.log(state)
-
-
+    const { data: state } = useFetchAllState();
 
 
     const initialValue = {
@@ -53,38 +51,47 @@ const FormAddress = () => {
         headers: { Authorization: `Bearer ${getToken()}` },
     };
 
-    const getCity = () => {
+    const getCity = (id) => {
 
-        (async () => {
-            const res = await http.get("/bff/get-city", config, {
-                ufId: 28
-            })
-            console.log(res)
-        })();
+        if (id) {
+
+            (async () => {
+                const res = await http.get(`/bff/get-city?ufId=${id}`, config)
+                console.log(res.data)
+                setcity(res.data)
+            })();
+        }
+
     }
 
 
-    console.log(getCity())
+    const stateSelect = (e, setFieldValue) => {
+        console.log(e)
+        setFieldValue("edcenso_uf_fk", e.target.value)
+       getCity(e.target.value.id)
+    }
+
+    console.log(city)
 
     return (
         <Column>
             <Padding padding="16px" />
             <h3>Endereço</h3>
             <Formik initialValues={initialValue} onSubmit={value => nextStep(value)} validationSchema={validationSchema}>
-                console.log(values)
-                {({ values, handleChange, handleSubmit, errors, touched }) => {
+                {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
+                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Estado" />
+                                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço" />
                                     <Padding />
                                     {errors.address && touched.address ? (
                                         <div style={{ color: "red" }}>{errors.address}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Cidade" />
+                                    <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência" />
                                     <Padding />
                                     {errors.reference && touched.reference ? (
                                         <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
@@ -93,17 +100,18 @@ const FormAddress = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasDropdown name="address" optionLabel={state} onChange={handleChange} value={values.address} label="Endereço" />
+                                    {state ? <CrasDropdown name="edcenso_uf_fk" optionLabel={"name"} options={state} onChange={(e) => stateSelect(e, setFieldValue)} value={values.edcenso_uf_fk} label="Estado" />
+                                        : <></>}
                                     <Padding />
-                                    {errors.address && touched.address ? (
-                                        <div style={{ color: "red" }}>{errors.address}<Padding /></div>
+                                    {errors.edcenso_uf_fk && touched.edcenso_uf_fk ? (
+                                        <div style={{ color: "red" }}>{errors.edcenso_uf_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasDropdown onChange={handleChange} optionLabel={[]} value={values.reference} name="reference" label="Ponto de Referência" />
+                                    <CrasDropdown onChange={handleChange} optionLabel={"name"} options={city} value={values.edcenso_city_fk} name="edcenso_city_fk" label="Cidade" />
                                     <Padding />
-                                    {errors.reference && touched.reference ? (
-                                        <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
+                                    {errors.edcenso_city_fk && touched.edcenso_city_fk ? (
+                                        <div style={{ color: "red" }}>{errors.edcenso_city_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>
