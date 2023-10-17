@@ -20,7 +20,7 @@ const config = {
 }
 
 export const CreateUserIdentifyRequest = async (body) => {
-  return await http.post("/user-identify", body, config)
+  return await http.post("/bff/create-user-without-family", body, config)
 }
 
 const FamilyReferedIdRequest = async (id) => {

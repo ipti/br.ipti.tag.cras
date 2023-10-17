@@ -195,8 +195,8 @@ const FormInfoPerson = () => {
                                 <Column>
                                     <label>Deficiente Físico ou Mental ?</label>
                                     <Row>
-                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.is_deficiency === "Sim"} value={"Sim"} name="is_deficiency" label={"Sim"} />
-                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.is_deficiency === "Não"} value={"Não"} name="is_deficiency" label="Não" />
+                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.is_deficiency === true} value={true} name="is_deficiency" label={"Sim"} />
+                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.is_deficiency === false} value={false} name="is_deficiency" label="Não" />
                                     </Row>
                                     <Padding />
                                     {errors.is_deficiency && touched.is_deficiency ? (

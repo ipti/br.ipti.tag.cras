@@ -2,12 +2,13 @@ import { useState } from "react"
 import { CreateUserIdentifyController } from "../../../sdk/FamilyRefered/CreateUserIdentify/controller";
 
 const CreateFamilyReferedState = () => {
-    const [activeStep, setActiveStep] = useState(2);
+    const [activeStep, setActiveStep] = useState(0);
     const [dataValues, setDataValues] = useState({});
+    const [benefits, setbenefits] = useState([])
 
-    const {CreateUserIdentifyRequestMutation, benefitsfetch, isLoading, error} = CreateUserIdentifyController();
 
-    console.log(benefitsfetch)
+    const { CreateUserIdentifyRequestMutation, benefitsfetch, isLoading, error } = CreateUserIdentifyController();
+
 
     const estadosDoBrasil = [
         { uf: 'AC', nome: 'Acre' },
@@ -37,9 +38,9 @@ const CreateFamilyReferedState = () => {
         { uf: 'SP', nome: 'São Paulo' },
         { uf: 'SE', nome: 'Sergipe' },
         { uf: 'TO', nome: 'Tocantins' }
-      ];
+    ];
 
-      const escolaridadeNoBrasil = [
+    const escolaridadeNoBrasil = [
         "Educação Infantil",
         "Ensino Fundamental I (1º ao 5º ano)",
         "Ensino Fundamental II (6º ao 9º ano)",
@@ -54,9 +55,9 @@ const CreateFamilyReferedState = () => {
         "Educação de Jovens e Adultos (EJA) - Ensino Médio",
         "Cursos Profissionalizantes",
         "Cursos de Aperfeiçoamento e Extensão"
-      ];
+    ];
 
-      const estadosCivis = [
+    const estadosCivis = [
         'Solteiro(a)',
         'Casado(a)',
         'Divorciado(a)',
@@ -64,7 +65,7 @@ const CreateFamilyReferedState = () => {
         'Separado(a)',
         'União Estável',
         'Outro',
-      ];
+    ];
 
 
     const nextStep = (values) => {
@@ -88,31 +89,45 @@ const CreateFamilyReferedState = () => {
 
         const data = {
             ...dataValues,
-            certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : 0,
-            apelido: dataValues.apelido === "" ? "." : dataValues.apelido,
-            NIS: parseInt(dataValues.NIS),
-            renda: parseInt(dataValues.renda),
-            bolsa_familia: parseInt(dataValues.bolsa_familia),
-            loasbpc: parseInt(dataValues.loasbpc),
-            previdencia: parseInt(dataValues.previdencia),
-            valor_aluguel: parseInt(dataValues.valor_aluguel),
+            nis: parseInt(dataValues.nis),
             uf_rg: dataValues.uf_rg.uf,
-            cpf: dataValues.cpf.replace(/\D/g, ''),
-            data_final: dataValues.data_final ?? null,
-            comodos: dataValues.comodos.toString(),
-            numero_rg: dataValues.numero_rg.replace(/\D/g, ''),
-            ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
-            crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-            idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-            desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
-            deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
-            baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
-            outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
+            attendance_unity_fk: 1,
+            birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,
+            edcenso_uf_fk: dataValues.edcenso_uf_fk.id,
+            edcenso_city_fk: dataValues.edcenso_city_fk.id,
+            irregular_ocupation
+                : (dataValues.irregular_ocupation
+                    .length === 0 || dataValues.irregular_ocupation
+                    === "") ? false : true,
+            alone_child
+                : (dataValues.alone_child
+                    .length === 0 || dataValues.alone_child
+                    === "") ? false : true,
+            dependent_elderly
+                : (dataValues.dependent_elderly
+                    .length === 0 || dataValues.dependent_elderly
+                    === "") ? false : true,
+            unemployed
+                : (dataValues.unemployed
+                    .length === 0 || dataValues.unemployed
+                    === "") ? false : true,
+            deficient
+                : (dataValues.deficient
+                    .length === 0 || dataValues.deficient
+                    === "") ? false : true,
+            low_income
+                : (dataValues.low_income
+                    .length === 0 || dataValues.low_income
+                    === "") ? false : true,
+            others
+                : (dataValues.others
+                    .length === 0 || dataValues.others
+                    === "") ? false : true
         }
         CreateUserIdentifyRequestMutation.mutate(data);
     }
     return {
-        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis, benefitsfetch, isLoading, error
+        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, benefitsfetch, isLoading, error, benefits, setbenefits
     }
 }
 

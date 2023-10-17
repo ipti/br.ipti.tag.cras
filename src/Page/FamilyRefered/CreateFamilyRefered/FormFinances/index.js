@@ -8,14 +8,14 @@ import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
+import Table from "../../../../Components/Table";
 
 const FormFinances = () => {
 
-    const { backStep, nextStep, dataValues, benefitsfetch, } = useContext(CreateFamilyReferedContext)
+    const { backStep, nextStep, dataValues, benefitsfetch, benefits, setbenefits } = useContext(CreateFamilyReferedContext)
 
     const [visibleAddBenefits, setvisibleAddBenefits] = useState();
 
-    const [benefits, setbenefits] = useState()
 
     const initialValue = {
         profission: dataValues.profission ?? "",
@@ -26,7 +26,8 @@ const FormFinances = () => {
         unemployed: dataValues.unemployed ?? "",
         deficient: dataValues.deficient ?? "",
         low_income: dataValues.low_income ?? "",
-        others: dataValues.others ?? ""
+        others: dataValues.others ?? "",
+        benefitsForFamily: dataValues.benefitsForFamily ?? []
     }
 
     const validationSchema = Yup.object().shape({
@@ -37,7 +38,17 @@ const FormFinances = () => {
     const [benefits_fk, setbenefits_fk] = useState()
     const [value, setvalue] = useState()
 
-
+    const columns = [
+        { field: 'benefits_fk.description', header: 'Beneficio' },
+        { field: 'value', header: 'Valor' },
+    ];
+    const handleBenefits = (set) => {
+        setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
+        setbenefits_fk()
+        setvalue()
+        setvisibleAddBenefits(!visibleAddBenefits)
+        set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
+    }
 
 
 
@@ -46,7 +57,15 @@ const FormFinances = () => {
             <Padding padding="16px" />
             <h3>Principais Vulnerabilidades</h3>
             <Formik initialValues={initialValue} onSubmit={(values => nextStep(values))} validationSchema={validationSchema}>
-                {({ values, handleChange, handleSubmit, errors, touched }) => {
+                {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
+                    const deleteBenefits = (id) => {
+
+                        const filterBen = benefits.filter(props => props.id !== id)
+                        setbenefits(filterBen)
+                        setFieldValue("benefitsForFamily", filterBen)
+                    }
+
+                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>
@@ -98,7 +117,7 @@ const FormFinances = () => {
                                 <Column>
                                     <CrasInputNumber mode="currency"
                                         currency="BRL"
-                                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal do usuário" />
+                                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal" />
                                     <Padding />
                                     {errors.income && touched.income ? (
                                         <div style={{ color: "red" }}>{errors.income}<Padding /></div>
@@ -117,7 +136,7 @@ const FormFinances = () => {
                                 </Column> */}
                             </Grid>
                             <h3>
-                                Benefício (Benefício do usuário cadastrado)
+                                Benefícios
                             </h3>
                             {/* <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
@@ -148,11 +167,7 @@ const FormFinances = () => {
                                     ) : null}
                                 </Column>
                             </Grid> */}
-                            {benefits ? <>{benefits.map((item) => {
-                                return (
-                                    <>asdsfqwewr</>
-                                )
-                            })}</> : null}
+
                             {visibleAddBenefits ? <>
                                 <Grid checkMockup={[{}, {}]}>
                                     <Column>
@@ -166,15 +181,25 @@ const FormFinances = () => {
                                 </Grid>
                                 <Row id="start">
                                     <Padding padding="8px" />
-                                    <ButtonPrime label={"Criar"} />
+                                    <ButtonPrime label={"Criar"} type="button" onClick={() => handleBenefits(setFieldValue)} />
                                     <Padding />
-                                    <ButtonPrime onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} severity={"danger"} label={"Cancelar"} />
+                                    <ButtonPrime type="button" onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} severity={"danger"} label={"Cancelar"} />
                                 </Row>
                             </>
                                 : null}
                             {!visibleAddBenefits ? <Row id="start" >
-                                <ButtonPrime label={"Adicionar Beneficio"} icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
+                                <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
                             </Row> : null}
+                            <Padding padding="8px">
+
+                                <Table
+                                    columns={columns}
+                                    list={benefits}
+                                    name="Beneficios"
+                                    pathEdit={"/edit/tecnico/"}
+                                    delet={deleteBenefits}
+                                />
+                            </Padding>
                             <Padding padding="16px" />
                             <Row id="end">
                                 <Padding />

@@ -1,5 +1,6 @@
 const TOKEN_KEY = "token";
 const id_key = "cras-id";
+const menu_key = "cras-menu";
 
 export const isAuthenticated = () => {
   return localStorage.getItem(TOKEN_KEY) !== null;
@@ -25,7 +26,11 @@ export const idUser = (id) => {
   localStorage.setItem(id_key, id);
 }
 
+export const menuItem = (id) => {
+  localStorage.setItem(menu_key, id);
+}
 
-export const getId = () => {
-  return localStorage.getItem(id_key);
+
+export const getMenuItem = () => {
+  return localStorage.getItem(menu_key);
 }

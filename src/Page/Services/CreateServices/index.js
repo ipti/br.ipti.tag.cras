@@ -10,6 +10,8 @@ const CreateServicesScreen = () => {
 
     const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify } = useContext(CreateServicesContext)
 
+    console.log(technician)
+
     return (
         <Container>
             <Column>
@@ -23,7 +25,7 @@ const CreateServicesScreen = () => {
                             <h3>Dados do atendimento</h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasDropdown name="servico" value={values.servico} onChange={handleChange} optionLabel={"nome"} options={service} label="Serviço" />
+                                    <CrasDropdown name="servico" value={values.servico} onChange={handleChange} optionLabel={"name"} options={service} label="Serviço" />
                                     <Padding />
                                     {errors.servico && touched.servico ? (
                                         <div style={{ color: "red" }}>{errors.servico}<Padding /></div>

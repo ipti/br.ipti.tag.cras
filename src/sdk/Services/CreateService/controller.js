@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllTechnician } from "../../Technician/Technician/request";
 import { CreateServiceRequest } from "./request";
+import { useFetchAllTypesServices } from "../../TypeService/TypeServices/request";
 
 export const CreateServicesController = () => {
     const history = useNavigate();
 
 
-    // const { data: allService, isLoading: isLoadingService, error: errorService } = useFetchAllTypesServices();
+    const { data: allService, isLoading: isLoadingService, error: errorService } = useFetchAllTypesServices();
     const { data: allTechnician, isLoading: isLoadingtechnician, error: errorTechnician } = useFetchAllTechnician();
     // const { data: allUserIdentify, isLoading: isLoadingUserIdentify, error: errorUserIdentify } = useFetchAllUserIdentify();
 
@@ -36,7 +37,9 @@ export const CreateServicesController = () => {
 
     return {
         CreateServicesRequestMutation,
-        
+        allService,
+        isLoadingService,
+        errorService,
         allTechnician,
         isLoadingtechnician,
         errorTechnician,

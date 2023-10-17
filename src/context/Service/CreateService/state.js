@@ -5,7 +5,7 @@ import { CreateServicesController } from "../../../sdk/Services/CreateService/co
 
 export const CreateServicesState = () => {
 
-  // const [service, setService] = useState([]);
+  const [service, setService] = useState([]);
   const [technician, setTechnician] = useState();
   // const [userIdentify, setUserIdentify] = useState([]);
 
@@ -28,14 +28,14 @@ export const CreateServicesState = () => {
     tecnico: Yup.object().required('Campo Obrigatório'),
     servico: Yup.object().required('Campo Obrigatório'),
     id_identificacao_usuario: Yup.object().required('Campo Obrigatório'),
-});
+  });
 
   const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify } = CreateServicesController();
 
   useEffect(() => {
-    // if (allService) {
-    //   setService(allService);
-    // }
+    if (allService) {
+      setService(allService);
+    }
     if (allTechnician) {
       setTechnician(allTechnician);
     }
@@ -63,6 +63,6 @@ export const CreateServicesState = () => {
   }
 
   return {
-    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema
+    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service
   }
 }
