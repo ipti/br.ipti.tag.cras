@@ -19,6 +19,7 @@ import EditUser from "../Container/Users/Edit";
 import EditService from "../Container/Services/EditService";
 import Benefits from "../Container/Benefits/ListBenefits";
 import CreateBenefits from "../Container/Benefits/CreateBenefits";
+import EditBenefits from "../Container/Benefits/EditBenefits";
 
 const RoutesCras = () => {
 
@@ -43,6 +44,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={EditTypeService} />} path="/edit/servico/:id" />
                 <Route element={<PrivateRoute Component={Benefits} />} path="/beneficios" />
                 <Route element={<PrivateRoute Component={CreateBenefits} />} path="/criar/beneficios" />
+                <Route element={<PrivateRoute Component={EditBenefits} />} path="/edit/beneficios/:id" />
+
                 <Route element={<Login />} path="/login" />
             </Routes>
         </BrowserRouter>

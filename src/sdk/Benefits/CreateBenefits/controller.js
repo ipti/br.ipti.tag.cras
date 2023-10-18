@@ -12,12 +12,11 @@ export const CreateBenefitsController = () => {
     (data) => CreateBenefitsRequest(data),
     {
       onError: (error) => {
-        console.log(error.response.data.message)
         if (error.response.status === 401 || error.response.status === 403) {
           logout();
           history("/login")
         }
-
+        alert(error.response.message)
       },
       onSuccess: (data) => {
         history("/beneficios");

@@ -7,5 +7,5 @@ const config = {
   };
 
 export const CreateServiceRequest = async (body) => {
-    return await http.post("/service", body, config)
+    return await http.post("/attendance", body, config)
 }

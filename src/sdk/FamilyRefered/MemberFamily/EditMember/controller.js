@@ -18,7 +18,7 @@ export const EditMemberController = (id, setOpen, toast) => {
     {
       onError: (error) => {
         console.log(error.response.data.message)
-        if (error.response.status === 401 | 403) {
+        if (error.response.status === 401 || error.response.status === 403) {
           logout();
           history("/login")
         }

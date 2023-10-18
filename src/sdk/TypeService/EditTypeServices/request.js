@@ -13,6 +13,7 @@ const OneTypesServicesRequest = async (id) => {
             logout()
             window.location.reload()
         }
+        alert(err.message)
         throw err;
     });;
 }

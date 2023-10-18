@@ -7,8 +7,8 @@ const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
   };
 
-  const OneServiceRequest = async (id) => {
-    return await http.get(`/service/${id}`, config).then(response => response.data)
+  const OneBenefitsRequest = async (id) => {
+    return await http.get(`/benefits/${id}`, config).then(response => response.data)
     .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
             logout()
@@ -20,12 +20,11 @@ const config = {
     });;
 }
 
-export const useFetchOneService = (id) => {
-    return useQuery("OneService", () => OneServiceRequest(id));
-  };
+export const useFetchOneBenefits = (id) => {
+    return useQuery("OneBenefits", () => OneBenefitsRequest(id));
+};
 
 
-
-export const EditServiceRequest = async (body, id) => {
-    return await http.put(`/service/${id}`, body, config)
+export const EditBenefitsRequest = async (body, id) => {
+    return await http.put(`/benefits/${id}`, body, config)
 }

@@ -4,11 +4,12 @@ import { UserIdentifyController } from "../../../sdk/FamilyRefered/UserIdentify/
 export const UserIdentifyState = () => {
 
     const {userIdentifyfetch, isLoading, error } = UserIdentifyController();
+    console.log(userIdentifyfetch)
     const [userIdentify, setUserIdentifify] = useState([]);
 
     useEffect(() => {
         if(userIdentifyfetch){
-            setUserIdentifify(userIdentifyfetch.data)
+            setUserIdentifify(userIdentifyfetch)
         }
     }, [userIdentifyfetch])
     

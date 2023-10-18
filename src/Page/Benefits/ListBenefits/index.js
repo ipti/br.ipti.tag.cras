@@ -16,7 +16,7 @@ const ListBenefitsScreen = () => {
 
     return (
         <Container>
-            <Table columns={columns} list={benefits} path="/criar/beneficios" name="Beneficios" pathEdit="/edit/familia/" />
+            <Table columns={columns} list={benefits} path="/criar/beneficios" name="Beneficios" pathEdit="/edit/beneficios/" />
         </Container>
     )
 }

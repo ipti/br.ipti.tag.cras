@@ -13,6 +13,7 @@ const AllBenefitsRequest = async () => {
         // logout()
         // window.location.reload()
       }
+      
       throw err;
     });;
 }

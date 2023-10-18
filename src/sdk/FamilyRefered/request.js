@@ -4,18 +4,18 @@ import { getToken, logout } from "../../services/localstorage";
 
 
 const config = {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  };
+  headers: { Authorization: `Bearer ${getToken()}` },
+};
 
- const AllUserIdentifyRequest = async () => {
-    return await http.get("/user-identify", config).then(response => response.data)
+const AllUserIdentifyRequest = async () => {
+  return await http.get("/user-identify", config).then(response => response.data)
     .catch(err => {
-        if (err.response.status === 401) {
-            logout()
-            window.location.reload()
-        }
-        alert(err)
-        throw err;
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      alert(err)
+      throw err;
     });
 }
 
@@ -25,13 +25,14 @@ export const CreateUserIdentifyRequest = async (body) => {
 
 const FamilyReferedIdRequest = async (id) => {
   return await http.get(`/user-identify/${id}`, config).then(response => response.data)
-  .catch(err => {
+    .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
-          logout()
-          window.location.reload()
+        logout()
+        window.location.reload()
       }
+      alert(err.message)
       throw err;
-  });
+    });
 }
 
 export const EditUserIdentifyRequest = async (body, id) => {
@@ -40,9 +41,9 @@ export const EditUserIdentifyRequest = async (body, id) => {
 
 
 export const useFetchAllUserIdentify = () => {
-    return useQuery("AllUserIdentify", () => AllUserIdentifyRequest());
-  };
+  return useQuery("AllUserIdentify", () => AllUserIdentifyRequest());
+};
 
-  export const useFetchFamilyReferedId = (id) => {
-    return useQuery("FamilyReferedId", () => FamilyReferedIdRequest(id));
-  };
+export const useFetchFamilyReferedId = (id) => {
+  return useQuery("FamilyReferedId", () => FamilyReferedIdRequest(id));
+};

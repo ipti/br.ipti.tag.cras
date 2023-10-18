@@ -13,6 +13,7 @@ const StateRequest = async () => {
         logout()
         window.location.reload()
       }
+      alert(err.message)
       throw err;
     });;
 }
@@ -31,6 +32,8 @@ const CityRequest = async (id) => {
       if (err.response.status === 401 || err.response.status === 403) {
         logout()
         window.location.reload()
+        alert(err.message)
+
       }
       throw err;
     });;

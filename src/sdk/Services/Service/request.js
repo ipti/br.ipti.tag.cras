@@ -14,6 +14,7 @@ const ALLServiceRequest = async () => {
           logout();
           window.location.reload()
         }
+        alert(err.message)
         throw err;
       });
   } catch (err) {
