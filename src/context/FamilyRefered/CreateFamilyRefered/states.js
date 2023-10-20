@@ -90,6 +90,9 @@ const CreateFamilyReferedState = () => {
         const data = {
             ...dataValues,
             nis: parseInt(dataValues.nis),
+            cpf: dataValues.cpf.replace(/\D/g, ''),
+            rg_number: dataValues.rg_number.replace(/\D/g, ''),
+            telephone: dataValues.telephone.replace(/\D/g, ''),
             uf_rg: dataValues.uf_rg.uf,
             attendance_unity_fk: 1,
             birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,

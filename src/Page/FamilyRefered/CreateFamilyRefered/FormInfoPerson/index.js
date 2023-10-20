@@ -140,7 +140,7 @@ const FormInfoPerson = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Certificado" name={"birth_certificate"} onChange={handleChange} value={values.birth_certificate} />
+                                    <CrasInput label="Certidão de nascimento" name={"birth_certificate"} onChange={handleChange} value={values.birth_certificate} />
                                     <Padding />
                                     {errors.birth_certificate && touched.birth_certificate ? (
                                         <div style={{ color: "red" }}>{errors.birth_certificate}<Padding /></div>

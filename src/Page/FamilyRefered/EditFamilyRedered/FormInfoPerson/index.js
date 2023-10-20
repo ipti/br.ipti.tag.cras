@@ -17,7 +17,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
     const dateEntry = new Date(values.data_inicial);
     const dateExit = new Date(values.data_final);
     const dateEmit = new Date(values.data_emissao_rg);
-    const dateBithrday = new Date(values.data_nascimento)
+    const dateBithrday = new Date(values.birthday)
   
     return (
         <Column>
@@ -68,26 +68,26 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             <h3>Dados Pessoais</h3>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput label="Nome" name="nome" onChange={handleChange} value={values.nome} />
+                    <CrasInput label="Nome" name="name" onChange={handleChange} value={values.name} />
                     <Padding />
-                    {errors.nome && touched.nome ? (
-                        <div style={{ color: "red" }}>{errors.nome}<Padding /></div>
+                    {errors.name && touched.name ? (
+                        <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput label="Apelido" name="apelido" onChange={handleChange} value={values.apelido} />
+                    <CrasInput label="Apelido" name="surname" onChange={handleChange} value={values.surname} />
                     <Padding />
-                    {errors.apelido && touched.apelido ? (
-                        <div style={{ color: "red" }}>{errors.apelido}<Padding /></div>
+                    {errors.surname && touched.surname ? (
+                        <div style={{ color: "red" }}>{errors.surname}<Padding /></div>
                     ) : null}
                 </Column>
             </Grid>
             <Grid checkMockup={[{}, {}, {}]}>
                 <Column>
-                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="data_nascimento" onChange={handleChange} showIcon />
+                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="birthday" onChange={handleChange} showIcon />
                     <Padding />
-                    {errors.data_nascimento && touched.data_nascimento ? (
-                        <div style={{ color: "red" }}>{errors.data_nascimento}<Padding /></div>
+                    {errors.birthday && touched.birthday ? (
+                        <div style={{ color: "red" }}>{errors.birthday}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>

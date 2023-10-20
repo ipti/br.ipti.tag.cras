@@ -27,5 +27,5 @@ export const useFetchAllService = () => {
 };
 
 export const DeleteServiceRequest = async (id) => {
-  return await http.delete(`/service/${id}`, config)
+  return await http.delete(`/attendance/${id}`, config)
 }

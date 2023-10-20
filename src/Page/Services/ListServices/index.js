@@ -8,10 +8,11 @@ const ListServicesScreen = () => {
     const { isLoading, service, deleteService, typeService, technician } = useContext(ServiceContext)
 
 
+    console.log(service)
     const columns = [
         { field: 'id', header: 'id' },
         { field: 'servico', header: 'Servico' },
-        { field: 'resultado', header: 'Resultado' },
+        { field: 'result', header: 'Resultado' },
         { field: 'tecnico', header: 'Tecnico responsavel' }
     ];
 

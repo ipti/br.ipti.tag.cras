@@ -38,7 +38,7 @@ const EditFamilyReferedState = () => {
   const {
     familyReferedfetch,
     CreateFamilyRequestRequestMutation,
-    membersFamilyRequest,
+    // membersFamilyRequest,
     DeleteMemberFamilyRequestMutation,
     EditFamilyRequestRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
@@ -46,15 +46,15 @@ const EditFamilyReferedState = () => {
 
   useEffect(() => {
     if (familyReferedfetch && loading) {
-      setFamily(familyReferedfetch.data)
+      setFamily(familyReferedfetch)
     }
 
-    if (membersFamilyRequest) {
-      const filter = membersFamilyRequest.data.filter(member => `${member.id_identificacao_usuario}` === id);
-      setMember(filter)
-    }
+    // if (membersFamilyRequest) {
+    //   const filter = membersFamilyRequest.data.filter(member => `${member.id_identificacao_usuario}` === id);
+    //   setMember(filter)
+    // }
 
-  }, [familyReferedfetch, membersFamilyRequest, id, loading])
+  }, [familyReferedfetch, id, loading])
 
   const sexo = [
     "Masculino",

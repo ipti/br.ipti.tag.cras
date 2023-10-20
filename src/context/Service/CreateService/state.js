@@ -38,13 +38,14 @@ export const CreateServicesState = () => {
     if (allTechnician) {
       setTechnician(allTechnician);
     }
-    if(allUserIdentify){
+    if (allUserIdentify) {
       setUserIdentify(allUserIdentify);
     }
   }, [allService, allTechnician, allUserIdentify])
 
 
   const handleCreateService = (data) => {
+
 
     const body = {
       solicitation: data.solicitation,
@@ -54,7 +55,8 @@ export const CreateServicesState = () => {
       technician_fk: data.technician_fk.id,
       attendance_unity_fk: 1,
       user_identify_fk: data.user_identify_fk.id,
-      description: data.description
+      description: data.description,
+      date: new Date(Date.now())
     }
 
     CreateServicesRequestMutation.mutate(body)

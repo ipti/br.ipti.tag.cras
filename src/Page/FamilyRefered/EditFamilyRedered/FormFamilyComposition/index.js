@@ -49,10 +49,10 @@ const FormFamilyComposition = () => {
 
     const columns = [
         { field: 'id', header: 'id' },
-        { field: 'nome', header: 'Name' },
+        { field: 'name', header: 'Name' },
         { field: 'parentesco', header: 'Parentesco' },
-        { field: 'date_nascimento', header: 'Data de nascimento' },
-        { field: 'sexo', header: 'Sexo' },
+        { field: 'birthday', header: 'Data de nascimento' },
+        { field: 'sex', header: 'Sexo' },
     ];
 
     return (
@@ -155,7 +155,7 @@ const FormFamilyComposition = () => {
                 : null
             }
             {open ? <EditMemberFamily setOpen={setOpen} id={idMember} schema={schema} /> : null}
-            {!open && !addMember ? <CrasTable delet={deleteMember} products={member} columns={columns} onEdit={editMember} /> : null}
+            {!open && !addMember ? <CrasTable delet={deleteMember} products={family.user_identifies} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
         </Column>
     )

@@ -24,7 +24,7 @@ export const CreateUserIdentifyRequest = async (body) => {
 }
 
 const FamilyReferedIdRequest = async (id) => {
-  return await http.get(`/user-identify/${id}`, config).then(response => response.data)
+  return await http.get(`/bff/get-all-from-family?familyId=${id}`, config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
         logout()

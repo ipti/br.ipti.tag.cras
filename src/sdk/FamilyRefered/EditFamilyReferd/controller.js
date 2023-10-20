@@ -1,14 +1,14 @@
 import { useMutation } from "react-query";
-import { CreateFamilyMemberRequest, DeleteFamilyMember, useFetchAllFamilyMember } from "../MemberFamily/request";
-import { EditUserIdentifyRequest, useFetchFamilyReferedId } from "../request";
-import { logout } from "../../../services/localstorage";
 import { useNavigate } from "react-router-dom";
+import { logout } from "../../../services/localstorage";
+import { CreateFamilyMemberRequest, DeleteFamilyMember } from "../MemberFamily/request";
+import { EditUserIdentifyRequest, useFetchFamilyReferedId } from "../request";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
 
   const { data: familyReferedfetch, isLoading, error } = useFetchFamilyReferedId(id);
 
-  const { data: membersFamilyRequest, refetch } = useFetchAllFamilyMember();
+  // const { data: membersFamilyRequest, refetch } = useFetchAllFamilyMember();
   const history = useNavigate();
 
 
@@ -24,7 +24,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
         }
       },
       onSuccess: (data) => {
-        refetch()
+        // refetch()
         setAddMember(false)
         console.log(data);
         setIsVerify(true)
@@ -45,7 +45,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
         }
       },
       onSuccess: (data) => {
-        refetch()
+        // refetch()
         setAddMember(false)
         console.log(data);
         setIsVerify(true)
@@ -66,7 +66,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
         }
       },
       onSuccess: (data) => {
-        refetch()
+        // refetch()
         setAddMember(false)
         console.log(data);
         setIsVerify(true)
@@ -78,6 +78,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
 
 
   return {
-    familyReferedfetch, isLoading, error, CreateFamilyRequestRequestMutation, membersFamilyRequest, EditFamilyRequestRequestMutation, DeleteMemberFamilyRequestMutation
+    familyReferedfetch, isLoading, error, CreateFamilyRequestRequestMutation, 
+    // membersFamilyRequest, 
+    EditFamilyRequestRequestMutation, DeleteMemberFamilyRequestMutation
   }
 }
