@@ -32,8 +32,8 @@ const FormInfoPerson = () => {
         cpf: dataValues.cpf ?? "",
         is_deficiency: dataValues.is_deficiency ?? "",
         deficiency: dataValues.deficiency ?? "",
-        mother: dataValues.mother ?? "",
-        father: dataValues.father ?? "",
+        filiation_1: dataValues.filiation_1 ?? "",
+        filiation_2: dataValues.filiation_2 ?? "",
         marital_status: dataValues.marital_status ?? "",
         escolarity: dataValues.escolarity ?? "",
         initial_date: dataValues.initial_date,
@@ -59,8 +59,8 @@ const FormInfoPerson = () => {
         cpf: Yup.string().required("Campo obrigatório"),
         is_deficiency: Yup.string().required("Campo obrigatório"),
         deficiency: Yup.string(),
-        mother: Yup.string().required("Campo obrigatório"),
-        father: Yup.string().required("Campo obrigatório"),
+        filiation_1: Yup.string().required("Campo obrigatório"),
+        filiation_2: Yup.string(),
         marital_status: Yup.string().required("Campo obrigatório"),
         escolarity: Yup.string().required("Campo obrigatório"),
     });
@@ -206,17 +206,17 @@ const FormInfoPerson = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput label="Mãe" name="mother" onChange={handleChange} value={values.mother} />
+                                    <CrasInput label="Filiação 1" name="filiation_1" onChange={handleChange} value={values.filiation_1} />
                                     <Padding />
-                                    {errors.mother && touched.mother ? (
-                                        <div style={{ color: "red" }}>{errors.mother}<Padding /></div>
+                                    {errors.filiation_1 && touched.filiation_1 ? (
+                                        <div style={{ color: "red" }}>{errors.filiation_1}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Pai" name={"father"} onChange={handleChange} value={values.father} />
+                                    <CrasInput label="Filiação 2" name={"filiation_2"} onChange={handleChange} value={values.filiation_2} />
                                     <Padding />
-                                    {errors.father && touched.father ? (
-                                        <div style={{ color: "red" }}>{errors.father}<Padding /></div>
+                                    {errors.filiation_2 && touched.filiation_2 ? (
+                                        <div style={{ color: "red" }}>{errors.filiation_2}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>

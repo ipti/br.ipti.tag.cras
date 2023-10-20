@@ -8,7 +8,8 @@ import { EditBenefitsContext } from "../../../context/Benefits/EditBenefits/cont
 
 const EditBenefitsScreen = () => {
 
-    const { handleEditBenefits, CreateSchema, initialValue, types } = useContext(EditBenefitsContext);
+    const { handleEditBenefits, CreateSchema, initialValue, types, benefits } = useContext(EditBenefitsContext);
+
 
     return (
         <Container>
@@ -17,8 +18,9 @@ const EditBenefitsScreen = () => {
                     Editar Beneficio
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={initialValue} onSubmit={(values) => handleEditBenefits(values)} validationSchema={CreateSchema}>
+                {benefits ? <Formik initialValues={initialValue} onSubmit={(values) => handleEditBenefits(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) => {
+                        console.log(values)
                         return (
                             <form onSubmit={handleSubmit}>
                                 <Grid checkMockup={[{}, {}]}>
@@ -51,7 +53,7 @@ const EditBenefitsScreen = () => {
                         )
                     }
                     }
-                </Formik>
+                </Formik> : <div>carregando...</div>}
 
             </Column>
         </Container>
