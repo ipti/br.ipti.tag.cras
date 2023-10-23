@@ -19,6 +19,7 @@ const EditFamilyReferedState = () => {
   const [dataValues, setDataValues] = useState({});
   const [family, setFamily] = useState();
   const [member, setMember] = useState()
+  const [benefits, setbenefits] = useState([])
   const { id } = useParams()
 
   const [isVerify, setIsVerify] = useState(true)
@@ -40,6 +41,7 @@ const EditFamilyReferedState = () => {
     CreateFamilyRequestRequestMutation,
     // membersFamilyRequest,
     DeleteMemberFamilyRequestMutation,
+    benefitsfetch,
     EditFamilyRequestRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
@@ -198,7 +200,7 @@ const EditFamilyReferedState = () => {
 
  
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen, benefits, setbenefits, benefitsfetch
   }
 }
 

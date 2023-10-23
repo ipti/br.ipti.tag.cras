@@ -58,8 +58,8 @@ const FormFinances = () => {
             <h3>Principais Vulnerabilidades</h3>
             <Formik initialValues={initialValue} onSubmit={(values => nextStep(values))} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-                    const deleteBenefits = (id) => {
 
+                    const deleteBenefits = (id) => {
                         const filterBen = benefits.filter(props => props.id !== id)
                         setbenefits(filterBen)
                         setFieldValue("benefitsForFamily", filterBen)
@@ -191,7 +191,6 @@ const FormFinances = () => {
                                 <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
                             </Row> : null}
                             <Padding padding="8px">
-
                                 <Table
                                     columns={columns}
                                     list={benefits}

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { CreateFamilyMemberRequest, DeleteFamilyMember } from "../MemberFamily/request";
 import { EditUserIdentifyRequest, useFetchFamilyReferedId } from "../request";
+import { useFetchAllBenefits } from "../../Benefits/ListBenefits/request";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
 
@@ -10,6 +11,9 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
 
   // const { data: membersFamilyRequest, refetch } = useFetchAllFamilyMember();
   const history = useNavigate();
+
+  const { data: benefitsfetch } = useFetchAllBenefits()
+
 
 
   const CreateFamilyRequestRequestMutation = useMutation(
@@ -80,6 +84,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
   return {
     familyReferedfetch, isLoading, error, CreateFamilyRequestRequestMutation, 
     // membersFamilyRequest, 
+    benefitsfetch,
     EditFamilyRequestRequestMutation, DeleteMemberFamilyRequestMutation
   }
 }

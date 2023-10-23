@@ -1,14 +1,50 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
+import CrasDropdown from "../../../../CrasUi/Dropdown";
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
+import Table from "../../../../Components/Table";
 
-const FormFinances = ({ values, errors, touched, handleChange }) => {
+const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) => {
 
-    const {family } = useContext(EditFamilyReferedContext)
+    const [visibleAddBenefits, setvisibleAddBenefits] = useState();
+
+    const [benefits_fk, setbenefits_fk] = useState()
+    const [value, setvalue] = useState()
+
+    const { benefits, setbenefits, benefitsfetch } = useContext(EditFamilyReferedContext);
+
+    useEffect(() => {
+        const test = []
+        values.benefitsForFamily.forEach(element => {
+            test.push({
+                benefits_fk: element.benefits.benefits.id, value: element.benefits.value
+            })
+        });
+        setbenefits(test)
+    }, [values.benefitsForFamily, setbenefits])
+
+
+    const columns = [
+        { field: 'benefits_fk.description', header: 'Beneficio' },
+        { field: 'value', header: 'Valor' },
+    ];
+    const handleBenefits = (set) => {
+        setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
+        setbenefits_fk()
+        setvalue()
+        setvisibleAddBenefits(!visibleAddBenefits)
+        set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
+    }
+
+
+
+
+    const { family } = useContext(EditFamilyReferedContext)
 
     if (!family) return null;
 
@@ -18,46 +54,46 @@ const FormFinances = ({ values, errors, touched, handleChange }) => {
             <h3>Principais Vulnerabilidades</h3>
             <Row>
                 <div className="col">
-                    <CrasCheckbox checked={values.ocupacao_irregular[0] === 1} name={"ocupacao_irregular"} value={1} onChange={handleChange} label={"Residem em área de ocupação irregular"} />
+                    <CrasCheckbox checked={values.irregular_ocupation[0] === 1} name={"irregular_ocupation"} value={1} onChange={handleChange} label={"Residem em área de ocupação irregular"} />
                 </div>
             </Row>
             <Row>
                 <div className="col">
-                    <CrasCheckbox name={"idosos_dependentes"} value={1} checked={values.idosos_dependentes[0] === 1} onChange={handleChange} label={"Existência de idosos dependentes na família"} />
+                    <CrasCheckbox name={"dependent_elderly"} value={1} checked={values.dependent_elderly[0] === 1} onChange={handleChange} label={"Existência de idosos dependentes na família"} />
                 </div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"deficientes"} value={1} checked={values.deficientes[0] === 1} onChange={handleChange} label={"Existência de deficientes na família"} /></div>
+                <div className="col"> <CrasCheckbox name={"deficient"} value={1} checked={values.deficient[0] === 1} onChange={handleChange} label={"Existência de deficient na família"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"crianca_sozinha"} value={1} checked={values.crianca_sozinha[0] === 1} onChange={handleChange} label={"Crianças que ficam sozinhos no domicilio"} /></div>
+                <div className="col"> <CrasCheckbox name={"alone_child"} value={1} checked={values.alone_child[0] === 1} onChange={handleChange} label={"Crianças que ficam sozinhos no domicilio"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"desempregados"} value={1} checked={values.desempregados[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
+                <div className="col"> <CrasCheckbox name={"unemployed"} value={1} checked={values.unemployed[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"baixa_renda"} value={1} checked={values.baixa_renda[0] === 1} onChange={handleChange} label={"Baixa renda"} /></div>
+                <div className="col"> <CrasCheckbox name={"low_income"} value={1} checked={values.low_income[0] === 1} onChange={handleChange} label={"Baixa income"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"outros"} value={1} checked={values.outros[0] === 1} onChange={handleChange} label={"Outros"} /></div>
+                <div className="col"> <CrasCheckbox name={"others"} value={1} checked={values.others[0] === 1} onChange={handleChange} label={"Outros"} /></div>
             </Row>
             <h3>Situação Financeira e Previdenciária</h3>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput name="profissao" onChange={handleChange} value={values.profissao} label="Profissão" />
+                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
                     <Padding />
-                    {errors.profissao && touched.profissao ? (
-                        <div style={{ color: "red" }}>{errors.profissao}<Padding /></div>
+                    {errors.profission && touched.profission ? (
+                        <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
                     <label>Carteira Assinada</label>
                     <Row>
-                        <CrasRadioButton selectValue={1} name="carteira_assinada" value={"Sim"} onChange={handleChange} checked={values.carteira_assinada === "Sim"} label={"Sim"} />
-                        <CrasRadioButton selectValue={2} name="carteira_assinada" label={"Não"} value={"Não"} onChange={handleChange} checked={values.carteira_assinada === "Não"} />
+                        <CrasRadioButton selectValue={1} name="signed_portfolio" value={true} onChange={handleChange} checked={values.signed_portfolio === true} label={"Sim"} />
+                        <CrasRadioButton selectValue={2} name="signed_portfolio" label={"Não"} value={false} onChange={handleChange} checked={values.signed_portfolio === false} />
                     </Row>
-                    {errors.carteira_assinada && touched.carteira_assinada ? (
-                        <div style={{ color: "red" }}>{errors.carteira_assinada}<Padding /></div>
+                    {errors.signed_portfolio && touched.signed_portfolio ? (
+                        <div style={{ color: "red" }}>{errors.signed_portfolio}<Padding /></div>
                     ) : null}
                 </Column>
             </Grid>
@@ -65,57 +101,66 @@ const FormFinances = ({ values, errors, touched, handleChange }) => {
                 <Column>
                     <CrasInputNumber mode="currency"
                         currency="BRL"
-                        locale="pt-BR" showButtons={true} value={values.renda} name={"renda"} onChange={handleChange} label="Renda Mensal do usuário" />
+                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal do usuário" />
                     <Padding />
-                    {errors.renda && touched.renda ? (
-                        <div style={{ color: "red" }}>{errors.renda}<Padding /></div>
+                    {errors.income && touched.income ? (
+                        <div style={{ color: "red" }}>{errors.income}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
                     <label>Reside com:</label>
                     <Row>
-                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.reside_familia === "Familia"} value={"Familia"} name={"reside_familia"} label="Família" />
-                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.reside_familia === "Sozinho"} value={"Sozinho"} name={"reside_familia"} label="Sozinho" />
-                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.reside_familia === "Outros"} value={"Outros"} name={"reside_familia"} label="Outros" />
+                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
+                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
+                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Outros"} value={"Outros"} name={"nuclear_family"} label="Outros" />
 
                     </Row>
-                    {errors.reside_familia && touched.reside_familia ? (
-                        <div style={{ color: "red" }}>{errors.reside_familia}</div>
+                    {errors.nuclear_family && touched.nuclear_family ? (
+                        <div style={{ color: "red" }}>{errors.nuclear_family}</div>
                     ) : null}
                 </Column>
             </Grid>
             <h3>
                 Benefício (Benefício do usuário cadastrado)
             </h3>
-            <Grid checkMockup={[{}, {}, {}]}>
-                <Column>
-                    <CrasInputNumber mode="currency"
-                        currency="BRL"
-                        locale="pt-BR" showButtons={true}  value={values.loasbpc} name={"loasbpc"} onChange={handleChange} label="LOAS/BPC" />
+            {visibleAddBenefits ? <>
+                <Grid checkMockup={[{}, {}]}>
+                    <Column>
+                        <CrasDropdown label={"Beneficios"} onChange={(e) => setbenefits_fk(e.target.value)} value={benefits_fk} optionLabel={"description"} options={benefitsfetch} />
+                    </Column>
+                    <Column>
+                        <CrasInputNumber mode="currency"
+                            currency="BRL"
+                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"value"} />
+                    </Column>
+                </Grid>
+                <Row id="start">
+                    <Padding padding="8px" />
+                    <ButtonPrime label={"Criar"} type="button" onClick={() => handleBenefits(setFieldValue)} />
                     <Padding />
-                    {errors.loasbpc && touched.loasbpc ? (
-                        <div style={{ color: "red" }}>{errors.loasbpc}</div>
-                    ) : null}
-                </Column>
-                <Column>
-                    <CrasInputNumber mode="currency"
-                        currency="BRL"
-                        locale="pt-BR" showButtons={true}  value={values.previdencia} name={"previdencia"} onChange={handleChange} label="Previdência Social" />
-                    <Padding />
-                    {errors.previdencia && touched.previdencia ? (
-                        <div style={{ color: "red" }}>{errors.previdencia}</div>
-                    ) : null}
-                </Column>
-                <Column>
-                    <CrasInputNumber mode="currency"
-                        currency="BRL"
-                        locale="pt-BR" showButtons={true}  value={values.bolsa_familia} name={"bolsa_familia"} onChange={handleChange} label="Bolsa Família" />
-                    <Padding />
-                    {errors.bolsa_familia && touched.bolsa_familia ? (
-                        <div style={{ color: "red" }}>{errors.bolsa_familia}</div>
-                    ) : null}
-                </Column>
-            </Grid>
+                    <ButtonPrime type="button" onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} severity={"danger"} label={"Cancelar"} />
+                </Row>
+            </>
+                : null}
+            {!visibleAddBenefits ? <Row id="start" >
+                <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
+            </Row> : null}
+            <Padding padding="8px">
+
+                <Table
+                    columns={columns}
+                    list={benefits}
+                    name="Beneficios"
+                    pathEdit={"/edit/tecnico/"}
+                // delet={deleteBenefits}
+                />
+            </Padding>
+            <Padding padding="16px" />
+            <Row id="end">
+                <Padding />
+                <ButtonPrime label="Próximo" type={"submit"} />
+            </Row>
+
             <Padding padding="16px" />
 
 

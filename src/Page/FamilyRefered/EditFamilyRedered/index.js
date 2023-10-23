@@ -76,92 +76,92 @@ const EditFamilyReferedScreen = () => {
 
     if (!family) return null
 
+
+    const findOwner = family ? family?.user_identifies.find(props => props.id === family.family_representative_fk) : {}
+
     const valueUf = () => {
-        const value = family ? estadosDoBrasil.find(fil => fil.id === family.id_identificacao_usuario) : ""
+        const value = family ? estadosDoBrasil.find(fil => fil.uf === findOwner.uf_rg) : ""
         return value
     }
 
-    const findOwner = family ? family?.user_identifies.find(props => props.id === family.family_representative_fk) : {}
+    console.log(family)
+
     const initialValue = {
         name: family ? findOwner?.name : "",
         surname: findOwner?.surname ?? "",
-        birthday: family?.birthday ?? "",
+        birthday: family ? findOwner?.birthday : "",
         // certidao_nascimento: family?.user_identifies.birth_certificate  ?? "",
-        // pasta: family?.pasta ?? "",
+        pasta: family ? findOwner?.pasta : "",
         // arquivo: family?.arquivo ?? "",
-        // nº: family?.nº ?? "",
-        // NIS: family?.NIS ?? "",
-        // numero_rg: family?.numero_rg ?? "",
-        // data_emissao_rg: family?.data_emissao_rg ?? "",
-        // uf_rg: valueUf() ?? "",
-        // emissao_rg: family?.emissao_rg ?? "",
-        // cpf: family?.cpf ?? "",
-        // deficiente: family?.deficiente ?? "",
+        number: family ? findOwner?.number : "",
+        nis: family ? findOwner?.nis : "",
+        rg_number: family ? findOwner?.rg_number : "",
+        rg_date_emission: family ? findOwner?.rg_date_emission : "",
+        uf_rg: valueUf() ?? "",
+        emission_rg: family ? findOwner?.emission_rg : "",
+        cpf: family ? findOwner.cpf : "",
+        is_deficiency: family ? findOwner?.is_deficiency : "",
         // deficiencia: family?.deficiencia ?? "",
-        // mae: family?.mae ?? "",
-        // pai: family?.pai ?? "",
-        // estado_civil: family?.estado_civil ?? "",
-        // escolaridade: family?.escolaridade ?? "",
-        // data_inicial: family?.data_inicial,
-        // data_final: family?.data_final,
-        // profissao: family?.id_situacao_financeira_situacao_financeira.profissao ?? "",
-        // renda: family?.id_situacao_financeira_situacao_financeira.renda ?? 0,
-        // reside_familia: family?.id_situacao_financeira_situacao_financeira.reside_familia ?? "",
-        // bolsa_familia: family?.id_situacao_financeira_situacao_financeira.bolsa_familia ?? 0,
-        // loasbpc: family?.id_situacao_financeira_situacao_financeira.loasbpc ?? 0,
-        // previdencia: family?.id_situacao_financeira_situacao_financeira.previdencia ?? 0,
-        // carteira_assinada: family?.id_situacao_financeira_situacao_financeira.carteira_assinada ?? "",
-        // ocupacao_irregular: family?.id_vulnerabilidade_vulnerabilidade.ocupacao_irregular === 1 ? [family?.id_vulnerabilidade_vulnerabilidade.ocupacao_irregular] : [],
-        // crianca_sozinha: family?.id_vulnerabilidade_vulnerabilidade.crianca_sozinha === 1 ? [family?.id_vulnerabilidade_vulnerabilidade.crianca_sozinha] : [],
-        // idosos_dependentes: family?.id_vulnerabilidade_vulnerabilidade.idosos_dependentes === 1 ? [family?.id_vulnerabilidade_vulnerabilidade.idosos_dependentes] : [],
-        // desempregados: family?.id_vulnerabilidade_vulnerabilidade.desempregados === 1 ? [family?.id_vulnerabilidade_vulnerabilidade.desempregados] : [],
-        // deficientes: family?.id_vulnerabilidade_vulnerabilidade.deficientes === 1 ? [family?.id_vulnerabilidade_vulnerabilidade.deficientes] : [],
-        // baixa_renda: family?.id_vulnerabilidade_vulnerabilidade.baixa_renda ? [family?.id_vulnerabilidade_vulnerabilidade.baixa_renda] : [],
-        // outros: family?.id_vulnerabilidade_vulnerabilidade.outros === 1 ? [family?.id_vulnerabilidade_vulnerabilidade.outros] : [],
-        // endereco: family?.id_endereco_endereco.endereco ?? "",
-        // telefone: family?.id_endereco_endereco.telefone ?? "",
-        // ponto_referencia: family?.id_endereco_endereco.ponto_referencia ?? "",
-        // condicoes_moradia: family?.id_endereco_endereco.condicoes_moradia ?? "",
-        // tipo_construcao: family?.id_endereco_endereco.tipo_construcao ?? "",
-        // comodos: family?.id_endereco_endereco.comodos ?? "",
-        // valor_aluguel: family?.id_endereco_endereco.valor_aluguel ?? 0
+        filiation_1: family ? findOwner?.filiation_1 : "",
+        filiation_2: family ? findOwner.filiation_2 : "",
+        marital_status: family ? findOwner?.marital_status : "",
+        escolarity: family ? findOwner?.escolarity : "",
+        initial_date: family ? findOwner?.initial_date : "",
+        final_date: family ? findOwner?.final_date : "",
+        profission: family ? findOwner.profission : "",
+        income: family ? findOwner.income : 0,
+        nuclear_family: findOwner?.nuclear_family ?? "",
+        signed_portfolio: findOwner?.signed_portfolio ?? false,
+        irregular_ocupation: family?.vulnerability.irregular_ocupation ? [1] : [0],
+        alone_child: family?.vulnerability.alone_child ? [1] : [0],
+        dependent_elderly: family?.vulnerability.dependent_elderly ? [1] : [0],
+        unemployed: family?.vulnerability.unemployed ? [1] : [0],
+        deficient: family?.vulnerability.deficient ? [1] : [0],
+        low_income: family?.vulnerability.low_income ? [1] : [0],
+        others: family?.vulnerability.others ? [1] : [0],
+        address: family?.address.address ?? "",
+        telephone: family?.address.telephone ?? "",
+        reference: family?.address.reference ?? "",
+        conditions: family?.address.conditions ?? "",
+        construction_type: family?.address.construction_type ?? "",
+        rooms: family?.address.rooms ?? "",
+        rent_value: family?.address.rent_value ?? 0,
+        benefitsForFamily: family?.family_benefits ?? []
     }
+
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Campo obrigatório"),
         surname: Yup.string().required("Campo obrigatório"),
         birthday: Yup.string().required("Campo obrigatório"),
         // certidao_nascimento: Yup.number(),
-        // pasta: Yup.string(),
-        // arquivo: Yup.string(),
-        // nº: Yup.string(),
-        // NIS: Yup.number(),
-        // numero_rg: Yup.string().required("Campo obrigatório"),
-        // data_emissao_rg: Yup.string().required("Campo obrigatório"),
-        // uf_rg: Yup.object().required("Campo obrigatório"),
-        // emissao_rg: Yup.string().required("Campo obrigatório"),
-        // cpf: Yup.string().required("Campo obrigatório"),
-        // deficiente: Yup.string().required("Campo obrigatório"),
-        // deficiencia: Yup.string(),
-        // mae: Yup.string().required("Campo obrigatório"),
-        // pai: Yup.string().required("Campo obrigatório"),
-        // estado_civil: Yup.string(),
-        // escolaridade: Yup.string().required("Campo obrigatório"),
-        // data_inicial: Yup.string(),
-        // profissao: Yup.string().required('Profissão é obrigatória'),
-        // carteira_assinada: Yup.string(),
-        // renda: Yup.number(),
-        // reside_familia: Yup.string().required('Informação sobre residir com a família é obrigatória'),
-        // bolsa_familia: Yup.number(),
-        // loasbpc: Yup.number(),
-        // previdencia: Yup.number(),
-        // endereco: Yup.string().required("Campo obrigatotório"),
-        // telefone: Yup.string().required("Campo obrigatotório"),
-        // ponto_referencia: Yup.string(),
-        // condicoes_moradia: Yup.string().required("Campo obrigatotório"),
-        // tipo_construcao: Yup.string().required("Campo obrigatotório"),
-        // comodos: Yup.string().required("Campo obrigatotório"),
-        // valor_aluguel: Yup.number(),
+        // folder: Yup.string(),
+        // archives: Yup.string(),
+        number: Yup.string(),
+        nis: Yup.number(),
+        numero_rg: Yup.string().required("Campo obrigatório"),
+        data_emissao_rg: Yup.string().required("Campo obrigatório"),
+        uf_rg: Yup.object().required("Campo obrigatório"),
+        emission_rg: Yup.string().required("Campo obrigatório"),
+        cpf: Yup.string().required("Campo obrigatório"),
+        is_deficiency: Yup.string().required("Campo obrigatório"),
+        // beb: Yup.string(),
+        filiation_1: Yup.string().required("Campo obrigatório"),
+        filiation_2: Yup.string().required("Campo obrigatório"),
+        marital_status: Yup.string(),
+        escolarity: Yup.string().required("Campo obrigatório"),
+        initial_date: Yup.string(),
+        profission: Yup.string().required('Profissão é obrigatória'),
+        signed_portfolio: Yup.string(),
+        income: Yup.number(),
+        nuclear_family: Yup.string().required('Informação sobre residir com a família é obrigatória'),
+        address: Yup.string().required("Campo obrigatotório"),
+        telephone: Yup.string().required("Campo obrigatotório"),
+        reference: Yup.string(),
+        conditions: Yup.string().required("Campo obrigatotório"),
+        construction_type: Yup.string().required("Campo obrigatotório"),
+        rooms: Yup.string().required("Campo obrigatotório"),
+        rent_value: Yup.number(),
     });
 
     return (
@@ -186,7 +186,7 @@ const EditFamilyReferedScreen = () => {
                 }}
                 validationSchema={validationSchema}
             >
-                {({ values, handleChange, handleSubmit, errors, touched }) => {
+                {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
 
                     var erroList = [];
 
@@ -206,9 +206,9 @@ const EditFamilyReferedScreen = () => {
                                 <ButtonPrime label="Salvar" type="submit" />
                             </Row>
                             {activeStep === 0 ?
-                                <FormInfoPerson values={values} errors={errors} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?
-                                    <FormAddress values={values} errors={errors} touched={touched} handleChange={handleChange} /> : activeStep === 2 ?
-                                        <FormFinances values={values} errors={errors} touched={touched} handleChange={handleChange} /> : null}
+                                <FormInfoPerson values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?
+                                    <FormAddress values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 2 ?
+                                        <FormFinances values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : null}
                         </form>
                     )
                 }
