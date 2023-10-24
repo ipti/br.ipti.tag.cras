@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
+import Table from "../../../../Components/Table";
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
+import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
-import CrasDropdown from "../../../../CrasUi/Dropdown";
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import Table from "../../../../Components/Table";
 
 const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) => {
 
@@ -16,35 +16,31 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
     const [benefits_fk, setbenefits_fk] = useState()
     const [value, setvalue] = useState()
 
-    const { benefits, setbenefits, benefitsfetch } = useContext(EditFamilyReferedContext);
+    const { benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits } = useContext(EditFamilyReferedContext);
+    const { family } = useContext(EditFamilyReferedContext)
 
-    useEffect(() => {
-        const test = []
-        values.benefitsForFamily.forEach(element => {
-            test.push({
-                benefits_fk: element.benefits.benefits.id, value: element.benefits.value
-            })
-        });
-        setbenefits(test)
-    }, [values.benefitsForFamily, setbenefits])
+    const [benefits, setbenefits] = useState(values.benefitsForFamily)
 
 
     const columns = [
         { field: 'benefits_fk.description', header: 'Beneficio' },
         { field: 'value', header: 'Valor' },
     ];
-    const handleBenefits = (set) => {
+
+
+    const handleBenefits = () => {
+
         setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
         setbenefits_fk()
         setvalue()
         setvisibleAddBenefits(!visibleAddBenefits)
-        set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
+        handleCreateFamilyBenefits({
+            family_fk: family.id,
+            benefits_fk: benefits_fk.id,
+            value: value
+        })
     }
 
-
-
-
-    const { family } = useContext(EditFamilyReferedContext)
 
     if (!family) return null;
 
@@ -136,7 +132,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                 </Grid>
                 <Row id="start">
                     <Padding padding="8px" />
-                    <ButtonPrime label={"Criar"} type="button" onClick={() => handleBenefits(setFieldValue)} />
+                    <ButtonPrime label={"Criar"} type="button" onClick={handleBenefits} />
                     <Padding />
                     <ButtonPrime type="button" onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} severity={"danger"} label={"Cancelar"} />
                 </Row>
@@ -152,7 +148,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                     list={benefits}
                     name="Beneficios"
                     pathEdit={"/edit/tecnico/"}
-                // delet={deleteBenefits}
+                    delet={deleteFamilyBenefits}
                 />
             </Padding>
             <Padding padding="16px" />

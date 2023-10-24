@@ -5,11 +5,11 @@ import queryClient from "../../../services/react-query";
 
 
 
-const EditFamilyReferedState = () => {
+const EditRferedState = () => {
 
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-    queryClient.removeQueries({ queryKey: "FamilyReferedId" })
+    queryClient.removeQueries({ queryKey: "RferedId" })
     setLoading(true);
   }, [])
 
@@ -18,8 +18,7 @@ const EditFamilyReferedState = () => {
   const [open, setOpen] = useState(false)
   const [dataValues, setDataValues] = useState({});
   const [family, setFamily] = useState();
-  const [member, setMember] = useState()
-  const [benefits, setbenefits] = useState([])
+
   const { id } = useParams()
 
   const [isVerify, setIsVerify] = useState(true)
@@ -39,10 +38,12 @@ const EditFamilyReferedState = () => {
   const {
     familyReferedfetch,
     CreateFamilyRequestRequestMutation,
-    // membersFamilyRequest,
-    DeleteMemberFamilyRequestMutation,
+    // membersRquest,
+    DeleteFamilyBenefitsMutation,
+    EditFamilyRequestRequestMutation, DeleteMemberFamilyRequestMutation,
+    EditAddressRequestMutation,
     benefitsfetch,
-    EditFamilyRequestRequestMutation
+    CreateFamilyBenefitsRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
 
@@ -51,8 +52,8 @@ const EditFamilyReferedState = () => {
       setFamily(familyReferedfetch)
     }
 
-    // if (membersFamilyRequest) {
-    //   const filter = membersFamilyRequest.data.filter(member => `${member.id_identificacao_usuario}` === id);
+    // if (membersRquest) {
+    //   const filter = membersRquest.data.filter(member => `${member.id_identificacao_usuario}` === id);
     //   setMember(filter)
     // }
 
@@ -167,41 +168,92 @@ const EditFamilyReferedState = () => {
   const handleFamiliaRefered = (values) => {
 
 
-    console.log(values.comodos.toString())
-    const data = {
-      ...values,
-      certidao_nascimento: values.certidao_nascimento ? parseInt(values.certidao_nascimento) : "",
-      NIS: parseInt(values.NIS),
-      renda: parseInt(values.renda),
-      bolsa_familia: parseInt(values.bolsa_familia),
-      loasbpc: parseInt(values.loasbpc),
-      previdencia: parseInt(values.previdencia),
-      comodos: values.comodos.toString(),
-      valor_aluguel: values.valor_aluguel ? parseInt(values.valor_aluguel) : 0,
-      uf_rg: values.uf_rg.uf,
-      ocupacao_irregular: values.ocupacao_irregular.length === 0 || values.ocupacao_irregular[0] === 0 ? 0 : 1,
-      crianca_sozinha: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
-      idosos_dependentes: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
-      desempregados: values.desempregados.length === 0 || values.desempregados[0] === 0 ? 0 : 1,
-      deficientes: values.deficientes.length === 0 || values.deficientes[0] === 0 ? 0 : 1,
-      baixa_renda: values.baixa_renda.length === 0 || values.baixa_renda[0] === 0 ? 0 : 1,
-      outros: values.outros.length === 0 || values.outros[0] === 0 ? 0 : 1
+
+    // const data = {
+    //   ...values,
+    //   certidao_nascimento: values.certidao_nascimento ? parseInt(values.certidao_nascimento) : "",
+    //   nis: parseInt(values.nis),
+    //   renda: parseInt(values.renda),
+    //   comodos: values.comodos.toString(),
+    //   valor_aluguel: values.valor_aluguel ? parseInt(values.valor_aluguel) : 0,
+    //   uf_rg: values.uf_rg.uf,
+    //   ocupacao_irregular: values.ocupacao_irregular.length === 0 || values.ocupacao_irregular[0] === 0 ? false : true,
+    //   crianca_sozinha: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
+    //   idosos_dependentes: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
+    //   desempregados: values.desempregados.length === 0 || values.desempregados[0] === 0 ? 0 : 1,
+    //   deficientes: values.deficientes.length === 0 || values.deficientes[0] === 0 ? 0 : 1,
+    //   baixa_renda: values.baixa_renda.length === 0 || values.baixa_renda[0] === 0 ? 0 : 1,
+    //   outros: values.outros.length === 0 || values.outros[0] === 0 ? 0 : 1
+    // }
+
+
+    const bodyUserIdentify = {
+      name: values?.name,
+      surname: values?.surname,
+      birthday: values?.birthday,
+      // certidao_nascimento: ?user_identifies.birth_certificate  ?? "",
+      // pasta:   values?.pasta : "",
+      // arquivo: ?arquivo ?? "",
+      number: values?.number,
+      nis: values?.nis,
+      rg_number: values?.rg_number.replace(/\D/g, ''),
+      rg_date_emission: values?.rg_date_emission,
+      uf_rg: values?.uf_rg.uf,
+      emission_rg: values?.emission_rg,
+      cpf: values.cpf.replace(/\D/g, ''),
+      is_deficiency: values?.is_deficiency,
+      // deficiencia: ?deficiencia ?? "",
+      filiation_1: values?.filiation_1,
+      filiation_2: values.filiation_2,
+      marital_status: values?.marital_status,
+      escolarity: values?.escolarity,
+      initial_date: values?.initial_date,
+      final_date: values?.final_date,
+      profission: values.profission,
+      income: values.income,
+      nuclear_family: values?.nuclear_family,
     }
 
+    const bodyAddress = {
+      address: values.address,
+      telephone: values.telephone.replace(/\D/g, ''),
+      reference: values.reference,
+      conditions: values.conditions,
+      construction_type: values.construction_type,
+      rooms: values.rooms,
+      rent_value: values.rent_value
+    }
+
+
+   
+
+    EditFamilyRequestRequestMutation.mutate(bodyUserIdentify);
+    EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
     show()
-    EditFamilyRequestRequestMutation.mutate(data);
 
   }
 
+  console.log(family)
 
-  const handleCreateFamilyMember = (body) => {
+  const handleCreateMmber = (body) => {
     CreateFamilyRequestRequestMutation.mutate(body)
   }
 
- 
+
+  const handleCreateFamilyBenefits = (body) => {
+    CreateFamilyBenefitsRequestMutation.mutate(body)
+  }
+
+  const deleteFamilyBenefits = (id) => {
+    DeleteFamilyBenefitsMutation.mutate(id)
+  }
+
+  
+  
+
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen, benefits, setbenefits, benefitsfetch
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits,deleteFamilyBenefits
   }
 }
 
-export default EditFamilyReferedState;
+export default EditRferedState;

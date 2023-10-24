@@ -84,15 +84,23 @@ const EditFamilyReferedScreen = () => {
         return value
     }
 
-    console.log(family)
+    const familyValue = (values) => {
+        const test = []
+        values.forEach(element => {
+            test.push({
+                benefits_fk: element.benefits, value: element.value, id: element.id
+            })
+        });
+        return test
+    }
 
     const initialValue = {
         name: family ? findOwner?.name : "",
-        surname: findOwner?.surname ?? "",
+        surname: findOwner?.surname ?? null,
         birthday: family ? findOwner?.birthday : "",
-        // certidao_nascimento: family?.user_identifies.birth_certificate  ?? "",
-        pasta: family ? findOwner?.pasta : "",
-        // arquivo: family?.arquivo ?? "",
+        birth_certificate: findOwner.birth_certificate ?? "",
+        folder: family ? findOwner?.folder : "",
+        archive: findOwner?.archive ?? "",
         number: family ? findOwner?.number : "",
         nis: family ? findOwner?.nis : "",
         rg_number: family ? findOwner?.rg_number : "",
@@ -126,28 +134,27 @@ const EditFamilyReferedScreen = () => {
         construction_type: family?.address.construction_type ?? "",
         rooms: family?.address.rooms ?? "",
         rent_value: family?.address.rent_value ?? 0,
-        benefitsForFamily: family?.family_benefits ?? []
+        benefitsForFamily: familyValue(family?.family_benefits) ?? []
     }
 
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Campo obrigatório"),
-        surname: Yup.string().required("Campo obrigatório"),
+        surname: Yup.string(),
         birthday: Yup.string().required("Campo obrigatório"),
-        // certidao_nascimento: Yup.number(),
-        // folder: Yup.string(),
-        // archives: Yup.string(),
+        birth_certificate: Yup.number(),
+        folder: Yup.string(),
+        archives: Yup.string(),
         number: Yup.string(),
-        nis: Yup.number(),
-        numero_rg: Yup.string().required("Campo obrigatório"),
-        data_emissao_rg: Yup.string().required("Campo obrigatório"),
+        rg_number: Yup.string().required("Campo obrigatório"),
+        rg_date_emission: Yup.string().required("Campo obrigatório"),
         uf_rg: Yup.object().required("Campo obrigatório"),
         emission_rg: Yup.string().required("Campo obrigatório"),
         cpf: Yup.string().required("Campo obrigatório"),
         is_deficiency: Yup.string().required("Campo obrigatório"),
         // beb: Yup.string(),
         filiation_1: Yup.string().required("Campo obrigatório"),
-        filiation_2: Yup.string().required("Campo obrigatório"),
+        filiation_2: Yup.string(),
         marital_status: Yup.string(),
         escolarity: Yup.string().required("Campo obrigatório"),
         initial_date: Yup.string(),
@@ -195,6 +202,8 @@ const EditFamilyReferedScreen = () => {
                             erroList.push(`${chave}: ${errors[chave]}`)
                         }
                     }
+
+                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             {erroList.map((item) => {
