@@ -20,7 +20,6 @@ const CreateServicesScreen = () => {
                 <Padding padding="16px" />
                 <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
-                        console.log(errors)
                         return <form onSubmit={handleSubmit}>
                             <h3>Dados do atendimento</h3>
                             <Grid checkMockup={[{}, {}]}>

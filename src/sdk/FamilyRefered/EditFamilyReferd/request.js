@@ -6,6 +6,13 @@ const config = {
   };
   
 
+  
+
+
+export const CreateUserIdentifyWithFamilyRequest = async (body) => {
+  return await http.post(`/bff/create-user-with-family`, body, config)
+}
+
 export const EditUserIdentifyRequest = async (body, id) => {
     return await http.put(`/user-identify/${id}`, body, config)
   }

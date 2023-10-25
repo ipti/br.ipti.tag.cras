@@ -203,7 +203,6 @@ const EditFamilyReferedScreen = () => {
                         }
                     }
 
-                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             {erroList.map((item) => {

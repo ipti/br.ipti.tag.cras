@@ -9,7 +9,7 @@ const EditRferedState = () => {
 
   const [loading, setLoading] = useState(false)
   useEffect(() => {
-    queryClient.removeQueries({ queryKey: "RferedId" })
+    queryClient.removeQueries({ queryKey: "FamilyReferedId" })
     setLoading(true);
   }, [])
 
@@ -18,6 +18,7 @@ const EditRferedState = () => {
   const [open, setOpen] = useState(false)
   const [dataValues, setDataValues] = useState({});
   const [family, setFamily] = useState();
+
 
   const { id } = useParams()
 
@@ -43,7 +44,8 @@ const EditRferedState = () => {
     EditFamilyRequestRequestMutation, DeleteMemberFamilyRequestMutation,
     EditAddressRequestMutation,
     benefitsfetch,
-    CreateFamilyBenefitsRequestMutation
+    CreateFamilyBenefitsRequestMutation,
+    CreateUserIdentifyWithFamilyRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
 
@@ -224,16 +226,12 @@ const EditRferedState = () => {
       rent_value: values.rent_value
     }
 
-
-   
-
     EditFamilyRequestRequestMutation.mutate(bodyUserIdentify);
     EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
     show()
 
   }
 
-  console.log(family)
 
   const handleCreateMmber = (body) => {
     CreateFamilyRequestRequestMutation.mutate(body)
@@ -248,11 +246,22 @@ const EditRferedState = () => {
     DeleteFamilyBenefitsMutation.mutate(id)
   }
 
-  
-  
+  const HandleCreateUserIdentify = (data) => {
+
+    CreateUserIdentifyWithFamilyRequestMutation.mutate({
+      ...data, nis: parseInt(data.nis),
+      cpf: data.cpf.replace(/\D/g, ''),
+      rg_number: data.rg_number.replace(/\D/g, ''),
+      telephone: data.telephone.replace(/\D/g, ''),
+      uf_rg: data.uf_rg.uf,
+      attendance_unity_fk: 1,
+      birth_certificate: data.birth_certificate === "" ? null : data.birth_certificate,
+    })
+  }
+
 
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits,deleteFamilyBenefits
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits
   }
 }
 

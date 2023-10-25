@@ -1,14 +1,15 @@
-import { DataTable } from 'primereact/datatable';
-import { Column } from 'primereact/column';
-import React, { useState } from 'react';
 import { Button } from 'primereact/button';
-import { Row } from '../styles/styles';
+import { Column } from 'primereact/column';
+import { ConfirmPopup } from 'primereact/confirmpopup';
+import { DataTable } from 'primereact/datatable';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Row } from '../styles/styles';
 
 
 const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
     const [visible, setVisible] = useState();
+    const [id, setId] = useState();
 
     const history = useNavigate()
     const actionBodyTemplate = (rowData) => {
@@ -16,25 +17,28 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
         return (
             <React.Fragment>
                 <Row id='end'>
-                    <Button icon="pi pi-pencil" rounded  className="mr-2" onClick={onEdit ? () => onEdit(rowData) : () => history(`${pathEdit}${rowData.id}`)} />
-                    <Button icon="pi pi-trash" rounded  severity="danger" onClick={() => setVisible(true)} />
+                    {pathEdit ? <Button icon="pi pi-pencil" rounded className="mr-2" onClick={onEdit ? () => onEdit(rowData) : () => history(`${pathEdit}${rowData.id}`)} /> : null}
+                    <Button icon="pi pi-trash" rounded type="button" severity="danger" onClick={() => { setVisible(true); setId(rowData.id) }} />
                 </Row>
-                <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Deseja excluir? Essa ação é irreversível!"
-                    acceptLabel='Sim'
-                    rejectLabel='Não'
-                    header="Confirmação" icon="pi pi-exclamation-triangle" accept={() => delet(rowData.id)} reject={() => setVisible(false)} />
+
             </React.Fragment>
         );
     };
 
-    return (
-        <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
-            {columns.map((col, i) => (
-                <Column align="center" key={col.field} field={col.field} header={col.header} />
-            ))}
-            <Column align="right" body={actionBodyTemplate} header={"Editar"} exportable={false} style={{ minWidth: '12rem' }}></Column>
 
-        </DataTable>
+    return (
+        <>
+            <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
+                {columns.map((col, i) => (
+                    <Column align="center" key={col.field} field={col.field} header={col.header} />
+                ))}
+                <Column align="right" body={actionBodyTemplate} header={"Editar"} exportable={false} style={{ minWidth: '12rem' }}></Column>
+            </DataTable>
+            <ConfirmPopup visible={visible} onHide={() => setVisible(false)} message="Deseja excluir? Essa ação é irreversível!"
+                acceptLabel='Sim'
+                rejectLabel='Não'
+                header="Confirmação" icon="pi pi-exclamation-triangle" accept={() => { delet(id) }} reject={() => setVisible(false)} />
+        </>
     )
 }
 

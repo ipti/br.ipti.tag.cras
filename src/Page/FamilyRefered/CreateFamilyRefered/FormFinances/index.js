@@ -65,7 +65,6 @@ const FormFinances = () => {
                         setFieldValue("benefitsForFamily", filterBen)
                     }
 
-                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Row>

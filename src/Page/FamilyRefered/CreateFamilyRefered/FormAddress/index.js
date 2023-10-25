@@ -57,7 +57,6 @@ const FormAddress = () => {
 
             (async () => {
                 const res = await http.get(`/bff/get-city?ufId=${id}`, config)
-                console.log(res.data)
                 setcity(res.data)
             })();
         }
@@ -66,12 +65,10 @@ const FormAddress = () => {
 
 
     const stateSelect = (e, setFieldValue) => {
-        console.log(e)
         setFieldValue("edcenso_uf_fk", e.target.value)
-       getCity(e.target.value.id)
+        getCity(e.target.value.id)
     }
 
-    console.log(city)
 
     return (
         <Column>
@@ -79,7 +76,6 @@ const FormAddress = () => {
             <h3>Endereço</h3>
             <Formik initialValues={initialValue} onSubmit={value => nextStep(value)} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-                    console.log(values)
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}]}>

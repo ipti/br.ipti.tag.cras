@@ -12,7 +12,6 @@ export const UserState = () => {
 
     useEffect(() => {
         if(userfetch){
-            console.log(userfetch)
             setUser(userfetch)
 
         }

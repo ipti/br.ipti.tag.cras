@@ -47,7 +47,6 @@ export const EditBenefitsState = () => {
 
 
 
-    console.log(initialValue)
     const handleEditBenefits = (body) => {
         EditBenefitsRequestMutation.mutate({ ...body, type: body.type.id })
     }

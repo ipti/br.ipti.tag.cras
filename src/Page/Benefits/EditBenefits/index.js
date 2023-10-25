@@ -20,7 +20,6 @@ const EditBenefitsScreen = () => {
                 <Padding padding="16px" />
                 {benefits ? <Formik initialValues={initialValue} onSubmit={(values) => handleEditBenefits(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) => {
-                        console.log(values)
                         return (
                             <form onSubmit={handleSubmit}>
                                 <Grid checkMockup={[{}, {}]}>

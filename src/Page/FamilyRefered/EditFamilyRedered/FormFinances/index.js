@@ -23,6 +23,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
 
 
     const columns = [
+        { field: 'id', header: 'id' },
         { field: 'benefits_fk.description', header: 'Beneficio' },
         { field: 'value', header: 'Valor' },
     ];
@@ -30,7 +31,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
 
     const handleBenefits = () => {
 
-        setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
+        setbenefits([...benefits, { benefits_fk: benefits_fk, value: value, id: benefits_fk.id }])
         setbenefits_fk()
         setvalue()
         setvisibleAddBenefits(!visibleAddBenefits)
@@ -39,6 +40,12 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
             benefits_fk: benefits_fk.id,
             value: value
         })
+    }
+
+    const deleteBenefits = (id) => {
+        console.log(id)
+        setbenefits(benefits.filter(props => props.id !== id))
+        deleteFamilyBenefits(id)
     }
 
 
@@ -142,13 +149,11 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                 <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
             </Row> : null}
             <Padding padding="8px">
-
                 <Table
                     columns={columns}
                     list={benefits}
                     name="Beneficios"
-                    pathEdit={"/edit/tecnico/"}
-                    delet={deleteFamilyBenefits}
+                    delet={deleteBenefits}
                 />
             </Padding>
             <Padding padding="16px" />
@@ -156,10 +161,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                 <Padding />
                 <ButtonPrime label="Próximo" type={"submit"} />
             </Row>
-
             <Padding padding="16px" />
-
-
         </Column>
     )
 }
