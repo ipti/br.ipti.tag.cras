@@ -225,8 +225,8 @@ const EditRferedState = () => {
       rooms: values.rooms,
       rent_value: values.rent_value
     }
-
-    EditFamilyRequestRequestMutation.mutate(bodyUserIdentify);
+    console.log(bodyUserIdentify)
+    EditFamilyRequestRequestMutation.mutate({body: bodyUserIdentify, id: family.family_representative_fk});
     EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
     show()
 

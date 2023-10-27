@@ -17,10 +17,9 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
         return (
             <React.Fragment>
                 <Row id='end'>
-                    {pathEdit ? <Button icon="pi pi-pencil" rounded className="mr-2" onClick={onEdit ? () => onEdit(rowData) : () => history(`${pathEdit}${rowData.id}`)} /> : null}
+                    {pathEdit ? <Button icon="pi pi-pencil" rounded className="mr-2" onClick={onEdit ? () => onEdit(rowData) : () => history(`${pathEdit}${rowData.family_fk ? rowData.family_fk : rowData.id}`)} /> : null}
                     <Button icon="pi pi-trash" rounded type="button" severity="danger" onClick={() => { setVisible(true); setId(rowData.id) }} />
                 </Row>
-
             </React.Fragment>
         );
     };

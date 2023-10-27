@@ -50,7 +50,7 @@ const FormFamilyComposition = () => {
         profission:"",
         income:  0,
         nuclear_family: "",
-        signed_portfolio:  false,
+        signed_portfolio: false,
         benefitsForFamily: []
     }
 

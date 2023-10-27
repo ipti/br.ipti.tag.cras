@@ -39,7 +39,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
   );
 
   const EditFamilyRequestRequestMutation = useMutation(
-    (data) => EditUserIdentifyRequest(data, id),
+    ({data, id}) => EditUserIdentifyRequest(data, id),
     {
       onError: (error) => {
         console.log(error.response.data.message)

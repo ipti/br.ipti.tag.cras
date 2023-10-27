@@ -25,7 +25,6 @@ export const EditUser = () => {
     const role = [
         {id: "SECRETARY", name: "Secretário ou administrador"},
         {id: "TECHNICIAN", name: "Técnico"},
-        {id: "USER", name: "Usuário"},
     ]
 
 

@@ -7,12 +7,12 @@ import { CreateTechnicianController } from '../../../sdk/Technician/CreateTechni
 export const CreateTechnicianState = () => {
     const initialValue = {
         name: "",
-        user_fk: ""
+        user: ""
     }
 
     const CreateSchema = Yup.object().shape({
         name: Yup.string().required("Campo Obrigatório"),
-        user_fk: Yup.object().required("Campo Obrigatório")
+        user: Yup.object().required("Campo Obrigatório")
     })
 
 
@@ -28,7 +28,7 @@ export const CreateTechnicianState = () => {
     }, [userfetch])
 
     const handleCreateTechnician = (body) => {
-        CreateTechnicianRequestMutation.mutate({...body, user_fk: body.user_fk.id})
+        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id})
     }
 
 

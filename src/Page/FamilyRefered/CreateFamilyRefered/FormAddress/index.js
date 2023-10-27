@@ -1,34 +1,23 @@
 import { Formik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import * as Yup from 'yup';
 import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
 import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
-import { useFetchAllState } from "../../../../sdk/State/request";
-import http from "../../../../services/axios";
-import { getToken } from "../../../../services/localstorage";
 
 
 const FormAddress = () => {
 
     const { backStep, nextStep, dataValues } = useContext(CreateFamilyReferedContext);
 
-    const [city, setcity] = useState([])
-
-    const { data: state } = useFetchAllState();
-
-
     const initialValue = {
         address: dataValues.address ?? "",
         telephone: dataValues.telephone ?? "",
         reference: dataValues.reference ?? "",
-        edcenso_uf_fk: dataValues.edcenso_uf_fk ?? "",
-        edcenso_city_fk: dataValues.edcenso_city_fk ?? "",
         conditions: dataValues.conditions ?? "",
         construction_type: dataValues.construction_type ?? "",
         rooms: dataValues.rooms ?? 0,
@@ -47,27 +36,6 @@ const FormAddress = () => {
 
 
 
-    const config = {
-        headers: { Authorization: `Bearer ${getToken()}` },
-    };
-
-    const getCity = (id) => {
-
-        if (id) {
-
-            (async () => {
-                const res = await http.get(`/bff/get-city?ufId=${id}`, config)
-                setcity(res.data)
-            })();
-        }
-
-    }
-
-
-    const stateSelect = (e, setFieldValue) => {
-        setFieldValue("edcenso_uf_fk", e.target.value)
-        getCity(e.target.value.id)
-    }
 
 
     return (
@@ -91,23 +59,6 @@ const FormAddress = () => {
                                     <Padding />
                                     {errors.reference && touched.reference ? (
                                         <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                            </Grid>
-                            <Grid checkMockup={[{}, {}]}>
-                                <Column>
-                                    {state ? <CrasDropdown name="edcenso_uf_fk" optionLabel={"name"} options={state} onChange={(e) => stateSelect(e, setFieldValue)} value={values.edcenso_uf_fk} label="Estado" />
-                                        : <></>}
-                                    <Padding />
-                                    {errors.edcenso_uf_fk && touched.edcenso_uf_fk ? (
-                                        <div style={{ color: "red" }}>{errors.edcenso_uf_fk}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                                <Column>
-                                    <CrasDropdown onChange={handleChange} optionLabel={"name"} options={city} value={values.edcenso_city_fk} name="edcenso_city_fk" label="Cidade" />
-                                    <Padding />
-                                    {errors.edcenso_city_fk && touched.edcenso_city_fk ? (
-                                        <div style={{ color: "red" }}>{errors.edcenso_city_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>

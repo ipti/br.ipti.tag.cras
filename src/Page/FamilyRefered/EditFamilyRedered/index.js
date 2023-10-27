@@ -77,7 +77,7 @@ const EditFamilyReferedScreen = () => {
     if (!family) return null
 
 
-    const findOwner = family ? family?.user_identifies.find(props => props.id === family.family_representative_fk) : {}
+    const findOwner = family ? family?.user_identify.find(props => props.id === family.family_representative_fk) : {}
 
     const valueUf = () => {
         const value = family ? estadosDoBrasil.find(fil => fil.uf === findOwner.uf_rg) : ""
@@ -87,6 +87,7 @@ const EditFamilyReferedScreen = () => {
     const familyValue = (values) => {
         const test = []
         values.forEach(element => {
+            console.log(element)
             test.push({
                 benefits_fk: element.benefits, value: element.value, id: element.id
             })
@@ -134,7 +135,7 @@ const EditFamilyReferedScreen = () => {
         construction_type: family?.address.construction_type ?? "",
         rooms: family?.address.rooms ?? "",
         rent_value: family?.address.rent_value ?? 0,
-        benefitsForFamily: familyValue(family?.family_benefits) ?? []
+        benefitsForFamily: familyValue(family?.benefits) ?? []
     }
 
 

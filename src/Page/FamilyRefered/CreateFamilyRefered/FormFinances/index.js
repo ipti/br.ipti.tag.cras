@@ -9,6 +9,7 @@ import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import Table from "../../../../Components/Table";
+import CrasRadioButton from "../../../../CrasUi/RadioButton";
 
 const FormFinances = () => {
 
@@ -27,12 +28,16 @@ const FormFinances = () => {
         deficient: dataValues.deficient ?? "",
         low_income: dataValues.low_income ?? "",
         others: dataValues.others ?? "",
-        benefitsForFamily: dataValues.benefitsForFamily ?? []
+        benefitsForFamily: dataValues.benefitsForFamily ?? [],
+        signed_portfolio: dataValues.signed_portfolio ?? "",
+        nuclear_family: dataValues.nuclear_family ?? ""
     }
 
     const validationSchema = Yup.object().shape({
         profission: Yup.string().required('Profissão é obrigatória'),
-        income: Yup.number().required("Campo Obrigatorio"),
+        signed_portfolio: Yup.string(),
+        income: Yup.number(),
+        nuclear_family: Yup.string().required('Informação sobre residir com a família é obrigatória'),
     });
 
     const [benefits_fk, setbenefits_fk] = useState()
@@ -93,47 +98,48 @@ const FormFinances = () => {
                                 <div className="col"> <CrasCheckbox name={"others"} value={1} checked={values.others[0] === 1} onChange={handleChange} label={"Outros"} /></div>
                             </Row>
                             <h3>Situação Financeira e Previdenciária</h3>
-                            <Grid checkMockup={[{}, {}]}>
-                                <Column>
-                                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
-                                    <Padding />
-                                    {errors.profission && touched.profission ? (
-                                        <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                                {/* <Column>
-                                    <label>Carteira Assinada</label>
-                                    <Row>
-                                        <CrasRadioButton selectValue={1} name="carteira_assinada" value={"Sim"} onChange={handleChange} checked={values.carteira_assinada === "Sim"} label={"Sim"} />
-                                        <CrasRadioButton selectValue={2} name="carteira_assinada" label={"Não"} value={"Não"} onChange={handleChange} checked={values.carteira_assinada === "Não"} />
-                                    </Row>
-                                    {errors.carteira_assinada && touched.carteira_assinada ? (
-                                        <div style={{ color: "red" }}>{errors.carteira_assinada}<Padding /></div>
-                                    ) : null}
-                                </Column> */}
-                            </Grid>
-                            <Grid checkMockup={[{}, {}]}>
-                                <Column>
-                                    <CrasInputNumber mode="currency"
-                                        currency="BRL"
-                                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal" />
-                                    <Padding />
-                                    {errors.income && touched.income ? (
-                                        <div style={{ color: "red" }}>{errors.income}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                                {/* <Column>
-                                    <label>Reside com:</label>
-                                    <Row>
-                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.reside_familia === "Familia"} value={"Familia"} name={"reside_familia"} label="Família" />
-                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.reside_familia === "Sozinho"} value={"Sozinho"} name={"reside_familia"} label="Sozinho" />
-                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.reside_familia === "Outros"} value={"Outros"} name={"reside_familia"} label="Outros" />
-                                    </Row>
-                                    {errors.reside_familia && touched.reside_familia ? (
-                                        <div style={{ color: "red" }}>{errors.reside_familia}</div>
-                                    ) : null}
-                                </Column> */}
-                            </Grid>
+            <Grid checkMockup={[{}, {}]}>
+                <Column>
+                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
+                    <Padding />
+                    {errors.profission && touched.profission ? (
+                        <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
+                    ) : null}
+                </Column>
+                <Column>
+                    <label>Carteira Assinada</label>
+                    <Row>
+                        <CrasRadioButton selectValue={1} name="signed_portfolio" value={true} onChange={handleChange} checked={values.signed_portfolio === true} label={"Sim"} />
+                        <CrasRadioButton selectValue={2} name="signed_portfolio" label={"Não"} value={false} onChange={handleChange} checked={values.signed_portfolio === false} />
+                    </Row>
+                    {errors.signed_portfolio && touched.signed_portfolio ? (
+                        <div style={{ color: "red" }}>{errors.signed_portfolio}<Padding /></div>
+                    ) : null}
+                </Column>
+            </Grid>
+            <Grid checkMockup={[{}, {}]}>
+                <Column>
+                    <CrasInputNumber mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal do usuário" />
+                    <Padding />
+                    {errors.income && touched.income ? (
+                        <div style={{ color: "red" }}>{errors.income}<Padding /></div>
+                    ) : null}
+                </Column>
+                <Column>
+                    <label>Reside com:</label>
+                    <Row>
+                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
+                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
+                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Outros"} value={"Outros"} name={"nuclear_family"} label="Outros" />
+
+                    </Row>
+                    {errors.nuclear_family && touched.nuclear_family ? (
+                        <div style={{ color: "red" }}>{errors.nuclear_family}</div>
+                    ) : null}
+                </Column>
+            </Grid>
                             <h3>
                                 Benefícios
                             </h3>

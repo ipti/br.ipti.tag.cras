@@ -94,10 +94,9 @@ const CreateFamilyReferedState = () => {
             rg_number: dataValues.rg_number.replace(/\D/g, ''),
             telephone: dataValues.telephone.replace(/\D/g, ''),
             uf_rg: dataValues.uf_rg.uf,
-            attendance_unity_fk: 1,
+            attendance_unity: 1,
+            kinship: "RESPONSAVEL",
             birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,
-            edcenso_uf_fk: dataValues.edcenso_uf_fk.id,
-            edcenso_city_fk: dataValues.edcenso_city_fk.id,
             irregular_ocupation
                 : (dataValues.irregular_ocupation
                     .length === 0 || dataValues.irregular_ocupation
@@ -127,6 +126,7 @@ const CreateFamilyReferedState = () => {
                     .length === 0 || dataValues.others
                     === "") ? false : true
         }
+
         CreateUserIdentifyRequestMutation.mutate(data);
     }
     return {

@@ -27,7 +27,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
         { field: 'benefits_fk.description', header: 'Beneficio' },
         { field: 'value', header: 'Valor' },
     ];
-
+    console.log(benefits)
 
     const handleBenefits = () => {
 

@@ -50,17 +50,17 @@ export const EditTechnicianState = () => {
 
     const initialValue = {
         name: technician ? technician.name : "",
-        user_fk: (user && technician) ? user.find(props => props.id === technician?.user_fk) : ""
+        user: (user && technician) ? user.find(props => props.id === technician?.user) : ""
     }
 
     const CreateSchema = Yup.object().shape({
         name: Yup.string().required("Campo Obrigatório"),
-        user_fk: Yup.object().required("Campo Obrigatório")
+        user: Yup.object().required("Campo Obrigatório")
     })
 
 
     const handleEditTechnician = (body) => {
-        EditTechnicianRequestMutation.mutate({...body, user_fk: body.user_fk.id})
+        EditTechnicianRequestMutation.mutate({...body, user: body.user.id})
     }
 
 
