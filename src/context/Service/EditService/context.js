@@ -3,13 +3,13 @@ import { EditServicesState } from "./state";
 
 export const EditServiceContext = createContext({});
 
-const EditServiceProvider = ({children}) => {
+const EditServiceProvider = ({ children }) => {
 
-    const { Schema, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne, toast, show } = EditServicesState();
+    const { Schema, handleCreateService, result, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne, toast, show } = EditServicesState();
 
 
     return (
-        <EditServiceContext.Provider value={{ Schema, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne, toast, show }}>
+        <EditServiceContext.Provider value={{ Schema, result, handleCreateService, initialValue, isLoadingService, isLoadingtechnician, service, technician, userIdentify, serviceOne, toast, show }}>
             {children}
         </EditServiceContext.Provider>
     )

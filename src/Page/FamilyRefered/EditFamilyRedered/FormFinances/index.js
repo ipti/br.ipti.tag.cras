@@ -27,7 +27,6 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
         { field: 'benefits_fk.description', header: 'Beneficio' },
         { field: 'value', header: 'Valor' },
     ];
-    console.log(benefits)
 
     const handleBenefits = () => {
 
@@ -36,8 +35,8 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
         setvalue()
         setvisibleAddBenefits(!visibleAddBenefits)
         handleCreateFamilyBenefits({
-            family_fk: family.id,
-            benefits_fk: benefits_fk.id,
+            family: family.id,
+            benefits: benefits_fk.id,
             value: value
         })
     }

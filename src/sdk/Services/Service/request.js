@@ -8,7 +8,7 @@ const config = {
 
 const ALLServiceRequest = async () => {
   try {
-    return await http.get("/attendance", config).then(response => response.data)
+    return await http.get("/bff/get-attendance", config).then(response => response.data)
       .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
           logout();

@@ -87,7 +87,6 @@ const EditFamilyReferedScreen = () => {
     const familyValue = (values) => {
         const test = []
         values.forEach(element => {
-            console.log(element)
             test.push({
                 benefits_fk: element.benefits, value: element.value, id: element.id
             })
@@ -100,7 +99,7 @@ const EditFamilyReferedScreen = () => {
         surname: findOwner?.surname ?? null,
         birthday: family ? findOwner?.birthday : "",
         birth_certificate: findOwner.birth_certificate ?? "",
-        folder: family ? findOwner?.folder : "",
+        folder: findOwner?.folder ?? "",
         archive: findOwner?.archive ?? "",
         number: family ? findOwner?.number : "",
         nis: family ? findOwner?.nis : "",

@@ -22,8 +22,8 @@ const FormInfoPerson = () => {
         birthday: dataValues.birthday ?? "",
         birth_certificate: dataValues.birth_certificate ?? "",
         folder: dataValues.folder ?? "",
-        archive: dataValues.arquivo ?? "",
-        number: dataValues.nº ?? "",
+        archive: dataValues.arquive ?? "",
+        number: dataValues.number ?? "",
         nis: dataValues.nis ?? "",
         rg_number: dataValues.rg_number ?? "",
         rg_date_emission: dataValues.rg_date_emission ?? "",
@@ -77,7 +77,9 @@ const FormInfoPerson = () => {
                     const dateEmit = new Date(values.rg_date_emission);
                     const dateBithrday = new Date(values.birthday)
 
+                    console.log(values)
 
+                    
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}, {}]}>

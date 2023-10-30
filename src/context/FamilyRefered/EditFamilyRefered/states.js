@@ -130,23 +130,21 @@ const EditRferedState = () => {
   ];
 
   const parentesco = [
-    "Pai",
-    "Mãe",
-    "Filho",
-    "Filha",
-    "Avô",
-    "Avó",
-    "Tio",
-    "Tia",
-    "Primo",
-    "Prima",
-    "Sobrinho",
-    "Sobrinha",
-    "Cônjuge",
-    "Companheiro(a)",
-    "Amigo(a)",
-    "Outro"
+    { id: "RESPONSAVEL", name: 'Responsável' },
+    { id: "CONJUGE", name: 'Cônjuge' },
+    { id: "FILHO_A", name: 'Filho(a)' },
+    { id: "ENTEADO_A", name: 'Enteado(a)' },
+    { id: "NETO_A", name: 'Neto(a)' },
+    { id: "PAI", name: 'Pai' },
+    { id: "MAE", name: 'Mãe' },
+    { id: "SOGRO_A", name: 'Sogro(a)' },
+    { id: "IRMAO_A", name: 'Irmão(a)' },
+    { id: "GENRO", name: 'Genro' },
+    { id: "NORA", name: 'Nora' },
+    { id: "OUTRO", name: 'Outro' },
+    { id: "NAO_PARENTE", name: 'Não Parente' }
   ]
+
 
 
 
@@ -169,8 +167,6 @@ const EditRferedState = () => {
 
   const handleFamiliaRefered = (values) => {
 
-
-
     // const data = {
     //   ...values,
     //   certidao_nascimento: values.certidao_nascimento ? parseInt(values.certidao_nascimento) : "",
@@ -188,15 +184,15 @@ const EditRferedState = () => {
     //   outros: values.outros.length === 0 || values.outros[0] === 0 ? 0 : 1
     // }
 
+    console.log(values)
 
     const bodyUserIdentify = {
       name: values?.name,
       surname: values?.surname,
       birthday: values?.birthday,
-      // certidao_nascimento: ?user_identifies.birth_certificate  ?? "",
-      // pasta:   values?.pasta : "",
-      // arquivo: ?arquivo ?? "",
-      number: values?.number,
+      folder: values.folder,
+      archive: values.archive,
+      number: values.number,
       nis: values?.nis,
       rg_number: values?.rg_number.replace(/\D/g, ''),
       rg_date_emission: values?.rg_date_emission,
@@ -214,7 +210,10 @@ const EditRferedState = () => {
       profission: values.profission,
       income: values.income,
       nuclear_family: values?.nuclear_family,
+      signed_portfolio: values?.signed_portfolio
     }
+
+    console.log(bodyUserIdentify)
 
     const bodyAddress = {
       address: values.address,
@@ -225,8 +224,8 @@ const EditRferedState = () => {
       rooms: values.rooms,
       rent_value: values.rent_value
     }
-    console.log(bodyUserIdentify)
-    EditFamilyRequestRequestMutation.mutate({body: bodyUserIdentify, id: family.family_representative_fk});
+
+    EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: family.family_representative_fk });
     EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
     show()
 
@@ -252,9 +251,11 @@ const EditRferedState = () => {
       ...data, nis: parseInt(data.nis),
       cpf: data.cpf.replace(/\D/g, ''),
       rg_number: data.rg_number.replace(/\D/g, ''),
-      telephone: data.telephone.replace(/\D/g, ''),
       uf_rg: data.uf_rg.uf,
-      attendance_unity_fk: 1,
+      attendance_unity: 1,
+      initial_date: new Date(Date.now()),
+      family: family.id,
+      kinship: data.kinship.id,
       birth_certificate: data.birth_certificate === "" ? null : data.birth_certificate,
     })
   }

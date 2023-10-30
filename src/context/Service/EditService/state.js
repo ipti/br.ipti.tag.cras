@@ -34,13 +34,12 @@ export const EditServicesState = () => {
 
   const Schema = Yup.object().shape({
     solicitation: Yup.string().required("Campo Obrigatório"),
-    result: Yup.string().required('Campo Obrigatório'),
-    data: Yup.string().required('Campo Obrigatório'),
+    result: Yup.object().required('Campo Obrigatório'),
     providence: Yup.string().required('Campo Obrigatório'),
     technician_fk: Yup.object().required('Campo Obrigatório'),
     task_fk: Yup.object().required('Campo Obrigatório'),
     user_identify_fk: Yup.object().required('Campo Obrigatório'),
-    description: Yup.object().required('Campo Obrigatório')
+    description: Yup.string().required('Campo Obrigatório'),
   });
 
   useEffect(() => {
@@ -75,20 +74,32 @@ export const EditServicesState = () => {
     return value
   }
 
+  
+  const result = [
+    {
+      id: "FINALIZADO",
+      name: "Finalizado"
+    },
+    {
+      id: "PENDENTE",
+      name: "Pendente"
+    }
+  ]
 
-
+  const valueResult = () => {
+    const value = serviceOne ? result?.find(fil => fil.id === serviceOne?.result) : ""
+    return value
+  }
   const initialValue = {
     solicitation: serviceOne ? serviceOne.solicitation : "",
-    result: serviceOne ? serviceOne.result : "",
+    result: valueResult(),
     providence: serviceOne ? serviceOne.providence : "",
     task_fk: valueService(),
     technician_fk: valueTechnician(),
     user_identify_fk: valueUserIdent(),
-    id_membro_familiar: "",
     data: serviceOne ? serviceOne.data : "",
     description: serviceOne ? serviceOne.description : ""
   }
-
 
 
 
@@ -98,14 +109,13 @@ export const EditServicesState = () => {
 
     const body = {
       solicitation: data.solicitation,
-      result: data.result,
+      result: data.result.id,
       providence: data.providence,
-      task_fk: data.task_fk.id,
-      technician_fk: data.technician_fk.id,
-      user_identify_fk: data.user_identify_fk.id,
+      task: data.task_fk.id,
+      technician: data.technician_fk.id,
+      user_identify: data.user_identify_fk.id,
       description: data.description,
-      attendance_unity_fk: 1,
-      data: data.data
+      attendance_unity: 1,
     }
 
     EditServicesRequestMutation.mutate(body)
@@ -114,6 +124,6 @@ export const EditServicesState = () => {
 
 
   return {
-    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, Schema, userIdentify, serviceOne, toast, show
+    initialValue, service, technician, isLoadingService, isLoadingtechnician, result, handleCreateService, Schema, userIdentify, serviceOne, toast, show
   }
 }

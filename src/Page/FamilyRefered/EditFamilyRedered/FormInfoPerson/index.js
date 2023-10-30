@@ -34,10 +34,10 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput label="Arquivo" name="archives" onChange={handleChange} value={values.archives} />
+                    <CrasInput label="Arquivo" name="archive" onChange={handleChange} value={values.archive} />
                     <Padding />
-                    {errors.archives && touched.archives ? (
-                        <div style={{ color: "red" }}>{errors.archives}<Padding /></div>
+                    {errors.archive && touched.archive ? (
+                        <div style={{ color: "red" }}>{errors.archive}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
@@ -157,14 +157,14 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput label="Mãe" name="filiation_1" onChange={handleChange} value={values.filiation_1} />
+                    <CrasInput label="Filiação 1" name="filiation_1" onChange={handleChange} value={values.filiation_1} />
                     <Padding />
                     {errors.filiation_1 && touched.filiation_1 ? (
                         <div style={{ color: "red" }}>{errors.filiation_1}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput label="Pai" name={"filiation_2"} onChange={handleChange} value={values.filiation_2} />
+                    <CrasInput label="Filiação 2" name={"filiation_2"} onChange={handleChange} value={values.filiation_2} />
                     <Padding />
                     {errors.filiation_2 && touched.filiation_2 ? (
                         <div style={{ color: "red" }}>{errors.filiation_2}<Padding /></div>

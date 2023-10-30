@@ -5,7 +5,7 @@ import { TechnicianContext } from "../../../context/Technician/Technician/contex
 
 const TechnicianPage = () => {
 
-    const { isLoading, technician, DeleteTechnician } = useContext(TechnicianContext);
+    const { isLoading, technician } = useContext(TechnicianContext);
 
 
     const columns = [
@@ -24,7 +24,7 @@ const TechnicianPage = () => {
                     path="/criar/tecnico"
                     name="Técnico"
                     pathEdit={"/edit/tecnico/"}
-                    delet={DeleteTechnician}
+                    // delet={DeleteTechnician}
                 />
             }
         </Container>

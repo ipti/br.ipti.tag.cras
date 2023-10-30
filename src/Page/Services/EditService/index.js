@@ -9,7 +9,7 @@ import { EditServiceContext } from "../../../context/Service/EditService/context
 import CrasInputArea from "../../../CrasUi/Input/inputArea";
 
 const EditServicePage = () => {
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, serviceOne, toast } = useContext(EditServiceContext)
+    const { initialValue, service, result,technician, handleCreateService, Schema, userIdentify, serviceOne, toast } = useContext(EditServiceContext)
 
     return (
         <Container>
@@ -18,7 +18,7 @@ const EditServicePage = () => {
                     Editar Atendimentos
                 </h1>
                 <Padding padding="16px" />
-                {serviceOne ? <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
+                {serviceOne ? <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={Schema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
                         return <form onSubmit={handleSubmit}>
                             <h3>Dados do atendimento</h3>
@@ -48,7 +48,7 @@ const EditServicePage = () => {
 
                                 </Column>
                                 <Column>
-                                    <CrasInput name="result" value={values.result} onChange={handleChange} label="Resultado" />
+                                <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado" />
                                     <Padding />
                                     {errors.result && touched.result ? (
                                         <div style={{ color: "red" }}>{errors.result}<Padding /></div>

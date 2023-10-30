@@ -9,7 +9,7 @@ import CrasInputArea from "../../../CrasUi/Input/inputArea";
 
 const CreateServicesScreen = () => {
 
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify } = useContext(CreateServicesContext);
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result } = useContext(CreateServicesContext);
 
     return (
         <Container>
@@ -48,7 +48,7 @@ const CreateServicesScreen = () => {
 
                                 </Column>
                                 <Column>
-                                    <CrasInput name="result" value={values.result} onChange={handleChange} label="Resultado" />
+                                    <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado" />
                                     <Padding />
                                     {errors.result && touched.result ? (
                                         <div style={{ color: "red" }}>{errors.result}<Padding /></div>

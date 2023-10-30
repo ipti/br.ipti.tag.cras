@@ -16,7 +16,7 @@ import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import Table from "../../../../Components/Table";
 
 const FormFamilyComposition = () => {
-    const { open, setOpen, handleCreateFamilyMember, HandleCreateUserIdentify,parentesco, family, addMember, setAddMember, benefitsfetch, deleteMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
+    const { open, setOpen, handleCreateFamilyMember, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, benefitsfetch, deleteMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
     const [idMember, setIdMember] = useState("")
     const [benefits_fk, setbenefits_fk] = useState()
     const [value, setvalue] = useState()
@@ -31,9 +31,12 @@ const FormFamilyComposition = () => {
 
     if (!family) return null;
 
+    console.log(family)
+
     const initialValue = {
         name: "",
-        surname:  "",
+        surname: "",
+        kinship: "",
         birthday: "",
         nis: "",
         rg_number: "",
@@ -42,13 +45,13 @@ const FormFamilyComposition = () => {
         emission_rg: "",
         cpf: "",
         is_deficiency: "",
-        deficiency:  "",
+        deficiency: "",
         filiation_1: "",
-        filiation_2:"",
-        marital_status:  "",
+        filiation_2: "",
+        marital_status: "",
         escolarity: "",
-        profission:"",
-        income:  0,
+        profission: "",
+        income: 0,
         nuclear_family: "",
         signed_portfolio: false,
         benefitsForFamily: []
@@ -56,9 +59,9 @@ const FormFamilyComposition = () => {
 
     const schema = Yup.object().shape({
         name: Yup.string().required("Campo obrigatório"),
+        kinship: Yup.object().required("Campo obrigatório"),
         surname: Yup.string(),
         birthday: Yup.string().required("Campo obrigatório"),
-        birth_certificate: Yup.number(),
         nis: Yup.number(),
         rg_number: Yup.string().required("Campo obrigatório"),
         rg_date_emission: Yup.string().required("Campo obrigatório"),
@@ -80,10 +83,11 @@ const FormFamilyComposition = () => {
     const columns = [
         { field: 'id', header: 'id' },
         { field: 'name', header: 'Name' },
-        { field: 'parentesco', header: 'Parentesco' },
+        { field: 'kinship', header: 'Parentesco' },
         { field: 'birthday', header: 'Data de nascimento' },
-        { field: 'sex', header: 'Sexo' },
     ];
+
+    const memberFamily = family.user_identify.filter(props => props.id !== family.family_representative_fk)
 
 
 
@@ -135,17 +139,17 @@ const FormFamilyComposition = () => {
                                     </Grid>
                                     <Grid checkMockup={[{}, {}]}>
                                         <Column>
-                                            <CrasDropdown label="Parentesco" options={parentesco} optionLabel={""} value={values.parentesco} name="parentesco" onChange={handleChange} />
+                                            <CrasDropdown label="Parentesco" options={parentesco} optionLabel={"name"} value={values.kinship} name="kinship" onChange={handleChange} />
                                             <Padding />
-                                            {errors.parentesco && touched.parentesco ? (
-                                                <div style={{ color: "red" }}>{errors.parentesco}<Padding /></div>
+                                            {errors.kinship && touched.kinship ? (
+                                                <div style={{ color: "red" }}>{errors.kinship}<Padding /></div>
                                             ) : null}
                                         </Column>
                                         <Column>
-                                            <CrasCalendar label="Data de Nascimento" date={dateBithrday} name={"birth_certificate"} showIcon onChange={handleChange} />
+                                            <CrasCalendar label="Data de Nascimento" date={dateBithrday} name={"birthday"} showIcon onChange={handleChange} />
                                             <Padding />
-                                            {errors.birth_certificate && touched.birth_certificate ? (
-                                                <div style={{ color: "red" }}>{errors.birth_certificate}<Padding /></div>
+                                            {errors.birthday && touched.birthday ? (
+                                                <div style={{ color: "red" }}>{errors.birthday}<Padding /></div>
                                             ) : null}
                                         </Column>
                                     </Grid>
@@ -297,7 +301,7 @@ const FormFamilyComposition = () => {
                                         </Row>
                                     </>
                                         : null}
-                                    {!visibleAddBenefits ? <Row id="start" >
+                                    {!visibleAddBenefits ? <Row id="start">
                                         <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
                                     </Row> : null}
                                     <Padding padding="8px">
@@ -323,7 +327,7 @@ const FormFamilyComposition = () => {
                 : null
             }
             {open ? <EditMemberFamily setOpen={setOpen} id={idMember} schema={schema} /> : null}
-            {!open && !addMember ? <CrasTable delet={deleteMember} products={family.user_identifies} columns={columns} onEdit={editMember} /> : null}
+            {!open && !addMember ? <CrasTable delet={deleteMember} products={memberFamily} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
         </Column>
     )
