@@ -14,9 +14,10 @@ import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import Table from "../../../../Components/Table";
+import { formatarData } from "../../../../services/functions";
 
 const FormFamilyComposition = () => {
-    const { open, setOpen, handleCreateFamilyMember, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, benefitsfetch, deleteMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
+    const { open, setOpen, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, deleteFamilyMember, benefitsfetch, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
     const [idMember, setIdMember] = useState("")
     const [benefits_fk, setbenefits_fk] = useState()
     const [value, setvalue] = useState()
@@ -31,7 +32,6 @@ const FormFamilyComposition = () => {
 
     if (!family) return null;
 
-    console.log(family)
 
     const initialValue = {
         name: "",
@@ -85,11 +85,10 @@ const FormFamilyComposition = () => {
         { field: 'name', header: 'Name' },
         { field: 'kinship', header: 'Parentesco' },
         { field: 'birthday', header: 'Data de nascimento' },
+        { field: "initial_date", header: "Data de Entrada" },
     ];
 
     const memberFamily = family.user_identify.filter(props => props.id !== family.family_representative_fk)
-
-
 
     const columnsBenefits = [
         { field: 'benefits_fk.description', header: 'Beneficio' },
@@ -104,6 +103,8 @@ const FormFamilyComposition = () => {
         set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
     }
 
+    const memberFamilyFilter = memberFamily ? memberFamily.map((data) => ({ ...data, kinship: parentesco.find(props => props.id === data.kinship).name, birthday: formatarData(data.birthday), initial_date: formatarData(data.initial_date)})) : [];
+
 
     return (
         <Column>
@@ -115,7 +116,7 @@ const FormFamilyComposition = () => {
             <Padding padding="8px" />
             {addMember ?
                 <Column>
-                    <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => HandleCreateUserIdentify(value)}>
+                    <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { HandleCreateUserIdentify(value); setAddMember(false) }}>
                         {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
                             const dateEmit = new Date(values.rg_date_emission);
                             const dateBithrday = new Date(values.birthday)
@@ -327,7 +328,7 @@ const FormFamilyComposition = () => {
                 : null
             }
             {open ? <EditMemberFamily setOpen={setOpen} id={idMember} schema={schema} /> : null}
-            {!open && !addMember ? <CrasTable delet={deleteMember} products={memberFamily} columns={columns} onEdit={editMember} /> : null}
+            {!open && !addMember ? <CrasTable delet={deleteFamilyMember} products={memberFamilyFilter} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
         </Column>
     )

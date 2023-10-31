@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 import queryClient from "../../../services/react-query";
+import { MemberFamilyController } from "../../../sdk/FamilyRefered/MemberFamily/controller";
 
 
 
@@ -41,12 +42,14 @@ const EditRferedState = () => {
     CreateFamilyRequestRequestMutation,
     // membersRquest,
     DeleteFamilyBenefitsMutation,
-    EditFamilyRequestRequestMutation, DeleteMemberFamilyRequestMutation,
+    EditFamilyRequestRequestMutation,
     EditAddressRequestMutation,
     benefitsfetch,
     CreateFamilyBenefitsRequestMutation,
-    CreateUserIdentifyWithFamilyRequestMutation
+
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
+
+  const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation } = MemberFamilyController()
 
 
   useEffect(() => {
@@ -167,25 +170,6 @@ const EditRferedState = () => {
 
   const handleFamiliaRefered = (values) => {
 
-    // const data = {
-    //   ...values,
-    //   certidao_nascimento: values.certidao_nascimento ? parseInt(values.certidao_nascimento) : "",
-    //   nis: parseInt(values.nis),
-    //   renda: parseInt(values.renda),
-    //   comodos: values.comodos.toString(),
-    //   valor_aluguel: values.valor_aluguel ? parseInt(values.valor_aluguel) : 0,
-    //   uf_rg: values.uf_rg.uf,
-    //   ocupacao_irregular: values.ocupacao_irregular.length === 0 || values.ocupacao_irregular[0] === 0 ? false : true,
-    //   crianca_sozinha: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
-    //   idosos_dependentes: values.crianca_sozinha.length === 0 || values.crianca_sozinha[0] === 0 ? 0 : 1,
-    //   desempregados: values.desempregados.length === 0 || values.desempregados[0] === 0 ? 0 : 1,
-    //   deficientes: values.deficientes.length === 0 || values.deficientes[0] === 0 ? 0 : 1,
-    //   baixa_renda: values.baixa_renda.length === 0 || values.baixa_renda[0] === 0 ? 0 : 1,
-    //   outros: values.outros.length === 0 || values.outros[0] === 0 ? 0 : 1
-    // }
-
-    console.log(values)
-
     const bodyUserIdentify = {
       name: values?.name,
       surname: values?.surname,
@@ -213,7 +197,6 @@ const EditRferedState = () => {
       signed_portfolio: values?.signed_portfolio
     }
 
-    console.log(bodyUserIdentify)
 
     const bodyAddress = {
       address: values.address,
@@ -236,13 +219,16 @@ const EditRferedState = () => {
     CreateFamilyRequestRequestMutation.mutate(body)
   }
 
-
   const handleCreateFamilyBenefits = (body) => {
     CreateFamilyBenefitsRequestMutation.mutate(body)
   }
 
   const deleteFamilyBenefits = (id) => {
     DeleteFamilyBenefitsMutation.mutate(id)
+  }
+
+  const deleteFamilyMember = (id) => {
+    DeleteMemberFamilyRequestMutation.mutate(id)
   }
 
   const HandleCreateUserIdentify = (data) => {
@@ -262,7 +248,7 @@ const EditRferedState = () => {
 
 
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits
+    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
   }
 }
 

@@ -11,6 +11,7 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
     const [visible, setVisible] = useState();
     const [id, setId] = useState();
 
+
     const history = useNavigate()
     const actionBodyTemplate = (rowData) => {
 

@@ -8,7 +8,7 @@ const config = {
 };
 
 const AllUserIdentifyRequest = async () => {
-  return await http.get("/user-identify", config).then(response => response.data)
+  return await http.get("/bff/get-all-family-representative", config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
         logout()

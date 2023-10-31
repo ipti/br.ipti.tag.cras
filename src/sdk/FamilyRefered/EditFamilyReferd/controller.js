@@ -2,9 +2,8 @@ import { useMutation } from "react-query";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllBenefits } from "../../Benefits/ListBenefits/request";
-import { CreateFamilyMemberRequest, DeleteFamilyMember } from "../MemberFamily/request";
 import { useFetchFamilyReferedId } from "../request";
-import { CreateFamilyBenefitsRequest, CreateUserIdentifyWithFamilyRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditUserIdentifyRequest } from "./request";
+import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditUserIdentifyRequest } from "./request";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
 
@@ -14,29 +13,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
   const history = useNavigate();
 
   const { data: benefitsfetch } = useFetchAllBenefits()
-
-
-
-  const CreateFamilyRequestRequestMutation = useMutation(
-    (data) => CreateFamilyMemberRequest(data),
-    {
-      onError: (error) => {
-        console.log(error.response.data.message)
-        setIsError(error.response.data.message)
-        if (error.response.status === 401 || error.response.status === 403) {
-          logout();
-          history("/login")
-        }
-      },
-      onSuccess: (data) => {
-        // refetch()
-        setAddMember(false)
-        console.log(data);
-        setIsVerify(true)
-        refetch()
-      },
-    }
-  );
 
   const EditFamilyRequestRequestMutation = useMutation(
     ({data, id}) => EditUserIdentifyRequest(data, id),
@@ -132,62 +108,20 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
 
 
 
-  const DeleteMemberFamilyRequestMutation = useMutation(
-    (data) => DeleteFamilyMember(data, id),
-    {
-      onError: (error) => {
-        console.log(error.response.data.message)
-        setIsError(error.response.data.message)
-        if (error.response.status === 401 || error.response.status === 403) {
-          logout();
-          history("/login")
-        }
-      },
-      onSuccess: (data) => {
-        // refetch()
-        setAddMember(false)
-        console.log(data);
-        setIsVerify(true)
-        refetch()
+ 
 
-      },
-    }
-  );
 
-  const CreateUserIdentifyWithFamilyRequestMutation = useMutation(
-    (data) => CreateUserIdentifyWithFamilyRequest(data),
-    {
-      onError: (error) => {
-        console.log(error.response.data.message)
-        setIsError(error.response.data.message)
-        if (error.response.status === 401 || error.response.status === 403) {
-          logout();
-          history("/login")
-        }
-      },
-      onSuccess: (data) => {
-        // refetch()
-        setAddMember(false)
-        console.log(data);
-        setIsVerify(true)
-        refetch()
-
-      },
-    }
-  );
 
 
 
 
   return {
-    familyReferedfetch, isLoading, error, CreateFamilyRequestRequestMutation,
-    // membersFamilyRequest, 
+    familyReferedfetch, isLoading, error,
     benefitsfetch,
     EditFamilyRequestRequestMutation,
-    DeleteMemberFamilyRequestMutation,
     EditAddressRequestMutation,
     CreateFamilyBenefitsRequestMutation,
     DeleteFamilyBenefitsMutation,
-    CreateUserIdentifyWithFamilyRequestMutation
+    
   }
 }
