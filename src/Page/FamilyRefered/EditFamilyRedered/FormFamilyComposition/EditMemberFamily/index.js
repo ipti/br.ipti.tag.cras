@@ -1,85 +1,55 @@
 import { Formik } from "formik";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
+import * as Yup from 'yup';
 import ButtonPrime from "../../../../../CrasUi/Button/ButtonPrime";
 import CrasCalendar from "../../../../../CrasUi/Calendar";
 import CrasDropdown from "../../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../../CrasUi/Input/Input";
+import CrasInputMask from "../../../../../CrasUi/Input/InputMask";
+import CrasInputNumber from "../../../../../CrasUi/Input/InputNumber";
+import CrasRadioButton from "../../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../../context/FamilyRefered/EditFamilyRefered/context";
-import queryClient from "../../../../../services/react-query";
-import CrasRadioButton from "../../../../../CrasUi/RadioButton";
-import CrasInputNumber from "../../../../../CrasUi/Input/InputNumber";
-import Table from "../../../../../Components/Table";
-import CrasInputMask from "../../../../../CrasUi/Input/InputMask";
-import * as Yup from 'yup';
 
 
-const EditMemberFamily = ({ id }) => {
-    const [oneMember, setOneMember] = useState();
-    const [loading, setLoading] = useState(false)
-    const [benefits_fk, setbenefits_fk] = useState()
-    const [value, setvalue] = useState()
-    const [visibleAddBenefits, setvisibleAddBenefits] = useState();
-    const [benefits, setbenefits] = useState([])
+const EditMemberFamily = ({ id, setOpen }) => {
 
 
-    const columnsBenefits = [
-        { field: 'benefits_fk.description', header: 'Beneficio' },
-        { field: 'value', header: 'Valor' },
-    ];
+    const { handleEditFamilyMember, parentesco, family, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
 
-    const handleBenefits = (set) => {
-        setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
-        setbenefits_fk()
-        setvalue()
-        setvisibleAddBenefits(!visibleAddBenefits)
-        set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
+    const member = family ? family.user_identify.find(props => props.id === id) : null
+
+    const kinship = (kinship) => {
+        const kinshipFilter = parentesco.find(props => props.id === kinship)
+        return kinshipFilter
     }
 
-    useEffect(() => {
-        queryClient.removeQueries({ queryKey: "OneFamilyMember" })
-        setLoading(true)
-    }, [])
-
-    const {  HandleCreateUserIdentify, parentesco,  setAddMember, benefitsfetch, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
-
-
-
-    // const handleEditMember = (body) => {
-    //     EditFamilyMemberRequestMutation.mutate(body)
-    // }
-
-    // useEffect(() => {
-    //     if (oneMemberFamily && loading) {
-    //         setOneMember(oneMemberFamily.data.data)
-    //     }
-    // }, [oneMemberFamily, loading])
-
-
-    if (!oneMember) return null;
+    const valueUf = () => {
+        const value = family ? estadosDoBrasil.find(fil => fil.uf === member?.uf_rg) : ""
+        return value
+    }
 
     const initialValue = {
-        name: "",
-        surname: "",
-        kinship: "",
-        birthday: "",
-        nis: "",
-        rg_number: "",
-        rg_date_emission: "",
-        uf_rg: "",
-        emission_rg: "",
-        cpf: "",
-        is_deficiency: "",
+        name: member?.name ?? "",
+        surname: member?.surname ?? "",
+        kinship: kinship(member?.kinship) ?? "",
+        birthday: member?.birthday ?? "",
+        nis: member?.nis ?? "",
+        rg_number: member?.rg_number ?? "",
+        rg_date_emission: member?.rg_date_emission ?? "",
+        uf_rg: valueUf() ?? "",
+        emission_rg: member?.emission_rg ?? "",
+        cpf: member?.cpf ?? "",
+        is_deficiency: member?.is_deficiency ?? "",
         deficiency: "",
-        filiation_1: "",
-        filiation_2: "",
-        marital_status: "",
-        escolarity: "",
-        profission: "",
-        income: 0,
-        nuclear_family: "",
-        signed_portfolio: false,
-        benefitsForFamily: []
+        filiation_1: member?.filiation_1 ?? "",
+        filiation_2: member?.filiation_2 ?? "",
+        marital_status: member?.marital_status ?? "",
+        escolarity: member?.escolarity ?? "",
+        profission: member?.profission ?? "",
+        income: member?.income ?? 0,
+        nuclear_family: member?.nuclear_family ?? "",
+        signed_portfolio: member?.signed_portfolio ?? false,
     }
 
     const schema = Yup.object().shape({
@@ -107,8 +77,8 @@ const EditMemberFamily = ({ id }) => {
 
     return (
         <Column>
-            <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { HandleCreateUserIdentify(value); setAddMember(false) }}>
-                {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
+            <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { handleEditFamilyMember(value, id); }}>
+                {({ values, handleChange, handleSubmit, errors, touched }) => {
                     const dateEmit = new Date(values.rg_date_emission);
                     const dateBithrday = new Date(values.birthday)
                     return (
@@ -271,7 +241,7 @@ const EditMemberFamily = ({ id }) => {
                                     ) : null}
                                 </Column>
                             </Grid>
-                            <h3>
+                            {/* <h3>
                                 Benefícios
                             </h3>
                             {visibleAddBenefits ? <>
@@ -295,8 +265,8 @@ const EditMemberFamily = ({ id }) => {
                                 : null}
                             {!visibleAddBenefits ? <Row id="start">
                                 <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
-                            </Row> : null}
-                            <Padding padding="8px">
+                            </Row> : null} */}
+                            {/* <Padding padding="8px">
                                 <Table
                                     columns={columnsBenefits}
                                     list={benefits}
@@ -304,12 +274,12 @@ const EditMemberFamily = ({ id }) => {
                                 // pathEdit={"/edit/tecnico/"}
                                 // delet={deleteBenefits}
                                 />
-                            </Padding>
+                            </Padding> */}
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime label="Canelar" onClick={() => setAddMember(false)} severity="danger" />
+                                <ButtonPrime label="Canelar" type={"button"} onClick={() => setOpen(false)} severity="danger" />
                                 <Padding />
-                                <ButtonPrime label="Adicionar membro" type="submit" />
+                                <ButtonPrime label="Salvar" type="submit" />
                             </Row>
                         </form>
                     )

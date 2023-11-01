@@ -13,6 +13,10 @@ export const EditAddressRequest = async (body, id) => {
   return await http.put(`/address/${id}`, body, config)
 }
 
+export const EditVulnerabilityRequest = async (body, id) => {
+  return await http.put(`/vulnerability/${id}`, body, config)
+}
+
 export const CreateFamilyBenefitsRequest = async (body) => {
   return await http.post(`/family-benefits`, body, config)
 }

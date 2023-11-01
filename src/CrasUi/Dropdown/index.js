@@ -5,7 +5,7 @@ const CrasDropdown = ({ value, setValue, options, optionLabel, placeholder, labe
     return (
         <Column>
             <label htmlFor="username" style={{marginBottom: "8px", marginLeft: "4px"}}>{label}</label>
-            <Dropdown name={name} value={value} onChange={onChange} options={options} optionLabel={optionLabel}
+            <Dropdown name={name} value={value} onChange={onChange} options={options} optionLabel={optionLabel} filter
                 placeholder={label} />
         </Column>
     )

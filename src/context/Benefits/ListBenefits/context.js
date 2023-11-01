@@ -5,10 +5,10 @@ export const BenefitsContext = createContext({});
 
 const BenefitsProvider = ({ children }) => {
 
-    const { benefits, isLoading, error } = ListBenefitsState();
+    const { benefits, isLoading, error, deleteBenefits } = ListBenefitsState();
 
     return (
-        <BenefitsContext.Provider value={{ benefits, isLoading, error }}>
+        <BenefitsContext.Provider value={{ benefits, isLoading, error, deleteBenefits }}>
             {children}
         </BenefitsContext.Provider>
     )

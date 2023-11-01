@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Column, Padding, Row } from "../styles/styles";
 
 import TagLogin from "../../assets/images/taglogin.svg";
 import Item from "./Item";
 import { Container, TopBar } from "./style";
 import { getMenuItem, menuItem } from "../../services/localstorage";
+import { AplicationContext } from "../../context/Aplication/context";
 
 
 
 
-const CrasMenu = ({viewdMenu}) => {
+const CrasMenu = ({ viewdMenu }) => {
+    const { user } = useContext(AplicationContext)
+
+    console.log(user)
 
     const [active, setActive] = useState(parseInt(getMenuItem()))
 
@@ -30,18 +34,18 @@ const CrasMenu = ({viewdMenu}) => {
                 </Row>
             </Padding>
             <Padding padding="8px">
-                <Item text={"Atendimentos"} funcActiv={() => {setActive(1); menuItem(1)}} active={active === 1 ? true : false} path={"/Atendimento"} icon={"pi pi-list"} />
+                <Item text={"Atendimentos"} funcActiv={() => { setActive(1); menuItem(1) }} active={active === 1 ? true : false} path={"/Atendimento"} icon={"pi pi-list"} />
                 <Padding />
-                <Item text={"Serviço"} funcActiv={() => {setActive(2); menuItem(2)}} active={active === 2 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
+                <Item text={"Serviço"} funcActiv={() => { setActive(2); menuItem(2) }} active={active === 2 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
                 <Padding />
-                <Item text={"Tecnico"} funcActiv={() => {setActive(3); menuItem(3)}} active={active === 3 ? true : false} path={"/tecnico"} icon={"pi pi-wrench"} />
+                <Item text={"Tecnico"} funcActiv={() => { setActive(3); menuItem(3) }} active={active === 3 ? true : false} path={"/tecnico"} icon={"pi pi-wrench"} />
                 <Padding />
-                <Item text={"Familias"} funcActiv={() => {setActive(4); menuItem(4)}} active={active === 4 ? true : false} path={"/familia"} icon={"pi pi-users"} />
+                <Item text={"Familias"} funcActiv={() => { setActive(4); menuItem(4) }} active={active === 4 ? true : false} path={"/familia"} icon={"pi pi-users"} />
                 <Padding />
-                <Item text={"Beneficios"} funcActiv={() => {setActive(5); menuItem(5)}} active={active === 5 ? true : false} path={"/beneficios"} icon={"pi pi-users"} />
+                <Item text={"Beneficios"} funcActiv={() => { setActive(5); menuItem(5) }} active={active === 5 ? true : false} path={"/beneficios"} icon={"pi pi-users"} />
                 <Padding />
-                <Item text={"Usuários"} funcActiv={() => {setActive(6); menuItem(6)}} active={active === 6 ? true : false} path="/usuarios" icon={"pi pi-user"} />
-            </Padding>
+                {true ? <Item text={"Usuários"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path="/usuarios" icon={"pi pi-user"} />
+                    : null}            </Padding>
         </Container>
     )
 }

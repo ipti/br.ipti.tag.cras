@@ -13,6 +13,7 @@ const UserPage = () => {
     const columns = [
         {field: 'id', header: 'id' },
         { field: 'name', header: 'Nome' },
+        { field: 'username', header: 'Nome de usuário' },
         { field: 'email', header: 'Email' },
         { field: 'role', header: 'Tipo de usuário' },
     ];

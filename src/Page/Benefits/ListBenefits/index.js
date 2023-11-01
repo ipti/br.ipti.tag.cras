@@ -5,7 +5,7 @@ import { BenefitsContext } from "../../../context/Benefits/ListBenefits/context"
 
 const ListBenefitsScreen = () => {
 
-    const { benefits } = useContext(BenefitsContext)
+    const { benefits, deleteBenefits } = useContext(BenefitsContext)
 
     const columns = [
         { field: "id", header: "id" },
@@ -16,7 +16,7 @@ const ListBenefitsScreen = () => {
 
     return (
         <Container>
-            <Table columns={columns} list={benefits} path="/criar/beneficios" name="Beneficios" pathEdit="/edit/beneficios/" />
+            <Table columns={columns} delet={deleteBenefits} list={benefits} path="/criar/beneficios" name="Beneficios" pathEdit="/edit/beneficios/" />
         </Container>
     )
 }

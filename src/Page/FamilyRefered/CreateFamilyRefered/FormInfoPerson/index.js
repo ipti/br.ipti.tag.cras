@@ -77,9 +77,8 @@ const FormInfoPerson = () => {
                     const dateEmit = new Date(values.rg_date_emission);
                     const dateBithrday = new Date(values.birthday)
 
-                    console.log(values)
 
-                    
+
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}, {}]}>

@@ -120,13 +120,13 @@ const EditFamilyReferedScreen = () => {
         income: family ? findOwner.income : 0,
         nuclear_family: findOwner?.nuclear_family ?? "",
         signed_portfolio: findOwner?.signed_portfolio ?? false,
-        irregular_ocupation: family?.vulnerability.irregular_ocupation ? [1] : [0],
-        alone_child: family?.vulnerability.alone_child ? [1] : [0],
-        dependent_elderly: family?.vulnerability.dependent_elderly ? [1] : [0],
-        unemployed: family?.vulnerability.unemployed ? [1] : [0],
-        deficient: family?.vulnerability.deficient ? [1] : [0],
-        low_income: family?.vulnerability.low_income ? [1] : [0],
-        others: family?.vulnerability.others ? [1] : [0],
+        irregular_ocupation: family?.vulnerability.irregular_ocupation,
+        alone_child: family?.vulnerability.alone_child,
+        dependent_elderly: family?.vulnerability.dependent_elderly,
+        unemployed: family?.vulnerability.unemployed,
+        deficient: family?.vulnerability.deficient,
+        low_income: family?.vulnerability.low_income,
+        others: family?.vulnerability.others,
         address: family?.address.address ?? "",
         telephone: family?.address.telephone ?? "",
         reference: family?.address.reference ?? "",
@@ -210,9 +210,9 @@ const EditFamilyReferedScreen = () => {
                                     <div style={{ color: "red" }}>{item}<Padding /></div>
                                 )
                             })}
-                            <Row style={{ width: "30%" }} id="start">
+                            {activeStep !== 3 ?  <Row style={{ width: "30%" }} id="start">
                                 <ButtonPrime label="Salvar" type="submit" />
-                            </Row>
+                            </Row> : null}
                             {activeStep === 0 ?
                                 <FormInfoPerson values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?
                                     <FormAddress values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 2 ?

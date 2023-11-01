@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllBenefits } from "../../Benefits/ListBenefits/request";
 import { useFetchFamilyReferedId } from "../request";
-import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditUserIdentifyRequest } from "./request";
+import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
 
@@ -16,6 +16,29 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
 
   const EditFamilyRequestRequestMutation = useMutation(
     ({data, id}) => EditUserIdentifyRequest(data, id),
+    {
+      onError: (error) => {
+        console.log(error.response.data.message)
+        setIsError(error.response.data.message)
+        show()
+        if (error.response.status === 401 || error.response.status === 403) {
+          logout();
+          history("/login")
+        }
+      },
+      onSuccess: (data) => {
+        // refetch()
+        setAddMember(false)
+        console.log(data);
+        setIsVerify(true)
+        refetch()
+        show()
+      },
+    }
+  );
+
+  const EditVulnerabilityRequestMutation = useMutation(
+    ({ data, id }) => EditVulnerabilityRequest(data, id),
     {
       onError: (error) => {
         console.log(error.response.data.message)
@@ -122,6 +145,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
     EditAddressRequestMutation,
     CreateFamilyBenefitsRequestMutation,
     DeleteFamilyBenefitsMutation,
-    
+    EditVulnerabilityRequestMutation
   }
 }

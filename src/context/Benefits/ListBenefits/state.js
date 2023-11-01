@@ -3,7 +3,7 @@ import { BenefitsController } from "../../../sdk/Benefits/ListBenefits/controlle
 
 export const ListBenefitsState = () => {
 
-    const { benefitsfetch, isLoading, error } = BenefitsController();
+    const { benefitsfetch, isLoading, error, DeleteBenefitsRequestMutation } = BenefitsController();
     const [benefits, setBenefits] = useState([]);
 
     useEffect(() => {
@@ -13,11 +13,11 @@ export const ListBenefitsState = () => {
     }, [benefitsfetch])
 
 
-    // const DeleteTypeServices = (id) => {
-    //     DeleteTypesServicesRequestMutation.mutate(id)
-    // }
+    const deleteBenefits = (id) => {
+        DeleteBenefitsRequestMutation.mutate(id)
+    }
 
     return {
-        benefits, isLoading, error
+        benefits, isLoading, error, deleteBenefits
     }
 }

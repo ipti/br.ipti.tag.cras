@@ -7,23 +7,17 @@ import CrasTable from "../../../../CrasUi/Table";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 
 import * as Yup from 'yup';
-import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
-import EditMemberFamily from "./EditMemberFamily";
 import CrasCalendar from "../../../../CrasUi/Calendar";
 import CrasInputMask from "../../../../CrasUi/Input/InputMask";
-import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
-import Table from "../../../../Components/Table";
+import CrasRadioButton from "../../../../CrasUi/RadioButton";
+import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 import { formatarData } from "../../../../services/functions";
+import EditMemberFamily from "./EditMemberFamily";
 
 const FormFamilyComposition = () => {
-    const { open, setOpen, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, deleteFamilyMember, benefitsfetch, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
+    const { open, setOpen, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, deleteFamilyMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
     const [idMember, setIdMember] = useState("")
-    const [benefits_fk, setbenefits_fk] = useState()
-    const [value, setvalue] = useState()
-    const [visibleAddBenefits, setvisibleAddBenefits] = useState();
-    const [benefits, setbenefits] = useState([])
-
 
     const editMember = (params) => {
         setOpen(true);
@@ -31,7 +25,6 @@ const FormFamilyComposition = () => {
     }
 
     if (!family) return null;
-
 
     const initialValue = {
         name: "",
@@ -54,7 +47,7 @@ const FormFamilyComposition = () => {
         income: 0,
         nuclear_family: "",
         signed_portfolio: false,
-        benefitsForFamily: []
+        // benefitsForFamily: []
     }
 
     const schema = Yup.object().shape({
@@ -90,20 +83,20 @@ const FormFamilyComposition = () => {
 
     const memberFamily = family.user_identify.filter(props => props.id !== family.family_representative_fk)
 
-    const columnsBenefits = [
-        { field: 'benefits_fk.description', header: 'Beneficio' },
-        { field: 'value', header: 'Valor' },
-    ];
+    // const columnsBenefits = [
+    //     { field: 'benefits_fk.description', header: 'Beneficio' },
+    //     { field: 'value', header: 'Valor' },
+    // ];
 
-    const handleBenefits = (set) => {
-        setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
-        setbenefits_fk()
-        setvalue()
-        setvisibleAddBenefits(!visibleAddBenefits)
-        set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
-    }
+    // const handleBenefits = (set) => {
+    //     setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
+    //     setbenefits_fk()
+    //     setvalue()
+    //     setvisibleAddBenefits(!visibleAddBenefits)
+    //     set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
+    // }
 
-    const memberFamilyFilter = memberFamily ? memberFamily.map((data) => ({ ...data, kinship: parentesco.find(props => props.id === data.kinship).name, birthday: formatarData(data.birthday), initial_date: formatarData(data.initial_date)})) : [];
+    const memberFamilyFilter = memberFamily ? memberFamily.map((data) => ({ ...data, kinship: parentesco.find(props => props.id === data.kinship).name, birthday: formatarData(data.birthday), initial_date: formatarData(data.initial_date) })) : [];
 
 
     return (
@@ -280,7 +273,7 @@ const FormFamilyComposition = () => {
                                             ) : null}
                                         </Column>
                                     </Grid>
-                                    <h3>
+                                    {/* <h3>
                                         Benefícios
                                     </h3>
                                     {visibleAddBenefits ? <>
@@ -313,7 +306,7 @@ const FormFamilyComposition = () => {
                                         // pathEdit={"/edit/tecnico/"}
                                         // delet={deleteBenefits}
                                         />
-                                    </Padding>
+                                    </Padding> */}
                                     <Padding padding="16px" />
                                     <Row id="end">
                                         <ButtonPrime label="Canelar" onClick={() => setAddMember(false)} severity="danger" />
@@ -327,7 +320,7 @@ const FormFamilyComposition = () => {
                 </Column>
                 : null
             }
-            {open ? <EditMemberFamily setOpen={setOpen} id={idMember} schema={schema} /> : null}
+            {open ? <EditMemberFamily setOpen={setOpen} id={idMember} /> : null}
             {!open && !addMember ? <CrasTable delet={deleteFamilyMember} products={memberFamilyFilter} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
         </Column>

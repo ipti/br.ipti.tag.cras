@@ -6,6 +6,8 @@ const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
 };
 
+
+
 const AllBenefitsRequest = async () => {
   return await http.get("/benefits", config).then(response => response.data)
     .catch(err => {
@@ -16,6 +18,10 @@ const AllBenefitsRequest = async () => {
       
       throw err;
     });;
+}
+
+export const DeleteBenefitsRequest = async (id) => {
+  return await http.delete(`/benefits/${id}`, config);
 }
 
 export const useFetchAllBenefits = () => {

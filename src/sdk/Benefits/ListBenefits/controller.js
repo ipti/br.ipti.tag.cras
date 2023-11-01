@@ -1,10 +1,30 @@
-import { useFetchAllBenefits } from "./request";
+import { useMutation } from "react-query";
+import { DeleteBenefitsRequest, useFetchAllBenefits } from "./request";
+import { logout } from "../../../services/localstorage";
+import { useNavigate } from "react-router-dom";
 
 export const BenefitsController = () => {
-//   const history = useNavigate();
+  const history = useNavigate();
 
-  const { data: benefitsfetch, isLoading, error, } = useFetchAllBenefits()
+  const { data: benefitsfetch, isLoading, error,  refetch} = useFetchAllBenefits()
 
+  const DeleteBenefitsRequestMutation = useMutation(
+    (id) => DeleteBenefitsRequest(id),
+    {
+      onError: (error) => {
+        console.log(error.response.data.message)
+        if (error.response.status === 401 | 403) {
+          logout();
+          history("/login")
+        }
+      },
+      onSuccess: (data) => {
+        console.log(data);
+        refetch()
+      },
+
+    }
+  );
 
   // if (error?.response.status === 401 | 403) {
   //   logout();
@@ -29,6 +49,6 @@ export const BenefitsController = () => {
 //   );
 
   return {
-    benefitsfetch, isLoading, error
+    benefitsfetch, isLoading, error, DeleteBenefitsRequestMutation
   }
 }

@@ -42,7 +42,6 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
     }
 
     const deleteBenefits = (id) => {
-        console.log(id)
         setbenefits(benefits.filter(props => props.id !== id))
         deleteFamilyBenefits(id)
     }
@@ -50,34 +49,40 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
 
     if (!family) return null;
 
+    const handleCheckbox = (e, set, atributo) => {
+        set(atributo, e.checked)
+    }
+
+    console.log(values)
+
     return (
         <Column>
             <Padding padding="16px" />
             <h3>Principais Vulnerabilidades</h3>
             <Row>
                 <div className="col">
-                    <CrasCheckbox checked={values.irregular_ocupation[0] === 1} name={"irregular_ocupation"} value={1} onChange={handleChange} label={"Residem em área de ocupação irregular"} />
+                    <CrasCheckbox checked={values.irregular_ocupation} name={"irregular_ocupation"}  onChange={(e)=> handleCheckbox(e, setFieldValue, "irregular_ocupation")} label={"Residem em área de ocupação irregular"} />
                 </div>
             </Row>
             <Row>
                 <div className="col">
-                    <CrasCheckbox name={"dependent_elderly"} value={1} checked={values.dependent_elderly[0] === 1} onChange={handleChange} label={"Existência de idosos dependentes na família"} />
+                    <CrasCheckbox name={"dependent_elderly"} checked={values.dependent_elderly} onChange={(e)=> handleCheckbox(e, setFieldValue, "dependent_elderly")} label={"Existência de idosos dependentes na família"} />
                 </div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"deficient"} value={1} checked={values.deficient[0] === 1} onChange={handleChange} label={"Existência de deficient na família"} /></div>
+                <div className="col"> <CrasCheckbox name={"deficient"} checked={values.deficient} onChange={(e)=> handleCheckbox(e, setFieldValue, "deficient")} label={"Existência de deficient na família"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"alone_child"} value={1} checked={values.alone_child[0] === 1} onChange={handleChange} label={"Crianças que ficam sozinhos no domicilio"} /></div>
+                <div className="col"> <CrasCheckbox name={"alone_child"}  checked={values.alone_child} onChange={(e)=> handleCheckbox(e, setFieldValue, "alone_child")} label={"Crianças que ficam sozinhos no domicilio"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"unemployed"} value={1} checked={values.unemployed[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
+                <div className="col"> <CrasCheckbox name={"unemployed"} checked={values.unemployed} onChange={(e)=> handleCheckbox(e, setFieldValue, "unemployed")} label={"Desemprego"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"low_income"} value={1} checked={values.low_income[0] === 1} onChange={handleChange} label={"Baixa income"} /></div>
+                <div className="col"> <CrasCheckbox name={"low_income"}  checked={values.low_income} onChange={(e)=> handleCheckbox(e, setFieldValue, "low_income")} label={"Baixa income"} /></div>
             </Row>
             <Row>
-                <div className="col"> <CrasCheckbox name={"others"} value={1} checked={values.others[0] === 1} onChange={handleChange} label={"Outros"} /></div>
+                <div className="col"> <CrasCheckbox name={"others"}  checked={values.others} onChange={(e)=> handleCheckbox(e, setFieldValue, "others")} label={"Outros"} /></div>
             </Row>
             <h3>Situação Financeira e Previdenciária</h3>
             <Grid checkMockup={[{}, {}]}>
@@ -123,7 +128,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                 </Column>
             </Grid>
             <h3>
-                Benefício (Benefício do usuário cadastrado)
+                Benefícios da Familia
             </h3>
             {visibleAddBenefits ? <>
                 <Grid checkMockup={[{}, {}]}>

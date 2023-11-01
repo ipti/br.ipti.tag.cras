@@ -1,5 +1,6 @@
+import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken } from "../../../services/localstorage";
+import { getToken, logout } from "../../../services/localstorage";
 
 
 const config = {
@@ -9,3 +10,19 @@ const config = {
 export const CreateServiceRequest = async (body) => {
     return await http.post("/attendance", body, config)
 }
+
+const AllUserIdentifyRequest = async () => {
+  return await http.get("/user-identify", config).then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      alert(err)
+      throw err;
+    });
+}
+
+export const useFetchAllUserIdentifyAttendance = () => {
+  return useQuery("AllUserIdentifyAttendance", () => AllUserIdentifyRequest());
+};

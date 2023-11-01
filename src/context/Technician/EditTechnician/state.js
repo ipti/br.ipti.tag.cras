@@ -48,9 +48,11 @@ export const EditTechnicianState = () => {
       }
     }, [technicianRequest, loading])
 
+    console.log(technician)
+
     const initialValue = {
         name: technician ? technician.name : "",
-        user: (user && technician) ? user.find(props => props.id === technician?.user) : ""
+        user: (user && technician) ? user.find(props => props.id === technician?.user_fk) : ""
     }
 
     const CreateSchema = Yup.object().shape({

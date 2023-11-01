@@ -57,7 +57,6 @@ export const CreateServicesState = () => {
 
   const handleCreateService = (data) => {
 
-    console.log(data)
     const body = {
       solicitation: data.solicitation,
       result: data.result.id,
@@ -70,7 +69,7 @@ export const CreateServicesState = () => {
       date: new Date(Date.now())
     }
 
-    CreateServicesRequestMutation.mutate(body)
+    CreateServicesRequestMutation.mutate(body);
 
   }
 

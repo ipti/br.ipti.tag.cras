@@ -21,13 +21,13 @@ const FormFinances = () => {
     const initialValue = {
         profission: dataValues.profission ?? "",
         income: dataValues.income ?? 0,
-        irregular_ocupation: dataValues.irregular_ocupation ?? "",
-        alone_child: dataValues.alone_child ?? "",
-        dependent_elderly: dataValues.dependent_elderly ?? "",
-        unemployed: dataValues.unemployed ?? "",
-        deficient: dataValues.deficient ?? "",
-        low_income: dataValues.low_income ?? "",
-        others: dataValues.others ?? "",
+        irregular_ocupation: dataValues.irregular_ocupation ?? false,
+        alone_child: dataValues.alone_child ?? false,
+        dependent_elderly: dataValues.dependent_elderly ?? false,
+        unemployed: dataValues.unemployed ?? false,
+        deficient: dataValues.deficient ?? false,
+        low_income: dataValues.low_income ?? false,
+        others: dataValues.others ?? false,
         benefitsForFamily: dataValues.benefitsForFamily ?? [],
         signed_portfolio: dataValues.signed_portfolio ?? "",
         nuclear_family: dataValues.nuclear_family ?? ""
@@ -55,6 +55,10 @@ const FormFinances = () => {
         set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
     }
 
+    const handleCheckbox = (e, set, atributo) => {
+        set(atributo, e.checked)
+    }
+
 
 
     return (
@@ -74,72 +78,72 @@ const FormFinances = () => {
                         <form onSubmit={handleSubmit}>
                             <Row>
                                 <div className="col">
-                                    <CrasCheckbox checked={values.irregular_ocupation[0] === 1} name={"irregular_ocupation"} value={1} onChange={handleChange} label={"Residem em área de ocupação irregular"} />
+                                    <CrasCheckbox checked={values.irregular_ocupation} name={"irregular_ocupation"} onChange={(e) => handleCheckbox(e, setFieldValue, "irregular_ocupation")} label={"Residem em área de ocupação irregular"} />
                                 </div>
                             </Row>
                             <Row>
                                 <div className="col">
-                                    <CrasCheckbox name={"dependent_elderly"} value={1} checked={values.dependent_elderly[0] === 1} onChange={handleChange} label={"Existência de idosos dependentes na família"} />
+                                    <CrasCheckbox name={"dependent_elderly"} checked={values.dependent_elderly} onChange={(e) => handleCheckbox(e, setFieldValue, "dependent_elderly")} label={"Existência de idosos dependentes na família"} />
                                 </div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"deficient"} value={1} checked={values.deficient[0] === 1} onChange={handleChange} label={"Existência de deficient na família"} /></div>
+                                <div className="col"> <CrasCheckbox name={"deficient"} checked={values.deficient} onChange={(e) => handleCheckbox(e, setFieldValue, "deficient")} label={"Existência de deficient na família"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"alone_child"} value={1} checked={values.alone_child[0] === 1} onChange={handleChange} label={"Crianças que ficam sozinhos no domicilio"} /></div>
+                                <div className="col"> <CrasCheckbox name={"alone_child"} checked={values.alone_child} onChange={(e) => handleCheckbox(e, setFieldValue, "alone_child")} label={"Crianças que ficam sozinhos no domicilio"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"unemployed"} value={1} checked={values.unemployed[0] === 1} onChange={handleChange} label={"Desemprego"} /></div>
+                                <div className="col"> <CrasCheckbox name={"unemployed"} checked={values.unemployed} onChange={(e) => handleCheckbox(e, setFieldValue, "unemployed")} label={"Desemprego"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"low_income"} value={1} checked={values.low_income[0] === 1} onChange={handleChange} label={"Baixa renda"} /></div>
+                                <div className="col"> <CrasCheckbox name={"low_income"} checked={values.low_income} onChange={(e) => handleCheckbox(e, setFieldValue, "low_income")} label={"Baixa income"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"others"} value={1} checked={values.others[0] === 1} onChange={handleChange} label={"Outros"} /></div>
+                                <div className="col"> <CrasCheckbox name={"others"} checked={values.others} onChange={(e) => handleCheckbox(e, setFieldValue, "others")} label={"Outros"} /></div>
                             </Row>
                             <h3>Situação Financeira e Previdenciária</h3>
-            <Grid checkMockup={[{}, {}]}>
-                <Column>
-                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
-                    <Padding />
-                    {errors.profission && touched.profission ? (
-                        <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
-                    ) : null}
-                </Column>
-                <Column>
-                    <label>Carteira Assinada</label>
-                    <Row>
-                        <CrasRadioButton selectValue={1} name="signed_portfolio" value={true} onChange={handleChange} checked={values.signed_portfolio === true} label={"Sim"} />
-                        <CrasRadioButton selectValue={2} name="signed_portfolio" label={"Não"} value={false} onChange={handleChange} checked={values.signed_portfolio === false} />
-                    </Row>
-                    {errors.signed_portfolio && touched.signed_portfolio ? (
-                        <div style={{ color: "red" }}>{errors.signed_portfolio}<Padding /></div>
-                    ) : null}
-                </Column>
-            </Grid>
-            <Grid checkMockup={[{}, {}]}>
-                <Column>
-                    <CrasInputNumber mode="currency"
-                        currency="BRL"
-                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal do usuário" />
-                    <Padding />
-                    {errors.income && touched.income ? (
-                        <div style={{ color: "red" }}>{errors.income}<Padding /></div>
-                    ) : null}
-                </Column>
-                <Column>
-                    <label>Reside com:</label>
-                    <Row>
-                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
-                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
-                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Outros"} value={"Outros"} name={"nuclear_family"} label="Outros" />
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
+                                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
+                                    <Padding />
+                                    {errors.profission && touched.profission ? (
+                                        <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                                <Column>
+                                    <label>Carteira Assinada</label>
+                                    <Row>
+                                        <CrasRadioButton selectValue={1} name="signed_portfolio" value={true} onChange={handleChange} checked={values.signed_portfolio === true} label={"Sim"} />
+                                        <CrasRadioButton selectValue={2} name="signed_portfolio" label={"Não"} value={false} onChange={handleChange} checked={values.signed_portfolio === false} />
+                                    </Row>
+                                    {errors.signed_portfolio && touched.signed_portfolio ? (
+                                        <div style={{ color: "red" }}>{errors.signed_portfolio}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
+                                    <CrasInputNumber mode="currency"
+                                        currency="BRL"
+                                        locale="pt-BR" showButtons={true} value={values.income} name={"income"} onChange={handleChange} label="Renda Mensal do usuário" />
+                                    <Padding />
+                                    {errors.income && touched.income ? (
+                                        <div style={{ color: "red" }}>{errors.income}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                                <Column>
+                                    <label>Reside com:</label>
+                                    <Row>
+                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
+                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
+                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Outros"} value={"Outros"} name={"nuclear_family"} label="Outros" />
 
-                    </Row>
-                    {errors.nuclear_family && touched.nuclear_family ? (
-                        <div style={{ color: "red" }}>{errors.nuclear_family}</div>
-                    ) : null}
-                </Column>
-            </Grid>
+                                    </Row>
+                                    {errors.nuclear_family && touched.nuclear_family ? (
+                                        <div style={{ color: "red" }}>{errors.nuclear_family}</div>
+                                    ) : null}
+                                </Column>
+                            </Grid>
                             <h3>
                                 Benefícios
                             </h3>

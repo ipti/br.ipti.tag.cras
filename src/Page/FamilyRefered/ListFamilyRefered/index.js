@@ -8,9 +8,6 @@ const ListFamilyReferedScreen = () => {
 
     const { userIdentify } = useContext(UserIdentifyContext)
 
-    console.log(userIdentify)
-
-
     const columns = [
         { field: "family_representative_fk", header: "id" },
         { field: 'representative.name', header: 'Nome' },

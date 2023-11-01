@@ -87,6 +87,8 @@ const CreateFamilyReferedState = () => {
 
     const handleFamiliaRefered = () => {
 
+        console.log(dataValues)
+
         const data = {
             ...dataValues,
             nis: parseInt(dataValues.nis),
@@ -97,34 +99,13 @@ const CreateFamilyReferedState = () => {
             attendance_unity: 1,
             kinship: "RESPONSAVEL",
             birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,
-            irregular_ocupation
-                : (dataValues.irregular_ocupation
-                    .length === 0 || dataValues.irregular_ocupation
-                    === "") ? false : true,
-            alone_child
-                : (dataValues.alone_child
-                    .length === 0 || dataValues.alone_child
-                    === "") ? false : true,
-            dependent_elderly
-                : (dataValues.dependent_elderly
-                    .length === 0 || dataValues.dependent_elderly
-                    === "") ? false : true,
-            unemployed
-                : (dataValues.unemployed
-                    .length === 0 || dataValues.unemployed
-                    === "") ? false : true,
-            deficient
-                : (dataValues.deficient
-                    .length === 0 || dataValues.deficient
-                    === "") ? false : true,
-            low_income
-                : (dataValues.low_income
-                    .length === 0 || dataValues.low_income
-                    === "") ? false : true,
-            others
-                : (dataValues.others
-                    .length === 0 || dataValues.others
-                    === "") ? false : true
+            irregular_ocupation: dataValues.irregular_ocupation ?? false,
+            alone_child: dataValues.alone_child ?? false,
+            dependent_elderly: dataValues.dependent_elderly ?? false,
+            unemployed: dataValues.unemployed ?? false,
+            deficient: dataValues.deficient ?? false,
+            low_income: dataValues.low_income ?? false,
+            others: dataValues.others ?? false
         }
 
         CreateUserIdentifyRequestMutation.mutate(data);
