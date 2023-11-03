@@ -14,7 +14,6 @@ import "primereact/resources/primereact.min.css";
 // import "./assets/css/theme.css"
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import { QueryClientProvider } from "react-query";
-import AplicationProvider from "./context/Aplication/context.js";
 import queryClient from "./services/react-query";
 import "/node_modules/primeflex/primeflex.css";
 // import { ReactQueryDevtools } from 'react-query'
@@ -22,11 +21,9 @@ import "/node_modules/primeflex/primeflex.css";
 
 const App = () => {
   return (
-    <AplicationProvider>
-      <QueryClientProvider client={queryClient}>
+    <QueryClientProvider client={queryClient}>
         <Routes />
-      </QueryClientProvider>
-    </AplicationProvider>
+    </QueryClientProvider>
   )
 }
 export default App;

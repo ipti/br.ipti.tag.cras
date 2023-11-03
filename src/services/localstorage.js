@@ -26,6 +26,10 @@ export const idUser = (id) => {
   localStorage.setItem(id_key, id);
 }
 
+
+export const GetIdUser = () => {
+  return localStorage.getItem(id_key);
+}
 export const menuItem = (id) => {
   localStorage.setItem(menu_key, id);
 }

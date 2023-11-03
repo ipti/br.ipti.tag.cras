@@ -6,7 +6,7 @@ const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
 };
 
-const OneUsersRequest = async (id) => {
+export const OneUsersRequest = async (id) => {
     return await http.get(`/user/${id}`, config).then(response => response.data)
         .catch(err => {
             if (err.response.status === 401 || err.response.status === 403) {

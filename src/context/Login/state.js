@@ -5,8 +5,7 @@ import { AplicationContext } from "../Aplication/context";
 
 export const LoginState = () => {
     const [error, setError] = useState()
-    const {handleUser, user} = useContext(AplicationContext)
-    console.log(handleUser)
+    const {handleUser} = useContext(AplicationContext)
     const initialValue = {
         username: "",
         password: ""
