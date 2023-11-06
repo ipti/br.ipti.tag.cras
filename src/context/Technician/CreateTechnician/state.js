@@ -12,7 +12,8 @@ export const CreateTechnicianState = () => {
 
     const CreateSchema = Yup.object().shape({
         name: Yup.string().required("Campo Obrigatório"),
-        user: Yup.object().required("Campo Obrigatório")
+        user: Yup.object().required("Campo Obrigatório"),
+        
     })
 
 
@@ -28,7 +29,7 @@ export const CreateTechnicianState = () => {
     }, [userfetch])
 
     const handleCreateTechnician = (body) => {
-        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id})
+        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id, attendance_unity: 1,})
     }
 
 

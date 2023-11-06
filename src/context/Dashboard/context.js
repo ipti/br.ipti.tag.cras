@@ -5,10 +5,10 @@ export const DashboardContext = createContext({});
 
 const DashboardProvider = ({ children }) => {
 
-    const { countAttendence, countAttendenceMonth, attendanceFinishorPending } = DashboardState();
+    const { countUniFamily, countAttendenceMonth, attendanceFinishorPending, CountFamily } = DashboardState();
 
     return (
-        <DashboardContext.Provider value={{ countAttendence, countAttendenceMonth, attendanceFinishorPending }}>
+        <DashboardContext.Provider value={{ countUniFamily, countAttendenceMonth, attendanceFinishorPending, CountFamily }}>
             {children}
         </DashboardContext.Provider>
     )

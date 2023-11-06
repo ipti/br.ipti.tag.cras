@@ -5,10 +5,10 @@ export const AplicationContext = createContext({});
 
 const AplicationProvider = ({ children }) => {
 
-    const { user, handleUser } = AplicationState();
+    const { user, handleUser, year } = AplicationState();
 
     return (
-        <AplicationContext.Provider value={{ user, handleUser }}>
+        <AplicationContext.Provider value={{ user, handleUser, year }}>
             {children}
         </AplicationContext.Provider>
     )

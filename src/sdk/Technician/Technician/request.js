@@ -7,7 +7,11 @@ const config = {
 };
 
 const AllTechnicianRequest = async () => {
-  return await http.get("/technician", config).then(response => response.data)
+  return await http.get("/technician",{
+    params: {
+      attendance_unity_fk: 1
+    }
+  }, config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
         logout()

@@ -1,16 +1,22 @@
-import { useContext } from "react";
-import { DashboardContext } from "../../context/Dashboard/context";
+import { Container, Grid, Padding } from "../../CrasUi/styles/styles";
 import AttendanceFinishorPending from "./AttendanceFinishorPending";
+import CountActiveFamily from "./CountActiveFamily";
+import Attendencebymonth from "./CountAttendence";
+import CountUniFamily from "./CountUniFamily";
 
 const DashboardScreen = () => {
 
-    const { countAttendenceMonth } = useContext(DashboardContext)
-
-    console.log(countAttendenceMonth)
     return (
-        <>
-            <AttendanceFinishorPending />
-        </>
+        <Container>
+            <Grid checkMockup={[{}, {}, {}]}>
+                <CountActiveFamily />
+                <CountUniFamily />
+                <AttendanceFinishorPending />
+            </Grid>
+            <Padding padding="16px">
+                <Attendencebymonth />
+            </Padding>
+        </Container>
     )
 }
 

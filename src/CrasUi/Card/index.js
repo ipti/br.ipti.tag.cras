@@ -1,12 +1,10 @@
 import { Padding } from "../styles/styles";
 import { Card } from "./style";
 
-const CrasCard = ({ children, title }) => {
+const CrasCard = ({ children }) => {
     return (
         <Card>
             <Padding>
-
-                <h3>{title}</h3>
                 {children}
             </Padding>
         </Card>

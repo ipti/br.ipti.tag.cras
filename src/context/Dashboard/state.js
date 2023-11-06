@@ -1,35 +1,36 @@
-import { useEffect, useState } from "react"
-import { useFetchAttendanceorPending, useFetchCoundAttendance, useFetchCoundAttendanceMonth } from "../../sdk/Dashboard/request"
+import { useEffect, useState } from "react";
+import { useFetchAttendanceorPending, useFetchCoundAttendanceMonth, useFetchCoundFamily, useFetchCoundUniFamily } from "../../sdk/Dashboard/request";
 
 export const DashboardState = () => {
 
-    const [countAttendence, setcountAttendence] = useState()
-    const [countAttendenceMonth, setCountAttendanceMonth] = useState()
-    const [attendanceFinishorPending, setattendanceFinishorPending] = useState()
-    const { data: CountAttendanceRequest } = useFetchCoundAttendance()
-    const { data: attendanceFinishorPendingRequest } = useFetchAttendanceorPending()
-
-    const { data: CountAttendanceMonthRequest } = useFetchCoundAttendanceMonth()
+    const [countUniFamily, setcountUniFamily] = useState();
+    const [countAttendenceMonth, setCountAttendanceMonth] = useState();
+    const [attendanceFinishorPending, setattendanceFinishorPending] = useState();
+    const [CountFamily, setCountFamily] = useState()
+    const { data: CountUniFamilyRequest } = useFetchCoundUniFamily();
+    const { data: attendanceFinishorPendingRequest } = useFetchAttendanceorPending();
+    const { data: CountAttendanceMonthRequest } = useFetchCoundAttendanceMonth();
+    const { data: CountFamilyRequest } = useFetchCoundFamily()
+    console.log(CountAttendanceMonthRequest)
 
     useEffect(() => {
-        if (CountAttendanceRequest) {
-            setcountAttendence(CountAttendanceRequest)
+        if (typeof CountUniFamilyRequest === "number") {
+            setcountUniFamily(CountUniFamilyRequest)
+        }
+        if (typeof CountFamilyRequest === "number") {
+            setCountFamily(CountFamilyRequest)
         }
         if (attendanceFinishorPendingRequest) {
-            console.log("ajsdnjndsja")
-            console.log(attendanceFinishorPendingRequest)
             setattendanceFinishorPending(attendanceFinishorPendingRequest)
         }
         if (CountAttendanceMonthRequest) {
             setCountAttendanceMonth(CountAttendanceMonthRequest)
         }
 
-    }, [CountAttendanceRequest, attendanceFinishorPendingRequest, CountAttendanceMonthRequest])
-
-    console.log(attendanceFinishorPendingRequest)
+    }, [CountUniFamilyRequest, attendanceFinishorPendingRequest, CountAttendanceMonthRequest, CountFamilyRequest])
 
 
     return {
-        countAttendence, countAttendenceMonth, attendanceFinishorPending
+        countUniFamily, countAttendenceMonth, attendanceFinishorPending, CountFamily
     }
 }

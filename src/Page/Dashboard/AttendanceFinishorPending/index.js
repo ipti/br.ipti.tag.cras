@@ -1,55 +1,51 @@
 import { Chart } from "primereact/chart";
 import { useContext, useEffect, useState } from "react";
-import { DashboardContext } from "../../../context/Dashboard/context";
 import CrasCard from "../../../CrasUi/Card";
-import { Padding } from "../../../CrasUi/styles/styles";
+import { Row } from "../../../CrasUi/styles/styles";
+import { DashboardContext } from "../../../context/Dashboard/context";
 
 const AttendanceFinishorPending = () => {
     const { attendanceFinishorPending } = useContext(DashboardContext)
-
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
-    console.log(attendanceFinishorPending)
-
     useEffect(() => {
-        const documentStyle = getComputedStyle(document.documentElement);
         const data = {
             labels: ['Finalizado', 'Pendente'],
             datasets: [
                 {
+                    label: 'Atendimentos',
                     data: [attendanceFinishorPending?.finished, attendanceFinishorPending?.pending],
                     backgroundColor: [
-                        documentStyle.getPropertyValue('--green-500'),
-                        documentStyle.getPropertyValue('--yellow-500'),
+                        'rgba(255, 159, 64, 0.2)',
+                        'rgba(75, 192, 192, 0.2)'
                     ],
-                    hoverBackgroundColor: [
-                        documentStyle.getPropertyValue('--green-400'),
-                        documentStyle.getPropertyValue('--yellow-400'),
-                    ]
+                    borderColor: [
+                        'rgb(255, 159, 64)',
+                        'rgb(75, 192, 192)'
+                    ],
+                    borderWidth: 1
                 }
             ]
-        }
+        };
         const options = {
-            plugins: {
-                legend: {
-                    labels: {
-                        usePointStyle: true
-                    }
+            scales: {
+                y: {
+                    beginAtZero: true
                 }
             }
         };
 
         setChartData(data);
         setChartOptions(options);
-    }, [attendanceFinishorPending]);
+    }, [attendanceFinishorPending?.finished, attendanceFinishorPending?.pending]);
+
 
     return (
-        <CrasCard title={"Title"}>
-            <Padding>
-
-                qwdjsadkansdjklsadjsdakasdlsadjkl
-            </Padding>
+        <CrasCard>
+            <Row id="center">
+                <Chart type="bar" data={chartData} options={chartOptions} />
+            </Row>
         </CrasCard>
     )
 

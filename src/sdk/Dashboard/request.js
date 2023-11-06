@@ -6,9 +6,25 @@ const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
 };
 
-const CountAttendanceRequest = async () => {
+const CountUniFamilyRequest = async () => {
     try {
-        return await http.get("/charts/count-attendance", config).then(response => response.data)
+        return await http.get("/charts/count-uni-family", config).then(response => response.data)
+            .catch(err => {
+                if (err.response.status === 401 || err.response.status === 403) {
+                    logout();
+                    window.location.reload()
+                }
+                alert(err.message)
+                throw err;
+            });
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const CountFamilyRequest = async () => {
+    try {
+        return await http.get("/charts/count-family", config).then(response => response.data)
             .catch(err => {
                 if (err.response.status === 401 || err.response.status === 403) {
                     logout();
@@ -44,11 +60,7 @@ const CountAttendancebyMonthRequest = async () => {
 
 const CountAttendanceFinishedorPendingRequest = async () => {
     try {
-        return await http.get("/charts/attendance-finished-or-pending", {
-            params: {
-                year: 2023
-            }
-        }, config).then(response => response.data)
+        return await http.get("/charts/attendance-finished-or-pending", {params: {year: 2023}}, config).then(response => response.data)
             .catch(err => {
                 if (err.response.status === 401 || err.response.status === 403) {
                     logout();
@@ -70,6 +82,11 @@ export const useFetchCoundAttendanceMonth = () => {
     return useQuery("ChartCountAttendanceMonth", () => CountAttendancebyMonthRequest());
 };
 
-export const useFetchCoundAttendance = () => {
-    return useQuery("ChartCountAttendance", () => CountAttendanceRequest());
+export const useFetchCoundUniFamily = () => {
+    return useQuery("ChartCountUniFamily", () => CountUniFamilyRequest());
 };
+
+export const useFetchCoundFamily = () => {
+    return useQuery("ChartCountFamily", () => CountFamilyRequest());
+};
+
