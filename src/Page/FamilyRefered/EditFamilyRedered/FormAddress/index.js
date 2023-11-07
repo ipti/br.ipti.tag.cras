@@ -1,180 +1,145 @@
-import { Formik } from "formik";
 import React, { useContext } from "react";
-import * as Yup from 'yup';
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputMask from "../../../../CrasUi/Input/InputMask";
+import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 
-const FormAddress = () => {
+const FormAddress = ({ values, errors, touched, handleChange }) => {
 
-    const { backStep, nextStep, family } = useContext(EditFamilyReferedContext);
+    const {family } = useContext(EditFamilyReferedContext);
 
     if (!family) return null;
-
-    const initialValue = {
-        endereco: family.id_endereco_endereco.endereco ?? "",
-        telefone: family.id_endereco_endereco.telefone ?? "",
-        ponto_referencia: family.id_endereco_endereco.ponto_referencia ?? "",
-        condicoes_moradia: family.id_endereco_endereco.condicoes_moradia ?? "",
-        tipo_construcao: family.id_endereco_endereco.tipo_construcao ?? "",
-        comodos: family.id_endereco_endereco.comodos ?? "",
-        valor_aluguel: family.id_endereco_endereco.valor_aluguel ?? 0
-    }
-
-    const validationSchema = Yup.object().shape({
-        endereco: Yup.string().required("Campo obrigatotório"),
-        telefone: Yup.string().required("Campo obrigatotório"),
-        ponto_referencia: Yup.string(),
-        condicoes_moradia: Yup.string().required("Campo obrigatotório"),
-        tipo_construcao: Yup.string().required("Campo obrigatotório"),
-        comodos: Yup.string().required("Campo obrigatotório"),
-        valor_aluguel: Yup.number(),
-    });
 
     return (
         <Column>
             <Padding padding="16px" />
             <h3>Endereço</h3>
-            <Formik initialValues={initialValue} onSubmit={value => nextStep(value)} validationSchema={validationSchema}>
-                {({ values, handleChange, handleSubmit, errors, touched }) => {
-                    return (
-                        <form onSubmit={handleSubmit}>
-                              <Grid checkMockup={[{}]}>
-                                <Column>
-                                    <CrasInput name="endereco" onChange={handleChange} value={values.endereco} label="Endereço" />
-                                    <Padding />
-                                    {errors.endereco && touched.endereco ? (
-                                        <div style={{ color: "red" }}>{errors.endereco}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                            </Grid>
-                            <Grid checkMockup={[{}, {}]}>
-                                <Column>
-                                    <CrasInput onChange={handleChange} value={values.telefone} name="telefone" label="Telefone" />
-                                    <Padding />
-                                    {errors.telefone && touched.telefone ? (
-                                        <div style={{ color: "red" }}>{errors.telefone}<Padding /></div>
-                                    ) : null}
+            <Grid checkMockup={[{}]}>
+                <Column>
+                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço" />
+                    <Padding />
+                    {errors.address && touched.address ? (
+                        <div style={{ color: "red" }}>{errors.address}<Padding /></div>
+                    ) : null}
+                </Column>
+            </Grid>
+            <Grid checkMockup={[{}, {}]}>
+                <Column>
+                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone" />
+                    <Padding />
+                    {errors.telephone && touched.telephone ? (
+                        <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
+                    ) : null}
 
-                                </Column>
-                                <Column>
-                                    <CrasInput onChange={handleChange} value={values.ponto_referencia} name="ponto_referencia" label="Ponto de Referência" />
-                                    <Padding />
-                                    {errors.ponto_referencia && touched.ponto_referencia ? (
-                                        <div style={{ color: "red" }}>{errors.ponto_referencia}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                            </Grid>
-                            <Row>
-                                <div className="col">
-                                    <label>Condições de Moradia</label>
-                                    <Padding />
-                                    <Row>
-                                        <CrasRadioButton
-                                            selectValue={"Própria"}
-                                            value={"Própria"}
-                                            checked={values.condicoes_moradia === "Própria"}
-                                            label={"Própria"}
-                                            onChange={handleChange}
-                                            name="condicoes_moradia" />
-                                        <CrasRadioButton
-                                            selectValue={"Alugada"}
-                                            value={"Alugada"}
-                                            checked={values.condicoes_moradia === "Alugada"}
-                                            label={"Alugada"}
-                                            onChange={handleChange}
-                                            name="condicoes_moradia" />
-                                        <CrasRadioButton
-                                            selectValue={"Cedida"}
-                                            value="Cedida"
-                                            onChange={handleChange}
-                                            checked={values.condicoes_moradia === "Cedida"}
-                                            label={"Cedida"}
-                                            name="condicoes_moradia" />
-                                        <CrasRadioButton
-                                            selectValue={"Área de Ocupação"}
-                                            value={"Área de Ocupação"}
-                                            onChange={handleChange}
-                                            checked={values.condicoes_moradia === "Área de Ocupação"}
-                                            label={"Área de Ocupação"}
-                                            name="condicoes_moradia" />
-                                    </Row>
-                                    {errors.condicoes_moradia && touched.condicoes_moradia ? (
-                                        <div style={{ color: "red" }}>{errors.condicoes_moradia}</div>
-                                    ) : null}
-                                </div>
-                            </Row>
-                            <Row>
-                            </Row>
-                            <div className="col">
-                                <label>Tipo de Construção</label>
-                                <Padding />
-                                <Row>
-                                    <CrasRadioButton
-                                        selectValue={"Alvenaria"}
-                                        value={"Alvenaria"}
-                                        onChange={handleChange}
-                                        checked={values.tipo_construcao === "Alvenaria"}
-                                        label={"Alvenaria"}
-                                        name="tipo_construcao" />
-                                    <CrasRadioButton
-                                        selectValue={"Madeira"}
-                                        value={"Madeira"}
-                                        onChange={handleChange}
-                                        checked={values.tipo_construcao === "Madeira"}
-                                        label={"Madeira"}
-                                        name="tipo_construcao" />
-                                    <CrasRadioButton
-                                        selectValue={"Mista"}
-                                        value={"Mista"}
-                                        onChange={handleChange}
-                                        checked={values.tipo_construcao === "Mista"}
-                                        label={"Mista"}
-                                        name="tipo_construcao" />
-                                    <CrasRadioButton
-                                        selectValue={"Taipa"}
-                                        value={"Taipa"}
-                                        onChange={handleChange}
-                                        checked={values.tipo_construcao === "Taipa"}
-                                        label={"Taipa"}
-                                        name="tipo_construcao" />
-                                </Row>
-                                {errors.tipo_construcao && touched.tipo_construcao ? (
-                                    <div style={{ color: "red" }}>{errors.tipo_construcao}</div>
-                                ) : null}
-                            </div>
-                            <Grid checkMockup={[{}, {}]}>
-                                <Column>
-                                    <CrasInput name={"comodos"} value={values.comodos} onChange={handleChange} label="Nº de Comodos" />
-                                    <Padding />
-                                    {errors.comodos && touched.comodos ? (
-                                        <div style={{ color: "red" }}>{errors.comodos}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                                <Column>
-                                    <CrasInput value={values.valor_aluguel} onChange={handleChange} name={"valor_aluguel"} label="Valor" />
-                                    <Padding />
-                                    {errors.valor_aluguel && touched.valor_aluguel ? (
-                                        <div style={{ color: "red" }}>{errors.valor_aluguel}<Padding /></div>
-                                    ) : null}
-                                </Column>
-                            </Grid>
-                            <Padding padding="16px" />
-                            <Row id="end">
-
-                                <Padding />
-                                <ButtonPrime label="Próximo" type="submit" />
-                            </Row>
-                        </form>
-                    )
-                }}
-            </Formik>
-            <Row id="start">
-                <ButtonPrime label="Voltar" onClick={backStep} />
+                </Column>
+                <Column>
+                    <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Ponto de Referência" />
+                    <Padding />
+                    {errors.reference && touched.reference ? (
+                        <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
+                    ) : null}
+                </Column>
+            </Grid>
+            <Row>
+                <div className="col">
+                    <label>Condições de Moradia</label>
+                    <Padding />
+                    <Row>
+                        <CrasRadioButton
+                            selectValue={"Própria"}
+                            value={"Própria"}
+                            checked={values.conditions === "Própria"}
+                            label={"Própria"}
+                            onChange={handleChange}
+                            name="conditions" />
+                        <CrasRadioButton
+                            selectValue={"Alugada"}
+                            value={"Alugada"}
+                            checked={values.conditions === "Alugada"}
+                            label={"Alugada"}
+                            onChange={handleChange}
+                            name="conditions" />
+                        <CrasRadioButton
+                            selectValue={"Cedida"}
+                            value="Cedida"
+                            onChange={handleChange}
+                            checked={values.conditions === "Cedida"}
+                            label={"Cedida"}
+                            name="conditions" />
+                        <CrasRadioButton
+                            selectValue={"Área de Ocupação"}
+                            value={"Área de Ocupação"}
+                            onChange={handleChange}
+                            checked={values.conditions === "Área de Ocupação"}
+                            label={"Área de Ocupação"}
+                            name="conditions" />
+                    </Row>
+                    {errors.conditions && touched.conditions ? (
+                        <div style={{ color: "red" }}>{errors.conditions}</div>
+                    ) : null}
+                </div>
             </Row>
+            <Row>
+            </Row>
+            <div className="col">
+                <label>Tipo de Construção</label>
+                <Padding />
+                <Row>
+                    <CrasRadioButton
+                        selectValue={"Alvenaria"}
+                        value={"Alvenaria"}
+                        onChange={handleChange}
+                        checked={values.construction_type === "Alvenaria"}
+                        label={"Alvenaria"}
+                        name="construction_type" />
+                    <CrasRadioButton
+                        selectValue={"Madeira"}
+                        value={"Madeira"}
+                        onChange={handleChange}
+                        checked={values.construction_type === "Madeira"}
+                        label={"Madeira"}
+                        name="construction_type" />
+                    <CrasRadioButton
+                        selectValue={"Mista"}
+                        value={"Mista"}
+                        onChange={handleChange}
+                        checked={values.construction_type === "Mista"}
+                        label={"Mista"}
+                        name="construction_type" />
+                    <CrasRadioButton
+                        selectValue={"Taipa"}
+                        value={"Taipa"}
+                        onChange={handleChange}
+                        checked={values.construction_type === "Taipa"}
+                        label={"Taipa"}
+                        name="construction_type" />
+                </Row>
+                {errors.construction_type && touched.construction_type ? (
+                    <div style={{ color: "red" }}>{errors.construction_type}</div>
+                ) : null}
+            </div>
+            <Grid checkMockup={[{}, {}]}>
+                <Column>
+                    <CrasInputNumber showButtons={true} name={"rooms"} value={values.rooms} onChange={handleChange} label="Nº de Comodos" />
+                    <Padding />
+                    {errors.rooms && touched.rooms ? (
+                        <div style={{ color: "red" }}>{errors.rooms}<Padding /></div>
+                    ) : null}
+                </Column>
+                <Column>
+                    <CrasInputNumber  mode="currency"
+                        currency="BRL"
+                        locale="pt-BR" showButtons={true} value={values.rent_value} onChange={handleChange} name={"rent_value"} label="Valor" />
+                    <Padding />
+                    {errors.rent_value && touched.rent_value ? (
+                        <div style={{ color: "red" }}>{errors.rent_value}<Padding /></div>
+                    ) : null}
+                </Column>
+            </Grid>
+            <Padding padding="16px" />
         </Column>
     )
 }

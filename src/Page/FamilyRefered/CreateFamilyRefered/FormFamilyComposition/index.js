@@ -9,7 +9,9 @@ const FormFamilyComposition = () => {
     return (
         <Column>
             <Padding padding="16px" />
-                <h1>Clique em Finalizar para cadastrar familia</h1>
+            <Row id="center">
+                <h2>Pressione 'Finalizar' para concluir o cadastro da família ou retorne para revisar os dados.</h2>
+            </Row>
             <Padding padding="16px" />
             <Row id="center">
                 <ButtonPrime label="Voltar" onClick={backStep} />

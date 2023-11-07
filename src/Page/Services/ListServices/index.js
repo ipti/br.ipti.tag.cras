@@ -10,9 +10,9 @@ const ListServicesScreen = () => {
 
     const columns = [
         { field: 'id', header: 'id' },
-        { field: 'servico', header: 'Servico' },
-        { field: 'resultado', header: 'Resultado' },
-        { field: 'tecnico', header: 'Tecnico responsavel' }
+        { field: 'task.name', header: 'Servico' },
+        { field: 'result', header: 'Resultado' },
+        { field: 'technician.name', header: 'Tecnico responsavel' }
     ];
 
     if(!technician && !typeService) return null

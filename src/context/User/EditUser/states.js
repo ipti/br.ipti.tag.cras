@@ -12,25 +12,20 @@ export const EditUser = () => {
     const [isError, setIsError] = useState("");
     const [loading, setLoading] = useState(false)
 
-    const typeUser = [
-        {id: 1, nome: "Administrador"},
-        {id: 2, nome: "Auxiliar administrativo"},
-        {id: 3, nome: "Técnico de nível superior"},
-        {id: 4, nome: "Coordenador(a)"},
-        {id: 5, nome: "Operador Cadastro Único"}
-    ]
-
-    
-
     const EditUserSchema = Yup.object().shape({
-        nome: Yup.string().required("Campo Obrigatório"),
+        name: Yup.string().required("Campo Obrigatório"),
         email: Yup.string().required('Campo Obrigatório'),
-        type_user: Yup.object().required('Campo Obrigatório'),
+        username: Yup.string().required('Campo Obrigatório'),
+        role: Yup.object().required('Campo Obrigatório'),
         password: Yup.string(),
         confirmPassword: Yup.string().label('Confirmar senha').oneOf([Yup.ref('password')], 'Senhas difirentes'),
     });
 
 
+    const role = [
+        {id: "SECRETARY", name: "Secretário ou administrador"},
+        {id: "TECHNICIAN", name: "Técnico"},
+    ]
 
 
 
@@ -55,20 +50,18 @@ export const EditUser = () => {
 
     useEffect(() => {
       if(UserRequest && loading){
-        setUser(UserRequest.data.data)
+        setUser(UserRequest)
       }
     }, [UserRequest, loading])
 
-    const valueTypeUser = () => {
-        const value = user ? typeUser.find(fil => fil.id === user.type_user) : ""
-        return value
-    }
+   
     
 
     const initialValue = {
-        nome: user ? user.nome : "",
+        name: user ? user.name : "",
         email: user ? user.email :  "",
-        type_user: user ? valueTypeUser() : "",
+        username: user ? user.username : "",
+        role: user ? role.find(props => props.id === user.role) : "",
         password: "",
         confirmPassword: ""
     }
@@ -77,23 +70,25 @@ export const EditUser = () => {
     const handleEditUser = (body) => {
 
         const datanotpassword = {
-            nome: body.nome,
+            name: body.name,
             email: body.email,
-            type_user: body.type_user.id,
+            username: body.username,
+            role: body.role.id
         }
 
         const data = {
-            nome: body.nome,
+            name: body.name,
             email: body.email,
-            type_user: body.type_user.id,
-            password: body.password
+            username: body.username,
+            password: body.password,
+            role: body.role.id
         }
 
-        EditUserRequestMutation.mutate(body.password !== "" ? data : datanotpassword)
+        EditUserRequestMutation.mutate(body.password !== "" ? data : datanotpassword);
     }
     
     
     return{
-        typeUser, handleEditUser, EditUserSchema, initialValue, user, isVerify, isError, toast
+         handleEditUser, EditUserSchema, initialValue, user, isVerify, isError, toast, role
     }
 }

@@ -2,12 +2,13 @@ import { Formik } from "formik";
 import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
-import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
+import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { CreateTechnicianContext } from "../../../context/Technician/CreateTechnician/context";
+import CrasDropdown from "../../../CrasUi/Dropdown";
 
 const CreateTechnicianScreen = () => {
 
-    const {  handleCreateTechnician, CreateSchema, initialValue } = useContext(CreateTechnicianContext);
+    const { handleCreateTechnician, CreateSchema, initialValue, user } = useContext(CreateTechnicianContext);
 
     return (
         <Container>
@@ -19,18 +20,26 @@ const CreateTechnicianScreen = () => {
                 <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTechnician(values)} validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
-                            <Row>
-                                <div className="col">
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
                                     <CrasInput
-                                        name="nome"
-                                        value={values.nome}
+                                        name="name"
+                                        value={values.name}
                                         onChange={handleChange}
                                         label="Nome" />
-                                    {errors.nome && touched.nome ? (
-                                        <div style={{ color: "red" }}>{errors.nome}</div>
+                                    <Padding />
+                                    {errors.name && touched.name ? (
+                                        <div style={{ color: "red" }}>{errors.name}</div>
                                     ) : null}
-                                </div>
-                            </Row>
+                                </Column>
+                                <Column>
+                                    <CrasDropdown name="user" value={values.user} options={user} onChange={handleChange} optionLabel={"name"} label="Usuário" />
+                                    <Padding />
+                                    {errors.user && touched.user ? (
+                                        <div style={{ color: "red" }}>{errors.user}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                            </Grid>
                             <Padding padding="16px" />
                             <Row id="end">
                                 <ButtonPrime type="submit" label="Cadastrar" />
@@ -43,5 +52,6 @@ const CreateTechnicianScreen = () => {
         </Container>
     )
 }
+
 
 export default CreateTechnicianScreen;

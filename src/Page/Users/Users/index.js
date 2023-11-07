@@ -12,12 +12,13 @@ const UserPage = () => {
 
     const columns = [
         {field: 'id', header: 'id' },
-        { field: 'nome', header: 'Nome' },
+        { field: 'name', header: 'Nome' },
+        { field: 'username', header: 'Nome de usuário' },
         { field: 'email', header: 'Email' },
-        { field: 'type_user', header: 'Tipo de usuário' },
+        { field: 'role', header: 'Tipo de usuário' },
     ];
 
-    const userConvert = user ?  user.map((data ) => ({ ...data, type_user: data.type_user  === 1 ? "administrador" : "user" })) : [];
+    const userConvert = user ?  user.map((data ) => ({ ...data, role: data.role  === "TECHNICIAN" ? "Técnico" : data.role  === "SECRETARY" ? "Secretário": "user" })) : [];
 
     return (
         <Container>

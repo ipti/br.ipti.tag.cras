@@ -1,9 +1,12 @@
-import {Card} from "primereact/card";
+import { Padding } from "../styles/styles";
+import { Card } from "./style";
 
-const CrasCard = ({children, title}) => {
-    return(
-        <Card title={title}>
-            {children}
+const CrasCard = ({ children }) => {
+    return (
+        <Card>
+            <Padding>
+                {children}
+            </Padding>
         </Card>
     )
 }

@@ -4,8 +4,11 @@ import { CreateUserIdentifyController } from "../../../sdk/FamilyRefered/CreateU
 const CreateFamilyReferedState = () => {
     const [activeStep, setActiveStep] = useState(0);
     const [dataValues, setDataValues] = useState({});
+    const [benefits, setbenefits] = useState([])
 
-    const {CreateUserIdentifyRequestMutation} = CreateUserIdentifyController();
+
+    const { CreateUserIdentifyRequestMutation, benefitsfetch, isLoading, error } = CreateUserIdentifyController();
+
 
     const estadosDoBrasil = [
         { uf: 'AC', nome: 'Acre' },
@@ -35,9 +38,9 @@ const CreateFamilyReferedState = () => {
         { uf: 'SP', nome: 'São Paulo' },
         { uf: 'SE', nome: 'Sergipe' },
         { uf: 'TO', nome: 'Tocantins' }
-      ];
+    ];
 
-      const escolaridadeNoBrasil = [
+    const escolaridadeNoBrasil = [
         "Educação Infantil",
         "Ensino Fundamental I (1º ao 5º ano)",
         "Ensino Fundamental II (6º ao 9º ano)",
@@ -52,9 +55,9 @@ const CreateFamilyReferedState = () => {
         "Educação de Jovens e Adultos (EJA) - Ensino Médio",
         "Cursos Profissionalizantes",
         "Cursos de Aperfeiçoamento e Extensão"
-      ];
+    ];
 
-      const estadosCivis = [
+    const estadosCivis = [
         'Solteiro(a)',
         'Casado(a)',
         'Divorciado(a)',
@@ -62,7 +65,7 @@ const CreateFamilyReferedState = () => {
         'Separado(a)',
         'União Estável',
         'Outro',
-      ];
+    ];
 
 
     const nextStep = (values) => {
@@ -84,30 +87,31 @@ const CreateFamilyReferedState = () => {
 
     const handleFamiliaRefered = () => {
 
+        console.log(dataValues)
+
         const data = {
             ...dataValues,
-            certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
-            NIS: parseInt(dataValues.NIS),
-            renda: parseInt(dataValues.renda),
-            bolsa_familia: parseInt(dataValues.bolsa_familia),
-            loasbpc: parseInt(dataValues.loasbpc),
-            previdencia: parseInt(dataValues.previdencia),
-            valor_aluguel: parseInt(dataValues.valor_aluguel),
-            uf_rg: dataValues.uf_rg.uf,
+            nis: parseInt(dataValues.nis),
             cpf: dataValues.cpf.replace(/\D/g, ''),
-            numero_rg: dataValues.numero_rg.replace(/\D/g, ''),
-            ocupacao_irregular: dataValues.ocupacao_irregular.length === 0 || dataValues.ocupacao_irregular === "" ? 0 : 1,
-            crianca_sozinha: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-            idosos_dependentes: dataValues.crianca_sozinha.length === 0 || dataValues.crianca_sozinha === "" ? 0 : 1,
-            desempregados: dataValues.desempregados.length === 0 || dataValues.desempregados === "" ? 0 : 1,
-            deficientes: dataValues.deficientes.length === 0 || dataValues.deficientes === "" ? 0 : 1,
-            baixa_renda: dataValues.baixa_renda.length === 0 || dataValues.baixa_renda === "" ? 0 : 1,
-            outros: dataValues.outros.length === 0 || dataValues.outros === "" ? 0 : 1
+            rg_number: dataValues.rg_number.replace(/\D/g, ''),
+            telephone: dataValues.telephone.replace(/\D/g, ''),
+            uf_rg: dataValues.uf_rg.uf,
+            attendance_unity: 1,
+            kinship: "RESPONSAVEL",
+            birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,
+            irregular_ocupation: dataValues.irregular_ocupation ?? false,
+            alone_child: dataValues.alone_child ?? false,
+            dependent_elderly: dataValues.dependent_elderly ?? false,
+            unemployed: dataValues.unemployed ?? false,
+            deficient: dataValues.deficient ?? false,
+            low_income: dataValues.low_income ?? false,
+            others: dataValues.others ?? false
         }
+
         CreateUserIdentifyRequestMutation.mutate(data);
     }
     return {
-        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues,handleFamiliaRefered, estadosCivis
+        activeStep, setActiveStep, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, benefitsfetch, isLoading, error, benefits, setbenefits
     }
 }
 

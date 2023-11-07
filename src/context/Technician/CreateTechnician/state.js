@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { CreateTechnicianController } from '../../../sdk/Technician/CreateTechnician/controller';
 
@@ -5,21 +6,34 @@ import { CreateTechnicianController } from '../../../sdk/Technician/CreateTechni
 
 export const CreateTechnicianState = () => {
     const initialValue = {
-        nome: "",
+        name: "",
+        user: ""
     }
 
     const CreateSchema = Yup.object().shape({
-        nome: Yup.string().required("Campo Obrigatório"),
+        name: Yup.string().required("Campo Obrigatório"),
+        user: Yup.object().required("Campo Obrigatório"),
+        
     })
 
-    const { CreateTechnicianRequestMutation } = CreateTechnicianController();
+
+
+    const { CreateTechnicianRequestMutation, userfetch } = CreateTechnicianController();
+
+    const [user, setUser] = useState([]);
+
+    useEffect(() => {
+        if (userfetch) {
+            setUser(userfetch)
+        }
+    }, [userfetch])
 
     const handleCreateTechnician = (body) => {
-        CreateTechnicianRequestMutation.mutate(body)
+        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id, attendance_unity: 1,})
     }
 
 
     return {
-        handleCreateTechnician, CreateSchema, initialValue
+        handleCreateTechnician, CreateSchema, initialValue, user
     }
 }

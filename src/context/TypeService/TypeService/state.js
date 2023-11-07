@@ -8,7 +8,7 @@ export const TypeServiceState = () => {
 
     useEffect(() => {
         if(typesServicesfetch){
-            setTypesServices(typesServicesfetch.data.data)
+            setTypesServices(typesServicesfetch)
         }
     }, [typesServicesfetch])
 

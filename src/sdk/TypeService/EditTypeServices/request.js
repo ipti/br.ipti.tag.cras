@@ -1,13 +1,21 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken } from "../../../services/localstorage";
+import { getToken, logout } from "../../../services/localstorage";
 
 const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
 };
 
 const OneTypesServicesRequest = async (id) => {
-    return await http.get(`/typesServices/${id}`, config);
+    return await http.get(`/task/${id}`, config).then(response => response.data)
+    .catch(err => {
+        if (err.response.status === 401 || err.response.status === 403) {
+            logout()
+            window.location.reload()
+        }
+        alert(err.message)
+        throw err;
+    });;
 }
 
 export const useFetchOneTypesServices= (id) => {
@@ -16,5 +24,5 @@ export const useFetchOneTypesServices= (id) => {
 
 
 export const EdittypesServicesRequest = async (body, id) => {
-    return await http.put(`/typesServices/${id}`, body, config);
+    return await http.put(`/task/${id}`, body, config);
 }

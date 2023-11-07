@@ -1,15 +1,23 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken } from "../../../services/localstorage";
+import { getToken, logout } from "../../../services/localstorage";
 
 const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
 };
 
 const ALLServiceRequest = async () => {
-  try{
-    return await http.get("/service", config);
-  }catch(err){
+  try {
+    return await http.get("/bff/get-attendance", config).then(response => response.data)
+      .catch(err => {
+        if (err.response.status === 401 || err.response.status === 403) {
+          logout();
+          window.location.reload()
+        }
+        alert(err.message)
+        throw err;
+      });
+  } catch (err) {
     console.log(err)
   }
 }
@@ -19,5 +27,5 @@ export const useFetchAllService = () => {
 };
 
 export const DeleteServiceRequest = async (id) => {
-  return await http.delete(`/service/${id}`, config)
+  return await http.delete(`/attendance/${id}`, config)
 }

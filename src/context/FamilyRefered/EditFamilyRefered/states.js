@@ -2,8 +2,11 @@ import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 import queryClient from "../../../services/react-query";
+import { MemberFamilyController } from "../../../sdk/FamilyRefered/MemberFamily/controller";
 
-const EditFamilyReferedState = () => {
+
+
+const EditRferedState = () => {
 
   const [loading, setLoading] = useState(false)
   useEffect(() => {
@@ -14,9 +17,10 @@ const EditFamilyReferedState = () => {
   const [activeStep, setActiveStep] = useState(0);
   const [addMember, setAddMember] = useState(false)
   const [open, setOpen] = useState(false)
-  const [dataValues, setDataValues] = useState({});
+  const [values, setDataValues] = useState({});
   const [family, setFamily] = useState();
-  const [member, setMember] = useState()
+
+
   const { id } = useParams()
 
   const [isVerify, setIsVerify] = useState(true)
@@ -36,23 +40,29 @@ const EditFamilyReferedState = () => {
   const {
     familyReferedfetch,
     CreateFamilyRequestRequestMutation,
-    membersFamilyRequest,
-    DeleteMemberFamilyRequestMutation,
-    EditFamilyRequestRequestMutation
+    // membersRquest,
+    DeleteFamilyBenefitsMutation,
+    EditFamilyRequestRequestMutation,
+    EditAddressRequestMutation,
+    benefitsfetch,
+    CreateFamilyBenefitsRequestMutation,
+    EditVulnerabilityRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
+
+  const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation } = MemberFamilyController()
 
 
   useEffect(() => {
     if (familyReferedfetch && loading) {
-      setFamily(familyReferedfetch.data.data)
+      setFamily(familyReferedfetch)
     }
 
-    if (membersFamilyRequest) {
-      const filter = membersFamilyRequest.data.data.filter(member => `${member.id_identificacao_usuario}` === id);
-      setMember(filter)
-    }
+    // if (membersRquest) {
+    //   const filter = membersRquest.data.filter(member => `${member.id_identificacao_usuario}` === id);
+    //   setMember(filter)
+    // }
 
-  }, [familyReferedfetch, membersFamilyRequest, id, loading])
+  }, [familyReferedfetch, id, loading])
 
   const sexo = [
     "Masculino",
@@ -123,28 +133,25 @@ const EditFamilyReferedState = () => {
   ];
 
   const parentesco = [
-    "Pai",
-    "Mãe",
-    "Filho",
-    "Filha",
-    "Avô",
-    "Avó",
-    "Tio",
-    "Tia",
-    "Primo",
-    "Prima",
-    "Sobrinho",
-    "Sobrinha",
-    "Cônjuge",
-    "Companheiro(a)",
-    "Amigo(a)",
-    "Outro"
+    { id: "CONJUGE", name: 'Cônjuge' },
+    { id: "FILHO_A", name: 'Filho(a)' },
+    { id: "ENTEADO_A", name: 'Enteado(a)' },
+    { id: "NETO_A", name: 'Neto(a)' },
+    { id: "PAI", name: 'Pai' },
+    { id: "MAE", name: 'Mãe' },
+    { id: "SOGRO_A", name: 'Sogro(a)' },
+    { id: "IRMAO_A", name: 'Irmão(a)' },
+    { id: "GENRO", name: 'Genro' },
+    { id: "NORA", name: 'Nora' },
+    { id: "OUTRO", name: 'Outro' },
+    { id: "NAO_PARENTE", name: 'Não Parente' }
   ]
 
 
 
+
   const nextStep = (values) => {
-    let data = Object.assign(dataValues, values);
+    let data = Object.assign(values, values);
     setDataValues(data);
 
     if (activeStep < 3) {
@@ -153,47 +160,138 @@ const EditFamilyReferedState = () => {
   }
 
   const backStep = () => {
-    
+
     if (activeStep !== 0) {
       setActiveStep(activeStep - 1);
     }
   }
 
 
-  const handleFamiliaRefered = () => {
+  const handleFamiliaRefered = (values) => {
 
-    const data = {
-      ...dataValues,
-      certidao_nascimento: dataValues.certidao_nascimento ? parseInt(dataValues.certidao_nascimento) : "",
-      NIS: parseInt(dataValues.NIS),
-      renda: parseInt(dataValues.renda),
-      bolsa_familia: parseInt(dataValues.bolsa_familia),
-      loasbpc: parseInt(dataValues.loasbpc),
-      previdencia: parseInt(dataValues.previdencia),
-      valor_aluguel: dataValues.valor_aluguel ? parseInt(dataValues.valor_aluguel) : 0,
-      uf_rg: dataValues.uf_rg.uf,
-      ocupacao_irregular: dataValues.ocupacao_irregular.length === 0  || dataValues.ocupacao_irregular[0] === 0 ? 0 : 1,
-      crianca_sozinha: dataValues.crianca_sozinha.length === 0  || dataValues.crianca_sozinha[0] === 0 ? 0 : 1,
-      idosos_dependentes: dataValues.crianca_sozinha.length === 0  || dataValues.crianca_sozinha[0] === 0 ? 0 : 1,
-      desempregados: dataValues.desempregados.length === 0  || dataValues.desempregados[0] === 0 ? 0 : 1,
-      deficientes: dataValues.deficientes.length === 0  || dataValues.deficientes[0] === 0 ? 0 : 1,
-      baixa_renda: dataValues.baixa_renda.length === 0  || dataValues.baixa_renda[0] === 0 ? 0 : 1,
-      outros: dataValues.outros.length === 0 || dataValues.outros[0] === 0 ? 0 : 1
+    const bodyUserIdentify = {
+      name: values?.name,
+      surname: values?.surname === "" ? undefined : values?.surname,
+      birthday: values?.birthday,
+      nis: values?.nis === "" ? undefined : parseInt(values?.nis),
+      folder: values.folder,
+      archive: values.archive,
+      number: values.number,
+      rg_number: values?.rg_number.replace(/\D/g, ''),
+      rg_date_emission: values?.rg_date_emission,
+      uf_rg: values?.uf_rg.uf,
+      emission_rg: values?.emission_rg,
+      cpf: values.cpf.replace(/\D/g, ''),
+      is_deficiency: values?.is_deficiency,
+      filiation_1: values?.filiation_1,
+      filiation_2: values.filiation_2,
+      marital_status: values?.marital_status,
+      escolarity: values?.escolarity,
+      initial_date: values?.initial_date,
+      final_date: values?.final_date,
+      profission: values.profission,
+      income: values.income,
+      nuclear_family: values?.nuclear_family,
+      signed_portfolio: values?.signed_portfolio,
+
     }
 
+    const bodyVulnerability = {
+      irregular_ocupation: values?.irregular_ocupation,
+      alone_child: values?.alone_child,
+      dependent_elderly: values?.dependent_elderly,
+      unemployed: values?.unemployed,
+      deficient: values?.deficient,
+      low_income: values?.low_income,
+      others: values?.others
+    }
+
+
+    const bodyAddress = {
+      address: values.address,
+      telephone: values.telephone.replace(/\D/g, ''),
+      reference: values.reference,
+      conditions: values.conditions,
+      construction_type: values.construction_type,
+      rooms: values.rooms,
+      rent_value: values.rent_value
+    }
+
+    EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: family.family_representative_fk });
+    EditVulnerabilityRequestMutation.mutate({ data: bodyVulnerability, id: family.vulnerability_fk })
+    EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
     show()
-    EditFamilyRequestRequestMutation.mutate(data);
+
+  }
+
+  const handleEditFamilyMember = (values, id) => {
+
+
+    const bodyUserIdentify = {
+      name: values?.name,
+      surname: values?.surname === "" ? undefined : values?.surname,
+      birthday: values?.birthday,
+      kinship: values?.kinship.id,
+      nis: values?.nis === "" ? undefined : parseInt(values?.nis),
+      rg_number: values?.rg_number.replace(/\D/g, ''),
+      rg_date_emission: values?.rg_date_emission,
+      uf_rg: values?.uf_rg.uf,
+      emission_rg: values?.emission_rg,
+      cpf: values.cpf.replace(/\D/g, ''),
+      is_deficiency: values?.is_deficiency,
+      // deficiencia: ?deficiencia ?? "",
+      filiation_1: values?.filiation_1,
+      filiation_2: values.filiation_2,
+      marital_status: values?.marital_status,
+      escolarity: values?.escolarity,
+      initial_date: values?.initial_date,
+      final_date: values?.final_date,
+      profission: values?.profission,
+      income: values?.income,
+      nuclear_family: values?.nuclear_family,
+      signed_portfolio: values?.signed_portfolio
+    }
+
+    EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: id });
 
   }
 
 
-  const handleCreateFamilyMember = (body) => {
+  const handleCreateMmber = (body) => {
     CreateFamilyRequestRequestMutation.mutate(body)
   }
 
+  const handleCreateFamilyBenefits = (body) => {
+    CreateFamilyBenefitsRequestMutation.mutate(body)
+  }
+
+  const deleteFamilyBenefits = (id) => {
+    DeleteFamilyBenefitsMutation.mutate(id)
+  }
+
+  const deleteFamilyMember = (id) => {
+    DeleteMemberFamilyRequestMutation.mutate(id)
+  }
+
+  const HandleCreateUserIdentify = (data) => {
+
+    CreateUserIdentifyWithFamilyRequestMutation.mutate({
+      ...data, nis: parseInt(data.nis),
+      cpf: data.cpf.replace(/\D/g, ''),
+      rg_number: data.rg_number.replace(/\D/g, ''),
+      uf_rg: data.uf_rg.uf,
+      attendance_unity: 1,
+      initial_date: new Date(Date.now()),
+      family: family.id,
+      kinship: data.kinship.id,
+      birth_certificate: data.birth_certificate === "" ? null : data.birth_certificate,
+    })
+  }
+
+
   return {
-    activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, estadosDoBrasil, escolaridadeNoBrasil, dataValues, handleFamiliaRefered, estadosCivis, family, handleCreateFamilyMember, parentesco, member, deleteMember, toast, show, open, setOpen
+    handleEditFamilyMember, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
   }
 }
 
-export default EditFamilyReferedState;
+export default EditRferedState;

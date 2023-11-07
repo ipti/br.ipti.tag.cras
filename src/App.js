@@ -22,7 +22,7 @@ import "/node_modules/primeflex/primeflex.css";
 const App = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <Routes />
+        <Routes />
     </QueryClientProvider>
   )
 }

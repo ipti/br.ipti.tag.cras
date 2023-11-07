@@ -8,7 +8,7 @@ export const TechnicianState = () => {
 
     useEffect(() => {
         if(technicianfetch){
-            setTechnician(technicianfetch.data.data)
+            setTechnician(technicianfetch)
         }
     }, [technicianfetch])
 

@@ -1,19 +1,31 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken } from "../../../services/localstorage";
+import { getToken, logout } from "../../../services/localstorage";
 
 const config = {
-    headers: { Authorization: `Bearer ${getToken()}` },
-  };
+  headers: { Authorization: `Bearer ${getToken()}` },
+};
 
 const AllTechnicianRequest = async () => {
-    return await http.get("/technician", config);
+  return await http.get("/technician",{
+    params: {
+      attendance_unity_fk: 1
+    }
+  }, config).then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401 || err.response.status === 403) {
+        logout()
+        window.location.reload()
+      }
+      alert(err.message)
+      throw err;
+    });;
 }
 
 export const useFetchAllTechnician = () => {
-    return useQuery("AllTechnician", () => AllTechnicianRequest());
-  };
+  return useQuery("AllTechnician", () => AllTechnicianRequest());
+};
 
-  export const DeleteTechnicianRequest = async (id) => {
-    return await http.delete(`/technician/${id}`, config);
+export const DeleteTechnicianRequest = async (id) => {
+  return await http.delete(`/technician/${id}`, config);
 }

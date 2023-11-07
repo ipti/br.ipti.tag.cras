@@ -2,23 +2,25 @@ import React, { useContext } from "react";
 import { Container } from "../../../CrasUi/styles/styles";
 import Table from "../../../Components/Table";
 import { UserIdentifyContext } from "../../../context/FamilyRefered/FamilyRefered/context";
+import { formatarData } from "../../../services/functions";
 
 const ListFamilyReferedScreen = () => {
-   
-    const {userIdentify } = useContext(UserIdentifyContext)
+
+    const { userIdentify } = useContext(UserIdentifyContext)
 
     const columns = [
-        {field: "id", header: "id"},
-        { field: 'nome', header: 'Nome' },
-        {field: "data_nascimento", header: "Data de Nascimento"},
-        {field: "data_inicial", header: "Data de Entrada"},
-
+        { field: "family_representative_fk", header: "id" },
+        { field: 'representative.name', header: 'Nome' },
+        { field: "birthday", header: "Data de Nascimento" },
+        { field: "initial_date", header: "Data de Entrada" },
+        { field: "members_quantity", header: "Quant. Membros" },
     ];
 
+    const userIdentifyFilter = userIdentify ? userIdentify.map((data) => ({ ...data, birthday: formatarData(data.representative.birthday), initial_date: formatarData(data.representative.initial_date) })) : [];
 
-    return(
+    return (
         <Container>
-            <Table columns={columns} list={userIdentify} path="/criar/familia" name="Família Referenciadas" pathEdit="/edit/familia/"/>
+            <Table columns={columns} list={userIdentifyFilter} path="/criar/familia" name="Família Referenciadas" pathEdit="/edit/familia/" />
         </Container>
     )
 }

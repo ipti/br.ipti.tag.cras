@@ -1,46 +1,56 @@
 import { useEffect, useState } from "react";
-import { CreateServicesController } from "../../../sdk/Services/CreateService/controller";
 import * as Yup from 'yup';
+import { CreateServicesController } from "../../../sdk/Services/CreateService/controller";
 
 
 export const CreateServicesState = () => {
 
-  const [service, setService] = useState();
+  const [service, setService] = useState([]);
   const [technician, setTechnician] = useState();
-  const [userIdentify, setUserIdentify] = useState();
+  const [userIdentify, setUserIdentify] = useState([]);
 
   const initialValue = {
-    solicitacao: "",
-    resultado: "",
-    encaminhamento: "",
-    servico: "",
-    tecnico: "",
-    id_identificacao_usuario: "",
-    id_membro_familiar: "",
-    data: ""
+    solicitation: "",
+    result: "",
+    providence: "",
+    task_fk: "",
+    technician_fk: "",
+    user_identify_fk: "",
+    description: ""
   }
 
   const CreateUserSchema = Yup.object().shape({
-    solicitacao: Yup.string().required("Campo Obrigatório"),
-    resultado: Yup.string().required('Campo Obrigatório'),
-    data: Yup.string().required('Campo Obrigatório'),
-    encaminhamento: Yup.string().required('Campo Obrigatório'),
-    tecnico: Yup.object().required('Campo Obrigatório'),
-    servico: Yup.object().required('Campo Obrigatório'),
-    id_identificacao_usuario: Yup.object().required('Campo Obrigatório'),
-});
+    solicitation: Yup.string().required("Campo Obrigatório"),
+    result: Yup.object().required('Campo Obrigatório'),
+    providence: Yup.string().required('Campo Obrigatório'),
+    technician_fk: Yup.object().required('Campo Obrigatório'),
+    task_fk: Yup.object().required('Campo Obrigatório'),
+    user_identify_fk: Yup.object().required('Campo Obrigatório'),
+    description: Yup.string().required('Campo Obrigatório'),
+  });
+
+  const result = [
+    {
+      id: "FINALIZADO",
+      name: "Finalizado"
+    },
+    {
+      id: "PENDENTE",
+      name: "Pendente"
+    }
+  ]
 
   const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify } = CreateServicesController();
 
   useEffect(() => {
     if (allService) {
-      setService(allService.data.data);
+      setService(allService);
     }
     if (allTechnician) {
-      setTechnician(allTechnician.data.data);
+      setTechnician(allTechnician);
     }
-    if(allUserIdentify){
-      setUserIdentify(allUserIdentify.data.data);
+    if (allUserIdentify) {
+      setUserIdentify(allUserIdentify);
     }
   }, [allService, allTechnician, allUserIdentify])
 
@@ -48,21 +58,22 @@ export const CreateServicesState = () => {
   const handleCreateService = (data) => {
 
     const body = {
-      solicitacao: data.solicitacao,
-      resultado: data.resultado,
-      encaminhamento: data.encaminhamento,
-      servico: data.servico.id,
-      tecnico: data.tecnico.id,
-      id_identificacao_usuario: data.id_identificacao_usuario.id,
-      id_membro_familiar: 1,
-      data: data.data
+      solicitation: data.solicitation,
+      result: data.result.id,
+      providence: data.providence,
+      task: data.task_fk.id,
+      technician: data.technician_fk.id,
+      attendance_unity: 1,
+      user_identify: data.user_identify_fk.id,
+      description: data.description,
+      date: new Date(Date.now())
     }
 
-    CreateServicesRequestMutation.mutate(body)
+    CreateServicesRequestMutation.mutate(body);
 
   }
 
   return {
-    initialValue, service, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, userIdentify
+    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result
   }
 }
