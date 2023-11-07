@@ -1,0 +1,20 @@
+{
+    "responseOverrides": {
+      "400": {
+        "rewrite": "/invalid-invitation-error.html",
+        "redirect": "/"
+      },
+      "401": {
+        "statusCode": 302,
+        "redirect": "/"
+      },
+      "403": {
+        "redirect": "/",
+        "rewrite": "/custom-forbidden-page.html"
+      },
+      "404": {
+        "rewrite": "/custom-404.html",
+        "redirect": "/"
+      }
+    }
+  }
