@@ -34,7 +34,7 @@ const EditTypeServiceScreen = () => {
                             </Row>
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime type="submit" label="Cadastrar" />
+                                <ButtonPrime type="submit" label="Editar" />
                             </Row>
                         </form>
                     }

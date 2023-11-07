@@ -13,9 +13,11 @@ export const BenefitsController = () => {
     {
       onError: (error) => {
         console.log(error.response.data.message)
-        if (error.response.status === 401 | 403) {
+        alert(error.response.data.message)
+        if (error.response.status === 401) {
           logout();
           history("/login")
+
         }
       },
       onSuccess: (data) => {

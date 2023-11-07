@@ -87,7 +87,7 @@ const FormFinances = () => {
                                 </div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"deficient"} checked={values.deficient} onChange={(e) => handleCheckbox(e, setFieldValue, "deficient")} label={"Existência de deficient na família"} /></div>
+                                <div className="col"> <CrasCheckbox name={"deficient"} checked={values.deficient} onChange={(e) => handleCheckbox(e, setFieldValue, "deficient")} label={"Existência de deficiente na família"} /></div>
                             </Row>
                             <Row>
                                 <div className="col"> <CrasCheckbox name={"alone_child"} checked={values.alone_child} onChange={(e) => handleCheckbox(e, setFieldValue, "alone_child")} label={"Crianças que ficam sozinhos no domicilio"} /></div>
@@ -96,7 +96,7 @@ const FormFinances = () => {
                                 <div className="col"> <CrasCheckbox name={"unemployed"} checked={values.unemployed} onChange={(e) => handleCheckbox(e, setFieldValue, "unemployed")} label={"Desemprego"} /></div>
                             </Row>
                             <Row>
-                                <div className="col"> <CrasCheckbox name={"low_income"} checked={values.low_income} onChange={(e) => handleCheckbox(e, setFieldValue, "low_income")} label={"Baixa income"} /></div>
+                                <div className="col"> <CrasCheckbox name={"low_income"} checked={values.low_income} onChange={(e) => handleCheckbox(e, setFieldValue, "low_income")} label={"Baixa renda"} /></div>
                             </Row>
                             <Row>
                                 <div className="col"> <CrasCheckbox name={"others"} checked={values.others} onChange={(e) => handleCheckbox(e, setFieldValue, "others")} label={"Outros"} /></div>
@@ -204,7 +204,6 @@ const FormFinances = () => {
                                     columns={columns}
                                     list={benefits}
                                     name="Beneficios"
-                                    pathEdit={"/edit/tecnico/"}
                                     delet={deleteBenefits}
                                 />
                             </Padding>

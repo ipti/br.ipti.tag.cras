@@ -27,7 +27,7 @@ const RoutesCras = () => {
     return (
         <BrowserRouter>
             <Routes>
-                <Route element={<PrivateRoute Component={ListServices} />} path="/" exact />
+                <Route element={<PrivateRoute Component={Dashboard} />} path="/" exact />
                 <Route element={<PrivateRoute Component={Users} />} path="/usuarios" />
                 <Route element={<PrivateRoute Component={CreateUser} />} path="/criar/usuarios" />
                 <Route element={<PrivateRoute Component={EditUser} />} path="/edit/usuarios/:id" />

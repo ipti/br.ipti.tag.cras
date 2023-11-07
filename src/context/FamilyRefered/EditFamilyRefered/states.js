@@ -133,7 +133,6 @@ const EditRferedState = () => {
   ];
 
   const parentesco = [
-    { id: "RESPONSAVEL", name: 'Responsável' },
     { id: "CONJUGE", name: 'Cônjuge' },
     { id: "FILHO_A", name: 'Filho(a)' },
     { id: "ENTEADO_A", name: 'Enteado(a)' },

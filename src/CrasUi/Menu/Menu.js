@@ -13,7 +13,6 @@ import { AplicationContext } from "../../context/Aplication/context";
 const CrasMenu = ({ viewdMenu }) => {
     const { user } = useContext(AplicationContext)
 
-
     const [active, setActive] = useState(parseInt(getMenuItem()))
 
     return (
@@ -37,16 +36,20 @@ const CrasMenu = ({ viewdMenu }) => {
                 <Padding />
                 <Item text={"Atendimentos"} funcActiv={() => { setActive(2); menuItem(2) }} active={active === 2 ? true : false} path={"/Atendimento"} icon={"pi pi-list"} />
                 <Padding />
-                <Item text={"Serviço"} funcActiv={() => { setActive(3); menuItem(3) }} active={active === 3 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
-                <Padding />
-                <Item text={"Tecnico"} funcActiv={() => { setActive(4); menuItem(4) }} active={active === 4 ? true : false} path={"/tecnico"} icon={"pi pi-wrench"} />
-                <Padding />
+                {user.role === "SECRETARY" ? <><Item text={"Serviço"} funcActiv={() => { setActive(3); menuItem(3) }} active={active === 3 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
+                    <Padding />
+                </> : null}
+                {user.role === "SECRETARY" ? <> <Item text={"Tecnico"} funcActiv={() => { setActive(4); menuItem(4) }} active={active === 4 ? true : false} path={"/tecnico"} icon={"pi pi-wrench"} />
+                    <Padding />
+                </> : null}
                 <Item text={"Familias"} funcActiv={() => { setActive(5); menuItem(5) }} active={active === 5 ? true : false} path={"/familia"} icon={"pi pi-users"} />
                 <Padding />
-                <Item text={"Beneficios"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path={"/beneficios"} icon={"pi pi-users"} />
-                <Padding />
-                {user.role === "SECRETARY" ? <Item text={"Usuários"} funcActiv={() => { setActive(7); menuItem(7) }} active={active === 7 ? true : false} path="/usuarios" icon={"pi pi-user"} />
-                    : null}            </Padding> : null}
+                {user.role === "SECRETARY" ? <>
+                    <Item text={"Beneficios"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path={"/beneficios"} icon={"pi pi-users"} />
+                    <Padding />
+                </> : null}
+                {user.role === "SECRETARY" ? <> <Item text={"Usuários"} funcActiv={() => { setActive(7); menuItem(7) }} active={active === 7 ? true : false} path="/usuarios" icon={"pi pi-user"} />
+                </> : null}            </Padding> : null}
 
         </Container>
     )

@@ -24,7 +24,7 @@ const Table = ({ columns, list, path, name, pathEdit, delet }) => {
         </Row>
     );
 
-    const filterName = nameFilter !== "" ? list.filter(filt => filt?.name?.toLowerCase()?.includes(nameFilter) || filt?.servico?.toLowerCase()?.includes(nameFilter)) : list
+    const filterName = nameFilter !== "" ? list.filter(filt => filt?.name?.toLowerCase()?.includes(nameFilter) || filt?.cpf?.toLowerCase()?.includes(nameFilter)) : list
 
     return (
         <Column>

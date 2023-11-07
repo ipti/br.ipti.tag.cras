@@ -13,6 +13,7 @@ const ListFamilyReferedScreen = () => {
         { field: 'representative.name', header: 'Nome' },
         { field: "birthday", header: "Data de Nascimento" },
         { field: "initial_date", header: "Data de Entrada" },
+        { field: "members_quantity", header: "Quant. Membros" },
     ];
 
     const userIdentifyFilter = userIdentify ? userIdentify.map((data) => ({ ...data, birthday: formatarData(data.representative.birthday), initial_date: formatarData(data.representative.initial_date) })) : [];

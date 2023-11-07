@@ -11,18 +11,17 @@ const Attendencebymonth = () => {
     const [chartData, setChartData] = useState({});
     const [chartOptions, setChartOptions] = useState({});
 
-    const ValueMonth = () => {
-
-        const month = []
-        countAttendenceMonth?.forEach(element => {
-            month.push(element.value)
-        });
-        return month
-    }
-
-    console.log(ValueMonth())
+ 
 
     useEffect(() => {
+
+        const ValueMonth = () => {
+            const month = [];
+            countAttendenceMonth?.forEach((element) => {
+                month.push(element.value);
+            });
+            return month;
+        }
         const documentStyle = getComputedStyle(document.documentElement);
         const textColor = documentStyle.getPropertyValue('--text-color');
         const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
@@ -32,7 +31,7 @@ const Attendencebymonth = () => {
             datasets: [
                 {
                     label: 'Atendimentos por mês',
-                    data: [0],
+                    data: countAttendenceMonth ?  ValueMonth() : [],
                     fill: true,
                     borderColor: documentStyle.getPropertyValue('--blue-500'),
                     tension: 0.4
@@ -71,13 +70,13 @@ const Attendencebymonth = () => {
 
         setChartData(data);
         setChartOptions(options);
-    }, []);
+    }, [countAttendenceMonth]);
 
     return (
         <CrasCard title={"Card"}>
             <Padding padding="16px">
                 {/* <CrasDropdown options={year} optionLabel={""} label={"Escolha um ano"} /> */}
-                <Chart type="line" data={chartData} options={chartOptions} />
+                {countAttendenceMonth ? <Chart type="line" data={chartData} options={chartOptions} /> : null}
             </Padding>
         </CrasCard>
     )
