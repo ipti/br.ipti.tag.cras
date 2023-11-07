@@ -34,7 +34,7 @@ const CrasMenu = ({ viewdMenu }) => {
             {user ? <Padding padding="8px">
                 <Item text={"Dashboard"} funcActiv={() => { setActive(1); menuItem(1) }} active={active === 1 ? true : false} path={"/dashboard"} icon={"pi pi-chart-bar"} />
                 <Padding />
-                <Item text={"Atendimentos"} funcActiv={() => { setActive(2); menuItem(2) }} active={active === 2 ? true : false} path={"/Atendimento"} icon={"pi pi-list"} />
+                <Item text={"Atendimentos"} funcActiv={() => { setActive(2); menuItem(2) }} active={active === 2 ? true : false} path={"/atendimento"} icon={"pi pi-list"} />
                 <Padding />
                 {user.role === "SECRETARY" ? <><Item text={"Serviço"} funcActiv={() => { setActive(3); menuItem(3) }} active={active === 3 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
                     <Padding />
