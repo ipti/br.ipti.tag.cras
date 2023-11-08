@@ -18,7 +18,6 @@ const AllUserIdentifyRequest = async () => {
         logout()
         window.location.reload()
       }
-      alert(err)
       throw err;
     });
 }

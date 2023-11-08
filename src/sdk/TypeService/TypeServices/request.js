@@ -13,7 +13,6 @@ const AllTypesServicesRequest = async () => {
           logout()
           window.location.reload()
       }
-      alert(err.message)
       throw err;
   });;
 }
