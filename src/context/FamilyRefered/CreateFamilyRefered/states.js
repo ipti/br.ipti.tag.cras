@@ -96,7 +96,7 @@ const CreateFamilyReferedState = () => {
             rg_number: dataValues.rg_number.replace(/\D/g, ''),
             telephone: dataValues.telephone.replace(/\D/g, ''),
             uf_rg: dataValues.uf_rg.uf,
-            attendance_unity: 1,
+            attendance_unity: 2,
             kinship: "RESPONSAVEL",
             birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,
             irregular_ocupation: dataValues.irregular_ocupation ?? false,

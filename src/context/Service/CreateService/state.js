@@ -63,7 +63,7 @@ export const CreateServicesState = () => {
       providence: data.providence,
       task: data.task_fk.id,
       technician: data.technician_fk.id,
-      attendance_unity: 1,
+      attendance_unity: 2,
       user_identify: data.user_identify_fk.id,
       description: data.description,
       date: new Date(Date.now())

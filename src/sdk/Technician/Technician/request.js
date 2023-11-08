@@ -9,7 +9,7 @@ const config = {
 const AllTechnicianRequest = async () => {
   return await http.get("/technician",{
     params: {
-      attendance_unity_fk: 1
+      attendance_unity_fk: 2
     }
   }, config).then(response => response.data)
     .catch(err => {
