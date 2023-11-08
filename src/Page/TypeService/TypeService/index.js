@@ -15,6 +15,10 @@ const TypeServicePage = () => {
         { field: 'name', header: 'Nome' },
     ];
 
+    const filter = (filt, namefilter) => {
+        return filt?.name?.toLowerCase()?.includes(namefilter)
+    }
+
 
     return (
         <Container>
@@ -25,6 +29,7 @@ const TypeServicePage = () => {
                     list={typesServices}
                     path="/criar/servico"
                     name="Serviço"
+                    filter={filter}
                     pathEdit={"/edit/servico/"}
                     delet={DeleteTypeServices}
                 />

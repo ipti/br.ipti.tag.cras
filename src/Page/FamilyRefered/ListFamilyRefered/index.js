@@ -18,9 +18,13 @@ const ListFamilyReferedScreen = () => {
 
     const userIdentifyFilter = userIdentify ? userIdentify.map((data) => ({ ...data, birthday: formatarData(data.representative.birthday), initial_date: formatarData(data.representative.initial_date) })) : [];
 
+    const filter = (filt, namefilter) => {
+        return filt?.representative?.name?.toLowerCase()?.includes(namefilter) || filt?.representative?.birthday?.toLowerCase()?.includes(namefilter)
+    }
+
     return (
         <Container>
-            <Table columns={columns} list={userIdentifyFilter} path="/criar/familia" name="Família Referenciadas" pathEdit="/edit/familia/" />
+            <Table columns={columns} list={userIdentifyFilter} path="/criar/familia" name="Família Referenciadas" pathEdit="/edit/familia/" filter={filter} />
         </Container>
     )
 }
