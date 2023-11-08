@@ -280,7 +280,7 @@ const EditRferedState = () => {
       cpf: data.cpf.replace(/\D/g, ''),
       rg_number: data.rg_number.replace(/\D/g, ''),
       uf_rg: data.uf_rg.uf,
-      attendance_unity: 1,
+      attendance_unity: 2,
       initial_date: new Date(Date.now()),
       family: family.id,
       kinship: data.kinship.id,

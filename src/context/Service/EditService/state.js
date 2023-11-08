@@ -115,7 +115,7 @@ export const EditServicesState = () => {
       technician: data.technician_fk.id,
       user_identify: data.user_identify_fk.id,
       description: data.description,
-      attendance_unity: 1,
+      attendance_unity: 2,
     }
 
     EditServicesRequestMutation.mutate(body)

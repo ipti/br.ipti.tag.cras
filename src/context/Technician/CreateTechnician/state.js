@@ -29,7 +29,7 @@ export const CreateTechnicianState = () => {
     }, [userfetch])
 
     const handleCreateTechnician = (body) => {
-        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id, attendance_unity: 1,})
+        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id, attendance_unity: 2,})
     }
 
 
