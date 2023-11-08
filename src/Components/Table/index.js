@@ -5,7 +5,7 @@ import ButtonPrime from "../../CrasUi/Button/ButtonPrime";
 import CrasTable from "../../CrasUi/Table";
 import { useNavigate } from "react-router-dom";
 
-const Table = ({ columns, list, path, name, pathEdit, delet }) => {
+const Table = ({ columns, list, path, name, pathEdit, delet, filter }) => {
 
     const history = useNavigate();
     const [nameFilter, setNameFilter] = useState("");
@@ -24,7 +24,7 @@ const Table = ({ columns, list, path, name, pathEdit, delet }) => {
         </Row>
     );
 
-    const filterName = nameFilter !== "" ? list.filter(filt => filt?.name?.toLowerCase()?.includes(nameFilter) || filt?.cpf?.toLowerCase()?.includes(nameFilter)) : list
+    const filterName = nameFilter !== "" ? list.filter(filt => filter ? filter(filt, nameFilter):null) : list
 
     return (
         <Column>

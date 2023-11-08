@@ -13,7 +13,6 @@ const AllUserRequest = async () => {
             logout()
             window.location.reload()
         }
-        alert(err.message)
         throw err;
     });;
 }

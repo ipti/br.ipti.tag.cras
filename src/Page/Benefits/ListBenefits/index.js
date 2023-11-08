@@ -13,10 +13,13 @@ const ListBenefitsScreen = () => {
         { field: "type", header: "Tipo" },
     ];
 
+    const filter = (filt, namefilter) => {
+        return filt?.description?.toLowerCase()?.includes(namefilter)
+    }
 
     return (
         <Container>
-            <Table columns={columns} delet={deleteBenefits} list={benefits} path="/criar/beneficios" name="Beneficios" pathEdit="/edit/beneficios/" />
+            <Table columns={columns} delet={deleteBenefits} filter={filter} list={benefits} path="/criar/beneficios" name="Beneficios" pathEdit="/edit/beneficios/" />
         </Container>
     )
 }

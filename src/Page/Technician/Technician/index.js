@@ -13,7 +13,9 @@ const TechnicianPage = () => {
         { field: 'name', header: 'Nome' },
     ];
 
-
+    const filter = (filt, namefilter) => {
+        return filt?.name?.toLowerCase()?.includes(namefilter)
+    }
     return (
         <Container>
             {isLoading ?
@@ -22,6 +24,7 @@ const TechnicianPage = () => {
                     columns={columns}
                     list={technician} 
                     path="/criar/tecnico"
+                    filter={filter}
                     name="Técnico"
                     pathEdit={"/edit/tecnico/"}
                     // delet={DeleteTechnician}

@@ -20,11 +20,14 @@ const UserPage = () => {
 
     const userConvert = user ?  user.map((data ) => ({ ...data, role: data.role  === "TECHNICIAN" ? "Técnico" : data.role  === "SECRETARY" ? "Secretário": "user" })) : [];
 
+    const filter = (filt, namefilter) => {
+        return filt?.name?.toLowerCase()?.includes(namefilter)
+    }
     return (
         <Container>
             {isLoading ?
                 <div>carregando...</div> :
-                <Table columns={columns} list={userConvert} path="/criar/usuarios" name="Usuários" pathEdit={"/edit/usuarios/"} delet={deleteUser}/>
+                <Table columns={columns} list={userConvert} filter={filter} path="/criar/usuarios" name="Usuários" pathEdit={"/edit/usuarios/"} delet={deleteUser}/>
             }
         </Container>
     )

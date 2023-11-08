@@ -17,7 +17,6 @@ const AllTechnicianRequest = async () => {
         logout()
         window.location.reload()
       }
-      alert(err.message)
       throw err;
     });;
 }

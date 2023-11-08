@@ -63,7 +63,7 @@ const CreateServicesScreen = () => {
                                         <div style={{ color: "red" }}>{errors.technician_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                <Column><CrasDropdown onChange={handleChange} value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
+                                <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
                                     <Padding />
                                     {errors.user_identify_fk && touched.user_identify_fk ? (
                                         <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>

@@ -7,6 +7,10 @@ const ListServicesScreen = () => {
 
     const { isLoading, service, deleteService, typeService, technician } = useContext(ServiceContext)
 
+    
+    const filter = (filt, namefilter) => {
+        return filt?.task?.name?.toLowerCase()?.includes(namefilter) || filt?.technician.name?.toLowerCase()?.includes(namefilter)
+    }
 
     const columns = [
         { field: 'id', header: 'id' },
@@ -23,7 +27,7 @@ const ListServicesScreen = () => {
     return (
         <Container>
             {
-                isLoading ? <div>carregando...</div> : <Table columns={columns} list={ServiceConvert} path="/criar/atendimento" name="Atendimentos" delet={deleteService} pathEdit={"/edit/atendimento/"} />
+                isLoading ? <div>carregando...</div> : <Table columns={columns} list={ServiceConvert} filter={filter} path="/criar/atendimento" name="Atendimentos" delet={deleteService} pathEdit={"/edit/atendimento/"} />
             }
             <Padding padding="16px" />
         </Container>

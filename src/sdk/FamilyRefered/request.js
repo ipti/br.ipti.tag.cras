@@ -14,7 +14,6 @@ const AllUserIdentifyRequest = async () => {
         logout()
         window.location.reload()
       }
-      alert(err)
       throw err;
     });
 }
@@ -30,7 +29,6 @@ const FamilyReferedIdRequest = async (id) => {
         logout()
         window.location.reload()
       }
-      alert(err.message)
       throw err;
     });
 }

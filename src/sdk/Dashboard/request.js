@@ -14,7 +14,6 @@ const CountUniFamilyRequest = async () => {
                     logout();
                     window.location.reload()
                 }
-                alert(err.message)
                 throw err;
             });
     } catch (err) {
@@ -30,7 +29,6 @@ const CountFamilyRequest = async () => {
                     logout();
                     window.location.reload()
                 }
-                alert(err.message)
                 throw err;
             });
     } catch (err) {
@@ -51,7 +49,6 @@ const CountAttendancebyMonthRequest = async () => {
                     logout();
                     window.location.reload()
                 }
-                alert(err.message)
                 throw err;
             });
     } catch (err) {
@@ -69,7 +66,6 @@ const CountAttendanceFinishedorPendingRequest = async () => {
                     logout();
                     window.location.reload()
                 }
-                alert(err.message)
                 throw err;
             });
     } catch (err) {
