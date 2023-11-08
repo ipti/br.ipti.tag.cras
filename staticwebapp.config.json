@@ -1,7 +1,6 @@
 {
     "responseOverrides": {
       "400": {
-        "rewrite": "/invalid-invitation-error.html",
         "redirect": "/"
       },
       "401": {
@@ -9,7 +8,6 @@
         "redirect": "/"
       },
       "404": {
-        "rewrite": "/custom-404.html",
         "redirect": "/"
       }
     }
