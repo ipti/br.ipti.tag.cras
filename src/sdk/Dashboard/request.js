@@ -8,7 +8,7 @@ const config = {
 
 const CountUniFamilyRequest = async () => {
     try {
-        return await http.get("/charts/count-uni-family", config).then(response => response.data)
+        return await http.get("/charts/count-uni-family", { params: { attendance_unity_fk: 1 } }, config).then(response => response.data)
             .catch(err => {
                 if (err.response.status === 401 || err.response.status === 403) {
                     logout();
@@ -24,7 +24,7 @@ const CountUniFamilyRequest = async () => {
 
 const CountFamilyRequest = async () => {
     try {
-        return await http.get("/charts/count-family", config).then(response => response.data)
+        return await http.get("/charts/count-family", { params: { attendance_unity_fk: 1 } }, config).then(response => response.data)
             .catch(err => {
                 if (err.response.status === 401 || err.response.status === 403) {
                     logout();
@@ -42,7 +42,8 @@ const CountAttendancebyMonthRequest = async () => {
     try {
         return await http.get("/charts/attendance-by-month", {
             params: {
-                year: 2023
+                year: 2023,
+                attendance_unity_fk: 1
             }
         }, config).then(response => response.data)
             .catch(err => {
@@ -59,8 +60,10 @@ const CountAttendancebyMonthRequest = async () => {
 }
 
 const CountAttendanceFinishedorPendingRequest = async () => {
+
+
     try {
-        return await http.get("/charts/attendance-finished-or-pending", {params: {year: 2023}}, config).then(response => response.data)
+        return await http.get("/charts/attendance-finished-or-pending", { params: { year: 2023, attendance_unity_fk: 1 } }, config).then(response => response.data)
             .catch(err => {
                 if (err.response.status === 401 || err.response.status === 403) {
                     logout();
