@@ -45,7 +45,11 @@ const CrasMenu = ({ viewdMenu }) => {
                 <Item text={"Familias"} funcActiv={() => { setActive(5); menuItem(5) }} active={active === 5 ? true : false} path={"/familia"} icon={"pi pi-users"} />
                 <Padding />
                 {user.role === "SECRETARY" ? <>
-                    <Item text={"Beneficios"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path={"/beneficios"} icon={"pi pi-users"} />
+                    <Item text={"Beneficios"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path={"/beneficios"} icon={"pi pi-money-bill"} />
+                    <Padding />
+                </> : null}
+                {user.role === "SECRETARY" ? <>
+                    <Item text={"Unidades"} funcActiv={() => { setActive(8); menuItem(8) }} active={active === 8 ? true : false} path={"/unidades"} icon={"pi pi-building"} />
                     <Padding />
                 </> : null}
                 {user.role === "SECRETARY" ? <> <Item text={"Usuários"} funcActiv={() => { setActive(7); menuItem(7) }} active={active === 7 ? true : false} path="/usuarios" icon={"pi pi-user"} />
