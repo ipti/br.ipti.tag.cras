@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken, logout } from "../../../services/localstorage";
+import { GetIdAttendance, getToken, logout } from "../../../services/localstorage";
 
 const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
@@ -9,7 +9,7 @@ const config = {
 const AllTechnicianRequest = async () => {
   return await http.get("/technician",{
     params: {
-      attendance_unity_fk: 2
+      attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined
     }
   }, config).then(response => response.data)
     .catch(err => {

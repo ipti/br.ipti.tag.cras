@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as Yup from 'yup';
 import { CreateTechnicianController } from '../../../sdk/Technician/CreateTechnician/controller';
+import { GetIdAttendance } from '../../../services/localstorage';
 
 
 
@@ -29,7 +30,7 @@ export const CreateTechnicianState = () => {
     }, [userfetch])
 
     const handleCreateTechnician = (body) => {
-        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id, attendance_unity: 2,})
+        CreateTechnicianRequestMutation.mutate({...body, user: body.user.id, attendance_unity: parseInt(GetIdAttendance()),})
     }
 
 

@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFamilyReferd/controller";
 import queryClient from "../../../services/react-query";
 import { MemberFamilyController } from "../../../sdk/FamilyRefered/MemberFamily/controller";
+import { GetIdAttendance } from "../../../services/localstorage";
 
 
 
@@ -280,7 +281,7 @@ const EditRferedState = () => {
       cpf: data.cpf.replace(/\D/g, ''),
       rg_number: data.rg_number.replace(/\D/g, ''),
       uf_rg: data.uf_rg.uf,
-      attendance_unity: 2,
+      attendance_unity: parseInt(GetIdAttendance()),
       initial_date: new Date(Date.now()),
       family: family.id,
       kinship: data.kinship.id,

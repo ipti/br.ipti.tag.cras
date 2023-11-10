@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import http from "../../services/axios";
-import { getToken, logout } from "../../services/localstorage";
+import { GetIdAttendance, getToken, logout } from "../../services/localstorage";
 
 
 const config = {
@@ -8,7 +8,7 @@ const config = {
 };
 
 const AllUserIdentifyRequest = async () => {
-  return await http.get("/bff/get-all-family-representative", config).then(response => response.data)
+  return await http.get("/bff/get-all-family-representative", { params: { attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined } }, config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
         logout()

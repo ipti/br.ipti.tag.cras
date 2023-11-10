@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import * as Yup from 'yup';
 import { CreateServicesController } from "../../../sdk/Services/CreateService/controller";
+import { GetIdAttendance } from "../../../services/localstorage";
 
 
 export const CreateServicesState = () => {
@@ -63,7 +64,7 @@ export const CreateServicesState = () => {
       providence: data.providence,
       task: data.task_fk.id,
       technician: data.technician_fk.id,
-      attendance_unity: 2,
+      attendance_unity: parseInt(GetIdAttendance()),
       user_identify: data.user_identify_fk.id,
       description: data.description,
       date: new Date(Date.now())
