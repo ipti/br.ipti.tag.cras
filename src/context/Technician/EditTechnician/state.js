@@ -48,7 +48,6 @@ export const EditTechnicianState = () => {
       }
     }, [technicianRequest, loading])
 
-    console.log(technician)
 
     const initialValue = {
         name: technician ? technician.name : "",

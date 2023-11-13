@@ -11,7 +11,6 @@ export const DashboardState = () => {
     const { data: attendanceFinishorPendingRequest } = useFetchAttendanceorPending();
     const { data: CountAttendanceMonthRequest } = useFetchCoundAttendanceMonth();
     const { data: CountFamilyRequest } = useFetchCoundFamily()
-    console.log(CountAttendanceMonthRequest)
 
     useEffect(() => {
         if (typeof CountUniFamilyRequest === "number") {

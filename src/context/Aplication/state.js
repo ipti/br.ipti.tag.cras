@@ -52,11 +52,11 @@ const AplicationState = () => {
     useEffect(() => {
         if (attendancefetch) {
             setAttendance(attendancefetch)
-            if (attendancefetch[0] && !GetIdAttendance() && user?.role === "SECRATARY") {
+            if (attendancefetch[0] && !GetIdAttendance() && user?.role === "SECRETARY") {
                 idAttendance(attendancefetch[0].id)
             }
         }
-    }, [attendancefetch])
+    }, [attendancefetch, user])
 
 
     const { data: userRequest } = useFetchOneUserAplication(GetIdUser())

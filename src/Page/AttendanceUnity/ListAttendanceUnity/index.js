@@ -14,7 +14,6 @@ const ListAttendanceUnity = () => {
         return filt?.name?.toLowerCase()?.includes(namefilter)
     }
 
-    console.log(attendance)
     return(
         <Container>
             {isLoading ?

@@ -88,7 +88,6 @@ const CreateFamilyReferedState = () => {
 
     const handleFamiliaRefered = () => {
 
-        console.log(dataValues)
 
         const data = {
             ...dataValues,
