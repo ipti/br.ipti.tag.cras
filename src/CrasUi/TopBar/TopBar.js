@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import LogoutTopBar from "../../Components/LogoutTopBar";
 import { AplicationContext } from "../../context/Aplication/context";
-import { GetIdAttendance, idAttendance } from "../../services/localstorage";
+import { GetIdAttendance, idAttendance, menuItem } from "../../services/localstorage";
 import CrasDropdown from "../Dropdown";
 import { Column, Padding, Row } from "../styles/styles";
 import { Back, Container } from "./style";
@@ -35,7 +35,7 @@ const TopBar = ({ setViewd, viewdMenu }) => {
                     </Back>
                     <Padding />
                     {user?.role === "SECRETARY" ? <Column>
-                        <CrasDropdown placeholder={"Unidades"} options={attendance} value={valueAttendance} optionLabel={"name"} onChange={(e) => { idAttendance(e.target.value.id); window.location.reload() }} />
+                        <CrasDropdown placeholder={"Unidades"} options={attendance} value={valueAttendance} optionLabel={"name"} onChange={(e) => { idAttendance(e.target.value.id);history("/"); menuItem(1); window.location.reload(); }} />
                     </Column> : null}
                 </Row>
             </Column>

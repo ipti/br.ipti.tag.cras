@@ -9,7 +9,7 @@ const config = {
 
 
 const AllBenefitsRequest = async () => {
-  return await http.get("/benefits", config).then(response => response.data)
+  return await http.get("/direct/benefits", config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
         // logout()
@@ -21,7 +21,7 @@ const AllBenefitsRequest = async () => {
 }
 
 export const DeleteBenefitsRequest = async (id) => {
-  return await http.delete(`/benefits/${id}`, config);
+  return await http.delete(`/direct/benefits/${id}`, config);
 }
 
 export const useFetchAllBenefits = () => {

@@ -7,7 +7,7 @@ const config = {
 };
 
 const AllTechnicianRequest = async () => {
-  return await http.get("/technician",{
+  return await http.get("/direct/technician",{
     params: {
       attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined
     }
@@ -26,5 +26,5 @@ export const useFetchAllTechnician = () => {
 };
 
 export const DeleteTechnicianRequest = async (id) => {
-  return await http.delete(`/technician/${id}`, config);
+  return await http.delete(`/direct/technician/${id}`, config);
 }

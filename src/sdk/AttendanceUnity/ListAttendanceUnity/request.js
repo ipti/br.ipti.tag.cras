@@ -11,7 +11,7 @@ const config = {
 
 
 const AllAttendanceUnityRequest = async () => {
-  return await http.get("/attendance-unity", config).then(response => response.data)
+  return await http.get("/direct/attendance-unity", config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
         // logout()
@@ -23,7 +23,7 @@ const AllAttendanceUnityRequest = async () => {
 }
 
 export const DeleteAttendanceRequest = async (id) => {
-  return await http.delete(`/attendance-unity/${id}`, config);
+  return await http.delete(`/direct/attendance-unity/${id}`, config);
 }
 
 export const useFetchAllAttendanceUnity = () => {

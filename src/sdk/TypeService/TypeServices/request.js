@@ -7,7 +7,7 @@ const config = {
 };
 
 const AllTypesServicesRequest = async () => {
-  return await http.get("/task", config).then(response => response.data)
+  return await http.get("/direct/task", config).then(response => response.data)
   .catch(err => {
       if (err.response.status === 401 || err.response.status === 403) {
           logout()
@@ -22,5 +22,5 @@ export const useFetchAllTypesServices = () => {
 };
 
 export const DeleteTypesServicesRequest = async (id) => {
-  return await http.delete(`/task/${id}`, config);
+  return await http.delete(`/direct/task/${id}`, config);
 }
