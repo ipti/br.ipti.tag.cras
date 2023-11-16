@@ -7,6 +7,6 @@ const config = {
 
 
 export const CreateAttendanceUnityRequest = async (body) => {
-    return await http.post("/bff/create-attendance-unity-address", body, config)
+    return await http.post("/bff/attendance-unity", body, config)
   }
   

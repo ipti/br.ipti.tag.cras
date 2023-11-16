@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken, logout } from "../../../services/localstorage";
+import { GetIdAttendance, getToken, logout } from "../../../services/localstorage";
 
 
 const config = {
@@ -8,11 +8,11 @@ const config = {
   };
 
 export const CreateServiceRequest = async (body) => {
-    return await http.post("/attendance", body, config)
+    return await http.post("/direct/attendance", body, config)
 }
 
 const AllUserIdentifyRequest = async () => {
-  return await http.get("/user-identify", config).then(response => response.data)
+  return await http.get("/bff/user-identify/from-attendance-unity", {params: {attendance_unity_fk: GetIdAttendance()}}, config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
         logout()

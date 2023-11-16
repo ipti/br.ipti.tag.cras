@@ -7,7 +7,7 @@ const config = {
 };
 
 export const OneUsersRequest = async (id) => {
-    return await http.get(`/user/${id}`, config).then(response => response.data)
+    return await http.get(`/direct/user/${id}`, config).then(response => response.data)
         .catch(err => {
             if (err.response.status === 401 || err.response.status === 403) {
                 logout()
@@ -23,5 +23,5 @@ export const useFetchOneUser = (id) => {
 
 
 export const EditUserRequest = async (body, id) => {
-    return await http.put(`/user/${id}`, body, config);
+    return await http.put(`/direct/user/${id}`, body, config);
 }

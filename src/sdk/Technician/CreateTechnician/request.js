@@ -7,5 +7,5 @@ const config = {
   };
 
 export const CreateTechnicianRequest = async (body) => {
-    return await http.post("/technician", body, config)
+    return await http.post("/direct/technician", body, config)
 }

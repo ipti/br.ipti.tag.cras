@@ -7,6 +7,6 @@ const config = {
 
 
 export const CreateBenefitsRequest = async (body) => {
-    return await http.post("/benefits", body, config)
+    return await http.post("/direct/benefits", body, config)
   }
   
