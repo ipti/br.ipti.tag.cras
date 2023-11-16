@@ -18,7 +18,7 @@ const ListAttendanceUnity = () => {
         <Container>
             {isLoading ?
                 <div>carregando...</div> :
-                <Table columns={columns} list={attendance} filter={filter} path="/criar/unidades" name="Unidades"  delet={deleteAttendance}/>
+                <Table columns={columns} list={attendance} filter={filter} path="/criar/unidades" pathEdit={"/edit/unidades/"} name="Unidades"  delet={deleteAttendance}/>
             }
         </Container>
     )

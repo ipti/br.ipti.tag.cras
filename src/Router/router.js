@@ -24,6 +24,7 @@ import Dashboard from "../Container/Dashboard";
 import NotFoundPage from "../Page/NotFoundPage";
 import AttendanceUnity from "../Container/AttendanceUnity/ListAttendanceUnity";
 import CreateAttendanceUnity from "../Container/AttendanceUnity/CreateAttendanceUnity";
+import EditAttendanceUnity from "../Container/AttendanceUnity/EditAttendanceUnity";
 
 const RoutesCras = () => {
 
@@ -52,6 +53,7 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={Dashboard} />} path="/dashboard" />
                 <Route element={<PrivateRoute Component={AttendanceUnity} />} path="/unidades" />
                 <Route element={<PrivateRoute Component={CreateAttendanceUnity} />} path="/criar/unidades" />
+                <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
 
                 <Route element={<Login />} path="/login" />
                 <Route path="/*" element={<NotFoundPage />} />

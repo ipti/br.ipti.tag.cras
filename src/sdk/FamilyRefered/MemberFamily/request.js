@@ -7,7 +7,7 @@ const config = {
 
 
 export const CreateUserIdentifyWithFamilyRequest = async (body) => {
-  return await http.post(`/bff/family/create-user-with-family`, body, config)
+  return await http.post(`/bff/user-identify/create-user-with-family`, body, config)
 }
 
 
