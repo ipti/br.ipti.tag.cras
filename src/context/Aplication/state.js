@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useFetchOneUserAplication } from "../../sdk/Login/request";
-import { GetIdUser } from "../../services/localstorage";
+import { GetIdAttendance, GetIdUser, idAttendance } from "../../services/localstorage";
+import { AttendanceUnityController } from "../../sdk/AttendanceUnity/ListAttendanceUnity/controller";
+
 
 const AplicationState = () => {
     const [user, setUser] = useState({})
@@ -44,6 +46,18 @@ const AplicationState = () => {
         2030
     ]
 
+    const { attendancefetch } = AttendanceUnityController();
+    const [attendance, setAttendance] = useState([]);
+
+    useEffect(() => {
+        if (attendancefetch) {
+            setAttendance(attendancefetch)
+            if (attendancefetch[0] && !GetIdAttendance() && user?.role === "SECRETARY") {
+                idAttendance(attendancefetch[0].id)
+            }
+        }
+    }, [attendancefetch, user])
+
 
     const { data: userRequest } = useFetchOneUserAplication(GetIdUser())
 
@@ -56,7 +70,7 @@ const AplicationState = () => {
 
 
     return {
-        user, handleUser, year
+        user, handleUser, year, attendance
     }
 }
 

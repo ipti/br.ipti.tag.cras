@@ -1,15 +1,15 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken, logout } from "../../../services/localstorage";
+import { GetIdAttendance, getToken, logout } from "../../../services/localstorage";
 
 const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
 };
 
 const AllTechnicianRequest = async () => {
-  return await http.get("/technician",{
+  return await http.get("/direct/technician",{
     params: {
-      attendance_unity_fk: 2
+      attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined
     }
   }, config).then(response => response.data)
     .catch(err => {
@@ -26,5 +26,5 @@ export const useFetchAllTechnician = () => {
 };
 
 export const DeleteTechnicianRequest = async (id) => {
-  return await http.delete(`/technician/${id}`, config);
+  return await http.delete(`/direct/technician/${id}`, config);
 }

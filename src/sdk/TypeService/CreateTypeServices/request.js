@@ -7,5 +7,5 @@ const config = {
   };
 
 export const CreateTypesServicesRequest = async (body) => {
-    return await http.post("/task", body, config)
+    return await http.post("/direct/task", body, config)
 }

@@ -7,7 +7,7 @@ const config = {
 };
 
 const OneTechnicianRequest = async (id) => {
-    return await http.get(`/technician/${id}`, config).then(response => response.data)
+    return await http.get(`/direct/technician/${id}`, config).then(response => response.data)
     .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
             logout()
@@ -23,5 +23,5 @@ export const useFetchOneTechnician = (id) => {
 
 
 export const EditTechnicianRequest = async (body, id) => {
-    return await http.put(`/technician/${id}`, body, config);
+    return await http.put(`/direct/technician/${id}`, body, config);
 }

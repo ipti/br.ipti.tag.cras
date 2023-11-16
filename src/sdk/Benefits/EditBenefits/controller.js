@@ -23,6 +23,8 @@ export const EditBenefitsController = (id) => {
             },
             onSuccess: (data) => {
                 console.log(data);
+                history("/beneficios")
+
             },
         }
     );

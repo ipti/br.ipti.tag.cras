@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import http from "../../services/axios";
-import { getToken, logout } from "../../services/localstorage";
+import { GetIdAttendance, getToken, logout } from "../../services/localstorage";
 
 const config = {
     headers: { Authorization: `Bearer ${getToken()}` },
@@ -8,9 +8,9 @@ const config = {
 
 const CountUniFamilyRequest = async () => {
     try {
-        return await http.get("/charts/count-uni-family", { params: { attendance_unity_fk: 2 } }, config).then(response => response.data)
+        return await http.get("/bff/charts/count-uni-family", { params: { attendance_unity_fk: parseInt(GetIdAttendance()) } }, config).then(response => response.data)
             .catch(err => {
-                if (err.response.status === 401 || err.response.status === 403) {
+                if (err.response.status === 401) {
                     logout();
                     window.location.reload()
                 }
@@ -23,9 +23,9 @@ const CountUniFamilyRequest = async () => {
 
 const CountFamilyRequest = async () => {
     try {
-        return await http.get("/charts/count-family", { params: { attendance_unity_fk: 2 } }, config).then(response => response.data)
+        return await http.get("/bff/charts/count-family", { params: { attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined } }, config).then(response => response.data)
             .catch(err => {
-                if (err.response.status === 401 || err.response.status === 403) {
+                if (err.response.status === 401) {
                     logout();
                     window.location.reload()
                 }
@@ -38,14 +38,14 @@ const CountFamilyRequest = async () => {
 
 const CountAttendancebyMonthRequest = async () => {
     try {
-        return await http.get("/charts/attendance-by-month", {
+        return await http.get("/bff/charts/attendance-by-month", {
             params: {
                 year: 2023,
-                attendance_unity_fk: 2
+                attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined
             }
         }, config).then(response => response.data)
             .catch(err => {
-                if (err.response.status === 401 || err.response.status === 403) {
+                if (err.response.status === 401) {
                     logout();
                     window.location.reload()
                 }
@@ -60,9 +60,9 @@ const CountAttendanceFinishedorPendingRequest = async () => {
 
 
     try {
-        return await http.get("/charts/attendance-finished-or-pending", { params: { year: 2023, attendance_unity_fk: 2 } }, config).then(response => response.data)
+        return await http.get("/bff/charts/attendance-finished-or-pending", { params: { year: 2023, attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined } }, config).then(response => response.data)
             .catch(err => {
-                if (err.response.status === 401 || err.response.status === 403) {
+                if (err.response.status === 401) {
                     logout();
                     window.location.reload()
                 }

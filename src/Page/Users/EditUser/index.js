@@ -11,7 +11,6 @@ const EditUserScreen = () => {
 
     const { handleEditUser, EditUserSchema, initialValue, user, toast, role } = useContext(EditUserContext);
 
-
     return (
         <Container>
             <Column>
@@ -107,7 +106,6 @@ const EditUserScreen = () => {
                     : <div>carregando...</div>}
             </Column>
             <Toast ref={toast} />
-
         </Container>
     )
 }

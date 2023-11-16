@@ -46,7 +46,7 @@ const EditBenefitsScreen = () => {
                                 </Grid>
                                 <Padding padding="16px" />
                                 <Row id="end">
-                                    <ButtonPrime type="submit" label="Cadastrar" />
+                                    <ButtonPrime type="submit" label="Salvar" />
                                 </Row>
                             </form>
                         )

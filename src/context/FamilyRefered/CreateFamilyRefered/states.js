@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { CreateUserIdentifyController } from "../../../sdk/FamilyRefered/CreateUserIdentify/controller";
+import { GetIdAttendance } from "../../../services/localstorage";
 
 const CreateFamilyReferedState = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -87,7 +88,6 @@ const CreateFamilyReferedState = () => {
 
     const handleFamiliaRefered = () => {
 
-        console.log(dataValues)
 
         const data = {
             ...dataValues,
@@ -96,7 +96,7 @@ const CreateFamilyReferedState = () => {
             rg_number: dataValues.rg_number.replace(/\D/g, ''),
             telephone: dataValues.telephone.replace(/\D/g, ''),
             uf_rg: dataValues.uf_rg.uf,
-            attendance_unity: 2,
+            attendance_unity: parseInt(GetIdAttendance()),
             kinship: "RESPONSAVEL",
             birth_certificate: dataValues.birth_certificate === "" ? null : dataValues.birth_certificate,
             irregular_ocupation: dataValues.irregular_ocupation ?? false,

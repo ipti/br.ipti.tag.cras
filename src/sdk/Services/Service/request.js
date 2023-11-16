@@ -1,6 +1,6 @@
 import { useQuery } from "react-query";
 import http from "../../../services/axios";
-import { getToken, logout } from "../../../services/localstorage";
+import { GetIdAttendance, getToken, logout } from "../../../services/localstorage";
 
 const config = {
   headers: { Authorization: `Bearer ${getToken()}` },
@@ -8,7 +8,7 @@ const config = {
 
 const ALLServiceRequest = async () => {
   try {
-    return await http.get("/bff/get-attendance", config).then(response => response.data)
+    return await http.get("/bff/attendance",{ params: { attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined } }, config).then(response => response.data)
       .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
           logout();
@@ -26,5 +26,5 @@ export const useFetchAllService = () => {
 };
 
 export const DeleteServiceRequest = async (id) => {
-  return await http.delete(`/attendance/${id}`, config)
+  return await http.delete(`/direct/attendance/${id}`, config)
 }

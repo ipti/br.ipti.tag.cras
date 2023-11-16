@@ -7,12 +7,12 @@ const config = {
 
 
 export const CreateUserIdentifyWithFamilyRequest = async (body) => {
-  return await http.post(`/bff/create-user-with-family`, body, config)
+  return await http.post(`/bff/user-identify/create-user-with-family`, body, config)
 }
 
 
 export const DeleteFamilyMember = async (id) => {
-  return await http.delete(`/user-identify/${id}`, config)
+  return await http.delete(`/direct/user-identify/${id}`, config)
 }
 
 

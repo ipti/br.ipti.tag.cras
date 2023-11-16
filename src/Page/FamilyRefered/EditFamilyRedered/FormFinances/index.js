@@ -53,7 +53,6 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
         set(atributo, e.checked)
     }
 
-    console.log(values)
 
     return (
         <Column>

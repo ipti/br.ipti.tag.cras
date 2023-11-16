@@ -8,7 +8,7 @@ const config = {
   };
 
   const OneBenefitsRequest = async (id) => {
-    return await http.get(`/benefits/${id}`, config).then(response => response.data)
+    return await http.get(`/direct/benefits/${id}`, config).then(response => response.data)
     .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
             logout()
@@ -25,5 +25,5 @@ export const useFetchOneBenefits = (id) => {
 
 
 export const EditBenefitsRequest = async (body, id) => {
-    return await http.put(`/benefits/${id}`, body, config)
+    return await http.put(`/direct/benefits/${id}`, body, config)
 }

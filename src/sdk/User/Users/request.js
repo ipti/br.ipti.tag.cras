@@ -7,7 +7,7 @@ const config = {
   };
 
 const AllUserRequest = async () => {
-    return await http.get("/user", config).then(response => response.data)
+    return await http.get("/direct/user", config).then(response => response.data)
     .catch(err => {
         if (err.response.status === 401 || err.response.status === 403) {
             logout()
@@ -22,5 +22,5 @@ export const useFetchAllUser = () => {
   };
 
   export const DeleteUserRequest = async (id) => {
-    return await http.delete(`/user/${id}`, config);
+    return await http.delete(`/direct/user/${id}`, config);
   }

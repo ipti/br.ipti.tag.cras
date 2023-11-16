@@ -7,5 +7,5 @@ const config = {
   };
 
 export const CreateUserRequest = async (body) => {
-    return await http.post("/user", body, config)
+    return await http.post("/direct/user", body, config)
 }
