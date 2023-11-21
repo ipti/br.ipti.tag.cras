@@ -2,6 +2,14 @@ import styled from "styled-components";
 
 export const StyledTable = styled.table`
   width: 100%;
+  overflow-y: auto;
+`;
+
+export const LineBottom = styled.div`
+ 
+  width: 100%;
+  height: 1px; /* Ajuste a altura conforme necessário */
+  background-color: #000; /* Cor da linha */
 `;
 
 export const StyledTableCell = styled.td`
