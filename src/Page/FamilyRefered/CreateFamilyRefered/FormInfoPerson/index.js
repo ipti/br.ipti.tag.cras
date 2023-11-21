@@ -19,14 +19,14 @@ const FormInfoPerson = () => {
     const initialValue = {
         name: dataValues.name ?? "",
         surname: dataValues.surname ?? "",
-        birthday: dataValues.birthday ?? "",
+        birthday: dataValues.birthday ?? new Date(Date.now()),
         birth_certificate: dataValues.birth_certificate ?? "",
         folder: dataValues.folder ?? "",
         archive: dataValues.arquive ?? "",
         number: dataValues.number ?? "",
         nis: dataValues.nis ?? "",
         rg_number: dataValues.rg_number ?? "",
-        rg_date_emission: dataValues.rg_date_emission ?? "",
+        rg_date_emission: dataValues.rg_date_emission ?? new Date(Date.now()),
         uf_rg: dataValues.uf_rg ?? "",
         emission_rg: dataValues.emission_rg ?? "",
         cpf: dataValues.cpf ?? "",
@@ -36,7 +36,7 @@ const FormInfoPerson = () => {
         filiation_2: dataValues.filiation_2 ?? "",
         marital_status: dataValues.marital_status ?? "",
         escolarity: dataValues.escolarity ?? "",
-        initial_date: dataValues.initial_date,
+        initial_date: dataValues.initial_date ?? new Date(Date.now()),
         final_date: dataValues.final_date
     }
 

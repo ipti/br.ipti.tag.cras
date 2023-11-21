@@ -3,6 +3,10 @@ import styled from "styled-components";
 export const StyledTable = styled.table`
   width: 100%;
   overflow-y: auto;
+
+  p{
+    font-size: medium;
+  }
 `;
 
 export const LineBottom = styled.div`

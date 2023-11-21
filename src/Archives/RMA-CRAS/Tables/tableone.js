@@ -2,12 +2,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Line from './Line';
-import { Padding } from '../../../CrasUi/styles/styles';
+import { Padding, Row } from '../../../CrasUi/styles/styles';
 
 // Estilize os componentes usando Styled Components
 const Table = styled.table`
   border-collapse: collapse;
-  margin-left: 8.00998pt;
 `;
 
 
@@ -36,17 +35,17 @@ const TableOne = () => {
       <Line text={"B.6. Famílias com crianças ou adolescentes em Serviço de Acolhimento"} />
       <Padding />
       <Paragraph className="s7" paddingLeft="8pt">
-        <p style={{ color: "red", fontSize: "12px" }}>        Atenção!
-        </p>
-        <p style={{ color: "green", fontSize: "12px" }}>
-          Os itens B1 a B6 identificam apenas alguns perfis de famílias. É normal
-          que algumas famílias contadas no item A2 não se enquadrem em nenhuma das
-          condições acima, enquanto outras podem se enquadrar simultaneamente
-          em mais de uma condição. Portanto, a soma de B1 a B6 não terá, necessariamente,
-          o mesmo valor relatado em A2.
-        </p>
+        <Row>
+          <p style={{ color: "green", fontSize: "12px" }}>
+            <span style={{ color: "red", fontSize: "12px" }}>Atenção!</span> Os itens B1 a B6 identificam apenas alguns perfis de famílias. É normal
+            que algumas famílias contadas no item A2 não se enquadrem em nenhuma das
+            condições acima, enquanto outras podem se enquadrar simultaneamente
+            em mais de uma condição. Portanto, a soma de B1 a B6 não terá, necessariamente,
+            o mesmo valor relatado em A2.
+          </p>
+        </Row>
       </Paragraph>
-
+    <Padding />
     </Table>
   );
 };

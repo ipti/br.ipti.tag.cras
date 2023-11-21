@@ -1,9 +1,8 @@
 import { Paragraph, TableCell, TableRow } from "./style";
 
 const Line = ({text, value, color}) => {
-    console.log(color)
     return (
-        <TableRow height="17pt">
+        <TableRow height="24pt">
             <TableCell bgColor={color}>
                 <Paragraph className="s5" paddingTop="2pt" paddingLeft="7pt">
                     {text}
