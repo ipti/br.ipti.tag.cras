@@ -86,7 +86,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
             <h3>Situação Financeira e Previdenciária</h3>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
+                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão *" />
                     <Padding />
                     {errors.profission && touched.profission ? (
                         <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
@@ -114,7 +114,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                     ) : null}
                 </Column>
                 <Column>
-                    <label>Reside com:</label>
+                    <label>Reside com: *</label>
                     <Row>
                         <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
                         <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />

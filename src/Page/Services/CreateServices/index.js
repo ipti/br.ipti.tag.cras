@@ -24,14 +24,14 @@ const CreateServicesScreen = () => {
                             <h3>Dados do atendimento</h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasDropdown name="task_fk" value={values.task_fk} onChange={handleChange} optionLabel={"name"} options={service} label="Serviço" />
+                                    <CrasDropdown name="task_fk" value={values.task_fk} onChange={handleChange} optionLabel={"name"} options={service} label="Serviço *" />
                                     <Padding />
                                     {errors.task_fk && touched.task_fk ? (
                                         <div style={{ color: "red" }}>{errors.task_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput name="solicitation" value={values.solicitation} onChange={handleChange} label="Solicitação" />
+                                    <CrasInput name="solicitation" value={values.solicitation} onChange={handleChange} label="Solicitação *" />
                                     <Padding />
                                     {errors.solicitation && touched.solicitation ? (
                                         <div style={{ color: "red" }}>{errors.solicitation}<Padding /></div>
@@ -40,7 +40,7 @@ const CreateServicesScreen = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name="providence" value={values.providence} onChange={handleChange} label="Providências" />
+                                    <CrasInput name="providence" value={values.providence} onChange={handleChange} label="Providências *" />
                                     <Padding />
                                     {errors.providence && touched.providence ? (
                                         <div style={{ color: "red" }}>{errors.providence}<Padding /></div>
@@ -48,7 +48,7 @@ const CreateServicesScreen = () => {
 
                                 </Column>
                                 <Column>
-                                    <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado" />
+                                    <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado *" />
                                     <Padding />
                                     {errors.result && touched.result ? (
                                         <div style={{ color: "red" }}>{errors.result}<Padding /></div>

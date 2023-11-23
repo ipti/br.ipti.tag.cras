@@ -46,14 +46,14 @@ const CreateAttendanceUnityPage = () => {
                             </h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name="name" onChange={handleChange} value={values.name} label="Nome" />
+                                    <CrasInput name="name" onChange={handleChange} value={values.name} label="Nome *" />
                                     <Padding />
                                     {errors.name && touched.name ? (
                                         <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone" />
+                                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone *" />
                                     <Padding />
                                     {errors.telephone && touched.telephone ? (
                                         <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
@@ -63,14 +63,14 @@ const CreateAttendanceUnityPage = () => {
                             <h3>Endereço</h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço" />
+                                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço *" />
                                     <Padding />
                                     {errors.address && touched.address ? (
                                         <div style={{ color: "red" }}>{errors.address}<Padding /></div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência" />
+                                    <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência *" />
                                     <Padding />
                                     {errors.reference && touched.reference ? (
                                         <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
@@ -79,7 +79,7 @@ const CreateAttendanceUnityPage = () => {
                             </Grid>
                             <Row>
                                 <div className="col">
-                                    <label>Condições de Moradia</label>
+                                    <label>Condições de Moradia *</label>
                                     <Padding />
                                     <Row>
                                         <CrasRadioButton
@@ -119,7 +119,7 @@ const CreateAttendanceUnityPage = () => {
                             <Row>
                             </Row>
                             <div className="col">
-                                <label>Tipo de Construção</label>
+                                <label>Tipo de Construção *</label>
                                 <Padding />
                                 <Row>
                                     <CrasRadioButton

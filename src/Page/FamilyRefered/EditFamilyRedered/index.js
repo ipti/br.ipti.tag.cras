@@ -14,7 +14,7 @@ import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 
 const EditFamilyReferedScreen = () => {
 
-    const { setActiveStep, activeStep, toast, family, estadosDoBrasil, handleFamiliaRefered } = useContext(EditFamilyReferedContext);
+    const { setActiveStep, activeStep, toast, family, estadosDoBrasil, handleFamiliaRefered, handleFamilyIsActive } = useContext(EditFamilyReferedContext);
 
 
     const items = [
@@ -96,6 +96,7 @@ const EditFamilyReferedScreen = () => {
 
     const initialValue = {
         name: family ? findOwner?.name : "",
+        isActive: family?.isActive,
         surname: findOwner?.surname ?? null,
         birthday: family ? findOwner?.birthday : "",
         birth_certificate: findOwner.birth_certificate ?? "",
@@ -203,6 +204,8 @@ const EditFamilyReferedScreen = () => {
                         }
                     }
 
+                    console.log(values)
+
                     return (
                         <form onSubmit={handleSubmit}>
                             {erroList.map((item) => {
@@ -210,8 +213,10 @@ const EditFamilyReferedScreen = () => {
                                     <div style={{ color: "red" }}>{item}<Padding /></div>
                                 )
                             })}
-                            {activeStep !== 3 ?  <Row style={{ width: "30%" }} id="start">
+                            {activeStep !== 3 ? <Row style={{ width: "30%", gap: "10px" }} id="start">
                                 <ButtonPrime label="Salvar" type="submit" />
+                                <ButtonPrime severity={values?.isActive ? "warning" : "success"} label={values?.isActive ? "Desativar" : "Ativar"} type="button" onClick={() => {handleFamilyIsActive(); setFieldValue("isActive", !values.isActive)}} />
+                                <ButtonPrime label="Excluir" severity={"danger"} type="submit" />
                             </Row> : null}
                             {activeStep === 0 ?
                                 <FormInfoPerson values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?

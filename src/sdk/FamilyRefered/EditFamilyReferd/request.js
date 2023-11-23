@@ -8,6 +8,9 @@ const config = {
 export const EditUserIdentifyRequest = async (body, id) => {
   return await http.put(`/direct/user-identify/${id}`, body, config)
 }
+export const EditFamilyRequest = async (body, id) => {
+  return await http.put(`/direct/family/${id}`, body, config)
+}
 
 export const EditAddressRequest = async (body, id) => {
   return await http.put(`/direct/address/${id}`, body, config)

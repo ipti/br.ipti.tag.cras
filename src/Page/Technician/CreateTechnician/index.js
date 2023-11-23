@@ -26,14 +26,14 @@ const CreateTechnicianScreen = () => {
                                         name="name"
                                         value={values.name}
                                         onChange={handleChange}
-                                        label="Nome" />
+                                        label="Nome *" />
                                     <Padding />
                                     {errors.name && touched.name ? (
                                         <div style={{ color: "red" }}>{errors.name}</div>
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasDropdown name="user" value={values.user} options={user} onChange={handleChange} optionLabel={"name"} label="Usuário" />
+                                    <CrasDropdown name="user" value={values.user} options={user} onChange={handleChange} optionLabel={"name"} label="Usuário *" />
                                     <Padding />
                                     {errors.user && touched.user ? (
                                         <div style={{ color: "red" }}>{errors.user}<Padding /></div>

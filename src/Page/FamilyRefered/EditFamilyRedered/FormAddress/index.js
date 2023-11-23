@@ -19,7 +19,7 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
             <h3>Endereço</h3>
             <Grid checkMockup={[{}]}>
                 <Column>
-                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço" />
+                    <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço *" />
                     <Padding />
                     {errors.address && touched.address ? (
                         <div style={{ color: "red" }}>{errors.address}<Padding /></div>
@@ -28,7 +28,7 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone" />
+                    <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone *" />
                     <Padding />
                     {errors.telephone && touched.telephone ? (
                         <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
@@ -45,7 +45,7 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Row>
                 <div className="col">
-                    <label>Condições de Moradia</label>
+                    <label>Condições de Moradia *</label>
                     <Padding />
                     <Row>
                         <CrasRadioButton
@@ -85,7 +85,7 @@ const FormAddress = ({ values, errors, touched, handleChange }) => {
             <Row>
             </Row>
             <div className="col">
-                <label>Tipo de Construção</label>
+                <label>Tipo de Construção *</label>
                 <Padding />
                 <Row>
                     <CrasRadioButton

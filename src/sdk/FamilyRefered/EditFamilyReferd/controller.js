@@ -3,7 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllBenefits } from "../../Benefits/ListBenefits/request";
 import { useFetchFamilyReferedId } from "../request";
-import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
+import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditFamilyRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
+import queryClient from "../../../services/react-query";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
 
@@ -33,6 +34,25 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
         setIsVerify(true)
         refetch()
         show()
+      },
+    }
+  );
+
+  const EditFamilyIsActiveRequestMutation = useMutation(
+    ({data, id}) => EditFamilyRequest(data, id),
+    {
+      onError: (error) => {
+        console.log(error.response.data.message)
+        setIsError(error.response.data.message)
+        show()
+        if (error.response.status === 401 || error.response.status === 403) {
+          logout();
+          history("/login")
+        }
+      },
+      onSuccess: (data) => {
+        // refetch()
+        queryClient.refetchQueries("FamilyReferedId")
       },
     }
   );
@@ -145,6 +165,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
     EditAddressRequestMutation,
     CreateFamilyBenefitsRequestMutation,
     DeleteFamilyBenefitsMutation,
-    EditVulnerabilityRequestMutation
+    EditVulnerabilityRequestMutation,
+    EditFamilyIsActiveRequestMutation
   }
 }
