@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllBenefits } from "../../Benefits/ListBenefits/request";
 import { useFetchFamilyReferedId } from "../request";
-import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, EditAddressRequest, EditFamilyRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
+import { CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, DeleteFamilyRequest, EditAddressRequest, EditFamilyRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
 import queryClient from "../../../services/react-query";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
@@ -16,7 +16,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
   const { data: benefitsfetch } = useFetchAllBenefits()
 
   const EditFamilyRequestRequestMutation = useMutation(
-    ({data, id}) => EditUserIdentifyRequest(data, id),
+    ({ data, id }) => EditUserIdentifyRequest(data, id),
     {
       onError: (error) => {
         console.log(error.response.data.message)
@@ -39,7 +39,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
   );
 
   const EditFamilyIsActiveRequestMutation = useMutation(
-    ({data, id}) => EditFamilyRequest(data, id),
+    ({ data, id }) => EditFamilyRequest(data, id),
     {
       onError: (error) => {
         console.log(error.response.data.message)
@@ -146,12 +146,31 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
     }
   );
 
+  const DeleteFamilyMutation = useMutation(
+    (id) => DeleteFamilyRequest(id),
+    {
+      onError: (error) => {
+        console.log(error.response.data.message)
+        setIsError(error.response.data.message)
+        show()
+        if (error.response.status === 401 || error.response.status === 403) {
+          logout();
+          history("/login")
+        }
+      },
+      onSuccess: (data) => {
+
+        history("/familia")
+      },
+    }
+  );
 
 
 
 
 
- 
+
+
 
 
 
@@ -166,6 +185,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
     CreateFamilyBenefitsRequestMutation,
     DeleteFamilyBenefitsMutation,
     EditVulnerabilityRequestMutation,
-    EditFamilyIsActiveRequestMutation
+    EditFamilyIsActiveRequestMutation,
+    DeleteFamilyMutation
   }
 }

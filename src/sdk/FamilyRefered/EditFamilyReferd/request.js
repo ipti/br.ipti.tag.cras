@@ -27,3 +27,8 @@ export const CreateFamilyBenefitsRequest = async (body) => {
 export const DeleteFamilyBenefitsRequest = async (id) => {
   return await http.delete(`/direct/family-benefits/${id}`, config)
 }
+
+
+export const DeleteFamilyRequest = async (id) => {
+  return await http.delete(`/bff/family/delete-family`, {params: {familyId: id}}, config)
+}

@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Steps from "../../../CrasUi/Steps";
 import { Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../context/FamilyRefered/EditFamilyRefered/context";
@@ -10,12 +10,13 @@ import { Toast } from "primereact/toast";
 import { Formik } from "formik";
 import * as Yup from 'yup';
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
-
+import { ConfirmDialog } from 'primereact/confirmdialog';
 
 const EditFamilyReferedScreen = () => {
 
-    const { setActiveStep, activeStep, toast, family, estadosDoBrasil, handleFamiliaRefered, handleFamilyIsActive } = useContext(EditFamilyReferedContext);
+    const { setActiveStep, activeStep, toast, family, estadosDoBrasil, handleFamiliaRefered, handleFamilyIsActive, deleteFamily } = useContext(EditFamilyReferedContext);
 
+    const [visible, setVisible] = useState(false)
 
     const items = [
         {
@@ -204,8 +205,6 @@ const EditFamilyReferedScreen = () => {
                         }
                     }
 
-                    console.log(values)
-
                     return (
                         <form onSubmit={handleSubmit}>
                             {erroList.map((item) => {
@@ -215,8 +214,13 @@ const EditFamilyReferedScreen = () => {
                             })}
                             {activeStep !== 3 ? <Row style={{ width: "30%", gap: "10px" }} id="start">
                                 <ButtonPrime label="Salvar" type="submit" />
-                                <ButtonPrime severity={values?.isActive ? "warning" : "success"} label={values?.isActive ? "Desativar" : "Ativar"} type="button" onClick={() => {handleFamilyIsActive(); setFieldValue("isActive", !values.isActive)}} />
-                                <ButtonPrime label="Excluir" severity={"danger"} type="submit" />
+                                <ButtonPrime severity={values?.isActive ? "warning" : "success"} label={values?.isActive ? "Desativar" : "Ativar"} type="button" onClick={() => { handleFamilyIsActive(); setFieldValue("isActive", !values.isActive) }} />
+                                <ButtonPrime label="Excluir" onClick={() => setVisible(true)} severity={"danger"} type="button" />
+
+                                <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Deseja excluir? Essa ação é irreversível!"
+                                    acceptLabel='Sim'
+                                    rejectLabel='Não'
+                                    header="Confirmação" icon="pi pi-exclamation-triangle" accept={() => { deleteFamily(family?.id) }} reject={() => setVisible(false)} />
                             </Row> : null}
                             {activeStep === 0 ?
                                 <FormInfoPerson values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?

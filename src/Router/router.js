@@ -26,6 +26,7 @@ import AttendanceUnity from "../Container/AttendanceUnity/ListAttendanceUnity";
 import CreateAttendanceUnity from "../Container/AttendanceUnity/CreateAttendanceUnity";
 import EditAttendanceUnity from "../Container/AttendanceUnity/EditAttendanceUnity";
 import RmaCras from "../Archives/RMA-CRAS";
+import Report from "../Container/Report";
 
 const RoutesCras = () => {
 
@@ -55,8 +56,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={AttendanceUnity} />} path="/unidades" />
                 <Route element={<PrivateRoute Component={CreateAttendanceUnity} />} path="/criar/unidades" />
                 <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
+                <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
                 <Route element={<RmaCras />} path="/rma-cras" />
-
                 <Route element={<Login />} path="/login" />
                 <Route path="/*" element={<NotFoundPage />} />
             </Routes>

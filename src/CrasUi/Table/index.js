@@ -28,7 +28,7 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
 
     return (
         <>
-            <DataTable value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
+            <DataTable rows={5} paginator rowsPerPageOptions={[5, 10, 25, 50]} value={products} header={header} tableStyle={{ minWidth: '50rem' }}>
                 {columns.map((col, i) => (
                     <Column align="center" key={col.field} field={col.field} header={col.header} />
                 ))}

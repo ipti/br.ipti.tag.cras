@@ -49,6 +49,10 @@ const CrasMenu = ({ viewdMenu }) => {
                     <Padding />
                 </> : null}
                 {user.role === "SECRETARY" ? <>
+                    <Item text={"Relatorios"} funcActiv={() => { setActive(9); menuItem(9) }} active={active === 9 ? true : false} path={"/relatorios"} icon={"pi pi-file-export"} />
+                    <Padding />
+                </> : null}
+                {user.role === "SECRETARY" ? <>
                     <Item text={"Unidades"} funcActiv={() => { setActive(8); menuItem(8) }} active={active === 8 ? true : false} path={"/unidades"} icon={"pi pi-building"} />
                     <Padding />
                 </> : null}

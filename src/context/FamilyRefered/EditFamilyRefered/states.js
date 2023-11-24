@@ -48,7 +48,8 @@ const EditRferedState = () => {
     benefitsfetch,
     CreateFamilyBenefitsRequestMutation,
     EditFamilyIsActiveRequestMutation,
-    EditVulnerabilityRequestMutation
+    EditVulnerabilityRequestMutation,
+    DeleteFamilyMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
   const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation } = MemberFamilyController()
@@ -227,7 +228,7 @@ const EditRferedState = () => {
   }
 
   const handleFamilyIsActive = () => {
-    EditFamilyIsActiveRequestMutation.mutate({ data: {isActive: !family.isActive}, id: family.id })
+    EditFamilyIsActiveRequestMutation.mutate({ data: { isActive: !family.isActive }, id: family.id })
   }
 
   const handleEditFamilyMember = (values, id) => {
@@ -279,6 +280,10 @@ const EditRferedState = () => {
     DeleteMemberFamilyRequestMutation.mutate(id)
   }
 
+  const deleteFamily = (id) => {
+    DeleteFamilyMutation.mutate(id)
+  }
+
   const HandleCreateUserIdentify = (data) => {
 
     CreateUserIdentifyWithFamilyRequestMutation.mutate({
@@ -296,7 +301,7 @@ const EditRferedState = () => {
 
 
   return {
-    handleEditFamilyMember, handleFamilyIsActive, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
+    deleteFamily, handleEditFamilyMember, handleFamilyIsActive, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
   }
 }
 
