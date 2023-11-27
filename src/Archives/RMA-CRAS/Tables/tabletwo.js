@@ -20,19 +20,19 @@ const Paragraph = styled.p`
 
 
 // Componente principal
-const TableTwo = () => {
+const TableTwo = ({item}) => {
     return (
         <Table>
             <Line text={"C. Volume de atendimentos particularizados realizados no CRAS no mês de referência"} value={"Quantidade"} color={"#92D050"} />
-            <Line text={"C.1. Total de atendimentos particularizados realizados no mês de referência"} />
-            <Line text={"C.2. Famílias encaminhadas para inclusão no Cadastro Único"} />
-            <Line text={"C.3. Famílias encaminhadas para atualização cadastral no Cadastro Único"} />
-            <Line text={"C.4. Indivíduos encaminhados para acesso ao BPC"} />
-            <Line text={"C.5. Famílias encaminhadas para o CREAS"} />
-            <Line text={"C.6. Visitas domiciliares realizadas"} />
-            <Line text={"C.7. Total de auxílios-natalidade concedidos/entregues durante o mês de referência"} />
-            <Line text={"C.8. Total de auxílios-funeral concedidos/entregues durante o mês de referência"} />
-            <Line text={"C.9 Outros benefícios eventuais concedidos/entregues durante o mês de referência"} />
+            <Line text={"C.1. Total de atendimentos particularizados realizados no mês de referência"} value={item?.attendanceTotal} />
+            <Line text={"C.2. Famílias encaminhadas para inclusão no Cadastro Único"} value={item?.familyForwardCadUnicoAdd} />
+            <Line text={"C.3. Famílias encaminhadas para atualização cadastral no Cadastro Único"} value={item?.familyForwardCadUnicoUpdate} />
+            <Line text={"C.4. Indivíduos encaminhados para acesso ao BPC"} value={item?.userIdentifyForwardBPC} />
+            <Line text={"C.5. Famílias encaminhadas para o CREAS"} value={item?.familyForwardCREAS} />
+            <Line text={"C.6. Visitas domiciliares realizadas"} value={item?.visitsTotal} />
+            <Line text={"C.7. Total de auxílios-natalidade concedidos/entregues durante o mês de referência"} value={item?.bornBenefitsTotal} />
+            <Line text={"C.8. Total de auxílios-funeral concedidos/entregues durante o mês de referência"} value={item?.deathBenefitsTotal} />
+            <Line text={"C.9 Outros benefícios eventuais concedidos/entregues durante o mês de referência"} value={item?.otherBenefitsTotal} />
             <Padding />
             <Paragraph className="s7" paddingLeft="8pt">
                 <Row>

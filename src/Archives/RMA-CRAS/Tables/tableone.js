@@ -20,19 +20,19 @@ const Paragraph = styled.p`
 
 
 // Componente principal
-const TableOne = () => {
+const TableOne = ({item}) => {
   return (
     <Table>
       <Line text={"A. Volume de famílias em acompanhamento pelo PAIF"} value={"Total"} color={"#92D050"} />
-      <Line text={"A.1. Total de famílias em acompanhamento pelo PAIF"} />
-      <Line text={"A.2. Novas famílias inseridas no acompanhamento do PAIF durante o mês de referência"} />
+      <Line text={"A.1. Total de famílias em acompanhamento pelo PAIF"} value={item?.familyTotal} />
+      <Line text={"A.2. Novas famílias inseridas no acompanhamento do PAIF durante o mês de referência"} value={item?.familyMonthy} />
       <Line text={"B. Perfil das novas famílias inseridas em acompanhamento no PAIF"} value={"Total"} color={"#92D050"} />
-      <Line text={"B.1. Famílias em situação de extrema pobreza"} />
-      <Line text={"B.2. Famílias beneficiárias do Programa Bolsa Família"} />
-      <Line text={"B.3. Famílias beneficiárias do Programa Bolsa Família em descumprimento de condicionalidades"} />
-      <Line text={"B.4. Famílias com membros beneficiários do BPC"} />
-      <Line text={"B.5. Famílias com crianças ou adolescentes em situação de trabalho infantil"} />
-      <Line text={"B.6. Famílias com crianças ou adolescentes em Serviço de Acolhimento"} />
+      <Line text={"B.1. Famílias em situação de extrema pobreza"} value={item?.familyLowIncome} />
+      <Line text={"B.2. Famílias beneficiárias do Programa Bolsa Família"} value={item?.familyBolsaFamilia} />
+      <Line text={"B.3. Famílias beneficiárias do Programa Bolsa Família em descumprimento de condicionalidades"} value={item?.familyBolsaFamiliaBreakCondicionalities} />
+      <Line text={"B.4. Famílias com membros beneficiários do BPC"} value={item?.familyMembersWithBPC} />
+      <Line text={"B.5. Famílias com crianças ou adolescentes em situação de trabalho infantil"} value={item?.familyChildWork} />
+      <Line text={"B.6. Famílias com crianças ou adolescentes em Serviço de Acolhimento"} value={item?.familyChildShelterProtection} />
       <Padding />
       <Paragraph className="s7" paddingLeft="8pt">
         <Row>

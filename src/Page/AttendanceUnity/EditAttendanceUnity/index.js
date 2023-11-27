@@ -8,6 +8,7 @@ import CrasInputMask from "../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../CrasUi/RadioButton";
 import { useContext } from "react";
 import { EditAttendanceUnityContext } from "../../../context/AttendanceUnity/EditAttendanceUnity/context";
+import CrasInputNumber from "../../../CrasUi/Input/InputNumber";
 
 const EditAttendanceUnityPage = () => {
 
@@ -22,6 +23,8 @@ const EditAttendanceUnityPage = () => {
         reference: oneAttendance ? oneAttendance?.address.reference : "",
         conditions: oneAttendance ? oneAttendance?.address.conditions : "",
         construction_type: oneAttendance ? oneAttendance?.address.construction_type : "",
+        type: oneAttendance ? oneAttendance.type : "",
+        unity_number: oneAttendance ? oneAttendance.unity_number : "",
         rooms: 0,
         rent_value: 0
     }
@@ -33,6 +36,8 @@ const EditAttendanceUnityPage = () => {
         reference: Yup.string().required("Campo obrigatório"),
         conditions: Yup.string().required("Campo obrigatório"),
         construction_type: Yup.string().required("Campo obrigatório"),
+        unity_number: Yup.number().required("Campo obrigatório"),
+        type: Yup.string().required("Campo obrigatório")
     });
 
     return (
@@ -59,6 +64,26 @@ const EditAttendanceUnityPage = () => {
                                         <Padding />
                                         {errors.telephone && touched.telephone ? (
                                             <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                </Grid>
+                                <Grid checkMockup={[{}, {}]}>
+                                    <Column>
+                                        <label>Tipo de Unidade *</label>
+                                        <Row>
+                                            <CrasRadioButton selectValue={"CRAS"} onChange={handleChange} checked={values.type === "CRAS"} value={"CRAS"} name="type" label={"CRAS"} />
+                                            <CrasRadioButton selectValue={"CREAS"} onChange={handleChange} checked={values.type === "CREAS"} value={"CREAS"} name="type" label="CREAS" />
+                                        </Row>
+                                        <Padding />
+                                        {errors.type && touched.type ? (
+                                            <div style={{ color: "red" }}>{errors.type}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                    <Column>
+                                        <CrasInputNumber onChange={handleChange} value={values.unity_number} name="unity_number" label="Nº da Unidade *" />
+                                        <Padding />
+                                        {errors.unity_number && touched.unity_number ? (
+                                            <div style={{ color: "red" }}>{errors.unity_number}<Padding /></div>
                                         ) : null}
                                     </Column>
                                 </Grid>

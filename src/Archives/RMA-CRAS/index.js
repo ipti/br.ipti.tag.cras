@@ -6,9 +6,22 @@ import SeuComponenteReact from './Tables/tableone';
 import TableThree from './Tables/tablethree';
 import TableTwo from './Tables/tabletwo';
 import { LineBottom, StyledTable, StyledTableCell } from './styled';
+import { useFetchOneAttendanceUnity } from '../../sdk/AttendanceUnity/EditAttendanceUnity/request';
+import { GetIdAttendance } from '../../services/localstorage';
+import { useFetchMonthRma } from '../../sdk/RMA-CRAS/request';
 
 
 const MonthlyForm = () => {
+
+    const date = new Date(Date.now())
+
+    console.log(date.getMonth())
+
+    const month = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
+    const { data: rma } = useFetchMonthRma(date?.getMonth() + 1, date?.getFullYear(), GetIdAttendance())
+
+
     return (
         <div style={{ overflowY: "auto" }}>
             <StyledTable cellspacing="0">
@@ -22,7 +35,7 @@ const MonthlyForm = () => {
                             </Row>
                             <Row id='end'>
                                 <p>
-                                    MÊS:  </p><Padding /><Row id='center' style={{ width: "80px", background: "white" }}>Dezembro</Row>/20<Row id='center' style={{ width: "30px", background: "white" }}>{20}</Row>
+                                    MÊS:  </p><Padding /><Row id='center' style={{ width: "80px", background: "white" }}>{month[date.getMonth()]}</Row><Padding /> / <Padding /><Row id='center' style={{ width: "40px", background: "white" }}>{date.getFullYear()}</Row>
                                 <Padding />
                             </Row>
                         </div>
@@ -35,14 +48,20 @@ const MonthlyForm = () => {
                             Nome da unidade:
                         </p>
                         <Column style={{ width: "70%" }}>
-                            <p>{99}</p>
+                            <Row>
+                                <Padding />
+                                <p> {unityAttendance?.name}</p>
+                            </Row>
                             <LineBottom />
                         </Column>
                     </Row>
                     <Row style={{ width: "100%" }}>
                         <p>Nº da unidade:</p>
                         <Column style={{ width: "80%" }}>
-                            <p>{99}</p>
+                            <Row >
+                                <Padding />
+                                <p>{unityAttendance?.unity_number}</p>
+                            </Row>
                             <LineBottom />
                         </Column>
                     </Row>
@@ -53,7 +72,10 @@ const MonthlyForm = () => {
                         Endereço:
                     </p>
                     <Column style={{ width: "100%" }}>
-                        <p>{99}</p>
+                        <Row id='start'>
+                            <Padding />
+                            <p>{unityAttendance?.address?.address}</p>
+                        </Row>
                         <LineBottom />
                     </Column>
                 </Row>
@@ -64,14 +86,19 @@ const MonthlyForm = () => {
                             Municipio:
                         </p>
                         <Column style={{ width: "100%" }}>
-                            <p>{22}</p>
+                            <Row>
+                                <Padding />
+                                <p>{unityAttendance?.edcenso_city?.name}</p>
+                            </Row>
                             <LineBottom />
                         </Column>
                     </Row>
-                    <Row style={{ width: "100%" }}>
+                    <Row style={{ width: "10%" }}>
                         <p>UF: </p>
                         <Column style={{ width: "100%" }}>
-                            <p>{222}</p>
+                            <Row id='center'>
+                                <p>{unityAttendance?.edcenso_city?.edcenso_uf?.acronym}</p>
+                            </Row>
                             <LineBottom />
                         </Column>
                     </Row>
@@ -87,7 +114,7 @@ const MonthlyForm = () => {
                     </StyledTableCell>
                 </tr>
                 <Padding padding="8px" />
-                <SeuComponenteReact />
+                <SeuComponenteReact item={rma?.bloco1} />
                 <tr style={{ height: '24pt' }}>
                     <StyledTableCell width="401pt" bgColor="#006600">
                         <Row id='space-between'>
@@ -98,7 +125,7 @@ const MonthlyForm = () => {
                     </StyledTableCell>
                 </tr>
                 <Padding padding="8px" />
-                <TableTwo />
+                <TableTwo item={rma?.bloco2} />
                 <tr style={{ height: '24pt' }}>
                     <StyledTableCell width="401pt" bgColor="#006600">
                         <Row id='space-between'>
@@ -141,10 +168,10 @@ const RmaCras = () => {
     };
 
     return (
-        <div style={{overflowY: "scroll", position: "relative", height: "100vh"}}>
+        <div style={{ overflowY: "scroll", position: "relative", height: "100vh" }}>
             <Padding padding={"32px"}>
                 <Padding padding="32px 16px">
-                    <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
+                    <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print'/></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
                 </Padding>
                 <div ref={contentRef}>
                     <Padding padding="8px">

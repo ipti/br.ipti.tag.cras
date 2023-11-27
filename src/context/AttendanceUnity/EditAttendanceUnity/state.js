@@ -9,7 +9,8 @@ export const EditAttendanceUnityState = () => {
 
     const HandleEditAttendance = (body) => {
         const bodyAttendance = {
-            name: body.name
+            name: body.name,
+            unity_number: body.unity_number.toString()
         }
 
         const bodyAddress = {
