@@ -27,6 +27,8 @@ import CreateAttendanceUnity from "../Container/AttendanceUnity/CreateAttendance
 import EditAttendanceUnity from "../Container/AttendanceUnity/EditAttendanceUnity";
 import RmaCras from "../Archives/RMA-CRAS";
 import Report from "../Container/Report";
+import Forwarding from "../Container/Forwarding/ListFamilyForwarding";
+import FamilyForwarding from "../Container/Forwarding/FamilyForwarding";
 
 const RoutesCras = () => {
 
@@ -57,6 +59,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={CreateAttendanceUnity} />} path="/criar/unidades" />
                 <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
                 <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
+                <Route element={<PrivateRoute Component={Forwarding} />} path="/encaminhamento" />
+                <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
                 <Route element={<RmaCras />} path="/rma-cras" />
                 <Route element={<Login />} path="/login" />
                 <Route path="/*" element={<NotFoundPage />} />

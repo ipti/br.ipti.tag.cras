@@ -83,6 +83,23 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
             <Row>
                 <div className="col"> <CrasCheckbox name={"others"}  checked={values.others} onChange={(e)=> handleCheckbox(e, setFieldValue, "others")} label={"Outros"} /></div>
             </Row>
+            <h3>Condicionalidades</h3>
+            <Row>
+                <div className="col">
+                    <CrasCheckbox checked={values.vaccination_schedule} name={"vaccination_schedule"}  onChange={(e)=> handleCheckbox(e, setFieldValue, "vaccination_schedule")} label={"Calendário de vacina"} />
+                </div>
+            </Row>
+            <Row>
+                <div className="col">
+                    <CrasCheckbox name={"nutritional_status"} checked={values.nutritional_status} onChange={(e)=> handleCheckbox(e, setFieldValue, "nutritional_status")} label={"Estado Nutricional"} />
+                </div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"prenatal"} checked={values.prenatal} onChange={(e)=> handleCheckbox(e, setFieldValue, "prenatal")} label={"Pré Natal"} /></div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"school_frequency"}  checked={values.school_frequency} onChange={(e)=> handleCheckbox(e, setFieldValue, "school_frequency")} label={"Frequência Escolar"} /></div>
+            </Row>
             <h3>Situação Financeira e Previdenciária</h3>
             <Grid checkMockup={[{}, {}]}>
                 <Column>

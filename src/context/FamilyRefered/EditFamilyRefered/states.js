@@ -49,7 +49,8 @@ const EditRferedState = () => {
     CreateFamilyBenefitsRequestMutation,
     EditFamilyIsActiveRequestMutation,
     EditVulnerabilityRequestMutation,
-    DeleteFamilyMutation
+    DeleteFamilyMutation,
+    EditFamilyCondicionalitiesRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
   const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation } = MemberFamilyController()
@@ -78,6 +79,7 @@ const EditRferedState = () => {
   const deleteMember = (id) => {
     DeleteMemberFamilyRequestMutation.mutate(id)
   }
+
   const estadosDoBrasil = [
     { uf: 'AC', nome: 'Acre' },
     { uf: 'AL', nome: 'Alagoas' },
@@ -223,6 +225,7 @@ const EditRferedState = () => {
     EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: family.family_representative_fk });
     EditVulnerabilityRequestMutation.mutate({ data: bodyVulnerability, id: family.vulnerability_fk })
     EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
+    EditFamilyCondicionalitiesRequestMutation.mutate({ data: {}})
     show()
 
   }

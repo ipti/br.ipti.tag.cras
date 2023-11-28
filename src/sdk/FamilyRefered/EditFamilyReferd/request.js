@@ -24,6 +24,11 @@ export const CreateFamilyBenefitsRequest = async (body) => {
   return await http.post(`/direct/family-benefits`, body, config)
 }
 
+export const CreateCondicionalitiesRequest = async (body) => {
+  return await http.post(`/bff/condicionalities`, body, config)
+}
+
+
 export const DeleteFamilyBenefitsRequest = async (id) => {
   return await http.delete(`/direct/family-benefits/${id}`, config)
 }
