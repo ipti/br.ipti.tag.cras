@@ -1,35 +1,46 @@
 import { Dialog } from "primereact/dialog"
-import { useState } from "react"
+import { useContext, useState } from "react"
 import Table from "../../../Components/Table"
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime"
 import CrasDropdown from "../../../CrasUi/Dropdown"
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles"
+import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context"
+import { Formik } from "formik"
 
 const FamilyForwardingPage = () => {
 
     const [visible, setVisible] = useState(false)
+
+    const { CreateForwarding, forwarding } = useContext(FamilyForwardingContext)
     return (
         <Container>
             <Padding padding="16px" />
-            <h1>Familia</h1>
+            <h1>Encaminhamentos</h1>
             <Row>
                 <ButtonPrime label={"Criar encaminhamento"} onClick={() => setVisible(true)} />
             </Row>
-            <Container>
-                <Table columns={[{}]} list={[]} name="Encaminhamentos" filter={[]} />
-            </Container>
+            <Table columns={[{}]} list={[]} name="Encaminhamentos" filter={[]} />
             <Dialog header="Criar Encaminhamento" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
-                <Grid checkMockup={[{}, {}]}>
-                    <CrasDropdown />
-                    <CrasDropdown />
-                </Grid>
-                <Padding />
+                <Formik initialValues={{}} onSubmit={(values) => CreateForwarding(values)}>
+                    {({values}) => {
+                        return (
+                            <form>
+                                <Grid checkMockup={[{}, {}]}>
+                                    <CrasDropdown options={forwarding} optionLabel={""} />
+                                    <CrasDropdown />
+                                </Grid>
+                                <Padding />
 
-                <Column>
-                    <Row id="center" style={{ width: "100%" }}>
-                        <ButtonPrime label={"Cadastrar"} />
-                    </Row>
-                </Column>
+                                <Column>
+                                    <Row id="center" style={{ width: "100%" }}>
+                                        <ButtonPrime label={"Cadastrar"} />
+                                    </Row>
+                                </Column>
+                            </form>
+                        )
+                    }}
+
+                </Formik>
                 {/* <Row>
                     <div className="col">
                         <CrasCheckbox checked={true} name={"irregular_ocupation"} onChange={(e) => { }} label={"Residem em área de ocupação irregular"} />

@@ -20,6 +20,10 @@ export const EditVulnerabilityRequest = async (body, id) => {
   return await http.put(`/direct/vulnerability/${id}`, body, config)
 }
 
+export const EditCondicionalitiesRequest = async (body) => {
+  return await http.put(`/bff/condicionalities`, body, config)
+}
+
 export const CreateFamilyBenefitsRequest = async (body) => {
   return await http.post(`/direct/family-benefits`, body, config)
 }

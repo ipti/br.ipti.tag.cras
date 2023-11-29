@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllBenefits } from "../../Benefits/ListBenefits/request";
 import { useFetchFamilyReferedId } from "../request";
-import { CreateCondicionalitiesRequest, CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, DeleteFamilyRequest, EditAddressRequest, EditFamilyRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
+import { CreateCondicionalitiesRequest, CreateFamilyBenefitsRequest, DeleteFamilyBenefitsRequest, DeleteFamilyRequest, EditAddressRequest, EditCondicionalitiesRequest, EditFamilyRequest, EditUserIdentifyRequest, EditVulnerabilityRequest } from "./request";
 import queryClient from "../../../services/react-query";
 
 export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIsError, show) => {
@@ -126,8 +126,31 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
     }
   );
 
-  const EditFamilyCondicionalitiesRequestMutation = useMutation(
+  const CreateFamilyCondicionalitiesRequestMutation = useMutation(
     (data) => CreateCondicionalitiesRequest(data),
+    {
+      onError: (error) => {
+        console.log(error.response.data.message)
+        setIsError(error.response.data.message)
+        show()
+        if (error.response.status === 401 || error.response.status === 403) {
+          logout();
+          history("/login")
+        }
+      },
+      onSuccess: (data) => {
+        // refetch()
+        setAddMember(false)
+        console.log(data);
+        setIsVerify(true)
+        refetch()
+        show()
+      },
+    }
+  );
+
+  const EditFamilyCondicionalitiesRequestMutation = useMutation(
+    (data) => EditCondicionalitiesRequest(data),
     {
       onError: (error) => {
         console.log(error.response.data.message)
@@ -211,6 +234,7 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
     EditVulnerabilityRequestMutation,
     EditFamilyIsActiveRequestMutation,
     DeleteFamilyMutation,
-    EditFamilyCondicionalitiesRequestMutation
+    EditFamilyCondicionalitiesRequestMutation,
+    CreateFamilyCondicionalitiesRequestMutation
   }
 }

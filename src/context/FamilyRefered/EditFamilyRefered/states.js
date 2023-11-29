@@ -50,7 +50,8 @@ const EditRferedState = () => {
     EditFamilyIsActiveRequestMutation,
     EditVulnerabilityRequestMutation,
     DeleteFamilyMutation,
-    EditFamilyCondicionalitiesRequestMutation
+    EditFamilyCondicionalitiesRequestMutation,
+    CreateFamilyCondicionalitiesRequestMutation
   } = EditFamilyReferedController(id, setAddMember, setIsVerify, setIsError, setOpen, show);
 
   const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation } = MemberFamilyController()
@@ -222,12 +223,24 @@ const EditRferedState = () => {
       rent_value: values.rent_value
     }
 
+    const bodyConditions = {
+      vaccination_schedule: values.vaccination_schedule,
+      nutritional_status: values.nutritional_status,
+      prenatal: values.prenatal,
+      school_frequency: values.school_frequency,
+      family: family?.id
+    }
+
     EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: family.family_representative_fk });
     EditVulnerabilityRequestMutation.mutate({ data: bodyVulnerability, id: family.vulnerability_fk })
     EditAddressRequestMutation.mutate({ data: bodyAddress, id: family?.address_fk });
-    EditFamilyCondicionalitiesRequestMutation.mutate({ data: {}})
-    show()
+    if (family?.condicionalities) {
+      EditFamilyCondicionalitiesRequestMutation.mutate(bodyConditions);
+    } else {
+      CreateFamilyCondicionalitiesRequestMutation.mutate(bodyConditions)
 
+    }
+    show()
   }
 
   const handleFamilyIsActive = () => {

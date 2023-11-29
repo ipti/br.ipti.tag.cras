@@ -10,7 +10,7 @@ import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) => {
-
+    console.log(values)
     const [visibleAddBenefits, setvisibleAddBenefits] = useState();
 
     const [benefits_fk, setbenefits_fk] = useState()

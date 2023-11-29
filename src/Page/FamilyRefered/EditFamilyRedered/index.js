@@ -95,6 +95,8 @@ const EditFamilyReferedScreen = () => {
         return test
     }
 
+    console.log(family)
+
     const initialValue = {
         name: family ? findOwner?.name : "",
         isActive: family?.isActive,
@@ -136,7 +138,11 @@ const EditFamilyReferedScreen = () => {
         construction_type: family?.address.construction_type ?? "",
         rooms: family?.address.rooms ?? "",
         rent_value: family?.address.rent_value ?? 0,
-        benefitsForFamily: familyValue(family?.benefits) ?? []
+        benefitsForFamily: familyValue(family?.benefits) ?? [],
+        vaccination_schedule: family?.condicionalities?.vaccination_schedule ? true : false,
+        nutritional_status: family?.condicionalities?.nutritional_status ?? false,
+        prenatal: family?.condicionalities?.prenatal ?? false,
+        school_frequency: family?.condicionalities?.school_frequency ?? false,
     }
 
 
