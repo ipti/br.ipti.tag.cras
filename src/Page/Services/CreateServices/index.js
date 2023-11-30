@@ -71,12 +71,12 @@ const CreateServicesScreen = () => {
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}]}>
-                                <CrasInputArea name={"description"}label={"Descrição"} onChange={handleChange} value={values.description} />
+                                <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
                             </Grid>
                             <Padding />
-                                    {errors.description && touched.description ? (
-                                        <div style={{ color: "red" }}>{errors.description}<Padding /></div>
-                                    ) : null}
+                            {errors.description && touched.description ? (
+                                <div style={{ color: "red" }}>{errors.description}<Padding /></div>
+                            ) : null}
                             <Padding padding="16px" />
                             <Row id="end">
                                 <ButtonPrime type="submit" label="Cadastrar" />

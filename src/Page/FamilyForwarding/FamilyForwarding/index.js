@@ -6,12 +6,13 @@ import CrasDropdown from "../../../CrasUi/Dropdown"
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles"
 import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context"
 import { Formik } from "formik"
+import CrasInputArea from "../../../CrasUi/Input/inputArea"
 
 const FamilyForwardingPage = () => {
 
     const [visible, setVisible] = useState(false)
 
-    const { CreateForwarding, forwarding } = useContext(FamilyForwardingContext)
+    const { CreateForwarding, forwarding, FamilyForwarding } = useContext(FamilyForwardingContext)
     return (
         <Container>
             <Padding padding="16px" />
@@ -21,19 +22,27 @@ const FamilyForwardingPage = () => {
             </Row>
             <Table columns={[{}]} list={[]} name="Encaminhamentos" filter={[]} />
             <Dialog header="Criar Encaminhamento" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
-                <Formik initialValues={{}} onSubmit={(values) => CreateForwarding(values)}>
-                    {({values}) => {
+                <Formik initialValues={{ family: FamilyForwarding?.familyInformation?.family_representative_fk, user_identify: undefined, forwading: null, description: "" }} onSubmit={(values) => CreateForwarding({ ...values, date: new Date(Date.now()), forwading: values.forwading.id})}>
+                    {({ values, errors, touched, handleChange, handleSubmit }) => {
+                        console.log(values)
                         return (
-                            <form>
+                            <form onSubmit={e => { e.preventDefault(); handleSubmit() }}>
                                 <Grid checkMockup={[{}, {}]}>
-                                    <CrasDropdown options={forwarding} optionLabel={""} />
-                                    <CrasDropdown />
+                                    <CrasDropdown value={values.forwading} name={"forwading"} options={forwarding} optionLabel={"name"} onChange={handleChange} placeholder={"Selecione um encaminhamento"} label={"Selecione um encaminhamento"} />
+                                    <CrasDropdown value={values.user_identify} name={"user_identify"} onChange={handleChange} options={FamilyForwarding?.familyInformation?.user_identify} optionLabel={"name"} placeholder={"Selecione um membro ou a familia"} label={"Selecione um membro ou a familia"} />
                                 </Grid>
                                 <Padding />
-
+                                <Padding padding="0 0 0 16px">
+                                    <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
+                                </Padding>
+                                <Padding />
+                                {errors.description && touched.description ? (
+                                    <div style={{ color: "red" }}>{errors.description}<Padding /></div>
+                                ) : null}
+                                <Padding />
                                 <Column>
                                     <Row id="center" style={{ width: "100%" }}>
-                                        <ButtonPrime label={"Cadastrar"} />
+                                        <ButtonPrime label={"Cadastrar"} type={"submit"} />
                                     </Row>
                                 </Column>
                             </form>

@@ -1,11 +1,11 @@
 import { useMutation } from "react-query";
 import { CreateForwardingRequest, useFetchAllForwarding, useFetchAllForwardingFamily } from "./request";
 import { logout } from "../../../services/localstorage";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export const FamilyForwardingController = () => {
     const history = useNavigate();
-
+    const {id} = useParams()
 
     const CreateForwardingRequestMutation = useMutation(
         (data) => CreateForwardingRequest(data),
@@ -23,7 +23,7 @@ export const FamilyForwardingController = () => {
         }
     );
 
-    const { data: forwardingFamilyfetch } = useFetchAllForwardingFamily()
+    const { data: forwardingFamilyfetch } = useFetchAllForwardingFamily(id)
 
     const {data: forwardingfetch} =useFetchAllForwarding()
 

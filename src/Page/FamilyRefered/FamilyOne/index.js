@@ -7,7 +7,7 @@ import styles from "../../../CrasUi/styles";
 const FamilyOnePage = () => {
 
     const history = useNavigate();
-    const {id} =useParams()
+    const { id } = useParams()
 
     return (
         <Container>
@@ -20,7 +20,7 @@ const FamilyOnePage = () => {
                         </Column>
                         <Padding />
                         <Column id="space-between">
-                            <h2>Alterar dados da familia</h2>
+                            <h2>Alterar dados da Familia</h2>
                             <Padding />
                             <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Alterar dados da Familia, adicionar membros a familia </p>
                         </Column>
@@ -33,7 +33,7 @@ const FamilyOnePage = () => {
                         </Column>
                         <Padding />
                         <Column id="space-between">
-                            <h2>Encaminhamentos da familia</h2>
+                            <h2>Encaminhamentos da Familia</h2>
                             <Padding />
                             <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Visualizar e criar Encaminhamentos para familia</p>
                         </Column>
@@ -42,6 +42,21 @@ const FamilyOnePage = () => {
                 {/* <Card style={{ width: "auto" }}>    
                     <p onClick={() => history("/rma-cras")}>RMA</p>
                 </Card> */}
+            </Grid>
+            <Grid checkMockup={[{}, {}]}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/edit/familia/${id}`)}>
+                    <Row>
+                        <Column id="center">
+                            <i className="pi pi-users" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
+                        </Column>
+                        <Padding />
+                        <Column id="space-between">
+                            <h2>Membros da Familia</h2>
+                            <Padding />
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Membros da familia </p>
+                        </Column>
+                    </Row>
+                </Card>
             </Grid>
         </Container>
     )

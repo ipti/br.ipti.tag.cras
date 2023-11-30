@@ -5,9 +5,9 @@ export const FamilyForwardingContext = createContext({});
 
 const FamilyForwardingProvider = ({children}) => {
 
-    const { FamilyForwarding, CreateForwarding, forwarding} = FamilyForwardingState();
+    const { FamilyForwarding, CreateForwarding, forwarding, familyOne} = FamilyForwardingState();
     return (
-        <FamilyForwardingContext.Provider value={{ FamilyForwarding, CreateForwarding, forwarding }}>
+        <FamilyForwardingContext.Provider value={{ FamilyForwarding, CreateForwarding, forwarding, familyOne }}>
             {children}
         </FamilyForwardingContext.Provider>
     )
