@@ -6,7 +6,9 @@ import { useNavigate, useParams } from "react-router-dom";
 export const FamilyForwardingController = () => {
     const history = useNavigate();
     const {id} = useParams()
-
+    const { data: forwardingFamilyfetch, refetch } = useFetchAllForwardingFamily(id)
+    const {data: forwardingfetch} =useFetchAllForwarding()
+    
     const CreateForwardingRequestMutation = useMutation(
         (data) => CreateForwardingRequest(data),
         {
@@ -19,13 +21,12 @@ export const FamilyForwardingController = () => {
             },
             onSuccess: (data) => {
                 console.log(data);
+                refetch()
             },
         }
     );
 
-    const { data: forwardingFamilyfetch } = useFetchAllForwardingFamily(id)
 
-    const {data: forwardingfetch} =useFetchAllForwarding()
 
 
     // if (error?.response.status === 401 | 403) {

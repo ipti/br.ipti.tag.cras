@@ -40,8 +40,6 @@ const EditRferedState = () => {
 
   const {
     familyReferedfetch,
-    CreateFamilyRequestRequestMutation,
-    // membersRquest,
     DeleteFamilyBenefitsMutation,
     EditFamilyRequestRequestMutation,
     EditAddressRequestMutation,
@@ -280,9 +278,7 @@ const EditRferedState = () => {
   }
 
 
-  const handleCreateMmber = (body) => {
-    CreateFamilyRequestRequestMutation.mutate(body)
-  }
+
 
   const handleCreateFamilyBenefits = (body) => {
     CreateFamilyBenefitsRequestMutation.mutate(body)
@@ -317,7 +313,7 @@ const EditRferedState = () => {
 
 
   return {
-    deleteFamily, handleEditFamilyMember, handleFamilyIsActive, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
+    deleteFamily, handleEditFamilyMember, handleFamilyIsActive, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
   }
 }
 

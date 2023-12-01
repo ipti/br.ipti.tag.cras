@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Row } from '../styles/styles';
 
 
-const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
+const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit, onView }) => {
     const [visible, setVisible] = useState();
     const [id, setId] = useState();
 
@@ -25,6 +25,17 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
         );
     };
 
+    const viewBodyTemplate = (rowData) => {
+
+        return (
+            <React.Fragment>
+                <Row id='end'>
+                    <Button icon="pi pi-eye" rounded className="mr-2" onClick={onView ? () => onView(rowData) : () => history(`${pathEdit}${rowData.family_fk ? rowData.family_fk : rowData.id}`)} />
+                </Row>
+            </React.Fragment>
+        );
+    };
+
 
     return (
         <>
@@ -32,7 +43,9 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit }) => {
                 {columns.map((col, i) => (
                     <Column align="center" key={col.field} field={col.field} header={col.header} />
                 ))}
-                <Column align="right" body={actionBodyTemplate} header={"Editar"} exportable={false} style={{ minWidth: '12rem' }}></Column>
+                {pathEdit || delet || onEdit ? <Column align="right" body={actionBodyTemplate} header={"Editar"} exportable={false} style={{ minWidth: '12rem' }}></Column> : null}
+                {onView ? <Column align="right" body={viewBodyTemplate} header={""} exportable={false} style={{ minWidth: '12rem' }}></Column> : null}
+
             </DataTable>
             <ConfirmPopup visible={visible} onHide={() => setVisible(false)} message="Deseja excluir? Essa ação é irreversível!"
                 acceptLabel='Sim'

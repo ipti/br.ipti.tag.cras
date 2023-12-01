@@ -51,9 +51,9 @@ const FamilyOnePage = () => {
                         </Column>
                         <Padding />
                         <Column id="space-between">
-                            <h2>Membros da Familia</h2>
+                            <h2>Composição Familiar</h2>
                             <Padding />
-                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Membros da familia </p>
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Visualizar e adiconar membros </p>
                         </Column>
                     </Row>
                 </Card>
