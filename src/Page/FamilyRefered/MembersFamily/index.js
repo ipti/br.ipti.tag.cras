@@ -1,22 +1,22 @@
 import { Formik } from "formik";
 import React, { useContext, useState } from "react";
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import CrasDropdown from "../../../../CrasUi/Dropdown";
-import CrasInput from "../../../../CrasUi/Input/Input";
-import CrasTable from "../../../../CrasUi/Table";
-import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
+import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
+import CrasDropdown from "../../../CrasUi/Dropdown";
+import CrasInput from "../../../CrasUi/Input/Input";
+import CrasTable from "../../../CrasUi/Table";
+import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 
 import * as Yup from 'yup';
-import CrasCalendar from "../../../../CrasUi/Calendar";
-import CrasInputMask from "../../../../CrasUi/Input/InputMask";
-import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
-import CrasRadioButton from "../../../../CrasUi/RadioButton";
-import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
-import { formatarData } from "../../../../services/functions";
+import CrasCalendar from "../../../CrasUi/Calendar";
+import CrasInputMask from "../../../CrasUi/Input/InputMask";
+import CrasInputNumber from "../../../CrasUi/Input/InputNumber";
+import CrasRadioButton from "../../../CrasUi/RadioButton";
+import { CompositionFamilyContext } from "../../../context/FamilyRefered/CompositionFamily/context";
+import { formatarData } from "../../../services/functions";
 import EditMemberFamily from "./EditMemberFamily";
 
 const FormFamilyComposition = () => {
-    const { open, setOpen, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, deleteFamilyMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
+    const { open, setOpen, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, deleteFamilyMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(CompositionFamilyContext)
     const [idMember, setIdMember] = useState("")
 
     const editMember = (params) => {
@@ -100,7 +100,7 @@ const FormFamilyComposition = () => {
 
 
     return (
-        <Column>
+        <Container>
             <Padding padding="16px" />
             {!addMember && !open ? <Row id="end">
                 <ButtonPrime onClick={() => setAddMember(true)} label="Adicionar Membro" />
@@ -323,7 +323,7 @@ const FormFamilyComposition = () => {
             {open ? <EditMemberFamily setOpen={setOpen} id={idMember} /> : null}
             {!open && !addMember ? <CrasTable delet={deleteFamilyMember} products={memberFamilyFilter} columns={columns} onEdit={editMember} /> : null}
             <Padding padding="16px" />
-        </Column>
+        </Container>
     )
 };
 

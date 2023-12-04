@@ -1,15 +1,15 @@
 import { Formik } from "formik";
 import React, { useContext } from "react";
 import * as Yup from 'yup';
-import ButtonPrime from "../../../../../CrasUi/Button/ButtonPrime";
-import CrasCalendar from "../../../../../CrasUi/Calendar";
-import CrasDropdown from "../../../../../CrasUi/Dropdown";
-import CrasInput from "../../../../../CrasUi/Input/Input";
-import CrasInputMask from "../../../../../CrasUi/Input/InputMask";
-import CrasInputNumber from "../../../../../CrasUi/Input/InputNumber";
-import CrasRadioButton from "../../../../../CrasUi/RadioButton";
-import { Column, Grid, Padding, Row } from "../../../../../CrasUi/styles/styles";
-import { EditFamilyReferedContext } from "../../../../../context/FamilyRefered/EditFamilyRefered/context";
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
+import CrasCalendar from "../../../../CrasUi/Calendar";
+import CrasDropdown from "../../../../CrasUi/Dropdown";
+import CrasInput from "../../../../CrasUi/Input/Input";
+import CrasInputMask from "../../../../CrasUi/Input/InputMask";
+import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
+import CrasRadioButton from "../../../../CrasUi/RadioButton";
+import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
+import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 
 const EditMemberFamily = ({ id, setOpen }) => {

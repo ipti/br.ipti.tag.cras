@@ -29,6 +29,7 @@ import Users from "../Container/Users/Users";
 import FamilyOnePage from "../Page/FamilyRefered/FamilyOne";
 import NotFoundPage from "../Page/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
+import CompositionFamily from "../Container/FamilyRefered/CompositionFamily";
 
 const RoutesCras = () => {
 
@@ -46,6 +47,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={CreateFamilyRefered} />} path="/criar/familia" />
                 <Route element={<PrivateRoute Component={EditFamilyRefered} />} path="/edit/familia/:id" />
                 <Route element={<PrivateRoute Component={FamilyOnePage} />} path="/familia/:id" />
+                <Route element={<PrivateRoute Component={CompositionFamily} />} path="/familia/composicao/:id" />
+
                 <Route element={<PrivateRoute Component={Technician} />} path="/tecnico" />
                 <Route element={<PrivateRoute Component={CreateTechnician} />} path="/criar/tecnico" />
                 <Route element={<PrivateRoute Component={EditTechnician} />} path="/edit/tecnico/:id" />

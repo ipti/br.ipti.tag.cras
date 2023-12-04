@@ -44,7 +44,7 @@ const FamilyOnePage = () => {
                 </Card> */}
             </Grid>
             <Grid checkMockup={[{}, {}]}>
-                <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/edit/familia/${id}`)}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/familia/composicao/${id}`)}>
                     <Row>
                         <Column id="center">
                             <i className="pi pi-users" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>

@@ -35,7 +35,7 @@ const FormFinances = () => {
 
     const validationSchema = Yup.object().shape({
         profission: Yup.string().required('Profissão é obrigatória'),
-        signed_portfolio: Yup.string(),
+        signed_portfolio: Yup.string().required('Campo é obrigatória'),
         income: Yup.number(),
         nuclear_family: Yup.string().required('Informação sobre residir com a família é obrigatória'),
     });
@@ -187,7 +187,7 @@ const FormFinances = () => {
                                     <Column>
                                         <CrasInputNumber mode="currency"
                                             currency="BRL"
-                                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"value"} />
+                                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"Valor"} />
                                     </Column>
                                 </Grid>
                                 <Row id="start">
@@ -198,7 +198,7 @@ const FormFinances = () => {
                                 </Row>
                             </>
                                 : null}
-                            {!visibleAddBenefits ? <Row id="start" >
+                             {!visibleAddBenefits ? <Row id="start" >
                                 <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
                             </Row> : null}
                             <Padding padding="8px">
