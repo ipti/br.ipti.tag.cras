@@ -26,6 +26,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -49,6 +51,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -68,6 +72,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -91,6 +97,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -114,6 +122,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -137,6 +147,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -160,6 +172,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         // refetch()
@@ -184,6 +198,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
 
@@ -204,6 +220,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
           logout();
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
 

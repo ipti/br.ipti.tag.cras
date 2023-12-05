@@ -16,6 +16,8 @@ export const CreateTypesServicesController = () => {
 
           history("/login")
         }
+        alert(error?.response?.data.message)
+
       },
       onSuccess: (data) => {
         console.log(data);

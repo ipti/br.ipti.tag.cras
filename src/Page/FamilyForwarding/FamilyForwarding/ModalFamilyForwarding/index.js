@@ -14,13 +14,13 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                         <Row>
                             <h2>Nome: </h2>
                             <Padding padding="2px" />
-                            <p>{visibleEdit?.user_identify.name}</p>
+                            <p>{visibleEdit?.user_identify?.name}</p>
                         </Row>
                         <Padding padding="8px" />
                         <Row>
                             <h2>Parentesco: </h2>
                             <Padding padding="2px" />
-                            <p>{visibleEdit?.user_identify.kinship}</p>
+                            <p>{visibleEdit?.user_identify?.kinship}</p>
                         </Row>
                     </Row>
                     <Padding padding="8px" />

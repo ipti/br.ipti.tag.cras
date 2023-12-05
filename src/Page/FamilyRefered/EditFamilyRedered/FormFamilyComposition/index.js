@@ -309,7 +309,7 @@ const FormFamilyComposition = () => {
                                     </Padding> */}
                                     <Padding padding="16px" />
                                     <Row id="end">
-                                        <ButtonPrime label="Canelar" onClick={() => setAddMember(false)} severity="danger" />
+                                        <ButtonPrime label="Cancelar" onClick={() => setAddMember(false)} severity="danger" />
                                         <Padding />
                                         <ButtonPrime label="Adicionar membro" type="submit" />
                                     </Row>

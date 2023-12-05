@@ -1,16 +1,15 @@
+import { Formik } from "formik";
+import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Toast } from "primereact/toast";
 import React, { useContext, useState } from "react";
+import * as Yup from 'yup';
+import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import Steps from "../../../CrasUi/Steps";
 import { Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../context/FamilyRefered/EditFamilyRefered/context";
 import FormAddress from "./FormAddress";
-import FormFamilyComposition from "./FormFamilyComposition";
 import FormFinances from "./FormFinances";
 import FormInfoPerson from "./FormInfoPerson";
-import { Toast } from "primereact/toast";
-import { Formik } from "formik";
-import * as Yup from 'yup';
-import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
-import { ConfirmDialog } from 'primereact/confirmdialog';
 
 const EditFamilyReferedScreen = () => {
 
@@ -37,12 +36,6 @@ const EditFamilyReferedScreen = () => {
                 setActiveStep(2)
             }
         },
-        {
-            label: 'Composição Familiar',
-            command: (event) => {
-                setActiveStep(3)
-            }
-        }
     ];
 
     const itemsSteps = [
@@ -64,12 +57,6 @@ const EditFamilyReferedScreen = () => {
                 setActiveStep(2)
             }
         },
-        {
-            label: '',
-            command: (event) => {
-                setActiveStep(3)
-            }
-        }
     ];
 
 
@@ -94,8 +81,6 @@ const EditFamilyReferedScreen = () => {
         });
         return test
     }
-
-    console.log(family)
 
     const initialValue = {
         name: family ? findOwner?.name : "",
@@ -130,6 +115,10 @@ const EditFamilyReferedScreen = () => {
         unemployed: family?.vulnerability.unemployed,
         deficient: family?.vulnerability.deficient,
         low_income: family?.vulnerability.low_income,
+        child_work: family?.vulnerability.child_work ?? false,
+        child_shelter_protection: family?.vulnerability.child_shelter_protection ?? false,
+        psychoactive_substance_violence: family?.vulnerability.psychoactive_substance_violence ?? false,
+        socio_educational_measures: family?.vulnerability.socio_educational_measures ?? false,
         others: family?.vulnerability.others,
         address: family?.address.address ?? "",
         telephone: family?.address.telephone ?? "",
@@ -202,7 +191,7 @@ const EditFamilyReferedScreen = () => {
                 validationSchema={validationSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-
+                        console.log(errors)
                     var erroList = [];
 
                     for (const chave in errors) {
@@ -237,8 +226,6 @@ const EditFamilyReferedScreen = () => {
                 }
                 }
             </Formik>
-            {activeStep === 3 ?
-                <FormFamilyComposition /> : null}
             <Padding padding="16px" />
             <Toast ref={toast} />
 

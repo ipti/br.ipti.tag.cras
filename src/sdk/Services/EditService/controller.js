@@ -27,6 +27,8 @@ export const EditServicesController = (id, setIsError, setIsVerify, show) => {
                     logout();
                     history("/login")
                 }
+                alert(error?.response?.data.message)
+
             },
             onSuccess: (data) => {
                 console.log(data);

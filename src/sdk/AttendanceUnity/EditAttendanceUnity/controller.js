@@ -21,6 +21,7 @@ export const EditAttendanceUnity = () => {
                     logout();
                     history("/login")
                 }
+                alert(error?.response?.data.message)
             },
             onSuccess: (data) => {
                 console.log(data);
@@ -40,6 +41,8 @@ export const EditAttendanceUnity = () => {
               logout();
               history("/login")
             }
+            alert(error?.response?.data.message)
+
           },
           onSuccess: (data) => {
             

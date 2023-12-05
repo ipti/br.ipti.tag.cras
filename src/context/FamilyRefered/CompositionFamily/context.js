@@ -5,9 +5,9 @@ export const CompositionFamilyContext = createContext({});
 
 const CompositionFamilyProvider = ({ children }) => {
 
-    const { HandleCreateUserIdentify, deleteFamilyMember, family, escolaridadeNoBrasil, estadosCivis, estadosDoBrasil, parentesco, open, setOpen, addMember, setAddMember } = CompositionFamily();
+    const { handleEditFamilyMember, HandleCreateUserIdentify, deleteFamilyMember, family, escolaridadeNoBrasil, estadosCivis, estadosDoBrasil, parentesco, open, setOpen, addMember, setAddMember } = CompositionFamily();
     return (
-        <CompositionFamilyContext.Provider value={{ HandleCreateUserIdentify, deleteFamilyMember, family, escolaridadeNoBrasil, estadosCivis, estadosDoBrasil, parentesco, open, setOpen, addMember, setAddMember }}>
+        <CompositionFamilyContext.Provider value={{ handleEditFamilyMember,HandleCreateUserIdentify, deleteFamilyMember, family, escolaridadeNoBrasil, estadosCivis, estadosDoBrasil, parentesco, open, setOpen, addMember, setAddMember }}>
             {children}
         </CompositionFamilyContext.Provider>
     )

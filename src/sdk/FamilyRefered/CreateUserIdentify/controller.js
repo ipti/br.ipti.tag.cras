@@ -19,7 +19,7 @@ export const CreateUserIdentifyController = () => {
               logout();
               // history("/login")
             }
-            console.log(error.response.data.message)
+            alert(error?.response?.data.message)
           },
           onSuccess: (data) => {
             console.log(data);

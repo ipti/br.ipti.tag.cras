@@ -20,6 +20,8 @@ export const EditBenefitsController = (id) => {
                     logout();
                     history("/login")
                 }
+                alert(error?.response?.data.message)
+
             },
             onSuccess: (data) => {
                 console.log(data);

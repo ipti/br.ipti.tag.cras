@@ -15,7 +15,6 @@ const MonthlyForm = () => {
 
     const date = new Date(Date.now())
 
-    console.log(date.getMonth())
 
     const month = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
     const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
@@ -136,7 +135,7 @@ const MonthlyForm = () => {
                     </StyledTableCell>
                 </tr>
                 <Padding padding="8px" />
-                <TableThree />
+                <TableThree item={rma?.bloco3} />
             </StyledTable>
         </div>
     );
@@ -149,11 +148,15 @@ const RmaCras = () => {
 
     const contentRef = useRef(null);
 
+    const date = new Date(Date.now())
+
+    const month = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
 
     const generatePDF = () => {
         if (!contentRef.current) return;
 
         const elementToCapture = contentRef.current;
+        
 
         html2canvas(elementToCapture).then((canvas) => {
             const pdf = new jsPDF('p', 'mm', 'a4');
@@ -163,15 +166,16 @@ const RmaCras = () => {
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
-            pdf.save(`teste.pdf`);
+            pdf.save(`RMA-${month[date.getMonth()]}.pdf`);
         });
     };
 
     return (
         <div style={{ overflowY: "scroll", position: "relative", height: "100vh" }}>
             <Padding padding={"32px"}>
+                <span style={{ color: "red", fontSize: "12px" }}>Recomendado gerar em computadores</span>
                 <Padding padding="32px 16px">
-                    <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print'/></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
+                    <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print' /></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
                 </Padding>
                 <div ref={contentRef}>
                     <Padding padding="8px">

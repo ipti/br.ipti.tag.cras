@@ -18,7 +18,7 @@ export const CreateTechnicianController = () => {
           logout();
           history("/login")
         }
-        alert(error.message)
+        alert(error?.response?.data.message)
       },
       onSuccess: (data) => {
         console.log(data);

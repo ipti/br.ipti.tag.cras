@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
+import { useParams } from "react-router-dom"
 import { MemberFamilyController } from "../../../sdk/FamilyRefered/MemberFamily/controller"
+import { useFetchFamilyReferedId } from "../../../sdk/FamilyRefered/request"
 import { GetIdAttendance } from "../../../services/localstorage"
 import queryClient from "../../../services/react-query"
-import { useParams } from "react-router-dom"
-import { useFetchFamilyReferedId } from "../../../sdk/FamilyRefered/request"
 
 export const CompositionFamily = () => {
 
@@ -63,9 +63,9 @@ export const CompositionFamily = () => {
         { uf: 'SP', nome: 'São Paulo' },
         { uf: 'SE', nome: 'Sergipe' },
         { uf: 'TO', nome: 'Tocantins' }
-      ];
-    
-      const escolaridadeNoBrasil = [
+    ];
+
+    const escolaridadeNoBrasil = [
         "Educação Infantil",
         "Ensino Fundamental I (1º ao 5º ano)",
         "Ensino Fundamental II (6º ao 9º ano)",
@@ -80,9 +80,9 @@ export const CompositionFamily = () => {
         "Educação de Jovens e Adultos (EJA) - Ensino Médio",
         "Cursos Profissionalizantes",
         "Cursos de Aperfeiçoamento e Extensão"
-      ];
-    
-      const estadosCivis = [
+    ];
+
+    const estadosCivis = [
         'Solteiro(a)',
         'Casado(a)',
         'Divorciado(a)',
@@ -90,9 +90,9 @@ export const CompositionFamily = () => {
         'Separado(a)',
         'União Estável',
         'Outro',
-      ];
-    
-      const parentesco = [
+    ];
+
+    const parentesco = [
         { id: "CONJUGE", name: 'Cônjuge' },
         { id: "FILHO_A", name: 'Filho(a)' },
         { id: "ENTEADO_A", name: 'Enteado(a)' },
@@ -105,9 +105,9 @@ export const CompositionFamily = () => {
         { id: "NORA", name: 'Nora' },
         { id: "OUTRO", name: 'Outro' },
         { id: "NAO_PARENTE", name: 'Não Parente' }
-      ]
+    ]
 
-    const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation } = MemberFamilyController()
+    const { CreateUserIdentifyWithFamilyRequestMutation, DeleteMemberFamilyRequestMutation, EditFamilyRequestRequestMutation } = MemberFamilyController()
 
     const deleteFamilyMember = (id) => {
         DeleteMemberFamilyRequestMutation.mutate(id)
@@ -128,7 +128,39 @@ export const CompositionFamily = () => {
         })
     }
 
+    const handleEditFamilyMember = (values, id) => {
+
+
+        const bodyUserIdentify = {
+            name: values?.name,
+            surname: values?.surname === "" ? undefined : values?.surname,
+            birthday: values?.birthday,
+            kinship: values?.kinship.id,
+            nis: values?.nis === "" ? undefined : parseInt(values?.nis),
+            rg_number: values?.rg_number.replace(/\D/g, ''),
+            rg_date_emission: values?.rg_date_emission,
+            uf_rg: values?.uf_rg.uf,
+            emission_rg: values?.emission_rg,
+            cpf: values.cpf.replace(/\D/g, ''),
+            is_deficiency: values?.is_deficiency,
+            // deficiencia: ?deficiencia ?? "",
+            filiation_1: values?.filiation_1,
+            filiation_2: values.filiation_2,
+            marital_status: values?.marital_status,
+            escolarity: values?.escolarity,
+            initial_date: values?.initial_date,
+            final_date: values?.final_date,
+            profission: values?.profission,
+            income: values?.income,
+            nuclear_family: values?.nuclear_family,
+            signed_portfolio: values?.signed_portfolio
+        }
+
+        EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: id });
+
+    }
+
     return {
-        HandleCreateUserIdentify, deleteFamilyMember, family, parentesco, escolaridadeNoBrasil, estadosCivis, estadosDoBrasil, addMember, setAddMember, open, setOpen
+        handleEditFamilyMember, HandleCreateUserIdentify, deleteFamilyMember, family, parentesco, escolaridadeNoBrasil, estadosCivis, estadosDoBrasil, addMember, setAddMember, open, setOpen
     }
 }

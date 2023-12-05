@@ -9,13 +9,13 @@ import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
-import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
+import { CompositionFamilyContext } from "../../../../context/FamilyRefered/CompositionFamily/context";
 
 
 const EditMemberFamily = ({ id, setOpen }) => {
 
 
-    const { handleEditFamilyMember, parentesco, family, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
+    const { parentesco, family, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil, handleEditFamilyMember } = useContext(CompositionFamilyContext)
 
     const member = family ? family.user_identify.find(props => props.id === id) : null
 
@@ -33,10 +33,10 @@ const EditMemberFamily = ({ id, setOpen }) => {
         name: member?.name ?? "",
         surname: member?.surname ?? "",
         kinship: kinship(member?.kinship) ?? "",
-        birthday: member?.birthday ?? "",
+        birthday: member?.birthday ?? new Date(Date.now()),
         nis: member?.nis ?? "",
         rg_number: member?.rg_number ?? "",
-        rg_date_emission: member?.rg_date_emission ?? "",
+        rg_date_emission: member?.rg_date_emission ?? new Date(Date.now()),
         uf_rg: valueUf() ?? "",
         emission_rg: member?.emission_rg ?? "",
         cpf: member?.cpf ?? "",
@@ -77,7 +77,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
 
     return (
         <Column>
-            <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { handleEditFamilyMember(value, id); }}>
+            <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { handleEditFamilyMember(value, id); setOpen(false) }}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
                     const dateEmit = new Date(values.rg_date_emission);
                     const dateBithrday = new Date(values.birthday)
@@ -277,7 +277,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
                             </Padding> */}
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime label="Canelar" type={"button"} onClick={() => setOpen(false)} severity="danger" />
+                                <ButtonPrime label="Cancelar" type={"button"} onClick={() => setOpen(false)} severity="danger" />
                                 <Padding />
                                 <ButtonPrime label="Salvar" type="submit" />
                             </Row>

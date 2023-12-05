@@ -18,6 +18,8 @@ export const FamilyForwardingController = () => {
                     logout();
                     history("/login")
                 }
+                alert(error?.response?.data.message)
+
             },
             onSuccess: (data) => {
                 console.log(data);

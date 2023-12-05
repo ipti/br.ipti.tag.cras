@@ -14,7 +14,6 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
     const forwadingName = forwarding?.map((item) => ({ ...item, name: item?.name + " - " + item?.type }))
 
     const [isFamily, setIsFamily] = useState(false)
-    console.log(isFamily)
 
     return (
         <Dialog header="Criar Encaminhamento" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>

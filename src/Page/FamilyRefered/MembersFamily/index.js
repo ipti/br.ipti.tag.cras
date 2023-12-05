@@ -11,8 +11,8 @@ import CrasCalendar from "../../../CrasUi/Calendar";
 import CrasInputMask from "../../../CrasUi/Input/InputMask";
 import CrasInputNumber from "../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../CrasUi/RadioButton";
-import { CompositionFamilyContext } from "../../../context/FamilyRefered/CompositionFamily/context";
 import { formatarData } from "../../../services/functions";
+import { CompositionFamilyContext } from "../../../context/FamilyRefered/CompositionFamily/context";
 import EditMemberFamily from "./EditMemberFamily";
 
 const FormFamilyComposition = () => {
@@ -30,10 +30,10 @@ const FormFamilyComposition = () => {
         name: "",
         surname: "",
         kinship: "",
-        birthday: "",
+        birthday: new Date(Date.now()),
         nis: "",
         rg_number: "",
-        rg_date_emission: "",
+        rg_date_emission: new Date(Date.now()),
         uf_rg: "",
         emission_rg: "",
         cpf: "",
@@ -82,19 +82,6 @@ const FormFamilyComposition = () => {
     ];
 
     const memberFamily = family.user_identify.filter(props => props.id !== family.family_representative_fk)
-
-    // const columnsBenefits = [
-    //     { field: 'benefits_fk.description', header: 'Beneficio' },
-    //     { field: 'value', header: 'Valor' },
-    // ];
-
-    // const handleBenefits = (set) => {
-    //     setbenefits([...benefits, { benefits_fk: benefits_fk, value: value }])
-    //     setbenefits_fk()
-    //     setvalue()
-    //     setvisibleAddBenefits(!visibleAddBenefits)
-    //     set("benefitsForFamily", [...benefits, { benefits_fk: benefits_fk.id, value: value }])
-    // }
 
     const memberFamilyFilter = memberFamily ? memberFamily.map((data) => ({ ...data, kinship: parentesco.find(props => props.id === data.kinship).name, birthday: formatarData(data.birthday), initial_date: formatarData(data.initial_date) })) : [];
 
@@ -309,7 +296,7 @@ const FormFamilyComposition = () => {
                                     </Padding> */}
                                     <Padding padding="16px" />
                                     <Row id="end">
-                                        <ButtonPrime label="Canelar" onClick={() => setAddMember(false)} severity="danger" />
+                                        <ButtonPrime label="Cancelar" onClick={() => setAddMember(false)} severity="danger" />
                                         <Padding />
                                         <ButtonPrime label="Adicionar membro" type="submit" />
                                     </Row>
