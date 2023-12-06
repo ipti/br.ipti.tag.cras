@@ -5,13 +5,14 @@ import { Container, Padding, Row } from "../../../CrasUi/styles/styles"
 import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context"
 import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
-import { InputSwitch } from "primereact/inputswitch";
+
+import { TabPanel, TabView } from 'primereact/tabview'
+
 
 const FamilyForwardingPage = () => {
 
     const [visible, setVisible] = useState(false)
     const [visibleEdit, setVisibleEdit] = useState(false)
-    const [checked, setChecked] = useState(false);
 
     const { FamilyForwarding } = useContext(FamilyForwardingContext)
 
@@ -30,21 +31,28 @@ const FamilyForwardingPage = () => {
 
 
     const filter = (filt, namefilter) => {
-        return !checked ? filt?.forwading?.name?.toLowerCase()?.includes(namefilter) : (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter)) 
+        return filt?.forwading?.name?.toLowerCase()?.includes(namefilter) ||  (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter))
     }
 
     return (
         <Container>
             <Padding padding="16px" />
-            <h1>Encaminhamentos {!checked ? "da Familia" : "dos Membros da Familia"}</h1>
+            <h1>Encaminhamentos</h1>
             <Row>
                 <ButtonPrime label={"Criar encaminhamento"} onClick={() => setVisible(true)} />
             </Row>
-            <Padding />
-            <p>Trocar para Encaminhamentos {!checked ? " dos Membros da Familias" : "da Familia"}</p>
-            <Padding />
-            <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
-            <Table columns={checked ? columns : columnsFamily} list={checked ? FamilyForwarding?.usersForwarding : FamilyForwarding?.familyForwadings} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
+            <Padding padding="16px" />
+            <div className="card">
+                <TabView>
+                    <TabPanel header="Membros da familia">
+                        <Table columns={columns} list={FamilyForwarding?.usersForwarding} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
+
+                    </TabPanel>
+                    <TabPanel header="Familia">
+                        <Table columns={columnsFamily} list={FamilyForwarding?.familyForwadings} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
+                    </TabPanel>
+                </TabView>
+            </div>
             <ModalCreateFamilyForwarding visible={visible} setVisible={setVisible} />
             <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
         </Container>
