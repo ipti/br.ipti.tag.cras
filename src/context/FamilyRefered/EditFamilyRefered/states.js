@@ -229,7 +229,8 @@ const EditRferedState = () => {
       nutritional_status: values.nutritional_status,
       prenatal: values.prenatal,
       school_frequency: values.school_frequency,
-      family: family?.id
+      family: family?.id, 
+      attendance_unity: parseInt(GetIdAttendance())
     }
 
     EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: family.family_representative_fk });
