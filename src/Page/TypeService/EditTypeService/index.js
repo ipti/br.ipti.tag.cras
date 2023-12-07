@@ -26,7 +26,7 @@ const EditTypeServiceScreen = () => {
                                         name="name"
                                         value={values.name}
                                         onChange={handleChange}
-                                        label="Nome" />
+                                        label="Nome *" />
                                     {errors.name && touched.name ? (
                                         <div style={{ color: "red" }}>{errors.name}</div>
                                     ) : null}

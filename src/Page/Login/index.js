@@ -27,7 +27,11 @@ const LoginPage = () => {
                     position: "absolute"
                 }} src={TagLogin} alt=""></img>
                 <Box>
-                    <p id="titleLogin">Cras Online </p>
+                    <Row id="center">
+
+                    <p id="titleLogin">Assistência Social Online </p>
+                    </Row>
+                    <Padding padding={"8px"} />
                     <Row id="center">
                         <Padding>
                             {error ? <CrasMessage severity="error" text={error} /> : null}

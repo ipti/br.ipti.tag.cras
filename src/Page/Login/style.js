@@ -11,11 +11,13 @@ export const Box = styled.div`
 
 
     #titleLogin {
-        text-align: center;
-        font-size: 24px;
-        color: ${styles.colors.colorsBaseInkNormal};
         font-family: ${styles.typography.types.inter};
-        font-weight: bold
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 18px;
+        letter-spacing: 0em;
+        text-align: left;
+        color: #18204E;
     }
 
     #subTitleLogin {

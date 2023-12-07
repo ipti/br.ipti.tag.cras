@@ -28,7 +28,7 @@ const EditUserScreen = () => {
                                             name="name"
                                             value={values.name}
                                             onChange={handleChange}
-                                            label="Nome" />
+                                            label="Nome *" />
                                         <Padding />
                                         {errors.name && touched.name ? (
                                             <div style={{ color: "red" }}>{errors.name}<Padding /></div>
@@ -39,7 +39,7 @@ const EditUserScreen = () => {
                                             name="email"
                                             value={values.email}
                                             onChange={handleChange}
-                                            label="Email" />
+                                            label="Email *" />
                                         <Padding />
                                         {errors.email && touched.email ? (
                                             <div style={{ color: "red" }}>{errors.email}<Padding /></div>
@@ -52,7 +52,7 @@ const EditUserScreen = () => {
                                         name="role"
                                         value={values.role}
                                         onChange={handleChange}
-                                        label="Tipo de usuário" />
+                                        label="Tipo de usuário *" />
                                     <Padding />
                                     {errors.role && touched.role ? (
                                         <div style={{ color: "red" }}>{errors.role}<Padding /></div>
@@ -65,7 +65,7 @@ const EditUserScreen = () => {
                                             name="username"
                                             value={values.username}
                                             onChange={handleChange}
-                                            label="Nome de usuário" />
+                                            label="Nome de usuário *" />
                                         <Padding />
                                         {errors.username && touched.username ? (
                                             <div style={{ color: "red" }}>{errors.username}<Padding /></div>
@@ -77,7 +77,7 @@ const EditUserScreen = () => {
                                             value={values.password}
                                             onChange={handleChange}
                                             name="password"
-                                            label="Senha" />
+                                            label="Senha *" />
                                         <Padding />
                                         {errors.password && touched.password ? (
                                             <div style={{ color: "red" }}>{errors.password}<Padding /></div>
@@ -89,7 +89,7 @@ const EditUserScreen = () => {
                                             value={values.confirmPassword}
                                             onChange={handleChange}
                                             name="confirmPassword"
-                                            label="Confirmar Senha" />
+                                            label="Confirmar Senha *" />
                                         <Padding />
                                         {errors.confirmPassword && touched.confirmPassword ? (
                                             <div style={{ color: "red" }}>{errors.confirmPassword}<Padding /></div>

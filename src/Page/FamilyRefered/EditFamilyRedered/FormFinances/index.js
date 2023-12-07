@@ -10,7 +10,6 @@ import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 
 const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) => {
-
     const [visibleAddBenefits, setvisibleAddBenefits] = useState();
 
     const [benefits_fk, setbenefits_fk] = useState()
@@ -81,12 +80,41 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                 <div className="col"> <CrasCheckbox name={"low_income"}  checked={values.low_income} onChange={(e)=> handleCheckbox(e, setFieldValue, "low_income")} label={"Baixa renda"} /></div>
             </Row>
             <Row>
+                <div className="col"> <CrasCheckbox name={"child_work"}  checked={values.child_work} onChange={(e)=> handleCheckbox(e, setFieldValue, "child_work")} label={"Trabalho infantil"} /></div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"child_shelter_protection"}  checked={values.child_shelter_protection} onChange={(e)=> handleCheckbox(e, setFieldValue, "child_shelter_protection")} label={"Crianças em serviço de acolhimento "} /></div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"psychoactive_substance_violence"}  checked={values.psychoactive_substance_violence} onChange={(e)=> handleCheckbox(e, setFieldValue, "psychoactive_substance_violence")} label={"Violência/violação esteja associada ao uso abusivo de substâncias psicoativas"} /></div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"socio_educational_measures"}  checked={values.socio_educational_measures} onChange={(e)=> handleCheckbox(e, setFieldValue, "socio_educational_measures")} label={"Adolescente em cumprimento de Medidas Socioeducativas em meio aberto"} /></div>
+            </Row>
+            <Row>
                 <div className="col"> <CrasCheckbox name={"others"}  checked={values.others} onChange={(e)=> handleCheckbox(e, setFieldValue, "others")} label={"Outros"} /></div>
+            </Row>
+            <h3>Condicionalidades</h3>
+            <Row>
+                <div className="col">
+                    <CrasCheckbox checked={values.vaccination_schedule} name={"vaccination_schedule"}  onChange={(e)=> handleCheckbox(e, setFieldValue, "vaccination_schedule")} label={"Calendário de vacina"} />
+                </div>
+            </Row>
+            <Row>
+                <div className="col">
+                    <CrasCheckbox name={"nutritional_status"} checked={values.nutritional_status} onChange={(e)=> handleCheckbox(e, setFieldValue, "nutritional_status")} label={"Estado Nutricional"} />
+                </div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"prenatal"} checked={values.prenatal} onChange={(e)=> handleCheckbox(e, setFieldValue, "prenatal")} label={"Pré Natal"} /></div>
+            </Row>
+            <Row>
+                <div className="col"> <CrasCheckbox name={"school_frequency"}  checked={values.school_frequency} onChange={(e)=> handleCheckbox(e, setFieldValue, "school_frequency")} label={"Frequência Escolar"} /></div>
             </Row>
             <h3>Situação Financeira e Previdenciária</h3>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
+                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão *" />
                     <Padding />
                     {errors.profission && touched.profission ? (
                         <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
@@ -114,7 +142,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                     ) : null}
                 </Column>
                 <Column>
-                    <label>Reside com:</label>
+                    <label>Reside com: *</label>
                     <Row>
                         <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
                         <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
@@ -137,7 +165,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                     <Column>
                         <CrasInputNumber mode="currency"
                             currency="BRL"
-                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"value"} />
+                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"valor"} />
                     </Column>
                 </Grid>
                 <Row id="start">

@@ -24,7 +24,7 @@ const ListFamilyReferedScreen = () => {
 
     return (
         <Container>
-            <Table columns={columns} list={userIdentifyFilter} path="/criar/familia" name="Família Referenciadas" pathEdit="/edit/familia/" filter={filter} />
+            <Table columns={columns} list={userIdentifyFilter} path="/criar/familia" name="Família Referenciadas" linkView="/familia/" filter={filter} />
         </Container>
     )
 }

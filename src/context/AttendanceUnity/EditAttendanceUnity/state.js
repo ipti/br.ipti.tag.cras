@@ -8,8 +8,11 @@ export const EditAttendanceUnityState = () => {
     const [oneAttendance, setoneAttendance] = useState();
 
     const HandleEditAttendance = (body) => {
+
         const bodyAttendance = {
-            name: body.name
+            name: body.name,
+            unity_number: body.unity_number.toString(),
+            email: body.email,
         }
 
         const bodyAddress = {
@@ -21,6 +24,8 @@ export const EditAttendanceUnityState = () => {
             rooms: body.rooms,
             rent_value: body.rent_value
         }
+
+        console.log(body)
         EditAddressRequestMutation.mutate({ data: bodyAddress, id: oneAttendance?.address_fk })
 
         EditAttendanceRequestMutation.mutate(bodyAttendance)

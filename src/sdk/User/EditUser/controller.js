@@ -22,9 +22,10 @@ export const EditUserController = (id, setIsError, setIsVerify, show) => {
             show()
             if (error.response.status === 401 | 403) {
               logout();
-
               history("/login")
             }
+            alert(error?.response?.data.message)
+
           },
           onSuccess: (data) => {
             console.log(data);

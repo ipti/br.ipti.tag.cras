@@ -277,7 +277,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
                             </Padding> */}
                             <Padding padding="16px" />
                             <Row id="end">
-                                <ButtonPrime label="Canelar" type={"button"} onClick={() => setOpen(false)} severity="danger" />
+                                <ButtonPrime label="Cancelar" type={"button"} onClick={() => setOpen(false)} severity="danger" />
                                 <Padding />
                                 <ButtonPrime label="Salvar" type="submit" />
                             </Row>

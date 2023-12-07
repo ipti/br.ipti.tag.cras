@@ -50,7 +50,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasCalendar name={"initial_date"} date={dateEntry} onChange={handleChange} label="Data Entrada" showIcon />
+                    <CrasCalendar name={"initial_date"} date={dateEntry} onChange={handleChange} label="Data Entrada *" showIcon />
                     <Padding />
                     {errors.initial_date && touched.initial_date ? (
                         <div style={{ color: "red" }}>{errors.initial_date}<Padding /></div>
@@ -68,7 +68,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             <h3>Dados Pessoais</h3>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput label="Nome" name="name" onChange={handleChange} value={values.name} />
+                    <CrasInput label="Nome *" name="name" onChange={handleChange} value={values.name} />
                     <Padding />
                     {errors.name && touched.name ? (
                         <div style={{ color: "red" }}>{errors.name}<Padding /></div>
@@ -84,7 +84,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}, {}]}>
                 <Column>
-                    <CrasCalendar label="Data de Nascimento" date={dateBithrday} name="birthday" onChange={handleChange} showIcon />
+                    <CrasCalendar label="Data de Nascimento *" date={dateBithrday} name="birthday" onChange={handleChange} showIcon />
                     <Padding />
                     {errors.birthday && touched.birthday ? (
                         <div style={{ color: "red" }}>{errors.birthday}<Padding /></div>
@@ -137,14 +137,14 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInputMask mask={"999.999.999-99"} label="CPF" name="cpf" onChange={handleChange} value={values.cpf} />
+                    <CrasInputMask mask={"999.999.999-99"} label="CPF *" name="cpf" onChange={handleChange} value={values.cpf} />
                     <Padding />
                     {errors.cpf && touched.cpf ? (
                         <div style={{ color: "red" }}>{errors.cpf}<Padding /></div>
                     ) : null}
                 </Column>
                 <Column>
-                    <label>Deficiente Físico ou Mental ?</label>
+                    <label>Deficiente Físico ou Mental ? *</label>
                     <Row>
                         <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.is_deficiency === true} value={true} name="is_deficiency" label={"Sim"} />
                         <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.is_deficiency === false} value={false} name="is_deficiency" label="Não" />
@@ -157,7 +157,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Column>
-                    <CrasInput label="Filiação 1" name="filiation_1" onChange={handleChange} value={values.filiation_1} />
+                    <CrasInput label="Filiação 1 *" name="filiation_1" onChange={handleChange} value={values.filiation_1} />
                     <Padding />
                     {errors.filiation_1 && touched.filiation_1 ? (
                         <div style={{ color: "red" }}>{errors.filiation_1}<Padding /></div>
@@ -173,7 +173,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
             </Grid>
             <Grid checkMockup={[{}]}>
                 <Column>
-                    <CrasDropdown options={estadosCivis} optionLabel={""} value={values.marital_status} label={"Estado civil"} onChange={handleChange} name="marital_status" />
+                    <CrasDropdown options={estadosCivis} optionLabel={""} value={values.marital_status} label={"Estado civil *"} onChange={handleChange} name="marital_status" />
                     <Padding />
                     {errors.marital_status && touched.marital_status ? (
                         <div style={{ color: "red" }}>{errors.marital_status}<Padding /></div>
@@ -183,7 +183,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
 
             <Grid checkMockup={[{}]}>
                 <Column>
-                    <CrasDropdown options={escolaridadeNoBrasil} optionLabel={""} label="Grau de Escolaridade" name="escolarity" onChange={handleChange} value={values.escolarity} />
+                    <CrasDropdown options={escolaridadeNoBrasil} optionLabel={""} label="Grau de Escolaridade *" name="escolarity" onChange={handleChange} value={values.escolarity} />
                     <Padding />
                     {errors.escolarity && touched.escolarity ? (
                         <div style={{ color: "red" }}>{errors.escolarity}<Padding />

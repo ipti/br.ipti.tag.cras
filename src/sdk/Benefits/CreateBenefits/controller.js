@@ -16,7 +16,7 @@ export const CreateBenefitsController = () => {
           logout();
           history("/login")
         }
-        alert(error.response.message)
+        alert(error?.response?.data.message)
       },
       onSuccess: (data) => {
         history("/beneficios");

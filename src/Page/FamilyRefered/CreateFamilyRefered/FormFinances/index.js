@@ -35,7 +35,7 @@ const FormFinances = () => {
 
     const validationSchema = Yup.object().shape({
         profission: Yup.string().required('Profissão é obrigatória'),
-        signed_portfolio: Yup.string(),
+        signed_portfolio: Yup.string().required('Campo é obrigatória'),
         income: Yup.number(),
         nuclear_family: Yup.string().required('Informação sobre residir com a família é obrigatória'),
     });
@@ -104,7 +104,7 @@ const FormFinances = () => {
                             <h3>Situação Financeira e Previdenciária</h3>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
-                                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão" />
+                                    <CrasInput name="profission" onChange={handleChange} value={values.profission} label="Profissão *" />
                                     <Padding />
                                     {errors.profission && touched.profission ? (
                                         <div style={{ color: "red" }}>{errors.profission}<Padding /></div>
@@ -132,13 +132,15 @@ const FormFinances = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <label>Reside com:</label>
-                                    <Row>
-                                        <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
-                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
-                                        <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Outros"} value={"Outros"} name={"nuclear_family"} label="Outros" />
+                                    <label>Reside com: *</label>
+                                    <Column id="center">
+                                        <Row>
+                                            <CrasRadioButton selectValue={1} onChange={handleChange} checked={values.nuclear_family === "Familia"} value={"Familia"} name={"nuclear_family"} label="Família" />
+                                            <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Sozinho"} value={"Sozinho"} name={"nuclear_family"} label="Sozinho" />
+                                            <CrasRadioButton selectValue={2} onChange={handleChange} checked={values.nuclear_family === "Outros"} value={"Outros"} name={"nuclear_family"} label="Outros" />
 
-                                    </Row>
+                                        </Row>
+                                    </Column>
                                     {errors.nuclear_family && touched.nuclear_family ? (
                                         <div style={{ color: "red" }}>{errors.nuclear_family}</div>
                                     ) : null}
@@ -185,7 +187,7 @@ const FormFinances = () => {
                                     <Column>
                                         <CrasInputNumber mode="currency"
                                             currency="BRL"
-                                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"value"} />
+                                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"Valor"} />
                                     </Column>
                                 </Grid>
                                 <Row id="start">
@@ -196,7 +198,7 @@ const FormFinances = () => {
                                 </Row>
                             </>
                                 : null}
-                            {!visibleAddBenefits ? <Row id="start" >
+                             {!visibleAddBenefits ? <Row id="start" >
                                 <ButtonPrime label={"Adicionar Beneficio"} type="button" icon="pi pi-plus" iconPos={"left"} onClick={() => setvisibleAddBenefits(!visibleAddBenefits)} />
                             </Row> : null}
                             <Padding padding="8px">

@@ -24,7 +24,7 @@ export const CreateAttendanceState = () => {
     const { CreateAttendanceRequestMutation } = CreateAttendanceController();
 
     const handleCreateAttendance = (body) => {
-        CreateAttendanceRequestMutation.mutate(body)
+        CreateAttendanceRequestMutation.mutate({...body, unity_number: body.unity_number.toString()})
     }
 
 

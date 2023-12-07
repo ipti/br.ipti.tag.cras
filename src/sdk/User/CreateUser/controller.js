@@ -14,6 +14,7 @@ export const CreateUserController = () => {
               logout();
               history("/login")
             }
+            alert(error?.response?.data.message)
           },
           onSuccess: (data) => {
             history("/usuarios");

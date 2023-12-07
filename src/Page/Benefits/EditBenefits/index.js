@@ -28,7 +28,7 @@ const EditBenefitsScreen = () => {
                                             name="description"
                                             value={values.description}
                                             onChange={handleChange}
-                                            label="Nome" />
+                                            label="Nome *" />
                                         <Padding />
                                         {errors.description && touched.description ? (
                                             <div style={{ color: "red" }}>{errors.description}</div>
@@ -37,7 +37,7 @@ const EditBenefitsScreen = () => {
                                     <Column>
                                         <CrasDropdown name="type" 
                                         value={values.type}
-                                         options={types} onChange={handleChange} optionLabel={"name"} label="Tipo" />
+                                         options={types} onChange={handleChange} optionLabel={"name"} label="Tipo *" />
                                         <Padding />
                                         {errors.type && touched.type ? (
                                             <div style={{ color: "red" }}>{errors.type}<Padding /></div>

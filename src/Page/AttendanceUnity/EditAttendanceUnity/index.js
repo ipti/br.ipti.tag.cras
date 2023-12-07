@@ -8,6 +8,7 @@ import CrasInputMask from "../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../CrasUi/RadioButton";
 import { useContext } from "react";
 import { EditAttendanceUnityContext } from "../../../context/AttendanceUnity/EditAttendanceUnity/context";
+import CrasInputNumber from "../../../CrasUi/Input/InputNumber";
 
 const EditAttendanceUnityPage = () => {
 
@@ -22,6 +23,9 @@ const EditAttendanceUnityPage = () => {
         reference: oneAttendance ? oneAttendance?.address.reference : "",
         conditions: oneAttendance ? oneAttendance?.address.conditions : "",
         construction_type: oneAttendance ? oneAttendance?.address.construction_type : "",
+        type: oneAttendance ? oneAttendance.type : "",
+        unity_number: oneAttendance ? oneAttendance.unity_number : "",
+        email: oneAttendance?.email ?? "",
         rooms: 0,
         rent_value: 0
     }
@@ -33,6 +37,9 @@ const EditAttendanceUnityPage = () => {
         reference: Yup.string().required("Campo obrigatório"),
         conditions: Yup.string().required("Campo obrigatório"),
         construction_type: Yup.string().required("Campo obrigatório"),
+        unity_number: Yup.number().required("Campo obrigatório"),
+        email: Yup.string(),
+        type: Yup.string().required("Campo obrigatório")
     });
 
     return (
@@ -41,6 +48,7 @@ const EditAttendanceUnityPage = () => {
             {oneAttendance ? <Padding padding="16px">
                 <Formik initialValues={initialValue} onSubmit={value => {HandleEditAttendance(value) }} validationSchema={validationSchema} >
                     {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
+                        console.log(values)
                         return (
                             <form onSubmit={handleSubmit}>
                                 <h3>
@@ -48,31 +56,60 @@ const EditAttendanceUnityPage = () => {
                                 </h3>
                                 <Grid checkMockup={[{}, {}]}>
                                     <Column>
-                                        <CrasInput name="name" onChange={handleChange} value={values.name} label="Nome" />
+                                        <CrasInput name="name" onChange={handleChange} value={values.name} label="Nome *" />
                                         <Padding />
                                         {errors.name && touched.name ? (
                                             <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                         ) : null}
                                     </Column>
                                     <Column>
-                                        <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone" />
+                                        <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone *" />
                                         <Padding />
                                         {errors.telephone && touched.telephone ? (
                                             <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
                                         ) : null}
                                     </Column>
                                 </Grid>
+                                <Grid checkMockup={[{}]}>
+                                    <Column>
+                                        <CrasInput name="email" type="email" onChange={handleChange} value={values.email} label="Email *" />
+                                        <Padding />
+                                        {errors.email && touched.email ? (
+                                            <div style={{ color: "red" }}>{errors.email}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                </Grid>
+                                <Grid checkMockup={[{}, {}]}>
+                                    <Column>
+                                        <label>Tipo de Unidade *</label>
+                                        <Row>
+                                            <CrasRadioButton selectValue={"CRAS"} onChange={handleChange} checked={values.type === "CRAS"} value={"CRAS"} name="type" label={"CRAS"} />
+                                            <CrasRadioButton selectValue={"CREAS"} onChange={handleChange} checked={values.type === "CREAS"} value={"CREAS"} name="type" label="CREAS" />
+                                        </Row>
+                                        <Padding />
+                                        {errors.type && touched.type ? (
+                                            <div style={{ color: "red" }}>{errors.type}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                    <Column>
+                                        <CrasInputNumber onChange={handleChange} value={values.unity_number} name="unity_number" label="Nº da Unidade *" />
+                                        <Padding />
+                                        {errors.unity_number && touched.unity_number ? (
+                                            <div style={{ color: "red" }}>{errors.unity_number}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                </Grid>
                                 <h3>Endereço</h3>
                                 <Grid checkMockup={[{}, {}]}>
                                     <Column>
-                                        <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço" />
+                                        <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço *" />
                                         <Padding />
                                         {errors.address && touched.address ? (
                                             <div style={{ color: "red" }}>{errors.address}<Padding /></div>
                                         ) : null}
                                     </Column>
                                     <Column>
-                                        <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência" />
+                                        <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência *" />
                                         <Padding />
                                         {errors.reference && touched.reference ? (
                                             <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
@@ -81,7 +118,7 @@ const EditAttendanceUnityPage = () => {
                                 </Grid>
                                 <Row>
                                     <div className="col">
-                                        <label>Condições de Moradia</label>
+                                        <label>Condições de Moradia *</label>
                                         <Padding />
                                         <Row>
                                             <CrasRadioButton
@@ -121,7 +158,7 @@ const EditAttendanceUnityPage = () => {
                                 <Row>
                                 </Row>
                                 <div className="col">
-                                    <label>Tipo de Construção</label>
+                                    <label>Tipo de Construção *</label>
                                     <Padding />
                                     <Row>
                                         <CrasRadioButton

@@ -1,21 +1,21 @@
-import React, { useContext } from "react";
+import { Formik } from "formik";
+import { ConfirmDialog } from 'primereact/confirmdialog';
+import { Toast } from "primereact/toast";
+import React, { useContext, useState } from "react";
+import * as Yup from 'yup';
+import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import Steps from "../../../CrasUi/Steps";
 import { Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../context/FamilyRefered/EditFamilyRefered/context";
 import FormAddress from "./FormAddress";
-import FormFamilyComposition from "./FormFamilyComposition";
 import FormFinances from "./FormFinances";
 import FormInfoPerson from "./FormInfoPerson";
-import { Toast } from "primereact/toast";
-import { Formik } from "formik";
-import * as Yup from 'yup';
-import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
-
 
 const EditFamilyReferedScreen = () => {
 
-    const { setActiveStep, activeStep, toast, family, estadosDoBrasil, handleFamiliaRefered } = useContext(EditFamilyReferedContext);
+    const { setActiveStep, activeStep, toast, family, estadosDoBrasil, handleFamiliaRefered, handleFamilyIsActive, deleteFamily } = useContext(EditFamilyReferedContext);
 
+    const [visible, setVisible] = useState(false)
 
     const items = [
         {
@@ -36,12 +36,6 @@ const EditFamilyReferedScreen = () => {
                 setActiveStep(2)
             }
         },
-        {
-            label: 'Composição Familiar',
-            command: (event) => {
-                setActiveStep(3)
-            }
-        }
     ];
 
     const itemsSteps = [
@@ -63,12 +57,6 @@ const EditFamilyReferedScreen = () => {
                 setActiveStep(2)
             }
         },
-        {
-            label: '',
-            command: (event) => {
-                setActiveStep(3)
-            }
-        }
     ];
 
 
@@ -96,6 +84,7 @@ const EditFamilyReferedScreen = () => {
 
     const initialValue = {
         name: family ? findOwner?.name : "",
+        isActive: family?.isActive,
         surname: findOwner?.surname ?? null,
         birthday: family ? findOwner?.birthday : "",
         birth_certificate: findOwner.birth_certificate ?? "",
@@ -126,6 +115,10 @@ const EditFamilyReferedScreen = () => {
         unemployed: family?.vulnerability.unemployed,
         deficient: family?.vulnerability.deficient,
         low_income: family?.vulnerability.low_income,
+        child_work: family?.vulnerability.child_work ?? false,
+        child_shelter_protection: family?.vulnerability.child_shelter_protection ?? false,
+        psychoactive_substance_violence: family?.vulnerability.psychoactive_substance_violence ?? false,
+        socio_educational_measures: family?.vulnerability.socio_educational_measures ?? false,
         others: family?.vulnerability.others,
         address: family?.address.address ?? "",
         telephone: family?.address.telephone ?? "",
@@ -134,7 +127,11 @@ const EditFamilyReferedScreen = () => {
         construction_type: family?.address.construction_type ?? "",
         rooms: family?.address.rooms ?? "",
         rent_value: family?.address.rent_value ?? 0,
-        benefitsForFamily: familyValue(family?.benefits) ?? []
+        benefitsForFamily: familyValue(family?.benefits) ?? [],
+        vaccination_schedule: family?.condicionalities?.vaccination_schedule ? true : false,
+        nutritional_status: family?.condicionalities?.nutritional_status ?? false,
+        prenatal: family?.condicionalities?.prenatal ?? false,
+        school_frequency: family?.condicionalities?.school_frequency ?? false,
     }
 
 
@@ -194,7 +191,7 @@ const EditFamilyReferedScreen = () => {
                 validationSchema={validationSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-
+                        console.log(errors)
                     var erroList = [];
 
                     for (const chave in errors) {
@@ -210,8 +207,15 @@ const EditFamilyReferedScreen = () => {
                                     <div style={{ color: "red" }}>{item}<Padding /></div>
                                 )
                             })}
-                            {activeStep !== 3 ?  <Row style={{ width: "30%" }} id="start">
+                            {activeStep !== 3 ? <Row style={{ width: "30%", gap: "10px" }} id="start">
                                 <ButtonPrime label="Salvar" type="submit" />
+                                <ButtonPrime severity={values?.isActive ? "warning" : "success"} label={values?.isActive ? "Desativar" : "Ativar"} type="button" onClick={() => { handleFamilyIsActive(); setFieldValue("isActive", !values.isActive) }} />
+                                <ButtonPrime label="Excluir" onClick={() => setVisible(true)} severity={"danger"} type="button" />
+
+                                <ConfirmDialog visible={visible} onHide={() => setVisible(false)} message="Deseja excluir? Essa ação é irreversível!"
+                                    acceptLabel='Sim'
+                                    rejectLabel='Não'
+                                    header="Confirmação" icon="pi pi-exclamation-triangle" accept={() => { deleteFamily(family?.id) }} reject={() => setVisible(false)} />
                             </Row> : null}
                             {activeStep === 0 ?
                                 <FormInfoPerson values={values} errors={errors} setFieldValue={setFieldValue} touched={touched} handleChange={handleChange} /> : activeStep === 1 ?
@@ -222,8 +226,6 @@ const EditFamilyReferedScreen = () => {
                 }
                 }
             </Formik>
-            {activeStep === 3 ?
-                <FormFamilyComposition /> : null}
             <Padding padding="16px" />
             <Toast ref={toast} />
 

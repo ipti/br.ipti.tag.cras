@@ -73,3 +73,40 @@ body,
   padding: 10.5px;
   margin-right: 0px;
 }
+
+.t-button-danger {
+  width: 100%;
+  border: none;
+  padding: 10.5px;
+  margin-right: 0px;
+}
+
+.t-button-secondary.t-warning {
+  width: 100%;
+  border: none;
+  padding: 10.5px;
+  margin-right: 0px;
+  background-color: #E98305;
+  color: white;
+
+}
+
+:hover.t-button-secondary.t-warning {
+  background-color: #DC7C05;
+  color: white;
+}
+
+.t-button-secondary.t-success {
+  width: 100%;
+  border: none;
+  padding: 10.5px;
+  margin-right: 0px;
+  height: 37px;
+  background-color: #28A138;
+  color: white;
+}
+
+:hover.t-button-secondary.t-button-success {
+  background-color: #238B31;
+  color: white;
+}
