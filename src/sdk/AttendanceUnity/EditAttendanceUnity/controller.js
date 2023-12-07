@@ -24,7 +24,6 @@ export const EditAttendanceUnity = () => {
                 alert(error?.response?.data.message)
             },
             onSuccess: (data) => {
-                console.log(data);
                 history("/unidades")
 
             },

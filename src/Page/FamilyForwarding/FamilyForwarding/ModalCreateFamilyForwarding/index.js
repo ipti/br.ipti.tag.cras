@@ -7,6 +7,7 @@ import CrasInputArea from "../../../../CrasUi/Input/inputArea";
 import { useContext, useState } from "react";
 import { FamilyForwardingContext } from "../../../../context/FamilyForwarding/FamilyForwarding/context";
 import CrasCheckbox from "../../../../CrasUi/Checkbox";
+import { GetIdAttendance } from "../../../../services/localstorage";
 
 const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
     const { CreateForwarding, forwarding, FamilyForwarding } = useContext(FamilyForwardingContext)
@@ -17,7 +18,7 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
 
     return (
         <Dialog header="Criar Encaminhamento" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
-            <Formik initialValues={{ user_identify: null, forwading: null, description: "" }} onSubmit={(values) => { CreateForwarding({ ...values, date: new Date(Date.now()), family: isFamily ? FamilyForwarding?.familyInformation?.id : undefined, forwading: values.forwading.id, user_identify: !isFamily ? values.user_identify.id : undefined }); setVisible(false) }}>
+            <Formik initialValues={{ user_identify: null, forwading: null, description: "" }} onSubmit={(values) => { CreateForwarding({ ...values, attendance_unity: parseInt(GetIdAttendance()),date: new Date(Date.now()), family: isFamily ? FamilyForwarding?.familyInformation?.id : undefined, forwading: values.forwading.id, user_identify: !isFamily ? values.user_identify.id : undefined }); setVisible(false) }}>
                 {({ values, errors, touched, handleChange, handleSubmit }) => {
                     return (
                         <form onSubmit={e => { e.preventDefault(); handleSubmit() }}>

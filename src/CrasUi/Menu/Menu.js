@@ -26,40 +26,52 @@ const CrasMenu = ({ viewdMenu }) => {
             <Padding padding="16px">
                 <Row id="center">
                     <img src={TagLogin} alt=""></img>
+                    <Padding />
                     <Column id="center">
-                        <h1>Cras</h1>
+                        <h1 style={{
+                            fontFamily: "Inter",
+                            fontSize: "14px",
+                            fontWeight: 700,
+                            lineHeight: "18px",
+                            letterSpacing: "0em",
+                            textSlign: "left",
+                            color: "#18204E",
+                        }}>Assistência<br />
+                            Social</h1>
                     </Column>
                 </Row>
             </Padding>
-            {user ? <Padding padding="8px">
-                <Item text={"Dashboard"} funcActiv={() => { setActive(1); menuItem(1) }} active={active === 1 ? true : false} path={"/dashboard"} icon={"pi pi-chart-bar"} />
-                <Padding />
-                <Item text={"Atendimentos"} funcActiv={() => { setActive(2); menuItem(2) }} active={active === 2 ? true : false} path={"/atendimento"} icon={"pi pi-list"} />
-                <Padding />
-                {user.role === "SECRETARY" ? <><Item text={"Serviço"} funcActiv={() => { setActive(3); menuItem(3) }} active={active === 3 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
+            {
+                user ? <Padding padding="8px">
+                    <Item text={"Dashboard"} funcActiv={() => { setActive(1); menuItem(1) }} active={active === 1 ? true : false} path={"/dashboard"} icon={"pi pi-chart-bar"} />
                     <Padding />
-                </> : null}
-                {user.role === "SECRETARY" ? <> <Item text={"Tecnico"} funcActiv={() => { setActive(4); menuItem(4) }} active={active === 4 ? true : false} path={"/tecnico"} icon={"pi pi-wrench"} />
+                    <Item text={"Atendimentos"} funcActiv={() => { setActive(2); menuItem(2) }} active={active === 2 ? true : false} path={"/atendimento"} icon={"pi pi-list"} />
                     <Padding />
-                </> : null}
-                <Item text={"Familias"} funcActiv={() => { setActive(5); menuItem(5) }} active={active === 5 ? true : false} path={"/familia"} icon={"pi pi-users"} />
-                <Padding />
-                {user.role === "SECRETARY" ? <>
-                    <Item text={"Beneficios"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path={"/beneficios"} icon={"pi pi-money-bill"} />
+                    {user.role === "SECRETARY" ? <><Item text={"Serviço"} funcActiv={() => { setActive(3); menuItem(3) }} active={active === 3 ? true : false} path={"/servico"} icon={"pi pi-th-large"} />
+                        <Padding />
+                    </> : null}
+                    {user.role === "SECRETARY" ? <> <Item text={"Tecnico"} funcActiv={() => { setActive(4); menuItem(4) }} active={active === 4 ? true : false} path={"/tecnico"} icon={"pi pi-wrench"} />
+                        <Padding />
+                    </> : null}
+                    <Item text={"Familias"} funcActiv={() => { setActive(5); menuItem(5) }} active={active === 5 ? true : false} path={"/familia"} icon={"pi pi-users"} />
                     <Padding />
-                </> : null}
-                {user.role === "SECRETARY" ? <>
-                    <Item text={"Relatorios"} funcActiv={() => { setActive(9); menuItem(9) }} active={active === 9 ? true : false} path={"/relatorios"} icon={"pi pi-file-export"} />
-                    <Padding />
-                </> : null}
-                {user.role === "SECRETARY" ? <>
-                    <Item text={"Unidades"} funcActiv={() => { setActive(8); menuItem(8) }} active={active === 8 ? true : false} path={"/unidades"} icon={"pi pi-building"} />
-                    <Padding />
-                </> : null}
-                {user.role === "SECRETARY" ? <> <Item text={"Usuários"} funcActiv={() => { setActive(7); menuItem(7) }} active={active === 7 ? true : false} path="/usuarios" icon={"pi pi-user"} />
-                </> : null}            </Padding> : null}
+                    {user.role === "SECRETARY" ? <>
+                        <Item text={"Beneficios"} funcActiv={() => { setActive(6); menuItem(6) }} active={active === 6 ? true : false} path={"/beneficios"} icon={"pi pi-money-bill"} />
+                        <Padding />
+                    </> : null}
+                    {user.role === "SECRETARY" ? <>
+                        <Item text={"Relatorios"} funcActiv={() => { setActive(9); menuItem(9) }} active={active === 9 ? true : false} path={"/relatorios"} icon={"pi pi-file-export"} />
+                        <Padding />
+                    </> : null}
+                    {user.role === "SECRETARY" ? <>
+                        <Item text={"Unidades"} funcActiv={() => { setActive(8); menuItem(8) }} active={active === 8 ? true : false} path={"/unidades"} icon={"pi pi-building"} />
+                        <Padding />
+                    </> : null}
+                    {user.role === "SECRETARY" ? <> <Item text={"Usuários"} funcActiv={() => { setActive(7); menuItem(7) }} active={active === 7 ? true : false} path="/usuarios" icon={"pi pi-user"} />
+                    </> : null}            </Padding> : null
+            }
 
-        </Container>
+        </Container >
     )
 }
 

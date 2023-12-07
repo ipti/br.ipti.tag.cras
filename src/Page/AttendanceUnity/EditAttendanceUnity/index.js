@@ -25,7 +25,7 @@ const EditAttendanceUnityPage = () => {
         construction_type: oneAttendance ? oneAttendance?.address.construction_type : "",
         type: oneAttendance ? oneAttendance.type : "",
         unity_number: oneAttendance ? oneAttendance.unity_number : "",
-        email: oneAttendance ? oneAttendance.email : "",
+        email: oneAttendance?.email ?? "",
         rooms: 0,
         rent_value: 0
     }
@@ -48,6 +48,7 @@ const EditAttendanceUnityPage = () => {
             {oneAttendance ? <Padding padding="16px">
                 <Formik initialValues={initialValue} onSubmit={value => {HandleEditAttendance(value) }} validationSchema={validationSchema} >
                     {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
+                        console.log(values)
                         return (
                             <form onSubmit={handleSubmit}>
                                 <h3>
