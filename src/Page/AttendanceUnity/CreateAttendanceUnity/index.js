@@ -20,6 +20,7 @@ const CreateAttendanceUnityPage = () => {
         conditions: "",
         construction_type: "",
         unity_number: "",
+        email: "",
         type: "",
         rooms: 0,
         rent_value: 0
@@ -33,7 +34,8 @@ const CreateAttendanceUnityPage = () => {
         conditions: Yup.string().required("Campo obrigatório"),
         construction_type: Yup.string().required("Campo obrigatório"),
         unity_number: Yup.number().required("Campo obrigatório"),
-        type: Yup.string().required("Campo obrigatório")
+        type: Yup.string().required("Campo obrigatório"),
+        email: Yup.string(),
     });
 
     const { handleCreateAttendance } = useContext(CreateAttendanceContext)
@@ -61,6 +63,15 @@ const CreateAttendanceUnityPage = () => {
                                         <Padding />
                                         {errors.telephone && touched.telephone ? (
                                             <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                </Grid>
+                                <Grid checkMockup={[{}]}>
+                                    <Column>
+                                        <CrasInput name="email" onChange={handleChange} value={values.email} label="Email *" />
+                                        <Padding />
+                                        {errors.email && touched.email ? (
+                                            <div style={{ color: "red" }}>{errors.email}<Padding /></div>
                                         ) : null}
                                     </Column>
                                 </Grid>

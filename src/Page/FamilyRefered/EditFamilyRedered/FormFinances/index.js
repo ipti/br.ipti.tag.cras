@@ -165,7 +165,7 @@ const FormFinances = ({ values, errors, touched, handleChange, setFieldValue }) 
                     <Column>
                         <CrasInputNumber mode="currency"
                             currency="BRL"
-                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"value"} />
+                            locale="pt-BR" showButtons={true} value={value} onChange={(e) => setvalue(e.target.value)} label={"valor"} />
                     </Column>
                 </Grid>
                 <Row id="start">

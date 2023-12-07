@@ -178,7 +178,7 @@ const RmaCras = () => {
                     <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print' /></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
                 </Padding>
                 <div ref={contentRef}>
-                    <Padding padding="8px">
+                    <Padding padding="32px">
                         <MonthlyForm />
                     </Padding>
                 </div>

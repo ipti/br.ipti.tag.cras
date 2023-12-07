@@ -25,6 +25,7 @@ const EditAttendanceUnityPage = () => {
         construction_type: oneAttendance ? oneAttendance?.address.construction_type : "",
         type: oneAttendance ? oneAttendance.type : "",
         unity_number: oneAttendance ? oneAttendance.unity_number : "",
+        email: oneAttendance ? oneAttendance.email : "",
         rooms: 0,
         rent_value: 0
     }
@@ -37,6 +38,7 @@ const EditAttendanceUnityPage = () => {
         conditions: Yup.string().required("Campo obrigatório"),
         construction_type: Yup.string().required("Campo obrigatório"),
         unity_number: Yup.number().required("Campo obrigatório"),
+        email: Yup.string(),
         type: Yup.string().required("Campo obrigatório")
     });
 
@@ -64,6 +66,15 @@ const EditAttendanceUnityPage = () => {
                                         <Padding />
                                         {errors.telephone && touched.telephone ? (
                                             <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                </Grid>
+                                <Grid checkMockup={[{}]}>
+                                    <Column>
+                                        <CrasInput name="email" type="email" onChange={handleChange} value={values.email} label="Email *" />
+                                        <Padding />
+                                        {errors.email && touched.email ? (
+                                            <div style={{ color: "red" }}>{errors.email}<Padding /></div>
                                         ) : null}
                                     </Column>
                                 </Grid>
