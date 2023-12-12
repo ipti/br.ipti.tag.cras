@@ -39,9 +39,6 @@ const FamilyOnePage = () => {
                         </Column>
                     </Row>
                 </Card>
-                {/* <Card style={{ width: "auto" }}>    
-                    <p onClick={() => history("/rma-cras")}>RMA</p>
-                </Card> */}
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/familia/composicao/${id}`)}>
@@ -60,7 +57,7 @@ const FamilyOnePage = () => {
                 <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/familia/visitas/${id}`)}>
                     <Row>
                         <Column id="center">
-                            <i className="pi pi-users" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
+                            <i className="pi pi-home" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
                         </Column>
                         <Padding />
                         <Column id="space-between">

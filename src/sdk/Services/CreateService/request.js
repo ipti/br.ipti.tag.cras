@@ -11,6 +11,10 @@ export const CreateServiceRequest = async (body) => {
     return await http.post("/direct/attendance", body, config)
 }
 
+export const CreateServiceAttendanceRequest = async (body) => {
+  return await http.post("/bff/attendance", body, config)
+}
+
 const AllUserIdentifyRequest = async () => {
   return await http.get("/bff/user-identify/from-attendance-unity", {params: {attendance_unity_fk: GetIdAttendance()}}, config).then(response => response.data)
     .catch(err => {

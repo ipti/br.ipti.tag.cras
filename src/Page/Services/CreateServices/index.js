@@ -7,20 +7,14 @@ import CrasInput from "../../../CrasUi/Input/Input";
 import CrasInputArea from "../../../CrasUi/Input/inputArea";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { CreateServicesContext } from "../../../context/Service/CreateService/context";
+import CrasCheckbox from "../../../CrasUi/Checkbox";
+import { UserIdentifyContext } from "../../../context/FamilyRefered/FamilyRefered/context";
 
 
 const CreateServicesScreen = () => {
-    // const [checked, setChecked] = useState(false);
-    const [selectedCities, setSelectedCities] = useState(null);
-
-    const cities = [
-        { name: 'New York', code: 'NY' },
-        { name: 'Rome', code: 'RM' },
-        { name: 'London', code: 'LDN' },
-        { name: 'Istanbul', code: 'IST' },
-        { name: 'Paris', code: 'PRS' }
-    ];
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result } = useContext(CreateServicesContext);
+    const [attendanceGroup, setattendanceGroup] = useState(false)
+    const { userIdentifyFamily } = useContext(UserIdentifyContext)
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema } = useContext(CreateServicesContext);
 
     return (
         <Container>
@@ -29,18 +23,11 @@ const CreateServicesScreen = () => {
                     Novo Atendimentos
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={CreateUserSchema}>
+                <Formik initialValues={initialValue} onSubmit={attendanceGroup ? handleCreateServiceGroup : handleCreateService} validationSchema={attendanceGroup ? CreateAttendanceSchema : CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
                         return <form onSubmit={handleSubmit}>
                             <h3>Dados do atendimento</h3>
                             <Padding />
-                            {/* <Grid checkMockup={[{}]}>
-                                <div>
-                                    <p>Atendimento em grupo?</p>
-                                    <Padding />
-                                    <InputSwitch checked={checked} onChange={(e) => setChecked(e.value)} />
-                                </div>
-                            </Grid> */}
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasDropdown name="task_fk" value={values.task_fk} onChange={handleChange} optionLabel={"name"} options={service} label="Serviço *" />
@@ -64,7 +51,6 @@ const CreateServicesScreen = () => {
                                     {errors.providence && touched.providence ? (
                                         <div style={{ color: "red" }}>{errors.providence}<Padding /></div>
                                     ) : null}
-
                                 </Column>
                                 <Column>
                                     <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado *" />
@@ -74,6 +60,9 @@ const CreateServicesScreen = () => {
                                     ) : null}
                                 </Column>
                             </Grid>
+                            <Grid checkMockup={[{}]}>
+                                <CrasCheckbox checked={attendanceGroup} value={attendanceGroup} onChange={() => setattendanceGroup(!attendanceGroup)} label={"Atendimento em grupos"} />
+                            </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasDropdown optionLabel={"name"} name="technician_fk" onChange={handleChange} value={values.technician_fk} options={technician} label="Técnico Responsável" />
@@ -82,17 +71,18 @@ const CreateServicesScreen = () => {
                                         <div style={{ color: "red" }}>{errors.technician_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                {true ? <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
+                                {!attendanceGroup ? <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
                                     <Padding />
                                     {errors.user_identify_fk && touched.user_identify_fk ? (
                                         <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>
                                     ) : null}
                                 </Column> : <Column>
                                     <label htmlFor="username" style={{ marginBottom: "8px", marginLeft: "4px" }}>Selecione as familias</label>
-                                    <MultiSelect value={selectedCities} onChange={(e) => setSelectedCities(e.value)} options={cities} optionLabel="name"
-                                        filter placeholder="Select Cities" maxSelectedLabels={3} className="w-full md:w-20rem" />                                    <Padding />
-                                    {errors.user_identify_fk && touched.user_identify_fk ? (
-                                        <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>
+                                    <MultiSelect style={{ height: "37px" }} placeholder="Selecione as familias" name="family" value={values.family} onChange={handleChange} options={userIdentifyFamily} optionLabel="representative.name"
+                                        filter maxSelectedLabels={3} />
+                                    <Padding />
+                                    {errors.family && touched.family ? (
+                                        <div style={{ color: "red" }}>{errors.family}<Padding /></div>
                                     ) : null}
                                 </Column>}
                             </Grid>
@@ -100,7 +90,7 @@ const CreateServicesScreen = () => {
                                 <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
                             </Grid>
                             <Padding />
-                            {errors.description && touched.description ? (
+                            {(errors.description && touched.description) ? (
                                 <div style={{ color: "red" }}>{errors.description}<Padding /></div>
                             ) : null}
                             <Padding padding="16px" />

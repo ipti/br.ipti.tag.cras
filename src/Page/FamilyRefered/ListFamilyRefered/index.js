@@ -6,7 +6,7 @@ import { formatarData } from "../../../services/functions";
 
 const ListFamilyReferedScreen = () => {
 
-    const { userIdentify } = useContext(UserIdentifyContext)
+    const { userIdentifyFamily } = useContext(UserIdentifyContext)
 
     const columns = [
         { field: "family_representative_fk", header: "id" },
@@ -16,7 +16,7 @@ const ListFamilyReferedScreen = () => {
         { field: "members_quantity", header: "Quant. Membros" },
     ];
 
-    const userIdentifyFilter = userIdentify ? userIdentify.map((data) => ({ ...data, birthday: formatarData(data.representative.birthday), initial_date: formatarData(data.representative.initial_date) })) : [];
+    const userIdentifyFilter = userIdentifyFamily ? userIdentifyFamily.map((data) => ({ ...data, birthday: formatarData(data.representative.birthday), initial_date: formatarData(data.representative.initial_date) })) : [];
 
     const filter = (filt, namefilter) => {
         return filt?.representative?.name?.toLowerCase()?.includes(namefilter) || filt?.representative?.birthday?.toLowerCase()?.includes(namefilter)

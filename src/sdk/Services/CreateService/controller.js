@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { logout } from "../../../services/localstorage";
 import { useFetchAllTechnician } from "../../Technician/Technician/request";
 import { useFetchAllTypesServices } from "../../TypeService/TypeServices/request";
-import { CreateServiceRequest, useFetchAllUserIdentifyAttendance } from "./request";
+import { CreateServiceAttendanceRequest, CreateServiceRequest, useFetchAllUserIdentifyAttendance } from "./request";
 
 export const CreateServicesController = () => {
     const history = useNavigate();
@@ -37,8 +37,29 @@ export const CreateServicesController = () => {
         }
     );
 
+    const CreateServicesAttendanceRequestMutation = useMutation(
+        (data) => CreateServiceAttendanceRequest(data),
+        {
+            onError: (error) => {
+                console.log(error.response.data.message)
+                if (error.response.status === 401 || error.response.status === 403) {
+                    logout();
+                    history("/login")
+                }
+                alert(error?.response?.data.message)
+
+            },
+            onSuccess: (data) => {
+                history("/atendimento");
+            },
+        }
+    );
+
+    
+
     return {
         CreateServicesRequestMutation,
+        CreateServicesAttendanceRequestMutation,
         allService,
         isLoadingService,
         errorService,
