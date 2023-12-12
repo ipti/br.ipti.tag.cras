@@ -10,7 +10,7 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
         <Dialog header="Encaminhamento" visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)}>
             {visibleEdit ? <Column>
                 <Padding padding="16px">
-                    <Row id="space-between">
+                    {visibleEdit?.user_identify?.name ? <Row id="space-between">
                         <Row>
                             <h2>Nome: </h2>
                             <Padding padding="2px" />
@@ -22,7 +22,7 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                             <Padding padding="2px" />
                             <p>{visibleEdit?.user_identify?.kinship}</p>
                         </Row>
-                    </Row>
+                    </Row> : null}
                     <Padding padding="8px" />
                     <Row id="space-between">
                         <Row><h2>Local: </h2>
