@@ -17,7 +17,8 @@ export const CreateServicesState = () => {
     task_fk: "",
     technician_fk: "",
     user_identify_fk: "",
-    description: ""
+    description: "",
+    family: ""
   }
 
   const CreateUserSchema = Yup.object().shape({
@@ -27,6 +28,16 @@ export const CreateServicesState = () => {
     technician_fk: Yup.object().required('Campo Obrigatório'),
     task_fk: Yup.object().required('Campo Obrigatório'),
     user_identify_fk: Yup.object().required('Campo Obrigatório'),
+    description: Yup.string().required('Campo Obrigatório'),
+  });
+
+  const CreateAttendanceSchema = Yup.object().shape({
+    solicitation: Yup.string().required("Campo Obrigatório"),
+    result: Yup.object().required('Campo Obrigatório'),
+    providence: Yup.string().required('Campo Obrigatório'),
+    technician_fk: Yup.object().required('Campo Obrigatório'),
+    task_fk: Yup.object().required('Campo Obrigatório'),
+    family: Yup.array().required('Campo Obrigatório'),
     description: Yup.string().required('Campo Obrigatório'),
   });
 
@@ -41,7 +52,7 @@ export const CreateServicesState = () => {
     }
   ]
 
-  const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify } = CreateServicesController();
+  const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, CreateServicesAttendanceRequestMutation } = CreateServicesController();
 
   useEffect(() => {
     if (allService) {
@@ -74,7 +85,32 @@ export const CreateServicesState = () => {
 
   }
 
+
+  const familyId = (value) => {
+    var family = []
+    value.forEach(element => {
+      family.push(element?.id)
+    });
+    return family
+  }
+  const handleCreateServiceGroup = (data) => {
+    const body = {
+      solicitation: data.solicitation,
+      result: data.result.id,
+      providence: data.providence,
+      task: data.task_fk.id,
+      technician: data.technician_fk.id,
+      attendance_unity: parseInt(GetIdAttendance()),
+      families: familyId(data.family),
+      description: data.description,
+      date: new Date(Date.now())
+    }
+
+    CreateServicesAttendanceRequestMutation.mutate(body);
+
+  }
+
   return {
-    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result
+    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema
   }
 }

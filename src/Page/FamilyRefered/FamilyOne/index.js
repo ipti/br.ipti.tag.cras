@@ -39,9 +39,6 @@ const FamilyOnePage = () => {
                         </Column>
                     </Row>
                 </Card>
-                {/* <Card style={{ width: "auto" }}>    
-                    <p onClick={() => history("/rma-cras")}>RMA</p>
-                </Card> */}
             </Grid>
             <Grid checkMockup={[{}, {}]}>
                 <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/familia/composicao/${id}`)}>
@@ -53,7 +50,20 @@ const FamilyOnePage = () => {
                         <Column id="space-between">
                             <h2>Composição Familiar</h2>
                             <Padding />
-                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Visualizar e adiconar membros </p>
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Visualizar ou adiconar membros </p>
+                        </Column>
+                    </Row>
+                </Card>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history(`/familia/visitas/${id}`)}>
+                    <Row>
+                        <Column id="center">
+                            <i className="pi pi-home" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
+                        </Column>
+                        <Padding />
+                        <Column id="space-between">
+                            <h2>Visitas a Familiar</h2>
+                            <Padding />
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Visualizar ou adiconar visitas </p>
                         </Column>
                     </Row>
                 </Card>

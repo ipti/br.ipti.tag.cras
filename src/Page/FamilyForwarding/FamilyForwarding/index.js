@@ -46,7 +46,6 @@ const FamilyForwardingPage = () => {
                 <TabView>
                     <TabPanel header="Membros da familia">
                         <Table columns={columns} list={FamilyForwarding?.usersForwarding} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
-
                     </TabPanel>
                     <TabPanel header="Familia">
                         <Table columns={columnsFamily} list={FamilyForwarding?.familyForwadings} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />

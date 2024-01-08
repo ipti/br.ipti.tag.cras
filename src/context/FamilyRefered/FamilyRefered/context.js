@@ -5,9 +5,9 @@ export const UserIdentifyContext = createContext({});
 
 const UserIdentifyProvider = ({children}) => {
 
-    const { error, isLoading, userIdentify } = UserIdentifyState();
+    const { error, isLoading, userIdentifyFamily , handleCreateServiceGroup} = UserIdentifyState();
     return (
-        <UserIdentifyContext.Provider value={{ error, isLoading, userIdentify }}>
+        <UserIdentifyContext.Provider value={{ error, isLoading, userIdentifyFamily, handleCreateServiceGroup }}>
             {children}
         </UserIdentifyContext.Provider>
     )
