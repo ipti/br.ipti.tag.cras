@@ -5,10 +5,10 @@ export const TechnicianVisitsContext = createContext({});
 
 const TechnicianVisitsProvider = ({ children }) => {
 
-    const { CreateTechnicianVisits, technicianVisits } = TechnicianVisitsState();
+    const { CreateTechnicianVisits, technicianVisits, EditTechnicianVisits } = TechnicianVisitsState();
 
     return (
-        <TechnicianVisitsContext.Provider value={{ CreateTechnicianVisits, technicianVisits }}>
+        <TechnicianVisitsContext.Provider value={{ CreateTechnicianVisits, technicianVisits, EditTechnicianVisits }}>
             {children}
         </TechnicianVisitsContext.Provider>
     )

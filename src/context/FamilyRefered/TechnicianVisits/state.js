@@ -7,12 +7,15 @@ const TechnicianVisitsState = () => {
 
     const { id } = useParams()
 
-    const { technicianVisitsRequests } = ListTechnicianController()
+    const { technicianVisitsRequests, EditTechnicianVisitsRequestMutation } = ListTechnicianController()
 
     const { CreateTechnicianVisitsRequestMutation } = CreateTechnicianVisitwsController()
 
     const CreateTechnicianVisits = (body) => {
         CreateTechnicianVisitsRequestMutation.mutate(body)
+    }
+    const EditTechnicianVisits = (id, body) => {
+        EditTechnicianVisitsRequestMutation.mutate({id: id, data: body})
     }
 
     const [technicianVisits, setTechnicianVisits] = useState([]);
@@ -25,7 +28,7 @@ const TechnicianVisitsState = () => {
     }, [technicianVisitsRequests, id])
 
     return {
-        CreateTechnicianVisits, technicianVisits
+        CreateTechnicianVisits, technicianVisits, EditTechnicianVisits
     }
 }
 
