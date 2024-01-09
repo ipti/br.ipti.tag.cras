@@ -1,16 +1,39 @@
 import { Formik } from "formik";
+import { MultiSelect } from "primereact/multiselect";
 import { Toast } from "primereact/toast";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
+import CrasCheckbox from "../../../CrasUi/Checkbox";
 import CrasDropdown from "../../../CrasUi/Dropdown";
 import CrasInput from "../../../CrasUi/Input/Input";
-import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
-import { EditServiceContext } from "../../../context/Service/EditService/context";
 import CrasInputArea from "../../../CrasUi/Input/inputArea";
+import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
+import { UserIdentifyContext } from "../../../context/FamilyRefered/FamilyRefered/context";
+import { EditServiceContext } from "../../../context/Service/EditService/context";
 
 const EditServicePage = () => {
-    const { initialValue, service, result,technician, handleCreateService, Schema, userIdentify, serviceOne, toast } = useContext(EditServiceContext)
+    const [attendanceGroup, setattendanceGroup] = useState(false)
+    const { userIdentifyFamily } = useContext(UserIdentifyContext)
 
+
+    const { initialValue, service, result, technician, handleCreateService, Schema, userIdentify, serviceOne, toast } = useContext(EditServiceContext)
+
+    const FilterFamliysGroups = (props) => {
+        const array = []
+        props?.forEach(element => {
+            array.push({id: element?.family.id, name: element?.family?.user_identify?.name})
+        });
+        return array
+    }
+
+    
+    const FilterFamliys = (props) => {
+        const array = []
+        props?.forEach(element => {
+            array.push({id: element?.id, name: element?.representative?.name})
+        });
+        return array
+    }
     return (
         <Container>
             <Column>
@@ -18,8 +41,9 @@ const EditServicePage = () => {
                     Editar Atendimentos
                 </h1>
                 <Padding padding="16px" />
-                {serviceOne ? <Formik initialValues={initialValue} onSubmit={handleCreateService} validationSchema={Schema}>
+                {serviceOne ? <Formik initialValues={!serviceOne?.group_attendance ? initialValue : { ...initialValue, families: FilterFamliysGroups(serviceOne?.group_attendance) }} onSubmit={handleCreateService} validationSchema={Schema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
+                        console.log(values)
                         return <form onSubmit={handleSubmit}>
                             <h3>Dados do atendimento</h3>
                             <Grid checkMockup={[{}, {}]}>
@@ -48,12 +72,15 @@ const EditServicePage = () => {
 
                                 </Column>
                                 <Column>
-                                <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado" />
+                                    <CrasDropdown name="result" value={values.result} optionLabel={"name"} options={result} onChange={handleChange} label="Resultado" />
                                     <Padding />
                                     {errors.result && touched.result ? (
                                         <div style={{ color: "red" }}>{errors.result}<Padding /></div>
                                     ) : null}
                                 </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}]}>
+                                <CrasCheckbox checked={serviceOne?.group_attendance !== undefined} value={serviceOne?.group_attendance} label={"Atendimento em grupos"} />
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
@@ -63,12 +90,20 @@ const EditServicePage = () => {
                                         <div style={{ color: "red" }}>{errors.technician_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
+                                {!serviceOne?.group_attendance ? <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
                                     <Padding />
                                     {errors.user_identify_fk && touched.user_identify_fk ? (
                                         <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>
                                     ) : null}
-                                </Column>
+                                </Column> : <Column>
+                                    <label htmlFor="username" style={{ marginBottom: "8px", marginLeft: "4px" }}>Selecione as familias</label>
+                                    <MultiSelect style={{ height: "37px" }} placeholder="Selecione as familias" name="families" value={values.families} onChange={handleChange} options={FilterFamliys(userIdentifyFamily)} optionLabel="name"
+                                        filter maxSelectedLabels={3} />
+                                    <Padding />
+                                    {errors.family && touched.family ? (
+                                        <div style={{ color: "red" }}>{errors.family}<Padding /></div>
+                                    ) : null}
+                                </Column>}
                             </Grid>
                             <Grid checkMockup={[{}]}>
                                 <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
