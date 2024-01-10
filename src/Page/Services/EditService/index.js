@@ -1,7 +1,7 @@
 import { Formik } from "formik";
 import { MultiSelect } from "primereact/multiselect";
 import { Toast } from "primereact/toast";
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasCheckbox from "../../../CrasUi/Checkbox";
 import CrasDropdown from "../../../CrasUi/Dropdown";
@@ -12,27 +12,36 @@ import { UserIdentifyContext } from "../../../context/FamilyRefered/FamilyRefere
 import { EditServiceContext } from "../../../context/Service/EditService/context";
 
 const EditServicePage = () => {
-    const [attendanceGroup, setattendanceGroup] = useState(false)
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
 
 
-    const { initialValue, service, result, technician, handleCreateService, Schema, userIdentify, serviceOne, toast } = useContext(EditServiceContext)
+    const { initialValue, service, result, technician, handleCreateService, Schema, userIdentify, serviceOne, toast, handleAddFamilyService, handleRemoveFamilyService } = useContext(EditServiceContext)
 
     const FilterFamliysGroups = (props) => {
         const array = []
         props?.forEach(element => {
-            array.push({id: element?.family.id, name: element?.family?.user_identify?.name})
+            array.push({ id: element?.family.id, name: element?.family?.user_identify?.name })
         });
         return array
     }
 
-    
+
     const FilterFamliys = (props) => {
         const array = []
         props?.forEach(element => {
-            array.push({id: element?.id, name: element?.representative?.name})
+            array.push({ id: element?.id, name: element?.representative?.name })
         });
         return array
+    }
+
+    const HandleAddorRemoveFamily = (e, set, value) => {
+        console.log(e)
+        if (value.find(props => props.id === e.selectedOption.id)) {
+            handleRemoveFamilyService({ familyId: e.selectedOption.id })
+        } else {
+            handleAddFamilyService({ familyId: e.selectedOption.id })
+        }
+        set("families", e.target.value)
     }
     return (
         <Container>
@@ -42,8 +51,7 @@ const EditServicePage = () => {
                 </h1>
                 <Padding padding="16px" />
                 {serviceOne ? <Formik initialValues={!serviceOne?.group_attendance ? initialValue : { ...initialValue, families: FilterFamliysGroups(serviceOne?.group_attendance) }} onSubmit={handleCreateService} validationSchema={Schema}>
-                    {({ values, handleChange, handleSubmit, errors, touched }) => {
-                        console.log(values)
+                    {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
                         return <form onSubmit={handleSubmit}>
                             <h3>Dados do atendimento</h3>
                             <Grid checkMockup={[{}, {}]}>
@@ -97,7 +105,7 @@ const EditServicePage = () => {
                                     ) : null}
                                 </Column> : <Column>
                                     <label htmlFor="username" style={{ marginBottom: "8px", marginLeft: "4px" }}>Selecione as familias</label>
-                                    <MultiSelect style={{ height: "37px" }} placeholder="Selecione as familias" name="families" value={values.families} onChange={handleChange} options={FilterFamliys(userIdentifyFamily)} optionLabel="name"
+                                    <MultiSelect style={{ height: "37px" }} placeholder="Selecione as familias" name="families" value={values.families} onChange={(e) => HandleAddorRemoveFamily(e, setFieldValue, values.families)} options={FilterFamliys(userIdentifyFamily)} optionLabel="name"
                                         filter maxSelectedLabels={3} />
                                     <Padding />
                                     {errors.family && touched.family ? (

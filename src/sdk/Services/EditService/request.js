@@ -28,3 +28,12 @@ export const useFetchOneService = (id) => {
 export const EditServiceRequest = async (body, id) => {
     return await http.put(`/direct/attendance/${id}`, body, config)
 }
+
+export const AddFamilyServiceGroupRequest = async (body) => {
+    return await http.post(`/bff/attendance/add-family-to-group-attendance`, body, config)
+}
+
+export const RemoveFamilyServiceGroupRequest = async (body) => {
+    return await http.delete(`/bff/attendance/remove-family-from-group-attendance`, {params: { attendanceId: 34,
+    familyId: 19 }}, config)
+}
