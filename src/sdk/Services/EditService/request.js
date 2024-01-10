@@ -34,6 +34,6 @@ export const AddFamilyServiceGroupRequest = async (body) => {
 }
 
 export const RemoveFamilyServiceGroupRequest = async (body) => {
-    return await http.delete(`/bff/attendance/remove-family-from-group-attendance`, {params: { attendanceId: 34,
-    familyId: 19 }}, config)
+    return await http.delete(`/bff/attendance/remove-family-from-group-attendance`, {params: { attendanceId: body.attendanceId,
+    familyId: body.familyId }}, config)
 }
