@@ -13,8 +13,6 @@ import { EditServiceContext } from "../../../context/Service/EditService/context
 
 const EditServicePage = () => {
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
-
-
     const { initialValue, service, result, technician, handleCreateService, Schema, userIdentify, serviceOne, toast, handleAddFamilyService, handleRemoveFamilyService } = useContext(EditServiceContext)
 
     const FilterFamliysGroups = (props) => {
@@ -35,7 +33,6 @@ const EditServicePage = () => {
     }
 
     const HandleAddorRemoveFamily = (e, set, value) => {
-        console.log(e)
         if (value.find(props => props.id === e.selectedOption.id)) {
             handleRemoveFamilyService({ familyId: e.selectedOption.id })
         } else {

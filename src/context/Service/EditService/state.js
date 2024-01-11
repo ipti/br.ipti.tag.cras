@@ -39,7 +39,6 @@ export const EditServicesState = () => {
     providence: Yup.string().required('Campo Obrigatório'),
     technician_fk: Yup.object().required('Campo Obrigatório'),
     task_fk: Yup.object().required('Campo Obrigatório'),
-    user_identify_fk: Yup.object().required('Campo Obrigatório'),
     description: Yup.string().required('Campo Obrigatório'),
   });
 
@@ -114,10 +113,10 @@ export const EditServicesState = () => {
       providence: data.providence,
       task: data.task_fk.id,
       technician: data.technician_fk.id,
-      user_identify: data.user_identify_fk.id,
       description: data.description,
       attendance_unity: parseInt(GetIdAttendance()),
     }
+    console.log(body)
     EditServicesRequestMutation.mutate(body)
   }
 
@@ -127,7 +126,6 @@ export const EditServicesState = () => {
       attendanceId: id,
       familyId: data.familyId
     }
-    console.log(body)
 
     AddFamilyServicesGroupRequestMutation.mutate(body)
   }
