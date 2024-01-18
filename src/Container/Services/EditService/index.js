@@ -1,11 +1,14 @@
 import React from "react";
 import EditServiceProvider from "../../../context/Service/EditService/context";
 import EditServicePage from "../../../Page/Services/EditService";
+import UserIdentifyProvider from "../../../context/FamilyRefered/FamilyRefered/context";
 
 const EditService = () => {
-    return(
+    return (
         <EditServiceProvider>
-            <EditServicePage />
+            <UserIdentifyProvider>
+                <EditServicePage />
+            </UserIdentifyProvider>
         </EditServiceProvider>
     )
 }

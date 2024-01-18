@@ -1,5 +1,5 @@
 import { useMutation } from "react-query";
-import { DeleteServiceRequest, useFetchAllService } from "./request"
+import { DeleteServiceRequest, useFetchAllService, useFetchAllServiceGroup } from "./request"
 import { useFetchAllTypesServices } from "../../TypeService/TypeServices/request";
 import { useFetchAllTechnician } from "../../Technician/Technician/request";
 import { useNavigate } from "react-router-dom";
@@ -11,8 +11,9 @@ export const ServiceController = () => {
 
 
     const { data: servicefetch, isLoading, error, refetch } = useFetchAllService()
-    const {data: typeServicesrequest} = useFetchAllTypesServices()
-    const {data: technicianRequest} = useFetchAllTechnician()
+    const { data: servicegroupfetch } = useFetchAllServiceGroup()
+    const { data: typeServicesrequest } = useFetchAllTypesServices()
+    const { data: technicianRequest } = useFetchAllTechnician()
 
 
     // if (error?.response.status === 401 | 403) {
@@ -29,7 +30,7 @@ export const ServiceController = () => {
                     logout();
                     history("/login")
                 }
-            
+
             },
             onSuccess: (data) => {
                 console.log(data);
@@ -40,6 +41,6 @@ export const ServiceController = () => {
 
 
     return {
-        servicefetch, isLoading, error, DeleteServicesRequestMutation, typeServicesrequest, technicianRequest
+        servicegroupfetch, servicefetch, isLoading, error, DeleteServicesRequestMutation, typeServicesrequest, technicianRequest
     }
 }

@@ -31,7 +31,7 @@ export const EditServicesState = () => {
       toast.current.show({ severity: 'error', summary: 'Error', detail: isError });
     }
   }
-  const { EditServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, oneService } = EditServicesController(id, setIsVerify, setIsError, show);
+  const { EditServicesRequestMutation, AddFamilyServicesGroupRequestMutation, RemoveFamilyServicesGroupRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, oneService } = EditServicesController(id, setIsVerify, setIsError, show);
 
   const Schema = Yup.object().shape({
     solicitation: Yup.string().required("Campo Obrigatório"),
@@ -39,7 +39,6 @@ export const EditServicesState = () => {
     providence: Yup.string().required('Campo Obrigatório'),
     technician_fk: Yup.object().required('Campo Obrigatório'),
     task_fk: Yup.object().required('Campo Obrigatório'),
-    user_identify_fk: Yup.object().required('Campo Obrigatório'),
     description: Yup.string().required('Campo Obrigatório'),
   });
 
@@ -75,7 +74,7 @@ export const EditServicesState = () => {
     return value
   }
 
-  
+
   const result = [
     {
       id: "FINALIZADO",
@@ -114,17 +113,35 @@ export const EditServicesState = () => {
       providence: data.providence,
       task: data.task_fk.id,
       technician: data.technician_fk.id,
-      user_identify: data.user_identify_fk.id,
       description: data.description,
       attendance_unity: parseInt(GetIdAttendance()),
     }
-
+    console.log(body)
     EditServicesRequestMutation.mutate(body)
+  }
 
+  const handleAddFamilyService = (data) => {
+
+    const body = {
+      attendanceId: id,
+      familyId: data.familyId
+    }
+
+    AddFamilyServicesGroupRequestMutation.mutate(body)
+  }
+
+  const handleRemoveFamilyService = (data) => {
+
+    const body = {
+      attendanceId: parseInt(id),
+      familyId: data.familyId
+    }
+
+    RemoveFamilyServicesGroupRequestMutation.mutate(body)
   }
 
 
   return {
-    initialValue, service, technician, isLoadingService, isLoadingtechnician, result, handleCreateService, Schema, userIdentify, serviceOne, toast, show
+    initialValue, service, technician, isLoadingService, isLoadingtechnician, result, handleCreateService, Schema, userIdentify, serviceOne, toast, show, handleAddFamilyService, handleRemoveFamilyService
   }
 }
