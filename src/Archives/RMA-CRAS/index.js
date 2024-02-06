@@ -9,16 +9,31 @@ import { LineBottom, StyledTable, StyledTableCell } from './styled';
 import { useFetchOneAttendanceUnity } from '../../sdk/AttendanceUnity/EditAttendanceUnity/request';
 import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchMonthRma } from '../../sdk/RMA-CRAS/request';
+import { useParams } from 'react-router-dom';
 
 
 const MonthlyForm = () => {
 
-    const date = new Date(Date.now())
+
+    const { month, year } = useParams()
 
 
-    const month = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro']
+    const monthGet = [
+        { name: 'Janeiro', id: 1 },
+        { name: 'Fevereiro', id: 2 },
+        { name: 'Março', id: 3 },
+        { name: 'Abril', id: 4 },
+        { name: 'Maio', id: 5 },
+        { name: 'Junho', id: 6 },
+        { name: 'Julho', id: 7 },
+        { name: 'Agosto', id: 8 },
+        { name: 'Setembro', id: 9 },
+        { name: 'Outubro', id: 10 },
+        { name: 'Novembro', id: 11 },
+        { name: 'Dezembro', id: 12 }
+    ];
     const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
-    const { data: rma } = useFetchMonthRma(date?.getMonth() + 1, date?.getFullYear(), GetIdAttendance())
+    const { data: rma } = useFetchMonthRma(month, year, GetIdAttendance())
 
 
     return (
@@ -34,7 +49,7 @@ const MonthlyForm = () => {
                             </Row>
                             <Row id='end'>
                                 <p>
-                                    MÊS:  </p><Padding /><Row id='center' style={{ width: "80px", background: "white" }}>{month[date.getMonth()]}</Row><Padding /> / <Padding /><Row id='center' style={{ width: "40px", background: "white" }}>{date.getFullYear()}</Row>
+                                    MÊS:  </p><Padding /><Row id='center' style={{ width: "80px", background: "white" }}>{monthGet[month - 1].name}</Row><Padding /> / <Padding /><Row id='center' style={{ width: "40px", background: "white" }}>{year}</Row>
                                 <Padding />
                             </Row>
                         </div>
@@ -156,7 +171,7 @@ const RmaCras = () => {
         if (!contentRef.current) return;
 
         const elementToCapture = contentRef.current;
-        
+
 
         html2canvas(elementToCapture).then((canvas) => {
             const pdf = new jsPDF('p', 'mm', 'a4');

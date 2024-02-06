@@ -67,7 +67,7 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
                 <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
                 <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
-                <Route element={<RmaCras />} path="/rma-cras" />
+                <Route element={<RmaCras />} path="/rma-cras/:month/:year" />
                 <Route element={<Login />} path="/login" />
                 <Route path="/*" element={<NotFoundPage />} />
             </Routes>
