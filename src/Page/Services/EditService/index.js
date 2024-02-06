@@ -40,6 +40,8 @@ const EditServicePage = () => {
         }
         set("families", e.target.value)
     }
+
+    console.log(serviceOne)
     return (
         <Container>
             <Column>
@@ -85,7 +87,7 @@ const EditServicePage = () => {
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}]}>
-                                <CrasCheckbox checked={serviceOne?.group_attendance !== undefined} value={serviceOne?.group_attendance} label={"Atendimento em grupos"} />
+                                <CrasCheckbox checked={serviceOne?.group_attendance.length !== 0} value={serviceOne?.group_attendance} label={"Atendimento em grupos"} />
                             </Grid>
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
@@ -95,7 +97,7 @@ const EditServicePage = () => {
                                         <div style={{ color: "red" }}>{errors.technician_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                {!serviceOne?.group_attendance ? <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
+                                {serviceOne?.group_attendance.length === 0 ? <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
                                     <Padding />
                                     {errors.user_identify_fk && touched.user_identify_fk ? (
                                         <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>

@@ -1,19 +1,19 @@
-import { useNavigate } from "react-router-dom";
-import { Column, Container, Grid, Padding, Row } from "../../CrasUi/styles/styles";
 
 import { Card } from 'primereact/card';
+import { useState } from "react";
 import styles from "../../CrasUi/styles";
+import ModalDateReport from "./ModalDateReport";
+import { Column, Container, Grid, Padding, Row } from '../../CrasUi/styles/styles';
 
 const ReportPage = () => {
 
-    const history = useNavigate();
-
+    const [visible, setVisible] = useState(false)
 
     return (
         <Container>
             <h1>Relatórios</h1>
             <Grid checkMockup={[{}, {}]}>
-                <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => history("/rma-cras")}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={() => setVisible(!visible)}>
                     <Row>
                         <Column id="center">
                             <i className="pi pi-file" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
@@ -26,6 +26,7 @@ const ReportPage = () => {
                         </Column>
                     </Row>
                 </Card>
+                <ModalDateReport visible={visible} setVisible={() => setVisible(!visible)} />
                 {/* <Card style={{ width: "auto" }}>    
                     <p onClick={() => history("/rma-cras")}>RMA</p>
                 </Card> */}

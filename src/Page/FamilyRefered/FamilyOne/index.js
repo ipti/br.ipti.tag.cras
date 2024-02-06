@@ -61,7 +61,7 @@ const FamilyOnePage = () => {
                         </Column>
                         <Padding />
                         <Column id="space-between">
-                            <h2>Visitas a Familiar</h2>
+                            <h2>Visitas a Familia</h2>
                             <Padding />
                             <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Visualizar ou adiconar visitas </p>
                         </Column>
