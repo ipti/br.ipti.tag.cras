@@ -31,6 +31,16 @@ export const CreateServicesState = () => {
     description: Yup.string().required('Campo Obrigatório'),
   });
 
+  const CreateNewUserSchema = Yup.object().shape({
+    solicitation: Yup.string().required("Campo Obrigatório"),
+    result: Yup.object().required('Campo Obrigatório'),
+    providence: Yup.string().required('Campo Obrigatório'),
+    technician_fk: Yup.object().required('Campo Obrigatório'),
+    task_fk: Yup.object().required('Campo Obrigatório'),
+    description: Yup.string().required('Campo Obrigatório'),
+    name: Yup.string().required('Campo Obrigatório'),
+  });
+
   const CreateAttendanceSchema = Yup.object().shape({
     solicitation: Yup.string().required("Campo Obrigatório"),
     result: Yup.object().required('Campo Obrigatório'),
@@ -111,6 +121,6 @@ export const CreateServicesState = () => {
   }
 
   return {
-    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema
+    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema
   }
 }

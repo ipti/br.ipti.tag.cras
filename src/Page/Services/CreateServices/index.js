@@ -9,12 +9,14 @@ import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/st
 import { CreateServicesContext } from "../../../context/Service/CreateService/context";
 import CrasCheckbox from "../../../CrasUi/Checkbox";
 import { UserIdentifyContext } from "../../../context/FamilyRefered/FamilyRefered/context";
+import CrasInputMask from "../../../CrasUi/Input/InputMask";
 
 
 const CreateServicesScreen = () => {
     const [attendanceGroup, setattendanceGroup] = useState(false)
+    const [attendanceNewUser, setattendanceNewUser] = useState(false)
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema } = useContext(CreateServicesContext);
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema } = useContext(CreateServicesContext);
 
     return (
         <Container>
@@ -23,10 +25,10 @@ const CreateServicesScreen = () => {
                     Novo Atendimentos
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={initialValue} onSubmit={attendanceGroup ? handleCreateServiceGroup : handleCreateService} validationSchema={attendanceGroup ? CreateAttendanceSchema : CreateUserSchema}>
+                <Formik initialValues={attendanceNewUser ? {...initialValue, name: "", cpf: ""} : initialValue} onSubmit={attendanceGroup ? handleCreateServiceGroup : handleCreateService} validationSchema={attendanceGroup ? CreateAttendanceSchema : attendanceNewUser ? CreateNewUserSchema : CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
                         return <form onSubmit={handleSubmit}>
-                            <h3>Dados do atendimento</h3>
+                            <h3>Dados do atendimento</h3> 
                             <Padding />
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
@@ -86,6 +88,25 @@ const CreateServicesScreen = () => {
                                     ) : null}
                                 </Column>}
                             </Grid>
+                            <Grid checkMockup={[{}]}>
+                                <CrasCheckbox checked={attendanceNewUser} value={attendanceNewUser} onChange={() => setattendanceNewUser(!attendanceNewUser)} label={"Usuário não cadastrado"} />
+                            </Grid>
+                            {attendanceNewUser ? <Grid checkMockup={[{}, {}]}>
+                                <Column>
+                                    <CrasInput name="name" value={values.name} onChange={handleChange} label="Nome do Indivíduo *" />
+                                    <Padding />
+                                    {errors.name && touched.name ? (
+                                        <div style={{ color: "red" }}>{errors.name}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                                <Column>
+                                    <CrasInputMask mask={"999.999.999-99"} label="CPF" name="cpf" onChange={handleChange} value={values.cpf} />
+                                    <Padding />
+                                    {errors.cpf && touched.cpf ? (
+                                        <div style={{ color: "red" }}>{errors.cpf}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                            </Grid> : null}
                             <Grid checkMockup={[{}]}>
                                 <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
                             </Grid>
