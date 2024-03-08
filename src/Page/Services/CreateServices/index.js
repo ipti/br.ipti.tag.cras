@@ -1,4 +1,4 @@
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import { MultiSelect } from 'primereact/multiselect';
 import React, { useContext, useState } from "react";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
@@ -16,7 +16,7 @@ const CreateServicesScreen = () => {
     const [attendanceGroup, setattendanceGroup] = useState(false)
     const [attendanceNewUser, setattendanceNewUser] = useState(false)
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema } = useContext(CreateServicesContext);
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema, handleCreateServiceNewUser } = useContext(CreateServicesContext);
 
     return (
         <Container>
@@ -25,10 +25,12 @@ const CreateServicesScreen = () => {
                     Novo Atendimentos
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={attendanceNewUser ? {...initialValue, name: "", cpf: ""} : initialValue} onSubmit={attendanceGroup ? handleCreateServiceGroup : handleCreateService} validationSchema={attendanceGroup ? CreateAttendanceSchema : attendanceNewUser ? CreateNewUserSchema : CreateUserSchema}>
+                <Formik initialValues={attendanceNewUser ? { ...initialValue, name: "", cpf: "" } : initialValue} onSubmit={attendanceGroup ? handleCreateServiceGroup : attendanceNewUser ? handleCreateServiceNewUser : handleCreateService} validationSchema={attendanceGroup ? CreateAttendanceSchema : attendanceNewUser ? CreateNewUserSchema : CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
-                        return <form onSubmit={handleSubmit}>
-                            <h3>Dados do atendimento</h3> 
+                        console.log(errors)
+                        return <Form
+                        >
+                            <h3>Dados do atendimento</h3>
                             <Padding />
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
@@ -118,7 +120,7 @@ const CreateServicesScreen = () => {
                             <Row id="end">
                                 <ButtonPrime type="submit" label="Cadastrar" />
                             </Row>
-                        </form>
+                        </Form>
                     }}
                 </Formik>
             </Column>
