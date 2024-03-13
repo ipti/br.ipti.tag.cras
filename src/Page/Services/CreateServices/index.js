@@ -10,11 +10,15 @@ import { CreateServicesContext } from "../../../context/Service/CreateService/co
 import CrasCheckbox from "../../../CrasUi/Checkbox";
 import { UserIdentifyContext } from "../../../context/FamilyRefered/FamilyRefered/context";
 import CrasInputMask from "../../../CrasUi/Input/InputMask";
+import { useFetchUserIdentifyByNameCpfRequest } from "../../../sdk/Services/CreateService/request";
+import queryClient from "../../../services/react-query";
 
 
 const CreateServicesScreen = () => {
     const [attendanceGroup, setattendanceGroup] = useState(false)
     const [attendanceNewUser, setattendanceNewUser] = useState(false)
+    const [nomeorcpf, setnameorcpf] = useState(false)
+    const {data} = useFetchUserIdentifyByNameCpfRequest(nomeorcpf)
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
     const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema, handleCreateServiceNewUser } = useContext(CreateServicesContext);
 
@@ -75,7 +79,9 @@ const CreateServicesScreen = () => {
                                         <div style={{ color: "red" }}>{errors.technician_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                {!attendanceGroup ? <Column><CrasDropdown onChange={handleChange} filter value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={userIdentify} label="Usuário ou Membro Familiar" />
+                                {!attendanceGroup ? <Column><CrasDropdown onChange={handleChange} filter onFilter={(value) => {setnameorcpf(value); queryClient.refetchQueries("UserIndentifyByNameCpfRequest")}} value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={data} label="Usuário ou Membro Familiar" />
+                                        
+
                                     <Padding />
                                     {errors.user_identify_fk && touched.user_identify_fk ? (
                                         <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>

@@ -30,6 +30,22 @@ const AllUserIdentifyRequest = async () => {
     });
 }
 
+const UserIndentifyByNameCpfRequest = async (name, cpf) => {
+  return await http.get("/bff/user-identify", {params: {name, cpf}}, config).then(response => response.data)
+    .catch(err => {
+      if (err.response.status === 401) {
+        logout()
+        window.location.reload()
+      }
+      throw err;
+    });
+}
+
 export const useFetchAllUserIdentifyAttendance = () => {
   return useQuery("AllUserIdentifyAttendance", () => AllUserIdentifyRequest());
 };
+
+export const useFetchUserIdentifyByNameCpfRequest = (_name) => {
+  return useQuery("UserIndentifyByNameCpfRequest", (_name) => UserIndentifyByNameCpfRequest(_name));
+};
+
