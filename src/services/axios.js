@@ -4,8 +4,8 @@ import { getToken } from "./localstorage";
 // require('dotenv').config();
 
 const http = axios.create({
-  //baseURL: "https://api-cras.tag.ong.br/",
-  baseURL: "http://localhost:3000/",
+  baseURL: "https://api-cras.tag.ong.br/",
+  // baseURL: "http://localhost:3000/",
 });
 
 http.interceptors.request.use(async config => {
