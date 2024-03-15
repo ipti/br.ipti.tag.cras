@@ -31,6 +31,16 @@ export const CreateServicesState = () => {
     description: Yup.string().required('Campo Obrigatório'),
   });
 
+  const CreateNewUserSchema = Yup.object().shape({
+    solicitation: Yup.string().required("Campo Obrigatório"),
+    result: Yup.object().required('Campo Obrigatório'),
+    providence: Yup.string().required('Campo Obrigatório'),
+    technician_fk: Yup.object().required('Campo Obrigatório'),
+    task_fk: Yup.object().required('Campo Obrigatório'),
+    description: Yup.string().required('Campo Obrigatório'),
+    name: Yup.string().required('Campo Obrigatório'),
+  });
+
   const CreateAttendanceSchema = Yup.object().shape({
     solicitation: Yup.string().required("Campo Obrigatório"),
     result: Yup.object().required('Campo Obrigatório'),
@@ -52,7 +62,7 @@ export const CreateServicesState = () => {
     }
   ]
 
-  const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, CreateServicesAttendanceRequestMutation } = CreateServicesController();
+  const { CreateServicesRequestMutation, allService, allTechnician, isLoadingService, isLoadingtechnician, allUserIdentify, CreateServicesAttendanceRequestMutation,CreateServicesAttendanceNewUserRequestMutation } = CreateServicesController();
 
   useEffect(() => {
     if (allService) {
@@ -110,7 +120,24 @@ export const CreateServicesState = () => {
 
   }
 
+  const handleCreateServiceNewUser = (data) => {
+    const body = {
+      solicitation: data.solicitation,
+      result: data.result.id,
+      providence: data.providence,
+      task: data.task_fk.id,
+      technician: data.technician_fk.id,
+      attendance_unity: parseInt(GetIdAttendance()),
+      name: data.name,
+      cpf: data.cpf,
+      description: data.description,
+      date: new Date(Date.now())
+    }
+
+    CreateServicesAttendanceNewUserRequestMutation.mutate(body);
+  }
+
   return {
-    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema
+    initialValue, technician, isLoadingService, isLoadingtechnician, handleCreateService, CreateUserSchema, service, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema, handleCreateServiceNewUser
   }
 }
