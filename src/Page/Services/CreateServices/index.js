@@ -20,7 +20,7 @@ const CreateServicesScreen = () => {
     const [nomeorcpf, setnameorcpf] = useState("")
     const {data} = useFetchUserIdentifyByNameCpfRequest(nomeorcpf)
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
-    const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema, handleCreateServiceNewUser } = useContext(CreateServicesContext);
+    const { initialValue, service, technician, handleCreateService, CreateUserSchema, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema, handleCreateServiceNewUser } = useContext(CreateServicesContext);
 
     return (
         <Container>
@@ -69,8 +69,10 @@ const CreateServicesScreen = () => {
                                 </Column>
                             </Grid>
                             <Grid checkMockup={[{}]}>
-                                <CrasCheckbox checked={attendanceGroup} value={attendanceGroup} onChange={() => setattendanceGroup(!attendanceGroup)} label={"Atendimento em grupos"} />
+                                <CrasCheckbox checked={attendanceGroup && !attendanceNewUser} value={attendanceGroup} onChange={() => setattendanceGroup(!attendanceGroup)} label={"Atendimento em grupos"}/>
                             </Grid>
+
+
                             <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasDropdown optionLabel={"name"} name="technician_fk" onChange={handleChange} value={values.technician_fk} options={technician} label="Técnico Responsável" />
@@ -79,26 +81,31 @@ const CreateServicesScreen = () => {
                                         <div style={{ color: "red" }}>{errors.technician_fk}<Padding /></div>
                                     ) : null}
                                 </Column>
-                                {!attendanceGroup ? <Column><CrasDropdown onChange={handleChange} filter onFilter={(value) => {setnameorcpf(value); queryClient.refetchQueries("UserIndentifyByNameCpfRequest")}} value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={data} label="Usuário ou Membro Familiar" />
-                                        
+                                {!attendanceNewUser ? <>
+                                    {!attendanceGroup ? <Column><CrasDropdown onChange={handleChange} filter onFilter={(value) => {setnameorcpf(value); queryClient.refetchQueries("UserIndentifyByNameCpfRequest")}} value={values.user_identify_fk} name={"user_identify_fk"} optionLabel={"name"} options={data} label="Usuário ou Membro Familiar" />  
+                                        <Padding />
+                                        {errors.user_identify_fk && touched.user_identify_fk ? (
+                                            <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>
+                                        ) : null}
+                                    </Column> : 
+                                    <Column>
+                                        <label htmlFor="username" style={{ marginBottom: "8px", marginLeft: "4px" }}>Selecione as familias</label>
+                                        <MultiSelect style={{ height: "37px" }} placeholder="Selecione as familias" name="family" value={values.family} onChange={handleChange} options={userIdentifyFamily} optionLabel="representative.name"
+                                            filter maxSelectedLabels={3} />
+                                        <Padding />
+                                        {errors.family && touched.family ? (
+                                            <div style={{ color: "red" }}>{errors.family}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                    }
+                                </>: null}
 
-                                    <Padding />
-                                    {errors.user_identify_fk && touched.user_identify_fk ? (
-                                        <div style={{ color: "red" }}>{errors.user_identify_fk}<Padding /></div>
-                                    ) : null}
-                                </Column> : <Column>
-                                    <label htmlFor="username" style={{ marginBottom: "8px", marginLeft: "4px" }}>Selecione as familias</label>
-                                    <MultiSelect style={{ height: "37px" }} placeholder="Selecione as familias" name="family" value={values.family} onChange={handleChange} options={userIdentifyFamily} optionLabel="representative.name"
-                                        filter maxSelectedLabels={3} />
-                                    <Padding />
-                                    {errors.family && touched.family ? (
-                                        <div style={{ color: "red" }}>{errors.family}<Padding /></div>
-                                    ) : null}
-                                </Column>}
                             </Grid>
+
                             <Grid checkMockup={[{}]}>
                                 <CrasCheckbox checked={attendanceNewUser} value={attendanceNewUser} onChange={() => setattendanceNewUser(!attendanceNewUser)} label={"Usuário não cadastrado"} />
                             </Grid>
+
                             {attendanceNewUser ? <Grid checkMockup={[{}, {}]}>
                                 <Column>
                                     <CrasInput name="name" value={values.name} onChange={handleChange} label="Nome do Indivíduo *" />
@@ -115,9 +122,11 @@ const CreateServicesScreen = () => {
                                     ) : null}
                                 </Column>
                             </Grid> : null}
+
                             <Grid checkMockup={[{}]}>
                                 <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
                             </Grid>
+
                             <Padding />
                             {(errors.description && touched.description) ? (
                                 <div style={{ color: "red" }}>{errors.description}<Padding /></div>
