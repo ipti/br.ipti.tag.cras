@@ -30,8 +30,8 @@ const AllUserIdentifyRequest = async () => {
     });
 }
 
-const UserIndentifyByNameCpfRequest = async (name, cpf) => {
-  return await http.get("/bff/user-identify", {params: {name, cpf}}, config).then(response => response.data)
+const UserIndentifyByNameCpfRequest = async (nameorcpf) => {
+  return await http.get("/bff/user-identify/search", {params: {nameorcpf: nameorcpf}}, config).then(response => response.data)
     .catch(err => {
       if (err.response.status === 401) {
         logout()
@@ -46,6 +46,6 @@ export const useFetchAllUserIdentifyAttendance = () => {
 };
 
 export const useFetchUserIdentifyByNameCpfRequest = (_name) => {
-  return useQuery("UserIndentifyByNameCpfRequest", (_name) => UserIndentifyByNameCpfRequest(_name));
+  return useQuery("UserIndentifyByNameCpfRequest", () => UserIndentifyByNameCpfRequest(_name));
 };
 

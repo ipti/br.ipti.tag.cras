@@ -17,7 +17,7 @@ import queryClient from "../../../services/react-query";
 const CreateServicesScreen = () => {
     const [attendanceGroup, setattendanceGroup] = useState(false)
     const [attendanceNewUser, setattendanceNewUser] = useState(false)
-    const [nomeorcpf, setnameorcpf] = useState(false)
+    const [nomeorcpf, setnameorcpf] = useState("")
     const {data} = useFetchUserIdentifyByNameCpfRequest(nomeorcpf)
     const { userIdentifyFamily } = useContext(UserIdentifyContext)
     const { initialValue, service, technician, handleCreateService, CreateUserSchema, userIdentify, result, handleCreateServiceGroup, CreateAttendanceSchema, CreateNewUserSchema, handleCreateServiceNewUser } = useContext(CreateServicesContext);

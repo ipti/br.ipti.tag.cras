@@ -73,8 +73,6 @@ export const CreateServicesController = () => {
         }
     );
 
-    
-
     return {
         CreateServicesRequestMutation,
         CreateServicesAttendanceRequestMutation,
