@@ -1,9 +1,12 @@
 import { Dialog } from "primereact/dialog";
 import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { formatarData } from "../../../../services/functions";
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
+import { useNavigate, useParams } from "react-router-dom";
 
 const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
-
+    const history = useNavigate()
+    const { id } = useParams()
 
 
     return (
@@ -51,6 +54,11 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                     </Row>
                     <Padding padding="8px" />
                     <Padding padding="8px" />
+
+                    <Row>
+                        <ButtonPrime label={"Imprimir"} onClick={() => { history("/encaminhamento/familia/"+id+"/foward/"+ visibleEdit?.user_identify?.id)}} />
+                    </Row>
+
 
                 </Padding>
             </Column> : null}
