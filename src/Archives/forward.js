@@ -41,6 +41,8 @@ const SubTitle = styled.h1`
 `;
 
 const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
+const { data: fouiforwarding} = getFOUIForwardingByUserIdentification(GetIdUserIdentify())
+
 // Componente React
 const Document = () => {
   return (
