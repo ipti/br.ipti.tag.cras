@@ -5,17 +5,20 @@ import { useFetchOneAttendanceUnity } from '../../sdk/AttendanceUnity/EditAttend
 import { GetIdAttendance } from '../../services/localstorage';
 import { formatarData } from '../../services/functions';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
+import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Technician/EditTechnician/request';
+import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
+
+// import { getFOUIForwardingByUserIdentification } from '../../sdk/FOUIFowarding/request';
 
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
   body {
     font-family: 'Times New Roman';
-    font-size: 11pt;
+    font-size: 12pt;
     margin: 0;
     padding: 0;
   }
 `;
-
 // Estilos dos componentes
 const HeaderContainer = styled.div`
   text-align: center;
@@ -37,6 +40,12 @@ const BodyText = styled.p`
   font-size: 11pt;
 `;
 
+const BodyTextAsign = styled.p`
+  margin: 0;
+  font-size: 11pt;
+  text-align: center;
+`;
+
 const EncaminhamentoContainer = styled.div`
   margin-left: 18pt;
 `;
@@ -48,17 +57,27 @@ const SubTitle = styled.h1`
 
 // Componente React
 const Document = ({ visibleEdit }) => {
-  const { id, idUser } = useParams()
+  const { id, idUser, idassis, idpsico, idFoward } = useParams()
 
   const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
   const { data: familyReferedId } = useFetchFamilyReferedId(id)
+  const { data: assistente} = useFetchOneTechnician(idassis)
+  const { data: psicologo} = useFetchOneTechnicianPsico(idpsico)
+  const { data: fowardMotivation } = useFetchOneFowardByForwarding(idFoward)
+ // const { data: dataEncaminhamento } = formatarData(visibleEdit?.date)
+
+  console.log(assistente, psicologo)
+
+  const typeNames = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]
+  const typeNamesConvert = typeNames?.find((type) => type.id === assistente?.type)
+  const typeNamesConvertPsico = typeNames?.find((type) => type.id === psicologo?.type)
 
   const name_user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
   const CPF_user_identify = familyReferedId?.user_identify?.find((cpf) => cpf.id === parseInt(idUser))
 
-  console.log(familyReferedId)
-  console.log(name_user_identify)
-  console.log(CPF_user_identify)
+  //console.log(familyReferedId)
+  //console.log(name_user_identify)
+  //console.log(CPF_user_identify)
 
   return (
     <>
@@ -83,18 +102,19 @@ const Document = ({ visibleEdit }) => {
 
       <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> <p>  </p>
       <BodyText>Motivo:</BodyText>
-      <p>  </p>
+      <p> {fowardMotivation?.description} </p>
 
       <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle>
       <BodyText>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyText>
 
-      <BodyText>__________________________________________________</BodyText>
-      {/* <BodyText>{technician?.name}</BodyText>
-      <BodyText>{technician?.type}  – 19/IS- {technician?.professional_register}</BodyText> */}
+      
+      <BodyTextAsign>__________________________________________________</BodyTextAsign>
+      <BodyTextAsign>{psicologo?.name}</BodyTextAsign>
+      <BodyTextAsign>{typeNamesConvert?.type}  – 19/IS- {psicologo?.professional_register}</BodyTextAsign>
 
-      <BodyText>__________________________________________________</BodyText>
-      {/* <BodyText>{technician?.name}</BodyText>
-      <BodyText>{technician?.type} – CRESS/SE- {technician?.professional_register}</BodyText> */}
+      <BodyTextAsign>__________________________________________________</BodyTextAsign>
+      <BodyTextAsign>{assistente?.name}</BodyTextAsign>
+      <BodyTextAsign>{typeNamesConvertPsico?.type} – CRESS/SE- {assistente?.professional_register}</BodyTextAsign> 
     </>
   );
 };
