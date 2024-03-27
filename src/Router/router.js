@@ -31,6 +31,8 @@ import NotFoundPage from "../Page/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
 import CompositionFamily from "../Container/FamilyRefered/CompositionFamily";
 import TechnicianVisits from "../Container/FamilyRefered/TechnicianVistis";
+import Forwarding from "../Archives/Foward/foward";
+
 
 const RoutesCras = () => {
 
@@ -67,6 +69,7 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
                 <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
                 <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
+                <Route element={<Forwarding />} path="/encaminhamento/familia/:id/foward/:idUser/:idFoward/:idassis/:idpsico" />
                 <Route element={<RmaCras />} path="/rma-cras/:month/:year" />
                 <Route element={<Login />} path="/login" />
                 <Route path="/*" element={<NotFoundPage />} />

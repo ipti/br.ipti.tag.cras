@@ -7,6 +7,7 @@ import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
 
 import { TabPanel, TabView } from 'primereact/tabview'
+import TechnicianProvider from "../../../context/Technician/Technician/context"
 
 
 const FamilyForwardingPage = () => {
@@ -31,7 +32,7 @@ const FamilyForwardingPage = () => {
 
 
     const filter = (filt, namefilter) => {
-        return filt?.forwading?.name?.toLowerCase()?.includes(namefilter) ||  (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter))
+        return filt?.forwading?.name?.toLowerCase()?.includes(namefilter) || (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter))
     }
 
     return (
@@ -53,7 +54,9 @@ const FamilyForwardingPage = () => {
                 </TabView>
             </div>
             <ModalCreateFamilyForwarding visible={visible} setVisible={setVisible} />
-            <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+            <TechnicianProvider>
+                <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+            </TechnicianProvider>
         </Container>
     )
 }

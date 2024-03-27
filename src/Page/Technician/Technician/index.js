@@ -7,11 +7,13 @@ const TechnicianPage = () => {
 
     const { isLoading, technician } = useContext(TechnicianContext);
 
-
     const columns = [
-        { field: 'id', header: 'id' },
+        { field: 'id', header: 'Identificação' },
         { field: 'name', header: 'Nome' },
+        { field: 'type', header: 'Função' },
     ];
+
+    const technicianConvert = technician ?  technician.map((data ) => ({ ...data, type: data.type  === "ASSISTENTE_SOCIAL" ? "Técnico" : data.role  === "PSICOLOGO" ? "Técnico": "Psicólogo" })) : [];
 
     const filter = (filt, namefilter) => {
         return filt?.name?.toLowerCase()?.includes(namefilter)
@@ -22,7 +24,7 @@ const TechnicianPage = () => {
                 <div>carregando...</div> :
                 <Table
                     columns={columns}
-                    list={technician} 
+                    list={technicianConvert} 
                     path="/criar/tecnico"
                     filter={filter}
                     name="Técnico"
