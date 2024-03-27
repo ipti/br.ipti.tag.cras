@@ -7,8 +7,7 @@ import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Technician/EditTechnician/request';
 import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
-
-// import { getFOUIForwardingByUserIdentification } from '../../sdk/FOUIFowarding/request';
+import { Column, Row } from '../../CrasUi/styles/styles';
 
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
@@ -65,11 +64,9 @@ const BodyTextBold = styled.p`
 `;
 
 const BodyTextPersonal = styled.p`
-  margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
+  margin-left: 10px;
   font-size: 12pt;
 `;
-
-
 
 const FooterContainer = styled.div`
   margin-top: 7cm;
@@ -97,7 +94,6 @@ const EncaminhamentoContainer = styled.div`
   position: relative;
 `;
 
-
 // Componente React
 const Document = ({ visibleEdit }) => {
   const { id, idUser, idassis, idpsico, idFoward } = useParams()
@@ -106,7 +102,7 @@ const Document = ({ visibleEdit }) => {
   const { data: familyReferedId } = useFetchFamilyReferedId(id)
   const { data: assistente} = useFetchOneTechnician(idassis)
   const { data: psicologo} = useFetchOneTechnicianPsico(idpsico)
-  const { data: fowardMotivation } = useFetchOneFowardByForwarding(idFoward)
+  const { data: forwardMotivation } = useFetchOneFowardByForwarding(idFoward)
  // const { data: dataEncaminhamento } = formatarData(visibleEdit?.date)
 
   const typeNames = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]
@@ -115,6 +111,8 @@ const Document = ({ visibleEdit }) => {
 
   const name_user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
   const CPF_user_identify = familyReferedId?.user_identify?.find((cpf) => cpf.id === parseInt(idUser))
+ 
+ console.log(forwardMotivation)
   
   return (
     <>
@@ -134,16 +132,22 @@ const Document = ({ visibleEdit }) => {
         <BodyText>
           O Centro de Referência Especializado da Assistência Social – {unityAttendance?.name}, no uso de suas atribuições, prestador de serviço público na área da Política de Assistência Social encaminha o(a) usuário(a):
         </BodyText>
-        <BodyTextBold>Nome:</BodyTextBold> <BodyTextPersonal> {name_user_identify?.name} </BodyTextPersonal>
-        <BodyTextBold>CPF:</BodyTextBold> <BodyTextPersonal> {CPF_user_identify?.cpf} </BodyTextPersonal> 
-        <BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address} </BodyTextPersonal>
+        <br/> 
+        <Row><BodyTextBold>Nome:</BodyTextBold> <BodyTextPersonal> {name_user_identify?.name} </BodyTextPersonal></Row>
+        <Row><BodyTextBold>CPF:</BodyTextBold> <BodyTextPersonal> {CPF_user_identify?.cpf} </BodyTextPersonal> </Row>
+        <Row><BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address} </BodyTextPersonal></Row>
 
-        <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> <BodyTextPersonal> {fowardMotivation?.fowarding_fk} </BodyTextPersonal>
-        <BodyTextBold>Motivo:</BodyTextBold>
-        <BodyTextPersonal> {fowardMotivation?.description} </BodyTextPersonal>
+        <Row>
+        <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> 
+        <Column id='center'>
+        <BodyTextPersonal> {forwardMotivation?.forwading.name} - {forwardMotivation?.forwading.type} </BodyTextPersonal>
+        </Column>
+        <br/>
+        </Row>
 
-        <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle>
+        <Row> <BodyTextBold>Motivo:</BodyTextBold> <BodyTextPersonal> {forwardMotivation?.description} </BodyTextPersonal></Row>
 
+        <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle> 
         <FooterContainer>
         <BodyTextDate>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyTextDate>
         <br/>
