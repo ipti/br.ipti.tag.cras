@@ -19,11 +19,12 @@ const GlobalStyle = createGlobalStyle`
 
 body {
   font-family: 'Times New Roman';
-  font-size: 24pt;
+  font-size: 14pt;
   margin: 0 ;
   padding: 0;
   width: 21cm; /* Largura da folha A4 */
   height: 29.7cm; /* Altura da folha A4 */
+  
 }
 `;
 // Estilos dos componentes
@@ -31,8 +32,9 @@ const HeaderContainer = styled.div`
   text-align: center;
   border-bottom: 1.5pt solid #000000;
   padding-bottom: 1pt;
+  margin-top: 20px;
 
-  margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
+  /* margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo */
 `;
 
 const Title = styled.p`
@@ -40,51 +42,59 @@ const Title = styled.p`
   margin-right: 90.75pt;
   margin-left: 88.9pt;
   text-align: center;
-  font-size: 30pt;
+  font-size: 14pt;
   font-weight: bold;
 
   margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
 `;
 
 const SubTitle = styled.h1`
-  margin-left: 18pt;
-  font-size: 28pt;
+  font-size: 14pt;
   margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
 `;
 
 const BodyText = styled.p`
   margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
-  font-size: 24pt;
+  font-size: 12pt;
 `;
 
 const BodyTextBold = styled.p`
   margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
-  font-size: 24pt;
+  font-size: 12pt;
   font-weight: bold;
 `;
 
 const BodyTextPersonal = styled.p`
   margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
-  font-size: 24pt;
+  font-size: 12pt;
 `;
 
-const BodyTextAsign = styled.p`
-  margin: 0;
-  font-size: 22pt;
-  text-align: center;
 
-  margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
-`;
 
 const FooterContainer = styled.div`
-  
-  bottom: 3cm; /* Distância de 3cm a partir do rodapé da página */
+  margin-top: 7cm;
+  /*bottom: 3cm;  Distância de 3cm a partir do rodapé da página */
   left: 2.5cm; /* Margem de 2,5cm no lado esquerdo */
   right: 2.5cm; /* Margem de 2,5cm no lado direito */
 `;
 
+const BodyTextAsign = styled.p`
+  margin: 0;
+  font-size: 11pt;
+  text-align: center;
+
+  margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
+`;
+const BodyTextDate = styled.p`
+
+  font-size: 11pt;
+  text-align: right;
+  margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
+`;
 const EncaminhamentoContainer = styled.div`
-  margin-left: 18pt;
+  width: 21cm; /* Largura da folha A4 */
+  height: 29.7cm; /* Altura da folha A4 */
+  position: relative;
 `;
 
 
@@ -128,21 +138,24 @@ const Document = ({ visibleEdit }) => {
         <BodyTextBold>CPF:</BodyTextBold> <BodyTextPersonal> {CPF_user_identify?.cpf} </BodyTextPersonal> 
         <BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address} </BodyTextPersonal>
 
-        <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> <p>  </p>
+        <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> <BodyTextPersonal> {fowardMotivation?.fowarding_fk} </BodyTextPersonal>
         <BodyTextBold>Motivo:</BodyTextBold>
         <BodyTextPersonal> {fowardMotivation?.description} </BodyTextPersonal>
 
-        <FooterContainer>
         <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle>
-        <BodyText>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyText>
-        
+
+        <FooterContainer>
+        <BodyTextDate>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyTextDate>
+        <br/>
+        <br/>
         <BodyTextAsign>__________________________________________________</BodyTextAsign>
         <BodyTextAsign>{psicologo?.name}</BodyTextAsign>
-        <BodyTextAsign>{typeNamesConvert?.type}  – 19/IS- {psicologo?.professional_register}</BodyTextAsign>
-
+        <BodyTextAsign>{typeNamesConvertPsico?.type}  – 19/IS- {psicologo?.professional_register}</BodyTextAsign>
+        <br/>
+        <br/>
         <BodyTextAsign>__________________________________________________</BodyTextAsign>
         <BodyTextAsign>{assistente?.name}</BodyTextAsign>
-        <BodyTextAsign>{typeNamesConvertPsico?.type} – CRESS/SE- {assistente?.professional_register}</BodyTextAsign> 
+        <BodyTextAsign>{typeNamesConvert?.type} – CRESS/SE- {assistente?.professional_register}</BodyTextAsign> 
         </FooterContainer>
         </EncaminhamentoContainer>
     </>
