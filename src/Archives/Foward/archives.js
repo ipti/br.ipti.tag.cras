@@ -9,6 +9,7 @@ import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Tec
 import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Column, Row } from '../../CrasUi/styles/styles';
 
+
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
 @page {
