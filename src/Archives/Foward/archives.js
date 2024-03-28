@@ -149,6 +149,8 @@ const Document = ({ visibleEdit }) => {
         <Row> <BodyTextBold>Motivo:</BodyTextBold> <BodyTextPersonal> {forwardMotivation?.description} </BodyTextPersonal></Row>
 
         <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle> 
+        <BodyText> {forwardMotivation?.report} </BodyText>
+        
         <FooterContainer>
         <BodyTextDate>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyTextDate>
         <br/>

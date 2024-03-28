@@ -24,7 +24,12 @@ const Forwarding = () => {
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
-            pdf.save(`Encaminhamento.pdf`);
+            const currentDate = new Date(); // Formato para colocar a data atual no nome do doc
+            const formattedDate = currentDate.toLocaleDateString().replace(/\//g, '-');
+            const formattedTime = currentDate.toLocaleTimeString().replace(/:/g, '-');
+            const formattedDateTime = `${formattedDate}_${formattedTime}`;
+
+            pdf.save(`Encaminhamento_${formattedDateTime}.pdf`); //Modelo: "Encaminhamento_28-03-2024_12-34-56.pdf"
         });
     };
 
