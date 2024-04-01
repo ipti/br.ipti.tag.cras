@@ -8,7 +8,7 @@ import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Technician/EditTechnician/request';
 import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Column, Row } from '../../CrasUi/styles/styles';
-
+import LogoNSLourdes from "../../assets/images/logo-prefeitura-nslourdes.png";
 
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
@@ -120,6 +120,7 @@ const Document = ({ visibleEdit }) => {
       <GlobalStyle />
       <EncaminhamentoContainer>
         <HeaderContainer>
+          <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
           <p>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</p>
           <p>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</p>
           {unityAttendance?.type === 'CRAS' ? (
@@ -149,6 +150,8 @@ const Document = ({ visibleEdit }) => {
         <Row> <BodyTextBold>Motivo:</BodyTextBold> <BodyTextPersonal> {forwardMotivation?.description} </BodyTextPersonal></Row>
 
         <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle> 
+        <BodyText> {forwardMotivation?.report} </BodyText>
+        
         <FooterContainer>
         <BodyTextDate>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyTextDate>
         <br/>
