@@ -5,6 +5,7 @@ import { Container, Padding, Row } from "../../../CrasUi/styles/styles"
 import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context"
 import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
+import ModalBankForwarding from "./ModalBankForwarding"
 
 import { TabPanel, TabView } from 'primereact/tabview'
 import TechnicianProvider from "../../../context/Technician/Technician/context"
@@ -53,10 +54,14 @@ const FamilyForwardingPage = () => {
                     </TabPanel>
                 </TabView>
             </div>
+            
             <ModalCreateFamilyForwarding visible={visible} setVisible={setVisible} />
+
             <TechnicianProvider>
-                <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                <ModalBankForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                {/* <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} /> */}
             </TechnicianProvider>
+
         </Container>
     )
 }

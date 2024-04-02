@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import { Column, Padding, Row } from "../../CrasUi/styles/styles";
 import Document from "./archives";
 
-const Forwarding = () => {
+const BankForwarding = () => {
 
     const contentRef = useRef(null);
 
@@ -33,7 +33,7 @@ const Forwarding = () => {
                 <Padding padding="32px 16px">
                     <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print' /></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
                 </Padding>
-                <div ref={contentRef} style={{width: "23cm", height: "29.7cm"}}>
+                <div ref={contentRef} style={{width: "23cm", height: "33cm"}}>
                     <Padding padding="32px">
                         <Document  />
                     </Padding>
@@ -43,4 +43,4 @@ const Forwarding = () => {
     );
 };
 
-export default Forwarding;
+export default BankForwarding;
