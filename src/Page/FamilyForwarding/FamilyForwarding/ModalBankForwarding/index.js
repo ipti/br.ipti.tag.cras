@@ -8,6 +8,7 @@ import { Form, Formik } from "formik";
 import { TechnicianContext } from "../../../../context/Technician/Technician/context";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
 import CrasInput from "../../../../CrasUi/Input/Input";
+import * as Yup from 'yup';
 
 
 const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
@@ -16,6 +17,14 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
   
     const { technician } = useContext(TechnicianContext);
 
+    const ErrorsSchema = Yup.object().shape({
+
+        name: Yup.object()
+          .required('Campo Obrigatório'),
+
+        agency: Yup.string()
+          .required('Campo Obrigatório'),
+    });
     //console.log(technician)
 
     return (
@@ -64,7 +73,9 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
                     <Padding padding="8px" />
                     <Padding padding="8px" />
 
-                    <Formik initialValues={{ name: null, agencia: null }} onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/bankfoward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+ values.agencia )}}>
+                    <Formik initialValues={{ name: null, agency: null }}
+                    validationSchema={ErrorsSchema} 
+                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/bankfoward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+ values.agency )}}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
@@ -77,7 +88,11 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                             ) : null}
                                         </Column>
                                         <Column>
-                                            <CrasInput name="agency" value={values.agencia} onChange={handleChange} label="Número da Agência *" />
+                                            <CrasInput name="agency" value={values.agency} onChange={handleChange} label="Número da Agência *" />
+                                            <Padding />
+                                            {errors.agency && touched.agency ? (
+                                                <div style={{ color: "red" }}>{errors.agency}<Padding /></div>
+                                            ) : null}
                                         </Column>
                                     </Grid> 
 

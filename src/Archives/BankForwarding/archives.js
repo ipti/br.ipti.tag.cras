@@ -5,8 +5,7 @@ import { useFetchOneAttendanceUnity } from '../../sdk/AttendanceUnity/EditAttend
 import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician} from '../../sdk/Technician/EditTechnician/request';
-import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
-import { Column, Row } from '../../CrasUi/styles/styles';
+import { Row } from '../../CrasUi/styles/styles';
 import LogoNSLourdes from "../../assets/images/logo-prefeitura-nslourdes.png";
 
 
@@ -30,20 +29,16 @@ body {
 // Estilos dos componentes
 const HeaderContainer = styled.div`
   text-align: center;
+  font-size: 12pt;
   border-bottom: 1.5pt solid #000000;
-  padding-bottom: 1pt;
+  padding: 5pt 10pt 5pt 10pt;
   margin-top: 5px;
 
   /* margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo */
 `;
 const FooterContainer = styled.div`
-  margin-top: 4cm;
+  margin-top: 2cm;
   
-`;
-
-const MainContainer = styled.div`
-  margin-right: 2.5cm; /* Margem de 2,5 cm no lado direito */
-  margin-left: 2.5cm; /* Margem de 2,5 cm no lado esquerdo */
 `;
 
 const Title = styled.p`
@@ -68,6 +63,12 @@ const BodyText = styled.p`
   
 `;
 
+const BodyTextNoIdent = styled.p`
+  font-size: 12pt;
+  text-align: justify;
+  
+`;
+
 const BodyTextAsign = styled.p`
   margin: 0;
   font-size: 11pt;
@@ -81,6 +82,7 @@ const BodyTextDate = styled.p`
 const EncaminhamentoContainer = styled.div`
   width: 21cm; /* Largura da folha A4 */
   height: 29.7cm; /* Altura da folha A4 */
+  padding: 0cm 2cm 0cm 2cm; /* Margem de 2cm */
   position: relative;
 `;
 
@@ -91,12 +93,11 @@ const StyledQuotationParagraph = styled.p`
 
 // Componente React
 const Document = ({ visibleEdit }) => {
-    const { id, idUser, idassis, idagency, idFoward } = useParams()
+    const { id, idUser, idassis, agency} = useParams()
 
     const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
     const { data: familyReferedId } = useFetchFamilyReferedId(id)
     const { data: assistente} = useFetchOneTechnician(idassis)
-    const { data: forwardMotivation } = useFetchOneFowardByForwarding(idFoward)
     // const { data: dataEncaminhamento } = formatarData(visibleEdit?.date)
 
     const typeNames = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]
@@ -118,8 +119,8 @@ const Document = ({ visibleEdit }) => {
         <EncaminhamentoContainer>
             <HeaderContainer>
             <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
-            <p>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</p>
-            <p>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</p>
+            <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</b></p>
+            <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
             {unityAttendance?.type === 'CRAS' ? (
                 <p>CENTRO DE REFERÊNCIA DE ASSISTÊNCIA SOCIAL – {unityAttendance?.name} </p>
             ) : (
@@ -133,7 +134,7 @@ const Document = ({ visibleEdit }) => {
             <SubTitle>
               <Row>À GERENCIA</Row>
               <Row>DO BANCO DO ESTADO DE SERGIPE</Row>
-              <Row>AGÊNCIA Nº _______________________ {idagency}</Row>
+              <Row>AGÊNCIA Nº {agency}</Row>
             </SubTitle>
 
             <BodyText>
@@ -161,20 +162,27 @@ const Document = ({ visibleEdit }) => {
 
             <br/>
             <BodyText>
-            Vale ressaltar que o (a) beneficiário (a) acima identificado (a), nos termos do art., inciso I e II, da Lei Federal n° 14. 284, de 29 de dezembro de 2021 é considerado pobre ou extremamente pobre e necessita obter uma conta poupança ligada a referida instituição bancária para o recebimento de benefício eventual.
+            Vale ressaltar que o(a) beneficiário(a) acima identificado(a), nos termos do art., inciso I e II, da Lei Federal n° 14. 284, de 29 de dezembro de 2021 é considerado pobre ou extremamente pobre e necessita obter uma conta poupança ligada a referida instituição bancária para o recebimento de benefício eventual.
             </BodyText>
 
             <FooterContainer>
             <BodyTextDate> {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}, ___/___/_____.</BodyTextDate>
             <br/><br/>
             
-        
-            <BodyTextAsign>__________________________________________________</BodyTextAsign>
-            <BodyTextAsign>{assistente?.name}</BodyTextAsign>
-            <BodyTextAsign>{typeNamesConvert?.type}</BodyTextAsign> 
-            <BodyTextAsign>CRP nº 3270 19ª Região</BodyTextAsign>  
-             
+            <BodyTextAsign><b>{assistente?.name.toUpperCase()}</b></BodyTextAsign>
+            <BodyTextAsign>{typeNamesConvert?.type}</BodyTextAsign>
+            {assistente?.type === 'PSICOLOGO' ? (
+                <BodyTextAsign>CRP nº – {assistente?.professional_register} </BodyTextAsign>
+            ) : (
+                <BodyTextAsign>CRESS/SE nº – {assistente?.professional_register}</BodyTextAsign>
+            )}
             </FooterContainer>
+
+            <br/><br/>
+            <BodyTextNoIdent><b>FUNDO MUNICIPAL DE ASSISTÊNCIA SOCIAL - FMAS</b></BodyTextNoIdent>
+            <BodyTextNoIdent><b>E-mail: </b>{unityAttendance?.email}</BodyTextNoIdent>
+            <BodyTextNoIdent><b>End.: </b>{unityAttendance?.address.address}, CEP:{unityAttendance?.edcenso_city.cep_final}</BodyTextNoIdent>
+
             
         </EncaminhamentoContainer>
         </>

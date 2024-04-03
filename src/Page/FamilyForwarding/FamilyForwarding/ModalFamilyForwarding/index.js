@@ -7,8 +7,7 @@ import { useContext} from "react";
 import { Form, Formik } from "formik";
 import { TechnicianContext } from "../../../../context/Technician/Technician/context";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
-
-
+import * as Yup from 'yup';
 
 
 const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
@@ -17,6 +16,16 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
   
     const { technician } = useContext(TechnicianContext);
 
+    const ErrorsSchema = Yup.object().shape({
+
+        name: Yup.object()
+          .required('Campo Obrigatório'),
+
+        psico: Yup.object()
+          .required('Campo Obrigatório'),
+    });
+     
+      
     //console.log(technician)
 
     return (
@@ -65,7 +74,9 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                     <Padding padding="8px" />
                     <Padding padding="8px" />
 
-                    <Formik initialValues={{ name: null, psico: null }} onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/foward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+values.psico.id )}}>
+                    <Formik initialValues={{ name: null, psico: null }}
+                    validationSchema={ErrorsSchema}
+                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/foward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+values.psico.id )}}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
