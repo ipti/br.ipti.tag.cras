@@ -41,7 +41,7 @@ const Forwarding = () => {
                     <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print' /></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
                 </Padding>
                 <div ref={contentRef} style={{width: "23cm", height: "29.7cm"}}>
-                    <Padding padding="32px">
+                    <Padding padding="2px">
                         <Document  />
                     </Padding>
                 </div>

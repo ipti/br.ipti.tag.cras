@@ -6,7 +6,8 @@ import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician} from '../../sdk/Technician/EditTechnician/request';
 import { Row } from '../../CrasUi/styles/styles';
-import LogoNSLourdes from "../../assets/images/logo-prefeitura-nslourdes.png";
+import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
+import BackgroundDoc  from "../../assets/images/nslourdes/backgroud_doc_nslourdes.jpg";
 
 
 // Estilos globais
@@ -23,6 +24,8 @@ body {
   padding: 0;
   width: 21cm; /* Largura da folha A4 */
   height: 29.7cm; /* Altura da folha A4 */
+
+  
   
 }
 `;
@@ -37,7 +40,7 @@ const HeaderContainer = styled.div`
   /* margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo */
 `;
 const FooterContainer = styled.div`
-  margin-top: 2cm;
+  margin-top: 1cm;
   
 `;
 
@@ -64,7 +67,7 @@ const BodyText = styled.p`
 `;
 
 const BodyTextNoIdent = styled.p`
-  font-size: 12pt;
+  font-size: 11pt;
   text-align: justify;
   
 `;
@@ -84,6 +87,15 @@ const EncaminhamentoContainer = styled.div`
   height: 29.7cm; /* Altura da folha A4 */
   padding: 0cm 2cm 0cm 2cm; /* Margem de 2cm */
   position: relative;
+`;
+
+const BackgroundContainer = styled.div`
+  padding: 0;
+
+  background-image: url(${BackgroundDoc});  
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  background-position: bottom;
 `;
 
 const StyledQuotationParagraph = styled.p`
@@ -116,6 +128,7 @@ const Document = ({ visibleEdit }) => {
     return (
         <>
         <GlobalStyle />
+        <BackgroundContainer>
         <EncaminhamentoContainer>
             <HeaderContainer>
             <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
@@ -185,6 +198,7 @@ const Document = ({ visibleEdit }) => {
 
             
         </EncaminhamentoContainer>
+        </BackgroundContainer>
         </>
     );
 };

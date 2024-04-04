@@ -6,7 +6,7 @@ import { FamilyForwardingContext } from "../../../context/FamilyForwarding/Famil
 import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
 import ModalBankForwarding from "./ModalBankForwarding"
-import ModalInfos from "./ModalInfos"
+import ModalInfos from "./ModalInfo"
 
 
 import { TabPanel, TabView } from 'primereact/tabview'
