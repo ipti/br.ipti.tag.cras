@@ -34,7 +34,7 @@ const HeaderContainer = styled.div`
   padding-bottom: 1pt;
   margin-top: 20px;
 
-  margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo 
+  margin-left: 2.5cm; 
 `;
 
 const Title = styled.p`
