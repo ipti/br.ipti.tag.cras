@@ -33,6 +33,7 @@ import CompositionFamily from "../Container/FamilyRefered/CompositionFamily";
 import TechnicianVisits from "../Container/FamilyRefered/TechnicianVistis";
 import Forwarding from "../Archives/Fowarding/fowarding";
 import BankForwarding from "../Archives/BankForwarding/bankFowarding";
+import SecondCopyForwarding from "../Archives/SecondCopyForwarding/secondCopyForwarding";
 
 
 const RoutesCras = () => {
@@ -73,13 +74,14 @@ const RoutesCras = () => {
 
                 <Route element={<Forwarding />} path="/encaminhamento/familia/:id/foward/:idUser/:idFoward/:idassis/:idpsico" />
                 <Route element={<BankForwarding />} path="/encaminhamento/familia/:id/bankfoward/:idUser/:idFoward/:idassis/:agency" />
+                <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyFowarding/:idUser/:idFoward/:registry/:dateFirstCopy/:book/:sheet/:numTermo" />
                 <Route element={<RmaCras />} path="/rma-cras/:month/:year" />
 
                 <Route element={<Login />} path="/login" />
                 <Route path="/*" element={<NotFoundPage />} />
             </Routes>
         </BrowserRouter>
-    )
+    ) 
 }
 
 export default RoutesCras;

@@ -102,12 +102,7 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                 </Form>
                             )
                         }}
-
-                        
                     </Formik>
-
-                    
-
 
                 </Padding>
             </Column> : null}

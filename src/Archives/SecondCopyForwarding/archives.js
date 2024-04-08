@@ -4,6 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { useFetchOneAttendanceUnity } from '../../sdk/AttendanceUnity/EditAttendanceUnity/request';
 import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
+import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Row, Column } from '../../CrasUi/styles/styles';
 import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 import BackgroundDoc  from "../../assets/images/nslourdes/backgroud_doc_nslourdes.jpg";
@@ -35,7 +36,8 @@ const HeaderContainer = styled.div`
   /* margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo */
 `;
 const FooterContainer = styled.div`
-  margin-top: 1cm;
+  margin-top: 1.3cm;
+  display: flex;
 `;
 
 const Title = styled.p`
@@ -62,6 +64,7 @@ const BodyText = styled.p`
 const BodyTextNoIdent = styled.p`
   font-size: 11pt;
   text-align: justify;
+  padding: 2px;
 `;
 
 const BodyTextAsign = styled.p`
@@ -76,8 +79,8 @@ const BodyTextDate = styled.p`
 `;
 const DeclaracaoContainer = styled.div`
     margin-top: 1cm;
-    margin-left: 2.5cm;
     border: 1px solid black;
+    padding: 10px;
 `;
 
 const EncaminhamentoContainer = styled.div`
@@ -97,17 +100,22 @@ const BackgroundContainer = styled.div`
 `;
 
 const Document = ({ visibleEdit }) => {
-    const { id, idUser} = useParams()
+    const { id, idUser, idFoward, registry, dateFirstCopy, book, sheet, numTermo} = useParams()
 
     const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
     const { data: familyReferedId } = useFetchFamilyReferedId(id)
+    const { data: forwardMotivation } = useFetchOneFowardByForwarding(idFoward)
+
 
     const name_user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
     const CPF_user_identify = familyReferedId?.user_identify?.find((cpf) => cpf.id === parseInt(idUser))
     const RG_user_identify = familyReferedId?.user_identify?.find((rg) => rg.id === parseInt(idUser))
     const emission_RG_user_identify = familyReferedId?.user_identify?.find((emission) => emission.id === parseInt(idUser))
     const uf_RG_user_identify = familyReferedId?.user_identify?.find((uf_rg) => uf_rg.id === parseInt(idUser))
-    const profission_user_identify = familyReferedId?.user_identify?.find((profission) => profission.id === parseInt(idUser))   
+    const profission_user_identify = familyReferedId?.user_identify?.find((profission) => profission.id === parseInt(idUser))  
+
+    const typeNames = [{ type: "Nascimento", id: "SEGUNDA_VIA_NASCIMENTO" }, { type: "Casamento", id: "SEGUNDA_VIA_CASAMENTO" }, { type: "Óbito", id: "SEGUNDA_VIA_OBITO" }]
+    const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.fowarding.type)
 
     return (
         <>
@@ -131,22 +139,22 @@ const Document = ({ visibleEdit }) => {
             <SubTitle>
               <Row>Ilmo(a). Sr(a).</Row>
               <Row>Oficial de Registro Civil das Pessoas Naturais</Row>
-              <Row>Cartório: {agency}</Row>
+              <Row>Cartório: {registry}</Row>
             </SubTitle>
 
             <br/><br/>
      
             <BodyText>
-                Solicito a Vossa Senhoria a expedição de segunda via gratuita de Certidão de {tipoCertidao}
+                Solicito a Vossa Senhoria a expedição de segunda via gratuita de Certidão de {typeNamesConvert?.type}
             </BodyText>
             <br />
             <BodyTextNoIdent> Em nome de {name_user_identify?.name} </BodyTextNoIdent>
-            <BodyTextNoIdent> Data de {tipoCertidao} : {dataCertidao} </BodyTextNoIdent>
-            <BodyTextNoIdent> Data:___/___/_____  Livro: {livroCertidao} Folha: {folhaCertidao} Nº TERMO: {numTermo} </BodyTextNoIdent>
+            <BodyTextNoIdent> Data de {typeNamesConvert} : {dateFirstCopy} </BodyTextNoIdent>
+            <BodyTextNoIdent> Data:___/___/_____  Livro: {book} Folha: {sheet} Nº TERMO: {numTermo} </BodyTextNoIdent>
 
             <BodyTextNoIdent><b>Filiação:</b></BodyTextNoIdent>
-            <BodyTextNoIdent> Nome da Mãe:_______________________________________________________________ </BodyTextNoIdent>
-            <BodyTextNoIdent> Nome do Pai:_______________________________________________________________ </BodyTextNoIdent>
+            <BodyTextNoIdent> Nome da Mãe: _______________________________________________________________ </BodyTextNoIdent>
+            <BodyTextNoIdent> Nome do Pai: ________________________________________________________________ </BodyTextNoIdent>
            
             <DeclaracaoContainer>
                 <Title>DECLARAÇÃO</Title>
@@ -166,7 +174,7 @@ const Document = ({ visibleEdit }) => {
             <br/><br/>
            
             <FooterContainer>
-                <Column><img src={LogoCras} alt="Logo Cras"/></Column>
+                <Column><img src={LogoCras} alt="Logo Cras" style={{ width: '80px' }}/></Column>
                 <Column>
                     <BodyTextNoIdent><b>End.: </b>{unityAttendance?.address.address}</BodyTextNoIdent>
                     <BodyTextNoIdent><b>Cep: </b>{unityAttendance?.edcenso_city.cep_final}</BodyTextNoIdent>
@@ -174,7 +182,6 @@ const Document = ({ visibleEdit }) => {
                     <BodyTextNoIdent><b>E-mail: </b>{unityAttendance?.email}</BodyTextNoIdent>
                 </Column>
             </FooterContainer>
-
             
         </EncaminhamentoContainer>
         </BackgroundContainer>

@@ -4,7 +4,7 @@ import jsPDF from 'jspdf';
 import { Column, Padding, Row } from "../../CrasUi/styles/styles";
 import Document from "./archives";
 
-const BankForwarding = () => {
+const SecondCopyForwarding = () => {
 
     const contentRef = useRef(null);
 
@@ -41,4 +41,4 @@ const BankForwarding = () => {
     );
 };
 
-export default BankForwarding;
+export default SecondCopyForwarding;
