@@ -6,7 +6,7 @@ import { GetIdAttendance } from '../../services/localstorage';
 //import { formatarData } from '../../services/functions';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Technician/EditTechnician/request';
-import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
+import { useFetchOneForwardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Column, Row } from '../../CrasUi/styles/styles';
 import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 
@@ -97,13 +97,13 @@ const EncaminhamentoContainer = styled.div`
 
 // Componente React
 const Document = ({ visibleEdit }) => {
-  const { id, idUser, idassis, idpsico, idFoward } = useParams()
+  const { id, idUser, idassis, idpsico, idForward } = useParams()
 
   const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
   const { data: familyReferedId } = useFetchFamilyReferedId(id)
   const { data: assistente} = useFetchOneTechnician(idassis)
   const { data: psicologo} = useFetchOneTechnicianPsico(idpsico)
-  const { data: forwardMotivation } = useFetchOneFowardByForwarding(idFoward)
+  const { data: forwardMotivation } = useFetchOneForwardByForwarding(idForward)
  // const { data: dataEncaminhamento } = formatarData(visibleEdit?.date)
 
   const typeNames = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]

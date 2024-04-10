@@ -4,7 +4,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { useFetchOneAttendanceUnity } from '../../sdk/AttendanceUnity/EditAttendanceUnity/request';
 import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
-import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
+import { useFetchOneForwardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Row, Column } from '../../CrasUi/styles/styles';
 import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 import BackgroundDoc  from "../../assets/images/nslourdes/backgroud_doc_nslourdes.jpg";
@@ -36,7 +36,7 @@ const HeaderContainer = styled.div`
   /* margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo */
 `;
 const FooterContainer = styled.div`
-  margin-top: 1.3cm;
+  margin-top: 1.0cm;
   display: flex;
 `;
 
@@ -100,12 +100,11 @@ const BackgroundContainer = styled.div`
 `;
 
 const Document = ({ visibleEdit }) => {
-    const { id, idUser, idFoward, registry, dateFirstCopy, book, sheet, numTermo} = useParams()
+    const { id, idUser, idForward, registry, dateFirstCopy, book, sheet, numTermo} = useParams()
 
     const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
     const { data: familyReferedId } = useFetchFamilyReferedId(id)
-    const { data: forwardMotivation } = useFetchOneFowardByForwarding(idFoward)
-
+    const { data: forwardMotivation } = useFetchOneForwardByForwarding(idForward)
 
     const name_user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
     const CPF_user_identify = familyReferedId?.user_identify?.find((cpf) => cpf.id === parseInt(idUser))
@@ -114,8 +113,10 @@ const Document = ({ visibleEdit }) => {
     const uf_RG_user_identify = familyReferedId?.user_identify?.find((uf_rg) => uf_rg.id === parseInt(idUser))
     const profission_user_identify = familyReferedId?.user_identify?.find((profission) => profission.id === parseInt(idUser))  
 
+    var dateFirstCopyEdit = dateFirstCopy.split("-").reverse().join("/");
+
     const typeNames = [{ type: "Nascimento", id: "SEGUNDA_VIA_NASCIMENTO" }, { type: "Casamento", id: "SEGUNDA_VIA_CASAMENTO" }, { type: "Óbito", id: "SEGUNDA_VIA_OBITO" }]
-    const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.fowarding.type)
+    const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.forwading.type)
 
     return (
         <>
@@ -142,15 +143,15 @@ const Document = ({ visibleEdit }) => {
               <Row>Cartório: {registry}</Row>
             </SubTitle>
 
-            <br/><br/>
+            <br/>
      
             <BodyText>
                 Solicito a Vossa Senhoria a expedição de segunda via gratuita de Certidão de {typeNamesConvert?.type}
             </BodyText>
             <br />
             <BodyTextNoIdent> Em nome de {name_user_identify?.name} </BodyTextNoIdent>
-            <BodyTextNoIdent> Data de {typeNamesConvert} : {dateFirstCopy} </BodyTextNoIdent>
-            <BodyTextNoIdent> Data:___/___/_____  Livro: {book} Folha: {sheet} Nº TERMO: {numTermo} </BodyTextNoIdent>
+            <BodyTextNoIdent> Data de {typeNamesConvert?.type} : {dateFirstCopyEdit} </BodyTextNoIdent>
+            <BodyTextNoIdent> Data:____/____/______  Livro:{book} Folha:{sheet} Nº TERMO:{numTermo} </BodyTextNoIdent>
 
             <BodyTextNoIdent><b>Filiação:</b></BodyTextNoIdent>
             <BodyTextNoIdent> Nome da Mãe: _______________________________________________________________ </BodyTextNoIdent>
@@ -159,7 +160,7 @@ const Document = ({ visibleEdit }) => {
             <DeclaracaoContainer>
                 <Title>DECLARAÇÃO</Title>
                 <BodyTextNoIdent>O abaixo-assinado e qualificado, DECLARA, sob pena de responsabilidade civil e criminal, nos termos do artigo 30, parágrafo 1º, da Lei 6.015/1973, que não possui recursos para arcar com os emolumentos relativos à expedição de certidão. </BodyTextNoIdent>
-                <BodyTextDate> {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}, ___/___/_____.</BodyTextDate>
+                <BodyTextDate> {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}, ____/____/______.</BodyTextDate>
                 <br/>
                 <BodyTextNoIdent>Nome:<u></u></BodyTextNoIdent>
                 <BodyTextNoIdent>Profissão: <u>{profission_user_identify?.profission}</u>  RG:<u>{RG_user_identify?.rg_number}</u> {emission_RG_user_identify?.emission_rg}/{uf_RG_user_identify?.uf_rg}   CPF: <u>{CPF_user_identify?.cpf}</u> </BodyTextNoIdent>

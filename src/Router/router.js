@@ -31,10 +31,9 @@ import NotFoundPage from "../Page/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
 import CompositionFamily from "../Container/FamilyRefered/CompositionFamily";
 import TechnicianVisits from "../Container/FamilyRefered/TechnicianVistis";
-import Forwarding from "../Archives/Fowarding/fowarding";
+import Forwarding from "../Archives/Forwarding/forwarding";
 import BankForwarding from "../Archives/BankForwarding/bankFowarding";
 import SecondCopyForwarding from "../Archives/SecondCopyForwarding/secondCopyForwarding";
-
 
 const RoutesCras = () => {
 
@@ -72,9 +71,9 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
                 <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
 
-                <Route element={<Forwarding />} path="/encaminhamento/familia/:id/foward/:idUser/:idFoward/:idassis/:idpsico" />
-                <Route element={<BankForwarding />} path="/encaminhamento/familia/:id/bankfoward/:idUser/:idFoward/:idassis/:agency" />
-                <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyFowarding/:idUser/:idFoward/:registry/:dateFirstCopy/:book/:sheet/:numTermo" />
+                <Route element={<Forwarding />} path="/encaminhamento/familia/:id/forward/:idUser/:idForward/:idassis/:idpsico" />
+                <Route element={<BankForwarding />} path="/encaminhamento/familia/:id/bankforward/:idUser/:idForward/:idassis/:agency" />
+                <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyForwarding/:idUser/:idForward/:registry/:dateFirstCopy/:book/:sheet/:numTermo" />
                 <Route element={<RmaCras />} path="/rma-cras/:month/:year" />
 
                 <Route element={<Login />} path="/login" />

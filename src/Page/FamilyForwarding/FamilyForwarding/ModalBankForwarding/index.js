@@ -75,7 +75,7 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
 
                     <Formik initialValues={{ name: null, agency: null }}
                     validationSchema={ErrorsSchema} 
-                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/bankfoward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+ values.agency )}}>
+                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/bankforward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+ values.agency )}}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
