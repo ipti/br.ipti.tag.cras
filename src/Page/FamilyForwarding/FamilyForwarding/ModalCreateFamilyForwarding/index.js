@@ -55,6 +55,9 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
                                     <ButtonPrime label={"Cadastrar"} type={"submit"} />
                                 </Row>
                             </Column>
+
+                           {/* TODO: breve relato se for encaminhamento creas/cras
+                           TODO: acompanhamento inss adiciona status */}
                         </form>
                     )
                 }}

@@ -22,16 +22,20 @@ const FamilyForwardingPage = () => {
     const { FamilyForwarding } = useContext(FamilyForwardingContext)
 
     const columns = [
-        { field: 'id', header: 'id' },
+        { field: 'id', header: 'Código' },
         { field: 'user_identify.name', header: 'Nome' },
         { field: 'user_identify.kinship', header: 'Parentesco' },
         { field: 'forwading.type', header: "Tipo" },
-        { field: 'forwading.name', header: "Local" }
+        { field: 'forwading.name', header: "Local" },
+        { field: 'forwading.status', header: "Status"},
+        
     ];
 
     const columnsFamily = [
         { field: 'forwading.type', header: "Tipo" },
-        { field: 'forwading.name', header: "Local" }
+        { field: 'forwading.name', header: "Local" },
+        { field: 'forwading.status', header: "Status"}, 
+       
     ];
 
     const filter = (filt, namefilter) => {

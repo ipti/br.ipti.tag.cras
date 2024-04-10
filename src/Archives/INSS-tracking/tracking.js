@@ -1,65 +1,51 @@
-import React from 'react';
-import styled from 'styled-components';
+import { useRef } from "react";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import { Column, Padding, Row } from "../../CrasUi/styles/styles";
+import Document from "./archives";
 
-const StyledDiv = styled.div`
-  page-break-before: always;
-  page-break-after: always;
-`;
+const INNStracking = () => {
 
-const StyledParagraph = styled.p`
-  font-weight: bold;
-`;
+    const contentRef = useRef(null);
 
-const StyledSpan = styled.span`
-  font-weight: bold;
-`;
+    const generatePDF = () => {
+        if (!contentRef.current) return;
 
-const INSStracking = () => {
-  return (
-    <html>
-      <head>
-        <title></title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      </head>
-      <body>
-        <StyledDiv>
-          <div>
-            <StyledParagraph>
-              <StyledSpan>ACOMPANHAMENTO MEU INSS – BPC</StyledSpan>
-              <br />
-              Nome: <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Responsável:</StyledSpan> Contato: <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Número do Benefício:</StyledSpan> Protocolo: <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Login:</StyledSpan> <br />
-              CPF: <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Senha:</StyledSpan> <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Agendamentos Avaliação Social:</StyledSpan> <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Perícia Médica:</StyledSpan> <br />
-            </StyledParagraph>
-            <StyledParagraph>
-              <StyledSpan>Status:</StyledSpan> ( ) Deferido ( ) Indeferido <br />
-            </StyledParagraph>
-            <StyledParagraph>
-               <br />
-               <br />
-            </StyledParagraph>
-          </div>
-        </StyledDiv>
-      </body>
-    </html>
-  );
+        const elementToCapture = contentRef.current;
+
+
+        html2canvas(elementToCapture).then((canvas) => {
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 210;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+            const currentDate = new Date(); // Formato para colocar a data atual no nome do doc
+            const formattedDate = currentDate.toLocaleDateString().replace(/\//g, '-');
+            const formattedTime = currentDate.toLocaleTimeString().replace(/:/g, '-');
+            const formattedDateTime = `${formattedDate}_${formattedTime}`;
+
+            pdf.save(`Acompanhamento_INSS_${formattedDateTime}.pdf`); //Modelo: "Acompanhamento_INSS_10-04-2024_12-34-56.pdf"
+        });
+    };
+
+    return (
+        <div style={{ overflowY: "scroll", position: "relative", height: "100vh" }}>
+            <Padding padding={"32px"}>
+                <span style={{ color: "red", fontSize: "12px" }}>Recomendado gerar em computadores</span>
+                <Padding padding="32px 16px">
+                    <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><Column id='center'><i className='pi pi-print' /></Column> <Padding padding="2px" /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
+                </Padding>
+                <div ref={contentRef} style={{width: "23cm", height: "29.7cm"}}>
+                    <Padding padding="2px">
+                        <Document  />
+                    </Padding>
+                </div>
+            </Padding>
+        </div>
+    );
 };
 
-export default INSStracking;
+export default INNStracking;
