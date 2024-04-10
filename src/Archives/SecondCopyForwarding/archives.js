@@ -106,18 +106,15 @@ const Document = ({ visibleEdit }) => {
     const { data: familyReferedId } = useFetchFamilyReferedId(id)
     const { data: forwardMotivation } = useFetchOneForwardByForwarding(idForward)
 
-    const name_user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
-    const CPF_user_identify = familyReferedId?.user_identify?.find((cpf) => cpf.id === parseInt(idUser))
-    const RG_user_identify = familyReferedId?.user_identify?.find((rg) => rg.id === parseInt(idUser))
-    const emission_RG_user_identify = familyReferedId?.user_identify?.find((emission) => emission.id === parseInt(idUser))
-    const uf_RG_user_identify = familyReferedId?.user_identify?.find((uf_rg) => uf_rg.id === parseInt(idUser))
-    const profission_user_identify = familyReferedId?.user_identify?.find((profission) => profission.id === parseInt(idUser))  
+    const user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
 
     var dateFirstCopyEdit = dateFirstCopy.split("-").reverse().join("/");
 
     const typeNames = [{ type: "Nascimento", id: "SEGUNDA_VIA_NASCIMENTO" }, { type: "Casamento", id: "SEGUNDA_VIA_CASAMENTO" }, { type: "Óbito", id: "SEGUNDA_VIA_OBITO" }]
     const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.forwading.type)
 
+
+    console.log(user_identify?.filiation_2)
     return (
         <>
         <GlobalStyle />
@@ -149,21 +146,21 @@ const Document = ({ visibleEdit }) => {
                 Solicito a Vossa Senhoria a expedição de segunda via gratuita de Certidão de {typeNamesConvert?.type}
             </BodyText>
             <br />
-            <BodyTextNoIdent> Em nome de {name_user_identify?.name} </BodyTextNoIdent>
+            <BodyTextNoIdent> Em nome de {user_identify?.name} </BodyTextNoIdent>
             <BodyTextNoIdent> Data de {typeNamesConvert?.type} : {dateFirstCopyEdit} </BodyTextNoIdent>
             <BodyTextNoIdent> Data:____/____/______  Livro:{book} Folha:{sheet} Nº TERMO:{numTermo} </BodyTextNoIdent>
 
             <BodyTextNoIdent><b>Filiação:</b></BodyTextNoIdent>
-            <BodyTextNoIdent> Nome da Mãe: _______________________________________________________________ </BodyTextNoIdent>
-            <BodyTextNoIdent> Nome do Pai: ________________________________________________________________ </BodyTextNoIdent>
+            <BodyTextNoIdent> Filiação 1: {user_identify?.filiation_1} </BodyTextNoIdent>
+            <BodyTextNoIdent> Filiação 1: {user_identify?.filiation_2} </BodyTextNoIdent>
            
             <DeclaracaoContainer>
                 <Title>DECLARAÇÃO</Title>
                 <BodyTextNoIdent>O abaixo-assinado e qualificado, DECLARA, sob pena de responsabilidade civil e criminal, nos termos do artigo 30, parágrafo 1º, da Lei 6.015/1973, que não possui recursos para arcar com os emolumentos relativos à expedição de certidão. </BodyTextNoIdent>
                 <BodyTextDate> {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}, ____/____/______.</BodyTextDate>
                 <br/>
-                <BodyTextNoIdent>Nome:<u></u></BodyTextNoIdent>
-                <BodyTextNoIdent>Profissão: <u>{profission_user_identify?.profission}</u>  RG:<u>{RG_user_identify?.rg_number}</u> {emission_RG_user_identify?.emission_rg}/{uf_RG_user_identify?.uf_rg}   CPF: <u>{CPF_user_identify?.cpf}</u> </BodyTextNoIdent>
+                <BodyTextNoIdent>Nome:<u>{user_identify.name}</u></BodyTextNoIdent>
+                <BodyTextNoIdent>Profissão: <u>{user_identify?.profission}</u>  RG:<u>{user_identify?.rg_number}</u> {user_identify?.emission_rg}/{user_identify?.uf_rg}   CPF: <u>{user_identify?.cpf}</u> </BodyTextNoIdent>
                 <BodyTextNoIdent>Endereço: <u>{familyReferedId?.address.address}</u> </BodyTextNoIdent>
                 <BodyTextNoIdent>Cidade: <u>{unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}</u></BodyTextNoIdent>
                 <br/>

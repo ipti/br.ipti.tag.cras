@@ -5,7 +5,7 @@ import { getToken } from "./localstorage";
 
 const http = axios.create({
   //baseURL: "https://api-cras.tag.ong.br/",
-  baseURL: "http://localhost:3001/",
+  baseURL: "http://localhost:3000/",
 });
 
 http.interceptors.request.use(async config => {
