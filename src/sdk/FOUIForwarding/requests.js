@@ -16,7 +16,7 @@ export  const getFOUIForwardingByForwardingId = async (id) => {
     return await http.get(`/bff/foui-forwarding/forwarding?forwardingId=${id}`, config);
 }
 
-export const useFetchOneFowardByForwarding = (id) => {
-    return useQuery("OneFowardByForwarding ", () => getFOUIForwardingByForwardingId(id).then(response => response.data));
+export const useFetchOneForwardByForwarding = (id) => {
+    return useQuery("OneForwardByForwarding ", () => getFOUIForwardingByForwardingId(id).then(response => response.data));
 };
 

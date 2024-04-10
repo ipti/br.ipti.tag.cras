@@ -6,8 +6,9 @@ import { GetIdAttendance } from '../../services/localstorage';
 //import { formatarData } from '../../services/functions';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Technician/EditTechnician/request';
-import { useFetchOneFowardByForwarding} from '../../sdk/FOUIForwarding/requests';
+import { useFetchOneForwardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Column, Row } from '../../CrasUi/styles/styles';
+import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
@@ -33,7 +34,7 @@ const HeaderContainer = styled.div`
   padding-bottom: 1pt;
   margin-top: 20px;
 
-  /* margin-left: 2.5cm; Margem de 2,5 cm no lado esquerdo */
+  margin-left: 2.5cm; 
 `;
 
 const Title = styled.p`
@@ -96,13 +97,13 @@ const EncaminhamentoContainer = styled.div`
 
 // Componente React
 const Document = ({ visibleEdit }) => {
-  const { id, idUser, idassis, idpsico, idFoward } = useParams()
+  const { id, idUser, idassis, idpsico, idForward } = useParams()
 
   const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
   const { data: familyReferedId } = useFetchFamilyReferedId(id)
   const { data: assistente} = useFetchOneTechnician(idassis)
   const { data: psicologo} = useFetchOneTechnicianPsico(idpsico)
-  const { data: forwardMotivation } = useFetchOneFowardByForwarding(idFoward)
+  const { data: forwardMotivation } = useFetchOneForwardByForwarding(idForward)
  // const { data: dataEncaminhamento } = formatarData(visibleEdit?.date)
 
   const typeNames = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]
@@ -119,8 +120,9 @@ const Document = ({ visibleEdit }) => {
       <GlobalStyle />
       <EncaminhamentoContainer>
         <HeaderContainer>
-          <p>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</p>
-          <p>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</p>
+          <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
+          <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</b></p>
+          <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
           {unityAttendance?.type === 'CRAS' ? (
             <p>CENTRO DE REFERÊNCIA DE ASSISTÊNCIA SOCIAL – {unityAttendance?.name} </p>
           ) : (
@@ -135,7 +137,7 @@ const Document = ({ visibleEdit }) => {
         <br/> 
         <Row><BodyTextBold>Nome:</BodyTextBold> <BodyTextPersonal> {name_user_identify?.name} </BodyTextPersonal></Row>
         <Row><BodyTextBold>CPF:</BodyTextBold> <BodyTextPersonal> {CPF_user_identify?.cpf} </BodyTextPersonal> </Row>
-        <Row><BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address} </BodyTextPersonal></Row>
+        <Row><BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address}, {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym} </BodyTextPersonal></Row>
 
         <Row>
         <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> 
@@ -148,6 +150,8 @@ const Document = ({ visibleEdit }) => {
         <Row> <BodyTextBold>Motivo:</BodyTextBold> <BodyTextPersonal> {forwardMotivation?.description} </BodyTextPersonal></Row>
 
         <SubTitle>III. BREVE RELATO DA SITUAÇÃO:</SubTitle> 
+        <BodyText> {forwardMotivation?.report} </BodyText>
+        
         <FooterContainer>
         <BodyTextDate>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyTextDate>
         <br/>

@@ -18,27 +18,38 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
 
     return (
         <Dialog header="Criar Encaminhamento" visible={visible} style={{ width: '50vw' }} onHide={() => setVisible(false)}>
-            <Formik initialValues={{ user_identify: null, forwading: null, description: "" }} onSubmit={(values) => { CreateForwarding({ ...values, attendance_unity: parseInt(GetIdAttendance()),date: new Date(Date.now()), family: isFamily ? FamilyForwarding?.familyInformation?.id : undefined, forwading: values.forwading.id, user_identify: !isFamily ? values.user_identify.id : undefined }); setVisible(false) }}>
+            <Formik initialValues={{ user_identify: null, forwading: null, description: "", report: ""}} onSubmit={(values) => { CreateForwarding({ ...values, attendance_unity: parseInt(GetIdAttendance()),date: new Date(Date.now()), family: isFamily ? FamilyForwarding?.familyInformation?.id : undefined, forwading: values.forwading.id, user_identify: !isFamily ? values.user_identify.id : undefined }); setVisible(false) }}>
                 {({ values, errors, touched, handleChange, handleSubmit }) => {
                     return (
                         <form onSubmit={e => { e.preventDefault(); handleSubmit() }}>
                             <Grid checkMockup={[{}]}>
                                 <CrasCheckbox checked={isFamily} value={isFamily} onChange={() => setIsFamily(!isFamily)} label={"Encaminhamento para familia"} />
                             </Grid>
+
                             <Padding />
-                            <Grid checkMockup={[{}, {}]}>
-                                <CrasDropdown value={values.forwading} name={"forwading"} options={forwadingName} optionLabel={"name"} onChange={handleChange} placeholder={"Selecione um encaminhamento"} label={"Selecione um encaminhamento"} />
-                                {!isFamily ? <CrasDropdown value={values.user_identify} name={"user_identify"} onChange={handleChange} options={FamilyForwarding?.familyInformation?.user_identify} optionLabel={"name"} placeholder={"Selecione um membro ou a familia"} label={"Selecione um membro ou a familia"} />
-                                    : null}                            </Grid>
+                                <Grid checkMockup={[{}, {}]}>
+                                    <CrasDropdown value={values.forwading} name={"forwading"} options={forwadingName} optionLabel={"name"} onChange={handleChange} placeholder={"Selecione um encaminhamento"} label={"Selecione um encaminhamento"} />
+                                    {!isFamily ? <CrasDropdown value={values.user_identify} name={"user_identify"} onChange={handleChange} options={FamilyForwarding?.familyInformation?.user_identify} optionLabel={"name"} placeholder={"Selecione um membro ou a familia"} label={"Selecione um membro ou a familia"} />
+                                        : null}                            
+                                </Grid>
                             <Padding />
+
                             <Padding padding="0 0 0 16px">
-                                <CrasInputArea name={"description"} label={"Descrição"} onChange={handleChange} value={values.description} />
+                                <CrasInputArea name={"description"} label={"Motivo"} onChange={handleChange} value={values.description} />
                             </Padding>
-                            <Padding />
+                            
                             {errors.description && touched.description ? (
-                                <div style={{ color: "red" }}>{errors.description}<Padding /></div>
+                                <div style={{ color: "red" }}>{errors.description}
+                                <Padding /></div>
                             ) : null}
                             <Padding />
+                            <Padding padding="0 0 0 16px">
+                                <CrasInputArea name={"report"} label={"Breve relato da situação"} onChange={handleChange} value={values.report} />
+                            </Padding>
+
+                            <Padding />
+                            <Padding />
+
                             <Column>
                                 <Row id="center" style={{ width: "100%" }}>
                                     <ButtonPrime label={"Cadastrar"} type={"submit"} />
