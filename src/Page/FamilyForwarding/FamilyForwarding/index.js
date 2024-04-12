@@ -7,6 +7,7 @@ import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
 import ModalBankForwarding from "./ModalBankForwarding"
 import ModalSecondCopyForwarding from "./ModalSecondCopyForwarding"
+import ModalINSStracking from "./ModalINSStracking"
 import ModalInfos from "./ModalInfo"
 
 
@@ -77,9 +78,12 @@ const FamilyForwardingPage = () => {
                             : ((visibleEdit?.forwading?.name === 'Cartório') && ((visibleEdit?.forwading?.type === 'SEGUNDA_VIA_NASCIMENTO')||( visibleEdit?.forwading?.type === 'SEGUNDA_VIA_CASAMENTO')||(visibleEdit?.forwading?.type === 'SEGUNDA_VIA_OBITO')) ) ? (
                                 <ModalSecondCopyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
                             )
-                                : (
-                                    <ModalInfos visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
-                                )}
+                                : ((visibleEdit?.forwading?.name === 'INSS') && (visibleEdit?.forwading?.type === 'ACOMPANHAMENTO')) ? (
+                                    <ModalINSStracking visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                                )
+                                    : (
+                                        <ModalInfos visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                                    )}
                 </>}
 
 

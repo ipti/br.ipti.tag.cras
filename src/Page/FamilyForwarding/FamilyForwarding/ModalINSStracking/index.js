@@ -56,20 +56,13 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                     </Row>
                     <Padding padding="8px" />
 
-                    <Row>
-                        <Row>
-                            <h2>CPF: </h2>
-                            <Padding padding="2px" />
-                            <p>{user_identify?.cpf}</p>
-                        </Row>
-                        <Padding padding="8px" />
-                        <Row>
-                            <h2>Senha: </h2>
-                            <Padding padding="2px" />
-                            <p></p>
-                        </Row>
+                    <Row>               
+                        <h2>Status do Acompanhamento: </h2>
+                        <Padding padding="2px" />
+                        <p>{visibleEdit?.forwading?.status}</p>   
                     </Row>
                     <Padding padding="8px" />
+
 
                 </Padding>
             </Column> : null}
@@ -77,4 +70,4 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
     )
 }
 
-export default ModalFamilyForwarding
+export default ModalINSStracking;
