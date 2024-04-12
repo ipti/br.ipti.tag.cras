@@ -26,7 +26,10 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
 
         numTermo: Yup.string()
             .required('Campo Obrigatório'),
-        
+
+        dateEvent: Yup.string()
+            .required('Campo Obrigatório'),
+            
         dateFirstCopy: Yup.string()
             .required('Campo Obrigatório'),
     
@@ -86,10 +89,10 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                     <Padding padding="8px" />
 
 
-                    <Formik initialValues={{ registry: null, dateFirstCopy: null, book: null, sheet: null, numTermo: null }}
+                    <Formik initialValues={{ registry: null, dateEvent: null, dateFirstCopy: null, book: null, sheet: null, numTermo: null }}
                     validationSchema={ErrorsSchema} 
                     onSubmit={(values) => { 
-                        history("/encaminhamento/familia/"+id+"/secondCopyForwarding/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+ values.registry +"/"+ values.dateFirstCopy.toISOString().split("T")[0]+"/"+ values.book +"/"+ values.sheet +"/"+values.numTermo )
+                        history("/encaminhamento/familia/"+id+"/secondCopyForwarding/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+ values.registry +"/"+ values.dateEvent.toISOString().split("T")[0]+"/"+ values.dateFirstCopy.toISOString().split("T")[0]+"/"+ values.book +"/"+ values.sheet +"/"+values.numTermo )
                         }}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
@@ -103,15 +106,22 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                             ) : null}
                                         </Column>
                                         <Column>
-                                            <CrasCalendar name="dateFirstCopy" value={values.dateFirstCopy} onChange={handleChange} label="Data da primeira via *" />
+                                            <CrasCalendar name="dateEvent" value={values.dateEvent} onChange={handleChange} label="Data do Nascimento/Casamento/Óbito *" />
                                             <Padding />
-                                            {errors.dateFirstCopy && touched.dateFirstCopy ? (
-                                                <div style={{ color: "red" }}>{errors.dateFirstCopy}<Padding /></div>
+                                            {errors.dateEvent && touched.dateEvent ? (
+                                                <div style={{ color: "red" }}>{errors.dateEvent}<Padding /></div>
                                             ) : null}
                                         </Column>
                                     </Grid>
 
                                     <Grid checkMockup={[{}, {}]}>
+                                        <Column>
+                                            <CrasCalendar name="dateFirstCopy" value={values.dateFirstCopy} onChange={handleChange} label="Data do registro da primeira via *" />
+                                            <Padding />
+                                            {errors.dateFirstCopy && touched.dateFirstCopy ? (
+                                                <div style={{ color: "red" }}>{errors.dateFirstCopy}<Padding /></div>
+                                            ) : null}
+                                        </Column>
                                         <Column>
                                             <CrasInput name="book" value={values.book} onChange={handleChange} label="Livro *" />
                                             <Padding />
@@ -119,6 +129,10 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                                 <div style={{ color: "red" }}>{errors.book}<Padding /></div>
                                             ) : null}
                                         </Column>
+                                        
+                                    </Grid> 
+
+                                    <Grid checkMockup={[{}, {}]}>
                                         <Column>
                                             <CrasInput name="sheet" value={values.sheet} onChange={handleChange} label="Folha *" />
                                             <Padding />
@@ -126,9 +140,6 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                                 <div style={{ color: "red" }}>{errors.sheet}<Padding /></div>
                                             ) : null}
                                         </Column>
-                                    </Grid> 
-
-                                    <Grid checkMockup={[{}, {}]}>
                                         <Column>
                                             <CrasInput name="numTermo" value={values.numTermo} onChange={handleChange} label="Número do termo *" />
                                             <Padding />
@@ -136,6 +147,7 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                                 <div style={{ color: "red" }}>{errors.numTermo}<Padding /></div>
                                             ) : null}
                                         </Column>
+                                        
                                     </Grid> 
 
                                     <Row>
