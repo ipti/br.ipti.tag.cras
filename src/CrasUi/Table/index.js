@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { Row } from '../styles/styles';
 
 
-const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit, onView, linkView }) => {
+const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit, onView, linkView}) => {
     const [visible, setVisible] = useState();
     const [id, setId] = useState();
 
@@ -26,7 +26,6 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit, onView,
     };
 
     const viewBodyTemplate = (rowData) => {
-
         return (
             <React.Fragment>
                 <Row id='end'>
@@ -36,6 +35,7 @@ const CrasTable = ({ products, columns, header, pathEdit, delet, onEdit, onView,
         );
     };
 
+    
 
     return (
         <>

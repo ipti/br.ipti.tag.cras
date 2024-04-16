@@ -36,7 +36,6 @@ const FamilyForwardingPage = () => {
         { field: 'forwading.type', header: "Tipo" },
         { field: 'forwading.name', header: "Local" },
         { field: 'forwading.status', header: "Status"}, 
-       
     ];
 
     const filter = (filt, namefilter) => {
@@ -56,7 +55,7 @@ const FamilyForwardingPage = () => {
             <div className="card">
                 <TabView>
                     <TabPanel header="Membros da familia">
-                        <Table columns={columns} list={FamilyForwarding?.usersForwarding} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
+                        <Table columns={columns} list={FamilyForwarding?.usersForwarding}  onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
                     </TabPanel>
                     <TabPanel header="Familia">
                         <Table columns={columnsFamily} list={FamilyForwarding?.familyForwadings} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />

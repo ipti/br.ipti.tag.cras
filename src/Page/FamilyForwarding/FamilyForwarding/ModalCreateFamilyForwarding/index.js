@@ -46,6 +46,7 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
                             <Padding padding="0 0 0 16px">
                                 <CrasInputArea name={"report"} label={"Breve relato da situação"} onChange={handleChange} value={values.report} />
                             </Padding>
+                           
 
                             <Padding />
                             <Padding />
