@@ -2,21 +2,33 @@ import { Dialog } from "primereact/dialog";
 import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { formatarData } from "../../../../services/functions";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
 import { Grid } from "../../../../CrasUi/styles/styles";
 import { useContext } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
-import { FamilyForwardingContext } from "../../../../context/FamilyForwarding/FamilyForwarding/context";
+import { Status } from "../../../../Controller/controllerGlobal";
+import { EditTrackingContext } from "../../../../context/FamilyForwarding/EditTracking/context";
 
 const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
 
-    const { forwading } = useContext(FamilyForwardingContext);
+    //const { forwading } = useContext(FamilyForwardingContext);
+
+    console.log(visibleEdit)
 
     const ErrorsSchema = Yup.object().shape({
         name: Yup.object()
           .required('Campo Obrigatório'),
 
     });
+
+    const status = [
+        {id: Status.PENDENTE, name: "Pendente"},
+        {id: Status.DEFERIDO, name: "Deferido"},
+        {id: Status.INDEFERIDO, name: "Indeferido"},
+    ]
+
+    const { handleEditTracking} = useContext(EditTrackingContext);
 
     return (
         <Dialog header="Acompanhamento" visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)}>
@@ -46,7 +58,6 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                             <Padding padding="2px" />
                             <p>{visibleEdit?.forwading?.type}</p>
                         </Row>
-
                     </Row>
                     <Padding padding="8px" />
 
@@ -75,21 +86,26 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                         <p>{visibleEdit?.forwading?.status}</p>   
                     </Row>
                     <Padding padding="8px" />
+
                     <Formik initialValues={{ name: visibleEdit?.forwading?.status}}
                     validationSchema={ErrorsSchema}
-                    onSubmit={(values) => {}}>
+                    onSubmit={(values) => handleEditTracking(values)}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
                                     <Grid checkMockup={[{}, {}]}>
                                         <Column>
-                                            <CrasDropdown name="name" value={values.name} options={forwading} onChange={handleChange} label="Status" />
+                                            <CrasDropdown name="name" value={values.name} options={status} onChange={handleChange} label="Status" optionLabel={"name"} />
                                             <Padding />
                                             {errors.name && touched.name ? (
                                                 <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                             ) : null}
                                         </Column>
                                     </Grid>
+                                    <Row>
+                                        <Padding />
+                                            <ButtonPrime label="Salvar" type="submit" />
+                                    </Row>
                                 </Form>
                             )
                         }}

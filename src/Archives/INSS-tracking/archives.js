@@ -29,32 +29,43 @@ const Document = () => {
                 <StyledDiv>
                 <div>
                     <StyledParagraph>
-                    <StyledSpan>ACOMPANHAMENTO MEU INSS – BPC</StyledSpan>
-                    <br />
-                    Nome: {user_identify?.name} <br />
+                      <StyledSpan>ACOMPANHAMENTO MEU INSS – BPC</StyledSpan>
+                      <br />
+                      Nome: {user_identify?.name} 
+                      <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
-                    <StyledSpan>Responsável:</StyledSpan> Contato: <br />
+                      <StyledSpan>Responsável:</StyledSpan> Contato: <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
-                    <StyledSpan>Número do Benefício:</StyledSpan> Protocolo: <br />
+                      <StyledSpan>Número do Benefício:</StyledSpan> Protocolo: <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
-                    <StyledSpan>Login:</StyledSpan> <br />
-                    CPF: <br />
+                      <StyledSpan>Login:</StyledSpan> 
+                      <br />
+                      CPF: 
+                      <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
-                    <StyledSpan>Senha:</StyledSpan> <br />
+                      <StyledSpan>Senha:</StyledSpan> <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
                     <StyledSpan>Agendamentos Avaliação Social:</StyledSpan> <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
                     <StyledSpan>Perícia Médica:</StyledSpan> <br />
                     </StyledParagraph>
+
                     <StyledParagraph>
                     <StyledSpan>Status:</StyledSpan> ( ) Deferido ( ) Indeferido <br />
                     </StyledParagraph>
+                    
                     <StyledParagraph>
                     <br />
                     <br />
