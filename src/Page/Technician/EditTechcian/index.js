@@ -11,6 +11,7 @@ import CrasDropdown from "../../../CrasUi/Dropdown";
 const EditTechnicianScreen = () => {
 
     const { CreateSchema, initialValue, technician, handleEditTechnician, toast, user } = useContext(EditTechnicianContext);
+    const functions = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]
 
     return (
         <Container>
@@ -20,7 +21,7 @@ const EditTechnicianScreen = () => {
                 </h1>
                 <Padding padding="16px" />
                 {technician ? <Formik initialValues={initialValue}
-                    onSubmit={(values) => { handleEditTechnician(values); }}
+                    onSubmit={(values) => { handleEditTechnician({...values, type: values.type.id}); }}
                     validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
@@ -41,6 +42,26 @@ const EditTechnicianScreen = () => {
                                     <Padding />
                                     {errors.user && touched.user ? (
                                         <div style={{ color: "red" }}>{errors.user}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                            </Grid>
+                            <Grid checkMockup={[{}, {}]}>
+                                <Column>
+                                    <CrasInput
+                                        name="professional_register"
+                                        value={values.professional_register}
+                                        onChange={handleChange}
+                                        label="Registro Profissional" />
+                                    <Padding />
+                                    {errors.professional_register && touched.professional_register ? (
+                                        <div style={{ color: "red" }}>{errors.professional_register}</div>
+                                    ) : null}
+                                </Column>
+                                <Column>
+                                    <CrasDropdown name="type" value={values.type} options={functions} onChange={handleChange} optionLabel={"type"} label="Função" />
+                                    <Padding />
+                                    {errors.type && touched.type ? (
+                                        <div style={{ color: "red" }}>{errors.type}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>

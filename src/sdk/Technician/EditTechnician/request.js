@@ -21,6 +21,10 @@ export const useFetchOneTechnician = (id) => {
     return useQuery("OneTechnician", () => OneTechnicianRequest(id));
 };
 
+export const useFetchOneTechnicianPsico = (id) => {
+    return useQuery("OneTechnicianPsico", () => OneTechnicianRequest(id));
+};
+
 
 export const EditTechnicianRequest = async (body, id) => {
     return await http.put(`/direct/technician/${id}`, body, config);
