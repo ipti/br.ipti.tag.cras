@@ -7,10 +7,11 @@ import { useContext} from "react";
 import { Form, Formik } from "formik";
 import { TechnicianContext } from "../../../../context/Technician/Technician/context";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
+import CrasInput from "../../../../CrasUi/Input/Input";
 import * as Yup from 'yup';
 
 
-const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
+const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
     const history = useNavigate()
     const { id } = useParams()
   
@@ -21,11 +22,9 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
         name: Yup.object()
           .required('Campo Obrigatório'),
 
-        psico: Yup.object()
+        agency: Yup.string()
           .required('Campo Obrigatório'),
     });
-     
-      
     //console.log(technician)
 
     return (
@@ -74,9 +73,9 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                     <Padding padding="8px" />
                     <Padding padding="8px" />
 
-                    <Formik initialValues={{ name: null, psico: null }}
-                    validationSchema={ErrorsSchema}
-                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/foward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+values.psico.id )}}>
+                    <Formik initialValues={{ name: null, agency: null }}
+                    validationSchema={ErrorsSchema} 
+                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/bankfoward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+ values.agency )}}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
@@ -89,13 +88,13 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                                             ) : null}
                                         </Column>
                                         <Column>
-                                            <CrasDropdown name="psico" value={values.psico} options={technician.filter(psico => psico.type === "PSICOLOGO")} onChange={handleChange} optionLabel={"name"} label="Psicólogo(a) Responsável *" />
+                                            <CrasInput name="agency" value={values.agency} onChange={handleChange} label="Número da Agência *" />
                                             <Padding />
-                                            {errors.psico && touched.psico ? (
-                                                <div style={{ color: "red" }}>{errors.psico}<Padding /></div>
+                                            {errors.agency && touched.agency ? (
+                                                <div style={{ color: "red" }}>{errors.agency}<Padding /></div>
                                             ) : null}
                                         </Column>
-                                    </Grid>
+                                    </Grid> 
 
                                     <Row>
                                         <ButtonPrime label={"Imprimir"}  />
@@ -116,4 +115,4 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
     )
 }
 
-export default ModalFamilyForwarding
+export default ModalBankForwarding

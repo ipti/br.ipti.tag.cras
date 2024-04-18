@@ -5,6 +5,9 @@ import { Container, Padding, Row } from "../../../CrasUi/styles/styles"
 import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context"
 import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
+import ModalBankForwarding from "./ModalBankForwarding"
+import ModalInfos from "./ModalInfo"
+
 
 import { TabPanel, TabView } from 'primereact/tabview'
 import TechnicianProvider from "../../../context/Technician/Technician/context"
@@ -30,10 +33,11 @@ const FamilyForwardingPage = () => {
         { field: 'forwading.name', header: "Local" }
     ];
 
-
     const filter = (filt, namefilter) => {
         return filt?.forwading?.name?.toLowerCase()?.includes(namefilter) || (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter))
     }
+
+    console.log(visibleEdit);
 
     return (
         <Container>
@@ -53,10 +57,26 @@ const FamilyForwardingPage = () => {
                     </TabPanel>
                 </TabView>
             </div>
+
             <ModalCreateFamilyForwarding visible={visible} setVisible={setVisible} />
+
             <TechnicianProvider>
-                <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+
+                {visibleEdit && <>
+                    {(visibleEdit?.forwading?.name === 'BANESE' && visibleEdit?.forwading?.type === 'ENCAMINHAMENTO') ? (
+                        <ModalBankForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                    )
+                        : (((visibleEdit?.forwading?.name === 'CRAS') || (visibleEdit?.forwading?.name === 'CREAS')) && (visibleEdit?.forwading?.type === 'ENCAMINHAMENTO')) ? (
+                            <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                        )
+                            : (
+                                <ModalInfos visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                            )}
+                </>}
+
+
             </TechnicianProvider>
+
         </Container>
     )
 }
