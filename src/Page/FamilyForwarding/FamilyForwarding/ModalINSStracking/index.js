@@ -8,11 +8,12 @@ import { useContext } from "react";
 import { Form, Formik } from "formik";
 import * as Yup from 'yup';
 import { Status } from "../../../../Controller/controllerGlobal";
-import { EditTrackingContext } from "../../../../context/FamilyForwarding/EditTracking/context";
+import { EditForwardingContext } from "../../../../context/FamilyForwarding/EditFamilyForwarding/context";
+// import { EditTrackingContext } from "../../../../context/FamilyForwarding/EditTracking/context";
 
 const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
 
-    //const { forwading } = useContext(FamilyForwardingContext);
+    const { handleEditForwarding } = useContext(EditForwardingContext);
 
     console.log(visibleEdit)
 
@@ -28,7 +29,7 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
         {id: Status.INDEFERIDO, name: "Indeferido"},
     ]
 
-    const { handleEditTracking} = useContext(EditTrackingContext);
+    // const { handleEditTracking} = useContext(EditTrackingContext);
 
     return (
         <Dialog header="Acompanhamento" visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)}>
@@ -83,13 +84,16 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                         <h2>Status do Acompanhamento: </h2>
                         <Padding padding="2px" />
                         {/* <CrasDropdown name="name" value={"A"} options={"A"} onChange={(a) => {console.log(a)}} optionLabel={"name"} label="Assistente Social Responsável *" /> */}
-                        <p>{visibleEdit?.forwading?.status}</p>   
+                        <p>{visibleEdit?.status}</p>   
                     </Row>
                     <Padding padding="8px" />
 
-                    <Formik initialValues={{ name: visibleEdit?.forwading?.status}}
+                    <Formik initialValues={{ name: visibleEdit?.status}}
                     validationSchema={ErrorsSchema}
-                    onSubmit={(values) => handleEditTracking(values)}>
+                    onSubmit={(status) => {
+                        handleEditForwarding({ status: status.name }, visibleEdit?.id)
+                        setVisibleEdit(false)
+                    }}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>

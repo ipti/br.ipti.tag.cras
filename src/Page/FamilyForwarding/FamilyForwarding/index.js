@@ -28,21 +28,17 @@ const FamilyForwardingPage = () => {
         { field: 'user_identify.kinship', header: 'Parentesco' },
         { field: 'forwading.type', header: "Tipo" },
         { field: 'forwading.name', header: "Local" },
-        { field: 'forwading.status', header: "Status"},
         
     ];
 
     const columnsFamily = [
         { field: 'forwading.type', header: "Tipo" },
         { field: 'forwading.name', header: "Local" },
-        { field: 'forwading.status', header: "Status"}, 
     ];
 
     const filter = (filt, namefilter) => {
         return filt?.forwading?.name?.toLowerCase()?.includes(namefilter) || (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter))
     }
-
-    console.log(visibleEdit);
 
     return (
         <Container>
