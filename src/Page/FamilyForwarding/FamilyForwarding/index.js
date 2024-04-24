@@ -7,6 +7,7 @@ import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
 import ModalBankForwarding from "./ModalBankForwarding"
 import ModalSecondCopyForwarding from "./ModalSecondCopyForwarding"
+import ModalINSStracking from "./ModalINSStracking"
 import ModalInfos from "./ModalInfo"
 
 
@@ -22,23 +23,22 @@ const FamilyForwardingPage = () => {
     const { FamilyForwarding } = useContext(FamilyForwardingContext)
 
     const columns = [
-        { field: 'id', header: 'id' },
+        { field: 'id', header: 'Código' },
         { field: 'user_identify.name', header: 'Nome' },
         { field: 'user_identify.kinship', header: 'Parentesco' },
         { field: 'forwading.type', header: "Tipo" },
-        { field: 'forwading.name', header: "Local" }
+        { field: 'forwading.name', header: "Local" },
+        
     ];
 
     const columnsFamily = [
         { field: 'forwading.type', header: "Tipo" },
-        { field: 'forwading.name', header: "Local" }
+        { field: 'forwading.name', header: "Local" },
     ];
 
     const filter = (filt, namefilter) => {
         return filt?.forwading?.name?.toLowerCase()?.includes(namefilter) || (filt?.user_identify.name?.toLowerCase()?.includes(namefilter) || filt?.forwading?.name?.toLowerCase()?.includes(namefilter))
     }
-
-    console.log(visibleEdit);
 
     return (
         <Container>
@@ -51,7 +51,7 @@ const FamilyForwardingPage = () => {
             <div className="card">
                 <TabView>
                     <TabPanel header="Membros da familia">
-                        <Table columns={columns} list={FamilyForwarding?.usersForwarding} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
+                        <Table columns={columns} list={FamilyForwarding?.usersForwarding}  onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
                     </TabPanel>
                     <TabPanel header="Familia">
                         <Table columns={columnsFamily} list={FamilyForwarding?.familyForwadings} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
@@ -73,9 +73,12 @@ const FamilyForwardingPage = () => {
                             : ((visibleEdit?.forwading?.name === 'Cartório') && ((visibleEdit?.forwading?.type === 'SEGUNDA_VIA_NASCIMENTO')||( visibleEdit?.forwading?.type === 'SEGUNDA_VIA_CASAMENTO')||(visibleEdit?.forwading?.type === 'SEGUNDA_VIA_OBITO')) ) ? (
                                 <ModalSecondCopyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
                             )
-                                : (
-                                    <ModalInfos visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
-                                )}
+                                : ((visibleEdit?.forwading?.name === 'INSS') && (visibleEdit?.forwading?.type === 'ACOMPANHAMENTO')) ? (
+                                    <ModalINSStracking visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                                )
+                                    : (
+                                        <ModalInfos visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
+                                    )}
                 </>}
 
 
