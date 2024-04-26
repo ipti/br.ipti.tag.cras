@@ -12,7 +12,7 @@ import { GetIdAttendance } from "../../../../services/localstorage";
 const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
     const { CreateForwarding, forwarding, FamilyForwarding } = useContext(FamilyForwardingContext)
 
-    const forwadingName = forwarding?.map((item) => ({ ...item, name: item?.name + " - " + item?.type }))
+    const forwadingName = forwarding?.map((item) => ({ ...item, name: item?.name + " - " + item?.type.split('_').join(' ') }))
 
     const [isFamily, setIsFamily] = useState(false)
 
