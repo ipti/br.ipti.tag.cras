@@ -3,17 +3,16 @@ import Table from "../../../Components/Table"
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime"
 import { Container, Padding, Row } from "../../../CrasUi/styles/styles"
 import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context"
+import ModalBankForwarding from "./ModalBankForwarding"
 import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding"
 import ModalFamilyForwarding from "./ModalFamilyForwarding"
-import ModalBankForwarding from "./ModalBankForwarding"
-import ModalSecondCopyForwarding from "./ModalSecondCopyForwarding"
 import ModalINSStracking from "./ModalINSStracking"
 import ModalInfos from "./ModalInfo"
-
+import ModalSecondCopyForwarding from "./ModalSecondCopyForwarding"
 
 import { TabPanel, TabView } from 'primereact/tabview'
+import { FowardingType, Kinship } from "../../../Controller/controllerGlobal"
 import TechnicianProvider from "../../../context/Technician/Technician/context"
-
 
 const FamilyForwardingPage = () => {
 
@@ -22,13 +21,15 @@ const FamilyForwardingPage = () => {
 
     const { FamilyForwarding } = useContext(FamilyForwardingContext)
 
+    const fowardingConvert = FamilyForwarding ?
+        FamilyForwarding?.usersForwarding.map((data) => ({ ...data, forwadingType: FowardingType.getTitle(data.forwading.type), kinshipType:Kinship.getTitle(data.user_identify.kinship) })) : [];
+
     const columns = [
         { field: 'id', header: 'Código' },
         { field: 'user_identify.name', header: 'Nome' },
-        { field: 'user_identify.kinship', header: 'Parentesco' },
-        { field: 'forwading.type', header: "Tipo" },
+        { field: 'kinshipType', header: 'Parentesco' },
+        { field: 'forwadingType', header: "Tipo" },
         { field: 'forwading.name', header: "Local" },
-        
     ];
 
     const columnsFamily = [
@@ -51,7 +52,7 @@ const FamilyForwardingPage = () => {
             <div className="card">
                 <TabView>
                     <TabPanel header="Membros da familia">
-                        <Table columns={columns} list={FamilyForwarding?.usersForwarding}  onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
+                        <Table columns={columns} list={fowardingConvert} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
                     </TabPanel>
                     <TabPanel header="Familia">
                         <Table columns={columnsFamily} list={FamilyForwarding?.familyForwadings} onView={setVisibleEdit} name="Encaminhamentos" filter={filter} />
@@ -70,7 +71,7 @@ const FamilyForwardingPage = () => {
                         : (((visibleEdit?.forwading?.name === 'CRAS') || (visibleEdit?.forwading?.name === 'CREAS')) && (visibleEdit?.forwading?.type === 'ENCAMINHAMENTO')) ? (
                             <ModalFamilyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
                         )
-                            : ((visibleEdit?.forwading?.name === 'Cartório') && ((visibleEdit?.forwading?.type === 'SEGUNDA_VIA_NASCIMENTO')||( visibleEdit?.forwading?.type === 'SEGUNDA_VIA_CASAMENTO')||(visibleEdit?.forwading?.type === 'SEGUNDA_VIA_OBITO')) ) ? (
+                            : ((visibleEdit?.forwading?.name === 'Cartório') && ((visibleEdit?.forwading?.type === 'SEGUNDA_VIA_NASCIMENTO') || (visibleEdit?.forwading?.type === 'SEGUNDA_VIA_CASAMENTO') || (visibleEdit?.forwading?.type === 'SEGUNDA_VIA_OBITO'))) ? (
                                 <ModalSecondCopyForwarding visibleEdit={visibleEdit} setVisibleEdit={setVisibleEdit} />
                             )
                                 : ((visibleEdit?.forwading?.name === 'INSS') && (visibleEdit?.forwading?.type === 'ACOMPANHAMENTO')) ? (

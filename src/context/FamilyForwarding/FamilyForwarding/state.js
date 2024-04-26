@@ -11,6 +11,7 @@ export const FamilyForwardingState = () => {
     const [familyOne, setFamilyOne] = useState()
     const {id} = useParams()
     const { data: familyReferedfetch} = useFetchFamilyReferedId(id);
+    console.log(forwardingFamilyfetch)
 
     useEffect(() => {
         if(familyReferedfetch){
