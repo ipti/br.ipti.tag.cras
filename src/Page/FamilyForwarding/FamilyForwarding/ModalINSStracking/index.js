@@ -1,34 +1,38 @@
 import { Dialog } from "primereact/dialog";
-import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
+import { Column, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { formatarData } from "../../../../services/functions";
-import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
-import { useNavigate, useParams } from "react-router-dom";
-import { useContext} from "react";
-import { Form, Formik } from "formik";
-import { TechnicianContext } from "../../../../context/Technician/Technician/context";
 import CrasDropdown from "../../../../CrasUi/Dropdown";
-import CrasInput from "../../../../CrasUi/Input/Input";
+import ButtonPrime from "../../../../CrasUi/Button/ButtonPrime";
+import { Grid } from "../../../../CrasUi/styles/styles";
+import { useContext } from "react";
+import { Form, Formik } from "formik";
 import * as Yup from 'yup';
+import { Status } from "../../../../Controller/controllerGlobal";
+import { EditForwardingContext } from "../../../../context/FamilyForwarding/EditFamilyForwarding/context";
+// import { EditTrackingContext } from "../../../../context/FamilyForwarding/EditTracking/context";
 
+const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
 
-const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
-    const history = useNavigate()
-    const { id } = useParams()
-  
-    const { technician } = useContext(TechnicianContext);
+    const { handleEditForwarding } = useContext(EditForwardingContext);
+
+    console.log(visibleEdit)
 
     const ErrorsSchema = Yup.object().shape({
-
         name: Yup.object()
           .required('Campo Obrigatório'),
 
-        agency: Yup.string()
-          .required('Campo Obrigatório'),
     });
-    //console.log(technician)
+
+    const status = [
+        {id: Status.PENDENTE, name: "Pendente"},
+        {id: Status.DEFERIDO, name: "Deferido"},
+        {id: Status.INDEFERIDO, name: "Indeferido"},
+    ]
+
+    // const { handleEditTracking} = useContext(EditTrackingContext);
 
     return (
-        <Dialog header="Encaminhamento" visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)}>
+        <Dialog header="Acompanhamento" visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)}>
             {visibleEdit ? <Column>
                 <Padding padding="16px">
                     {visibleEdit?.user_identify?.name ? <Row id="space-between">
@@ -55,7 +59,6 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
                             <Padding padding="2px" />
                             <p>{visibleEdit?.forwading?.type}</p>
                         </Row>
-
                     </Row>
                     <Padding padding="8px" />
 
@@ -71,33 +74,41 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
                         <p>{visibleEdit?.description}</p>
                     </Row>
                     <Padding padding="8px" />
+                    <Row>
+                        <h2>Breve relato: </h2>
+                        <Padding padding="2px" />
+                        <p>{visibleEdit?.report}</p>
+                    </Row>
+                    <Padding padding="8px" />
+                    <Row>               
+                        <h2>Status do Acompanhamento: </h2>
+                        <Padding padding="2px" />
+                        {/* <CrasDropdown name="name" value={"A"} options={"A"} onChange={(a) => {console.log(a)}} optionLabel={"name"} label="Assistente Social Responsável *" /> */}
+                        <p>{visibleEdit?.status}</p>   
+                    </Row>
                     <Padding padding="8px" />
 
-                    <Formik initialValues={{ name: null, agency: null }}
-                    validationSchema={ErrorsSchema} 
-                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/bankforward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+ values.agency )}}>
+                    <Formik initialValues={{ name: visibleEdit?.status}}
+                    validationSchema={ErrorsSchema}
+                    onSubmit={(status) => {
+                        handleEditForwarding({ status: status.name }, visibleEdit?.id)
+                        setVisibleEdit(false)
+                    }}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
                                     <Grid checkMockup={[{}, {}]}>
                                         <Column>
-                                            <CrasDropdown name="name" value={values.name} options={technician?.filter(assis => assis.type === "ASSISTENTE_SOCIAL")} onChange={handleChange} optionLabel={"name"} label="Assistente Social Responsável *" />
+                                            <CrasDropdown name="name" value={values.name} options={status} onChange={handleChange} label="Status" optionLabel={"name"} />
                                             <Padding />
                                             {errors.name && touched.name ? (
                                                 <div style={{ color: "red" }}>{errors.name}<Padding /></div>
                                             ) : null}
                                         </Column>
-                                        <Column>
-                                            <CrasInput name="agency" value={values.agency} onChange={handleChange} label="Número da Agência *" />
-                                            <Padding />
-                                            {errors.agency && touched.agency ? (
-                                                <div style={{ color: "red" }}>{errors.agency}<Padding /></div>
-                                            ) : null}
-                                        </Column>
-                                    </Grid> 
-
+                                    </Grid>
                                     <Row>
-                                        <ButtonPrime label={"Imprimir"}  />
+                                        <Padding />
+                                            <ButtonPrime label="Salvar" type="submit" />
                                     </Row>
                                 </Form>
                             )
@@ -110,4 +121,4 @@ const ModalBankForwarding = ({ visibleEdit, setVisibleEdit }) => {
     )
 }
 
-export default ModalBankForwarding
+export default ModalINSStracking;

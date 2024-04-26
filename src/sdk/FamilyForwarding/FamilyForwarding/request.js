@@ -40,8 +40,21 @@ const config = {
     }
   }
 
+  // const EditTrackingRequest = async (body) => {
+  //   try {
+  //     return await http.put("/bff/forwarding", body, config)
+  //     .catch(err => {
+  //       if (err.response.status === 401 || err.response.status === 403) {
+  //         logout();
+  //         window.location.reload()
+  //       }
+  //       throw err;
+  //     });
+  //     } catch (err) {
+  //       console.log(err)
+  //   }
+  // } 
 
-  
   export const useFetchAllForwardingFamily = (id) => {
     return useQuery("AllForwardingFamily", () => AllForwardingFamilyRequest(id));
   };
@@ -49,3 +62,4 @@ const config = {
   export const useFetchAllForwarding = () => {
     return useQuery("AllForwarding", () => AllForwardingRequest());
   };
+  

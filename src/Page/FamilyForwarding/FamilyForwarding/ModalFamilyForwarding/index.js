@@ -76,7 +76,7 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
 
                     <Formik initialValues={{ name: null, psico: null }}
                     validationSchema={ErrorsSchema}
-                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/foward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+values.psico.id )}}>
+                    onSubmit={(values) => { history("/encaminhamento/familia/"+id+"/forward/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+values.name.id +"/"+values.psico.id )}}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>
