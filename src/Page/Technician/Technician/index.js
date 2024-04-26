@@ -11,6 +11,7 @@ const TechnicianPage = () => {
         { field: 'id', header: 'Identificação' },
         { field: 'name', header: 'Nome' },
         { field: 'type', header: 'Função' },
+        { field: 'professional_register', header: 'Nº de registro profissional' },  
     ];
 
     const technicianConvert = technician ?  technician.map((data ) => ({ ...data, type: data.type  === "ASSISTENTE_SOCIAL" ? "Técnico" : data.role  === "PSICOLOGO" ? "Técnico": "Psicólogo" })) : [];

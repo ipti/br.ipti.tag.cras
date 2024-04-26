@@ -7,7 +7,7 @@ const ListAttendanceUnity = () => {
 
     const {isLoading, attendance, deleteAttendance} = useContext(AttendanceUnityContext)
     const columns = [
-        {field: 'id', header: 'id' },
+        {field: 'id', header: 'Identificação' },
         { field: 'name', header: 'Nome' },
     ];
     const filter = (filt, namefilter) => {

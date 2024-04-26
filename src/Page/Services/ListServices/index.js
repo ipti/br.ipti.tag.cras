@@ -18,14 +18,14 @@ const ListServicesScreen = () => {
     const history = useNavigate()
 
     const columns = [
-        { field: 'id', header: 'id' },
+        { field: 'id', header: 'Identificação' },
         { field: 'task.name', header: 'Servico' },
         { field: 'result', header: 'Resultado' },
         { field: 'technician.name', header: 'Tecnico responsavel' }
     ];
 
     const columnsGroup = [
-        { field: 'id', header: 'id' },
+        { field: 'id', header: 'Identificação' },
         { field: 'servico', header: 'Servico' },
         { field: 'result', header: 'Resultado' },
         { field: 'tecnico', header: 'Tecnico responsavel' }

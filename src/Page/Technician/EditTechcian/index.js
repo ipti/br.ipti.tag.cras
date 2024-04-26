@@ -58,7 +58,7 @@ const EditTechnicianScreen = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasDropdown name="type" value={values.type} options={functions} onChange={handleChange} optionLabel={"type"} label="Função" />
+                                    <CrasDropdown name="type" value={values} options={functions} onChange={handleChange} optionLabel={"type"} label="Função" />
                                     <Padding />
                                     {errors.type && touched.type ? (
                                         <div style={{ color: "red" }}>{errors.type}<Padding /></div>

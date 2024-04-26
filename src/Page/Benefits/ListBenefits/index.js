@@ -8,8 +8,8 @@ const ListBenefitsScreen = () => {
     const { benefits, deleteBenefits } = useContext(BenefitsContext)
 
     const columns = [
-        { field: "id", header: "id" },
-        { field: "description", header: "nome" },
+        { field: "id", header: "Identificação" },
+        { field: "description", header: "Nome" },
         { field: "type", header: "Tipo" },
     ];
 
