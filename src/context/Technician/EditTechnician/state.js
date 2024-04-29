@@ -5,9 +5,9 @@ import { useParams } from 'react-router-dom';
 import queryClient from '../../../services/react-query';
 // import { CreateTechnicianController } from '../../sdk/Technician/CreateTechnician/controller';
 
-
-
 export const EditTechnicianState = () => {
+    
+    const functions = [{ name: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { name: "Psicólogo", id: "PSICOLOGO" }];
 
     const [loading, setLoading] = useState(false)
     useEffect(() => {
@@ -51,21 +51,21 @@ export const EditTechnicianState = () => {
 
     const initialValue = {
         name: technician ? technician.name : "",
-        user: (user && technician) ? user.find(props => props.id === technician?.user_fk) : ""
+        user: (user && technician) ? user.find(props => props.id === technician?.user_fk) : "",
+        type: technician ? functions.find(props =>  props.id === technician?.type) : "",
     }
-
     const CreateSchema = Yup.object().shape({
         name: Yup.string().required("Campo Obrigatório"),
-        user: Yup.object().required("Campo Obrigatório")
+        user: Yup.object().required("Campo Obrigatório"),
+        type: Yup.object().required("Campo Obrigatório"),
     })
-
-
+    
     const handleEditTechnician = (body) => {
         EditTechnicianRequestMutation.mutate({...body, user: body.user.id})
     }
-
+    
 
     return {
-        handleEditTechnician, CreateSchema, initialValue, technician, show, toast, user
+        handleEditTechnician, CreateSchema, initialValue, technician, show, toast, user, functions
     }
 }
