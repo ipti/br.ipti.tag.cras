@@ -41,7 +41,6 @@ const EditServicePage = () => {
         set("families", e.target.value)
     }
 
-    console.log(serviceOne)
     return (
         <Container>
             <Column>

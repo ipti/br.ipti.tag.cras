@@ -114,7 +114,6 @@ const Document = ({ visibleEdit }) => {
     const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.forwading.type)
 
 
-    console.log(user_identify?.filiation_2)
     return (
         <>
         <GlobalStyle />

@@ -6,7 +6,7 @@ import { CreateAttendanceUnityRequest } from "./request";
 export const CreateAttendanceController = () => {
   const history = useNavigate();
 
-//   const { data: userfetch, isLoading, error, refetch } = useFetchAllUser()
+
 
   const CreateAttendanceRequestMutation = useMutation(
     (data) => CreateAttendanceUnityRequest(data),
@@ -18,7 +18,7 @@ export const CreateAttendanceController = () => {
         }
         alert(error.response.message)
       },
-      onSuccess: (data) => {
+      onSuccess: () => {
         history("/unidades");
       },
 

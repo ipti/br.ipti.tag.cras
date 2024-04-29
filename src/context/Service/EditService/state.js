@@ -116,7 +116,6 @@ export const EditServicesState = () => {
       description: data.description,
       attendance_unity: parseInt(GetIdAttendance()),
     }
-    console.log(body)
     EditServicesRequestMutation.mutate(body)
   }
 
