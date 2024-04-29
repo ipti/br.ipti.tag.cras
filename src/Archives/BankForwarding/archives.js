@@ -123,7 +123,6 @@ const Document = ({ visibleEdit }) => {
     const date_RG_user_identify = familyReferedId?.user_identify?.find((rg_date_emission) => rg_date_emission.id === parseInt(idUser))
 
     var emission_date = date_RG_user_identify?.rg_date_emission.split("T")[0].split("-").reverse().join("/");
-    // console.log(forwardMotivation)
     
     return (
         <>

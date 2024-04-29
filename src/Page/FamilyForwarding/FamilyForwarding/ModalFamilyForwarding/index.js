@@ -25,9 +25,6 @@ const ModalFamilyForwarding = ({ visibleEdit, setVisibleEdit }) => {
           .required('Campo Obrigatório'),
     });
      
-      
-    //console.log(technician)
-
     return (
         <Dialog header="Encaminhamento" visible={visibleEdit} style={{ width: '50vw' }} onHide={() => setVisibleEdit(false)}>
             {visibleEdit ? <Column>

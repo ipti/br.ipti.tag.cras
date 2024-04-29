@@ -25,7 +25,6 @@ export const EditAttendanceUnityState = () => {
             rent_value: body.rent_value
         }
 
-        console.log(body)
         EditAddressRequestMutation.mutate({ data: bodyAddress, id: oneAttendance?.address_fk })
 
         EditAttendanceRequestMutation.mutate(bodyAttendance)
