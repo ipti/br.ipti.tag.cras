@@ -11,7 +11,7 @@ import CrasDropdown from "../../../CrasUi/Dropdown";
 const EditTechnicianScreen = () => {
 
     const { CreateSchema, initialValue, technician, handleEditTechnician, toast, user, functions } = useContext(EditTechnicianContext);
-    
+    console.log(functions)
     return (
         <Container>
             <Column>
