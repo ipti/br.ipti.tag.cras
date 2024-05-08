@@ -7,9 +7,7 @@ export const EditBenefitsController = (id) => {
     
     const history = useNavigate();
 
-
     const { data: OneBenefits, isLoading: isLoadingBenefits, error: errorBenefits } = useFetchOneBenefits(id);
-
 
     const EditBenefitsRequestMutation = useMutation(
         (data) => EditBenefitsRequest(data, id),

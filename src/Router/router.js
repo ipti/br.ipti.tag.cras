@@ -34,6 +34,7 @@ import TechnicianVisits from "../Container/FamilyRefered/TechnicianVistis";
 import Forwarding from "../Archives/Forwarding/forwarding";
 import BankForwarding from "../Archives/BankForwarding/bankFowarding";
 import SecondCopyForwarding from "../Archives/SecondCopyForwarding/secondCopyForwarding";
+import HappyChild from "../Container/HappyChild";
 
 const RoutesCras = () => {
 
@@ -70,6 +71,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
                 <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
                 <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
+
+                <Route element={<PrivateRoute Component={HappyChild} />} path="/criancafeliz" />
 
                 <Route element={<Forwarding />} path="/encaminhamento/familia/:id/forward/:idUser/:idForward/:idassis/:idpsico" />
                 <Route element={<BankForwarding />} path="/encaminhamento/familia/:id/bankforward/:idUser/:idForward/:idassis/:agency" />

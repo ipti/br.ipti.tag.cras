@@ -45,7 +45,6 @@ export const CreateFamilyBenefitsRequest = async (body) => {
   return await http.post(`/direct/family-benefits`, body, config)
 }
 
-
 export const useFetchAllUserIdentify = () => {
   return useQuery("AllUserIdentify", () => AllUserIdentifyRequest());
 };
