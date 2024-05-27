@@ -18,9 +18,8 @@ const HappyChildPage = () => {
 
     return (
         <Container>
-            <h1>Criança Feliz</h1>
-            <Grid checkMockup={[{}, {}]}>
-
+            <h1>Programa Criança Feliz</h1>
+            <Grid checkMockup={[{}, {}, {}]}>
                 <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
                     <Row>
                         <Column id="center">
@@ -28,13 +27,12 @@ const HappyChildPage = () => {
                         </Column>
                         <Padding />
                         <Column id="space-between">
-                            <h2>PLANO DE VISITA</h2>
+                            <h2>REGISTRO DE VISITAS DOMICILIARES</h2>
                             <Padding />
-                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Plano de Visitas - Programa Criança Feliz</p> 
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Documento para Registro de Visitas Domiciliares - Programa Criança Feliz</p> 
                         </Column>
                     </Row>
                 </Card>
-
                 <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
                     <Row>
                         <Column id="center">
@@ -47,8 +45,35 @@ const HappyChildPage = () => {
                             <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Controle de Visitas - Programa Criança Feliz</p>
                         </Column>
                     </Row>
+                </Card>  
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
+                    <Row>
+                        <Column id="center">
+                            <i className="pi pi-file" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
+                        </Column>
+                        <Padding />
+                        <Column id="space-between">
+                            <h2>PLANO DE VISITA</h2>
+                            <Padding />
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Plano de Visitas - Programa Criança Feliz</p>
+                        </Column>
+                    </Row>
+                </Card>  
+            </Grid>
+            <Grid checkMockup={[{}, {}, {}]}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
+                    <Row>
+                        <Column id="center">
+                            <i className="pi pi-users" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
+                        </Column>
+                        <Padding />
+                        <Column id="space-between">
+                            <h2>FAMÍLIA PCF</h2>
+                            <Padding />
+                            <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Familias do Programa Criança Feliz</p> 
+                        </Column>
+                    </Row>
                 </Card>
-               
             </Grid>
         </Container>
     )
