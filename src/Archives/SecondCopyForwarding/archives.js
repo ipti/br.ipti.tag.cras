@@ -118,6 +118,7 @@ const Document = ({ visibleEdit }) => {
     const typeNames = [{ type: "Nascimento", id: "SEGUNDA_VIA_NASCIMENTO" }, { type: "Casamento", id: "SEGUNDA_VIA_CASAMENTO" }, { type: "Óbito", id: "SEGUNDA_VIA_OBITO" }]
     const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.forwading.type)
 
+    console.log(dateEvent)
 
     return (
         <>
