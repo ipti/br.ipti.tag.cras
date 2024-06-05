@@ -15,7 +15,7 @@ export const EditBenefitsController = (id) => {
         (data) => EditBenefitsRequest(data, id),
         {
             onError: (error) => {
-                console.log(error.response.data.message)
+                
                 if (error.response.status === 401 ||error.response.status === 403) {
                     logout();
                     history("/login")
@@ -23,8 +23,7 @@ export const EditBenefitsController = (id) => {
                 alert(error?.response?.data.message)
 
             },
-            onSuccess: (data) => {
-                console.log(data);
+            onSuccess: () => {
                 history("/beneficios")
 
             },

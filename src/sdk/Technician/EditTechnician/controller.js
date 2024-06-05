@@ -7,12 +7,9 @@ import { useFetchAllUser } from "../../User/Users/request";
 export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
 
   const { data: technicianRequest, refetch } = useFetchOneTechnician(id);
-
   const { data: userfetch, isLoading, error } = useFetchAllUser()
 
-
   const history = useNavigate();
-
 
   const EditTechnicianRequestMutation = useMutation(
     (data) => EditTechnicianRequest(data, id),
@@ -25,7 +22,6 @@ export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
           history("/login")
         }
         alert(error?.response?.data.message)
-
       },
       onSuccess: (data) => {
         console.log(data);
@@ -33,7 +29,6 @@ export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
         setIsVerify(true)
         show()
       },
-
     }
   );
 

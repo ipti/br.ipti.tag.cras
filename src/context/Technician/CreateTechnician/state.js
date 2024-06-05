@@ -8,13 +8,13 @@ import { GetIdAttendance } from '../../../services/localstorage';
 export const CreateTechnicianState = () => {
     const initialValue = {
         name: "",
-        user: ""
+        user: "",
     }
 
     const CreateSchema = Yup.object().shape({
         name: Yup.string().required("Campo Obrigatório"),
         user: Yup.object().required("Campo Obrigatório"),
-        
+        type: Yup.object().required("Campo Obrigatório"),
     })
 
 

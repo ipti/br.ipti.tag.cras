@@ -104,7 +104,6 @@ const Document = ({ visibleEdit }) => {
   const { data: assistente} = useFetchOneTechnician(idassis)
   const { data: psicologo} = useFetchOneTechnicianPsico(idpsico)
   const { data: forwardMotivation } = useFetchOneForwardByForwarding(idForward)
- // const { data: dataEncaminhamento } = formatarData(visibleEdit?.date)
 
   const typeNames = [{ type: "Assistente Social", id: "ASSISTENTE_SOCIAL" }, { type: "Psicólogo", id: "PSICOLOGO" }]
   const typeNamesConvert = typeNames?.find((type) => type.id === assistente?.type)
@@ -113,7 +112,6 @@ const Document = ({ visibleEdit }) => {
   const name_user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
   const CPF_user_identify = familyReferedId?.user_identify?.find((cpf) => cpf.id === parseInt(idUser))
  
- console.log(forwardMotivation)
   
   return (
     <>

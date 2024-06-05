@@ -18,7 +18,9 @@ const CreateTechnicianScreen = () => {
                     Novo Tecnico
                 </h1>
                 <Padding padding="16px" />
-                <Formik initialValues={initialValue} onSubmit={(values) => handleCreateTechnician({...values, type: values.type.id})} validationSchema={CreateSchema}>
+                <Formik initialValues={initialValue} 
+                    onSubmit={(values) => handleCreateTechnician({...values, type: values.type.id})} 
+                    validationSchema={CreateSchema}>
                     {({ values, handleChange, errors, touched, handleSubmit }) =>
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}]}>
@@ -34,7 +36,13 @@ const CreateTechnicianScreen = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasDropdown name="user" value={values.user} options={user} onChange={handleChange} optionLabel={"name"} label="Usuário *" />
+                                    <CrasDropdown 
+                                        name="user" 
+                                        value={values.user} 
+                                        options={user} 
+                                        onChange={handleChange} 
+                                        optionLabel={"name"} 
+                                        label="Usuário *" />
                                     <Padding />
                                     {errors.user && touched.user ? (
                                         <div style={{ color: "red" }}>{errors.user}<Padding /></div>
@@ -54,7 +62,13 @@ const CreateTechnicianScreen = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasDropdown name="type" value={values.type} options={functions} onChange={handleChange} optionLabel={"type"} label="Função" />
+                                    <CrasDropdown 
+                                        name="type" 
+                                        value={values.type} 
+                                        options={functions} 
+                                        onChange={handleChange} 
+                                        optionLabel={"type"} 
+                                        label="Função *" />
                                     <Padding />
                                     {errors.type && touched.type ? (
                                         <div style={{ color: "red" }}>{errors.type}<Padding /></div>

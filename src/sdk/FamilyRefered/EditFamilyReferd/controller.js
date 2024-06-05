@@ -75,10 +75,8 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
         alert(error?.response?.data.message)
 
       },
-      onSuccess: (data) => {
-        // refetch()
+      onSuccess: () => {
         setAddMember(false)
-        console.log(data);
         setIsVerify(true)
         refetch()
         show()

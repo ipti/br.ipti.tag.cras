@@ -31,7 +31,7 @@ const CreateServicesScreen = () => {
                 <Padding padding="16px" />
                 <Formik initialValues={attendanceNewUser ? { ...initialValue, name: "", cpf: "" } : initialValue} onSubmit={attendanceGroup ? handleCreateServiceGroup : attendanceNewUser ? handleCreateServiceNewUser : handleCreateService} validationSchema={attendanceGroup ? CreateAttendanceSchema : attendanceNewUser ? CreateNewUserSchema : CreateUserSchema}>
                     {({ values, handleChange, handleSubmit, errors, touched }) => {
-                        console.log(errors)
+                        
                         return <Form
                         >
                             <h3>Dados do atendimento</h3>

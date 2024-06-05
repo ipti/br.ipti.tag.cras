@@ -16,7 +16,7 @@ export const EditAttendanceUnity = () => {
         (data) => EditAttendanceUnityRequest(data, id),
         {
             onError: (error) => {
-                console.log(error.response.data.message)
+                
                 if (error.response.status === 401 || error.response.status === 403) {
                     logout();
                     history("/login")
@@ -34,8 +34,7 @@ export const EditAttendanceUnity = () => {
         ({ data, id }) => EditAddressRequest(data, id),
         {
           onError: (error) => {
-            console.log(error.response.data.message)
-        
+            
             if (error.response.status === 401 || error.response.status === 403) {
               logout();
               history("/login")

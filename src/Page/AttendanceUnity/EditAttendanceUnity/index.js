@@ -48,7 +48,6 @@ const EditAttendanceUnityPage = () => {
             {oneAttendance ? <Padding padding="16px">
                 <Formik initialValues={initialValue} onSubmit={value => {HandleEditAttendance(value) }} validationSchema={validationSchema} >
                     {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-                        console.log(values)
                         return (
                             <form onSubmit={handleSubmit}>
                                 <h3>

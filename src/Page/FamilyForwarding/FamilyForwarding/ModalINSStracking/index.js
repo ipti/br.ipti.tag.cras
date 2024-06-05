@@ -15,8 +15,6 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
 
     const { handleEditForwarding } = useContext(EditForwardingContext);
 
-    console.log(visibleEdit)
-
     const ErrorsSchema = Yup.object().shape({
         name: Yup.object()
           .required('Campo Obrigatório'),
@@ -83,7 +81,6 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                     <Row>               
                         <h2>Status do Acompanhamento: </h2>
                         <Padding padding="2px" />
-                        {/* <CrasDropdown name="name" value={"A"} options={"A"} onChange={(a) => {console.log(a)}} optionLabel={"name"} label="Assistente Social Responsável *" /> */}
                         <p>{visibleEdit?.status}</p>   
                     </Row>
                     <Padding padding="8px" />

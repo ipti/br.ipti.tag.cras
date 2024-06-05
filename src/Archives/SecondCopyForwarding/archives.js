@@ -9,7 +9,7 @@ import { Row, Column } from '../../CrasUi/styles/styles';
 import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 import BackgroundDoc  from "../../assets/images/nslourdes/backgroud_doc_nslourdes.jpg";
 import LogoCras from "../../assets/images/logo_cras.png";
-
+import { useQuery } from 'react-query';
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
 @page {
@@ -100,12 +100,17 @@ const BackgroundContainer = styled.div`
 `;
 
 const Document = ({ visibleEdit }) => {
-    const { id, idUser, idForward, registry, dateFirstCopy, book, sheet, numTermo} = useParams()
+    const { id } = useParams()
+
+    //esses dados irão vir por query
+    const { idUser, idForward, registry, dateEvent, dateFirstCopy, book, sheet, numTermo} = useQuery()
+
 
     const { data: unityAttendance } = useFetchOneAttendanceUnity(GetIdAttendance())
     const { data: familyReferedId } = useFetchFamilyReferedId(id)
     const { data: forwardMotivation } = useFetchOneForwardByForwarding(idForward)
-
+    // todo: use query para pegar os dados do encaminhamento
+   
     const user_identify = familyReferedId?.user_identify?.find((name) => name.id === parseInt(idUser))
 
     var dateFirstCopyEdit = dateFirstCopy.split("-").reverse().join("/");
@@ -114,7 +119,6 @@ const Document = ({ visibleEdit }) => {
     const typeNamesConvert = typeNames?.find((type) => type.id === forwardMotivation?.forwading.type)
 
 
-    console.log(user_identify?.filiation_2)
     return (
         <>
         <GlobalStyle />

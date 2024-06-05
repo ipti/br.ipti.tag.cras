@@ -73,7 +73,9 @@ const RoutesCras = () => {
 
                 <Route element={<Forwarding />} path="/encaminhamento/familia/:id/forward/:idUser/:idForward/:idassis/:idpsico" />
                 <Route element={<BankForwarding />} path="/encaminhamento/familia/:id/bankforward/:idUser/:idForward/:idassis/:agency" />
-                <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyForwarding/:idUser/:idForward/:registry/:dateEvent/:dateFirstCopy/:book/:sheet/:numTermo" />
+                <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyForwarding" />
+                {/* <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyForwarding/:idUser/:idForward/:registry/:dateEvent/:dateFirstCopy/:book/:sheet/:numTermo" /> */}
+                {/* todo: remover tudo a partir do secondCopyFowardr*/}
                 <Route element={<RmaCras />} path="/rma-cras/:month/:year" />
 
                 <Route element={<Login />} path="/login" />

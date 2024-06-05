@@ -191,7 +191,7 @@ const EditFamilyReferedScreen = () => {
                 validationSchema={validationSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-                        console.log(errors)
+                        
                     var erroList = [];
 
                     for (const chave in errors) {
