@@ -75,6 +75,7 @@ const RoutesCras = () => {
                 {/* <Route element={<PrivateRoute Component={HappyChild} />} path="/criancafeliz" /> */}
                 {/* <Route element={<PrivateRoute Component={ListFamilyHC} />} path="/criancafeliz/familiaPCF" /> */}
 
+
                 <Route element={<Forwarding />} path="/encaminhamento/familia/:id/forward/:idUser/:idForward/:idassis/:idpsico" />
                 <Route element={<BankForwarding />} path="/encaminhamento/familia/:id/bankforward/:idUser/:idForward/:idassis/:agency" />
                 <Route element={<SecondCopyForwarding />} path="/encaminhamento/familia/:id/secondCopyForwarding" />
