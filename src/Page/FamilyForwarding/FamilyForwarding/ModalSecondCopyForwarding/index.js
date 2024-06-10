@@ -95,8 +95,7 @@ const ModalSecondCopyForwarding = ({ visibleEdit, setVisibleEdit }) => {
                         // todo: fazer comn query 
                         //history("/encaminhamento/familia/"+id+"/secondCopyForwarding/"+ visibleEdit?.user_identify?.id +"/"+visibleEdit?.id+"/"+ values.registry +"/"+ values.dateEvent.toISOString().split("T")[0]+"/"+ values.dateFirstCopy.toISOString().split("T")[0]+"/"+ values.book +"/"+ values.sheet +"/"+values.numTermo )
                         history(`/encaminhamento/familia/${id}/secondCopyForwarding?idUser=${visibleEdit?.user_identify?.id}&idForward=${visibleEdit?.id}&registry=${values.registry}&dateEvent=${values.dateEvent.toISOString().split("T")[0]}&dateFirstCopy=${values.dateFirstCopy.toISOString().split("T")[0]}&book=${values.book}&sheet=${values.sheet}&numTermo=${values.numTermo}`);
-[                       
-]                        }}>
+                    }}>
                         {({ values, errors, touched, handleChange }) => {
                             return (
                                 <Form>

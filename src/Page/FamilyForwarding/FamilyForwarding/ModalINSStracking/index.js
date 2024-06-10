@@ -66,18 +66,6 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                         <p>{formatarData(visibleEdit?.date)}</p>
                     </Row>
                     <Padding padding="8px" />
-                    <Row>
-                        <h2>Descrição: </h2>
-                        <Padding padding="2px" />
-                        <p>{visibleEdit?.description}</p>
-                    </Row>
-                    <Padding padding="8px" />
-                    <Row>
-                        <h2>Breve relato: </h2>
-                        <Padding padding="2px" />
-                        <p>{visibleEdit?.report}</p>
-                    </Row>
-                    <Padding padding="8px" />
                     <Row>               
                         <h2>Status do Acompanhamento: </h2>
                         <Padding padding="2px" />
