@@ -1,5 +1,6 @@
 
 export const Status = {
+    NAO_SE_APLICA:"NÃO SE APLICA",
     PENDENTE:"PENDENTE",
     DEFERIDO:"DEFERIDO",
     INDEFERIDO:"INDEFERIDO",

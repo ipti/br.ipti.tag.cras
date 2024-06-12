@@ -11,7 +11,7 @@ import ModalInfos from "./ModalInfo";
 import ModalSecondCopyForwarding from "./ModalSecondCopyForwarding";
 
 import { TabPanel, TabView } from "primereact/tabview";
-import { FowardingType, Kinship, Status } from "../../../Controller/controllerGlobal";
+import { FowardingType, Kinship } from "../../../Controller/controllerGlobal";
 import TechnicianProvider from "../../../context/Technician/Technician/context";
 
 const FamilyForwardingPage = () => {
@@ -25,7 +25,7 @@ const FamilyForwardingPage = () => {
             ...data,
             forwadingType: FowardingType.getTitle(data.forwading.type),
             kinshipType: Kinship.getTitle(data.user_identify.kinship),
-            //TO DO:: fowardingStatus: Status.getTitle(data.family_or_user_forwarding.status),
+           
         }))
         : [];
 
@@ -35,7 +35,7 @@ const FamilyForwardingPage = () => {
         { field: "kinshipType", header: "Parentesco" },
         { field: "forwadingType", header: "Tipo" },
         { field: "forwading.name", header: "Local" },
-        { field: "fowardingStatus", header: "Status" },
+        { field: "status", header: "Status" },
     ];
 
     const columnsFamily = [
