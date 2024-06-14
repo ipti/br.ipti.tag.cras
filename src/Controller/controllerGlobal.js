@@ -4,6 +4,7 @@ export const Status = {
     PENDENTE:"PENDENTE",
     DEFERIDO:"DEFERIDO",
     INDEFERIDO:"INDEFERIDO",
+    getTitle: (type) => Status[type]
 }
 
 export const FowardingType = {
