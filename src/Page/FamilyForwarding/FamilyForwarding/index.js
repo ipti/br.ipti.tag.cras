@@ -25,6 +25,7 @@ const FamilyForwardingPage = () => {
             ...data,
             forwadingType: FowardingType.getTitle(data.forwading.type),
             kinshipType: Kinship.getTitle(data.user_identify.kinship),
+           
         }))
         : [];
 
@@ -34,6 +35,7 @@ const FamilyForwardingPage = () => {
         { field: "kinshipType", header: "Parentesco" },
         { field: "forwadingType", header: "Tipo" },
         { field: "forwading.name", header: "Local" },
+        { field: "status", header: "Status" },
     ];
 
     const columnsFamily = [
