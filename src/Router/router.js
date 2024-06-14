@@ -34,8 +34,8 @@ import TechnicianVisits from "../Container/FamilyRefered/TechnicianVistis";
 import Forwarding from "../Archives/Forwarding/forwarding";
 import BankForwarding from "../Archives/BankForwarding/bankFowarding";
 import SecondCopyForwarding from "../Archives/SecondCopyForwarding/secondCopyForwarding";
-// import HappyChild from "../Container/HappyChild/MenuHappyChild";
-// import ListFamilyHC from "../Container/HappyChild/FamilyHappyChild";
+import HappyChild from "../Container/HappyChild";
+import ListFamilyHC from "../Container/HappyChild/ListFamilyHappyChild/indexlista";
 
 const RoutesCras = () => {
 
@@ -70,10 +70,9 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={CreateAttendanceUnity} />} path="/criar/unidades" />
                 <Route element={<PrivateRoute Component={EditAttendanceUnity} />} path="/edit/unidades/:id" />
                 <Route element={<PrivateRoute Component={Report} />} path="/relatorios" />
+                <Route element={<PrivateRoute Component={HappyChild} />} path="/criancafeliz" />
+                <Route element={<PrivateRoute Component={ListFamilyHC} />} path="/criancafeliz/familiaPCF" />
                 <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
-
-                {/* <Route element={<PrivateRoute Component={HappyChild} />} path="/criancafeliz" /> */}
-                {/* <Route element={<PrivateRoute Component={ListFamilyHC} />} path="/criancafeliz/familiaPCF" /> */}
 
 
                 <Route element={<Forwarding />} path="/encaminhamento/familia/:id/forward/:idUser/:idForward/:idassis/:idpsico" />

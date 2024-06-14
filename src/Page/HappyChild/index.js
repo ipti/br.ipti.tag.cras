@@ -11,16 +11,22 @@ import FolhaAssinaturas from "../../Archives/SignatureSheet/Registro-FOLHADEASSI
 const HappyChildPage = () => {
 
     //const [visible, setVisible] = useState(false)
-    const pdfUrl = FolhaAssinaturas;
-    const abrirPDF = () => {
-        window.open(pdfUrl);
+
+    
+
+    let folhaAssinaturasPDF = () => {
+        window.open(FolhaAssinaturas, '_blank');
+    }
+
+    const listaFamilia = () => {
+        window.open('/criancafeliz/familiaPCF', '_self');
     };
 
     return (
         <Container>
             <h1>Programa Criança Feliz</h1>
             <Grid checkMockup={[{}, {}, {}]}>
-                <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={folhaAssinaturasPDF}>
                     <Row>
                         <Column id="center">
                             <i className="pi pi-file" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
@@ -33,7 +39,7 @@ const HappyChildPage = () => {
                         </Column>
                     </Row>
                 </Card>
-                <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={folhaAssinaturasPDF}>
                     <Row>
                         <Column id="center">
                             <i className="pi pi-file" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
@@ -46,7 +52,7 @@ const HappyChildPage = () => {
                         </Column>
                     </Row>
                 </Card>  
-                <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={folhaAssinaturasPDF}>
                     <Row>
                         <Column id="center">
                             <i className="pi pi-file" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>
@@ -61,7 +67,7 @@ const HappyChildPage = () => {
                 </Card>  
             </Grid>
             <Grid checkMockup={[{}, {}, {}]}>
-                <Card style={{ width: "auto", cursor: "pointer" }} onClick={abrirPDF}>
+                <Card style={{ width: "auto", cursor: "pointer" }} onClick={listaFamilia}>
                     <Row>
                         <Column id="center">
                             <i className="pi pi-users" style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}></i>

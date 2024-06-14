@@ -1,4 +1,4 @@
-import ListFamilyHCScreen from "../../Page/HappyChild/FamilyHC";
+import ListFamilyHCScreen from "../../../Page/HappyChild/FamilyHC";
 
 const ListFamilyHappyChild = () => {
     return (

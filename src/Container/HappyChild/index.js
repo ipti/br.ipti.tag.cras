@@ -1,5 +1,5 @@
 import React from "react";
-import HappyChildPage from "../../../Page/HappyChild";
+import HappyChildPage from "../../Page/HappyChild";
 
 const HappyChild = () => {
     return (
