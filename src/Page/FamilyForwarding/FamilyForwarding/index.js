@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import Table from "../../../Components/Table";
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
-import { Container, Padding, Row } from "../../../CrasUi/styles/styles";
+import { Column, Container, Padding, Row } from "../../../CrasUi/styles/styles";
 import { FamilyForwardingContext } from "../../../context/FamilyForwarding/FamilyForwarding/context";
 import ModalBankForwarding from "./ModalBankForwarding";
 import ModalCreateFamilyForwarding from "./ModalCreateFamilyForwarding";
@@ -11,7 +11,7 @@ import ModalInfos from "./ModalInfo";
 import ModalSecondCopyForwarding from "./ModalSecondCopyForwarding";
 
 import { TabPanel, TabView } from "primereact/tabview";
-import { FowardingType, Kinship } from "../../../Controller/controllerGlobal";
+import { FowardingType, Kinship, Status } from "../../../Controller/controllerGlobal";
 import TechnicianProvider from "../../../context/Technician/Technician/context";
 
 const FamilyForwardingPage = () => {
@@ -25,8 +25,28 @@ const FamilyForwardingPage = () => {
             ...data,
             forwadingType: FowardingType.getTitle(data.forwading.type),
             kinshipType: Kinship.getTitle(data.user_identify.kinship),
+            statusType: Status.getTitle(data.status),
         }))
         : [];
+
+
+    const getSeverity = (status) => {
+        switch (status) {
+            case 'PENDENTE':
+                return { backgroundColor: '#ffc107', color: '#ffffff' };  // amarelo
+            case 'DEFERIDO':
+                return { backgroundColor: '#28a745', color: '#ffffff' };  // verde
+            case 'INDEFERIDO':
+                return { backgroundColor: '#dc3545', color: '#ffffff' };  // vermelho
+            default:
+                return { backgroundColor: '#6c757d', color: '#ffffff' };  // cinza padrão
+        }
+    };
+
+    const statusBodyTemplate = (data) => {
+        const severityStyle = getSeverity(data.status);
+        return <Column value={data.status} style={severityStyle} />; //todo: corrigir a tag Column
+    };
 
     const columns = [
         { field: "id", header: "Código" },
@@ -34,12 +54,14 @@ const FamilyForwardingPage = () => {
         { field: "kinshipType", header: "Parentesco" },
         { field: "forwadingType", header: "Tipo" },
         { field: "forwading.name", header: "Local" },
+        { field: "statusType", header: "Status", body: statusBodyTemplate },
     ];
 
     const columnsFamily = [
         { field: "forwading.type", header: "Tipo" },
         { field: "forwading.name", header: "Local" },
     ];
+
 
     const filter = (filt, namefilter) => {
         return (
@@ -82,9 +104,7 @@ const FamilyForwardingPage = () => {
                     </TabPanel>
                 </TabView>
             </div>
-
             <ModalCreateFamilyForwarding visible={visible} setVisible={setVisible} />
-
             <TechnicianProvider>
                 {visibleEdit && (() => {
                     const { forwading } = visibleEdit;
