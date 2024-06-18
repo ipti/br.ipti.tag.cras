@@ -36,11 +36,14 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
                 validationSchema={validationSchema}
                 onSubmit={(values) => { 
                     CreateForwarding({ 
-                        ...values, 
+                        user_identify: values.user_identify,
+                        family: isFamily ? FamilyForwarding?.familyInformation?.id : undefined, 
+                        forwading: values.forwading.id, user_identify: !isFamily ? values.user_identify.id : undefined,
+                        description: values.description,
+                        report: values.report,
+                        status: values.status?.id,
                         attendance_unity: parseInt(GetIdAttendance()),
                         date: new Date(Date.now()), 
-                        family: isFamily ? FamilyForwarding?.familyInformation?.id : undefined, 
-                        forwading: values.forwading.id, user_identify: !isFamily ? values.user_identify.id : undefined 
                     }); 
                     setVisible(false) 
                 }}>
@@ -120,12 +123,12 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
                                     <Padding padding="0 0 0 16px">
                                         <CrasDropdown
                                             name={"status"}
-                                            value={values.status.id}
-                                            options={statusOptions}
+                                            optionLabel={"name"} // exibe os dados na lista de opcoes
+                                            value={values.status.name}
+                                            placeholder={"Selecione um status"}
+                                            options={statusOptions} //opcoes que serao usadas pelo option label
                                             onChange={handleChange}
-                                            placeholder={"Selecione o status"}
-                                            label={"Status"}
-                                            optionLabel={"name"}
+                                            label={"Status"} 
                                         />
                                         <Padding />
                                         {errors.status && touched.status ? (
