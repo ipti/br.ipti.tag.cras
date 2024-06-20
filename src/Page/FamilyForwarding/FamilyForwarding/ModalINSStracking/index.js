@@ -84,7 +84,13 @@ const ModalINSStracking = ({ visibleEdit, setVisibleEdit }) => {
                                 <Form>
                                     <Grid checkMockup={[{}, {}]}>
                                         <Column>
-                                            <CrasDropdown name="name" value={values.name} options={status} onChange={handleChange} label="Status" optionLabel={"name"} />
+                                            <CrasDropdown 
+                                            name="name" 
+                                            value={values.name} 
+                                            options={status} 
+                                            onChange={handleChange} 
+                                            label="Status" 
+                                            optionLabel={"name"} />
                                             <Padding />
                                             {errors.name && touched.name ? (
                                                 <div style={{ color: "red" }}>{errors.name}<Padding /></div>
