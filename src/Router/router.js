@@ -36,6 +36,7 @@ import BankForwarding from "../Archives/BankForwarding/bankFowarding";
 import SecondCopyForwarding from "../Archives/SecondCopyForwarding/secondCopyForwarding";
 import HappyChild from "../Container/HappyChild";
 import ListFamilyHC from "../Container/HappyChild/ListFamilyHappyChild/indexlista";
+import CreateFamilyHappyChild from "../Container/HappyChild/CreateFamilyHappyChild/index";
 
 const RoutesCras = () => {
 
@@ -74,7 +75,7 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={HappyChild} />} path="/criancafeliz" />
                 <Route element={<PrivateRoute Component={ListFamilyHC} />} path="/criancafeliz/familiaPCF" />
                 <Route element={<PrivateRoute Component={FamilyForwarding} />} path="/encaminhamento/familia/:id" />
-                <Route element={<PrivateRoute Component={CreateFamilyHC} />} path="/criancafeliz/criar/familiaPCF" />
+                <Route element={<PrivateRoute Component={CreateFamilyHappyChild} />} path="/criancafeliz/criar/familiaPCF" />
 
 
                 <Route element={<Forwarding />} path="/encaminhamento/familia/:id/forward/:idUser/:idForward/:idassis/:idpsico" />
