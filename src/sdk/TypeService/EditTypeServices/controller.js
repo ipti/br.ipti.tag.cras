@@ -23,7 +23,6 @@ export const EditTypesServicesController = (id, setIsError, setIsVerify, show) =
 
       },
       onSuccess: (data) => {
-        console.log(data);
         refetch()
         setIsVerify(true)
         show()

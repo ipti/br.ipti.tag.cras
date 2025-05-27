@@ -7,7 +7,6 @@ const config = {
 };
 
 export const EditTechnicianVisitsRequest = async (id, body) => {
-  console.log(id)
   return await http.put("/bff/technician-visits/" + id, body, config)
 }
 

@@ -20,7 +20,6 @@ export const FamilyForwardingController = () => {
                 alert(error?.response?.data.message)
             },
             onSuccess: (data) => {
-                console.log(data); 
                 queryClient.refetchQueries("AllForwardingFamily")
             },
         }

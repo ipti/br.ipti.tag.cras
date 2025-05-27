@@ -24,7 +24,6 @@ export const EditTechnicianController = (id, setIsError, setIsVerify, show) => {
         alert(error?.response?.data.message)
       },
       onSuccess: (data) => {
-        console.log(data);
         refetch()
         setIsVerify(true)
         show()

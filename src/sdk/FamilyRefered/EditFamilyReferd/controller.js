@@ -32,7 +32,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
       onSuccess: (data) => {
         // refetch()
         setAddMember(false)
-        console.log(data);
         setIsVerify(true)
         refetch()
         show()
@@ -101,7 +100,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
       onSuccess: (data) => {
         // refetch()
         setAddMember(false)
-        console.log(data);
         setIsVerify(true)
         refetch()
         show()
@@ -126,7 +124,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
       onSuccess: (data) => {
         // refetch()
         setAddMember(false)
-        console.log(data);
         setIsVerify(true)
         refetch()
         show()
@@ -151,7 +148,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
       onSuccess: (data) => {
         // refetch()
         setAddMember(false)
-        console.log(data);
         setIsVerify(true)
         refetch()
         show()
@@ -176,7 +172,6 @@ export const EditFamilyReferedController = (id, setAddMember, setIsVerify, setIs
       onSuccess: (data) => {
         // refetch()
         setAddMember(false)
-        console.log(data);
         setIsVerify(true)
         refetch()
         show()

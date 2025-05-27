@@ -49,7 +49,6 @@ const ModalCreateFamilyForwarding = ({ visible, setVisible }) => {
                 }}>
 
                 {({ values, errors, touched, handleChange, handleSubmit }) => {
-                    console.log(values.status?.id)
                     
                     const isAcompanhamentoINSS = values.forwading?.name === 'INSS - ACOMPANHAMENTO';
                     const isEncaminhamento = values.forwading?.type === 'ENCAMINHAMENTO';

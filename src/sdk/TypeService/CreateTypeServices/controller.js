@@ -20,7 +20,6 @@ export const CreateTypesServicesController = () => {
 
       },
       onSuccess: (data) => {
-        console.log(data);
         history("/servico");
       },
 

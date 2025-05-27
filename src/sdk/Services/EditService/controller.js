@@ -31,7 +31,6 @@ export const EditServicesController = (id, setIsError, setIsVerify, show) => {
 
             },
             onSuccess: (data) => {
-                console.log(data);
                 setIsVerify(true)
                 show()
             },
@@ -54,7 +53,6 @@ export const EditServicesController = (id, setIsError, setIsVerify, show) => {
 
             },
             onSuccess: (data) => {
-                console.log(data);
                 setIsVerify(true)
                 show()
             },
@@ -76,7 +74,6 @@ export const EditServicesController = (id, setIsError, setIsVerify, show) => {
 
             },
             onSuccess: (data) => {
-                console.log(data);
                 setIsVerify(true)
                 show()
             },

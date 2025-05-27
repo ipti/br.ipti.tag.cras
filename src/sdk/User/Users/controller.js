@@ -24,7 +24,6 @@ export const UserController = () => {
         }
       },
       onSuccess: (data) => {
-        console.log(data);
         refetch()
       },
 

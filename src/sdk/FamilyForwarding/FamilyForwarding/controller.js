@@ -22,7 +22,6 @@ export const FamilyForwardingController = () => {
 
             },
             onSuccess: (data) => {
-                console.log(data);
                 refetch()
             },
         }

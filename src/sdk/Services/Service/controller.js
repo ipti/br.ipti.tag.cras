@@ -33,7 +33,6 @@ export const ServiceController = () => {
 
             },
             onSuccess: (data) => {
-                console.log(data);
                 refetch()
             },
         }

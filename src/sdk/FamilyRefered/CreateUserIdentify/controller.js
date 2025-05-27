@@ -22,7 +22,6 @@ export const CreateUserIdentifyController = () => {
             alert(error?.response?.data.message)
           },
           onSuccess: (data) => {
-            console.log(data);
             history("/familia");
           },
         }

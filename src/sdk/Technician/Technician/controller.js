@@ -24,7 +24,6 @@ export const TechnicianController = () => {
         }
       },
       onSuccess: (data) => {
-        console.log(data);
         refetch()
       },
 

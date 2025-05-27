@@ -24,7 +24,6 @@ export const TypesServicesController = () => {
             }
           },
           onSuccess: (data) => {
-            console.log(data);
             refetch()
           },
     

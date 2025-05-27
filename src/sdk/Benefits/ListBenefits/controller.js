@@ -21,7 +21,6 @@ export const BenefitsController = () => {
         }
       },
       onSuccess: (data) => {
-        console.log(data);
         refetch()
       },
 

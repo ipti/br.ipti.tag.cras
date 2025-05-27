@@ -21,7 +21,6 @@ export const CreateTechnicianController = () => {
         alert(error?.response?.data.message)
       },
       onSuccess: (data) => {
-        console.log(data);
         history("/tecnico");
       },
 

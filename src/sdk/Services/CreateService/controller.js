@@ -31,7 +31,6 @@ export const CreateServicesController = () => {
 
             },
             onSuccess: (data) => {
-                console.log(data);
                 history("/atendimento");
             },
         }
