@@ -28,7 +28,7 @@ const TechnicianVisitsPage = () => {
                 <Padding padding="16px" />
                 <h1>Visitas</h1>
                 <Row>
-                    <ButtonPrime label={"Criar encaminhamento"} onClick={() => setVisible(true)} />
+                    <ButtonPrime label={"Criar visitas"} onClick={() => setVisible(true)} />
                 </Row>
                 <Padding padding="16px" />
                 <Table columns={columns} list={technicianVisitsFilter} name="Visitas" onView={setVisibleView} />
