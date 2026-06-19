@@ -4,8 +4,8 @@ import { getToken } from "./localstorage";
 // require('dotenv').config();
 
 const http = axios.create({
-  baseURL: "https://br-ong-tag-cras.azurewebsites.net/",
-  // baseURL: "http://localhost:3001/",
+  // baseURL: "https://br-ong-tag-cras.azurewebsites.net/",
+  baseURL: "http://localhost:3000/",
 });
 
 http.interceptors.request.use(async config => {

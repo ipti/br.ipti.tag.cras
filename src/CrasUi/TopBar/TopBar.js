@@ -34,7 +34,7 @@ const TopBar = ({ setViewd, viewdMenu }) => {
                         Voltar
                     </Back>
                     <Padding />
-                    {user?.role === "SECRETARY" ? <Column>
+                    {user?.role === "SECRETARY" || user?.role === "ADMIN" ? <Column>
                         <CrasDropdown placeholder={"Unidades"} options={attendance} value={valueAttendance} optionLabel={"name"} onChange={(e) => { idAttendance(e.target.value.id);history("/"); menuItem(1); window.location.reload(); }} />
                     </Column> : null}
                 </Row>
