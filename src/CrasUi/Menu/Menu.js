@@ -14,6 +14,8 @@ import { hasPermission, Permission } from "../../permissions";
 const CrasMenu = ({ viewdMenu }) => {
     const { user } = useContext(AplicationContext)
 
+    console.log("User role:", user);
+
     const [active, setActive] = useState(parseInt(getMenuItem()))
 
     return (

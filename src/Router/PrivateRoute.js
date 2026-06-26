@@ -20,8 +20,6 @@ const PrivateRoute = ({ Component }) => {
 const PermissionGuard = ({ Component, permission }) => {
   const { user } = useContext(AplicationContext);
 
-  console.log("User role:", user);
-
   if (!user) return null;
 
   if (!hasPermission(user.role, permission)) return <Navigate to="/" />;

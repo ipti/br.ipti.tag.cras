@@ -1,41 +1,50 @@
 import { Formik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import * as Yup from 'yup';
 import ButtonPrime from "../../../CrasUi/Button/ButtonPrime";
 import CrasInput from "../../../CrasUi/Input/Input";
 import CrasInputMask from "../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../CrasUi/RadioButton";
+import CrasDropdown from "../../../CrasUi/Dropdown";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { CreateAttendanceContext } from "../../../context/AttendanceUnity/CreateAttendanceUnity/context";
 import CrasInputNumber from "../../../CrasUi/Input/InputNumber";
+import { useFetchAllState, useFetchAllCity } from "../../../sdk/State/request";
 
 
 const CreateAttendanceUnityPage = () => {
 
+    const [selectedUf, setSelectedUf] = useState(null);
+
+    const { data: ufs = [] } = useFetchAllState();
+    const { data: cities = [] } = useFetchAllCity(selectedUf?.id);
+
     const initialValue = {
         name: "",
+        unity_number: "",
+        type: "",
+        email: "",
         address: "",
         telephone: "",
         reference: "",
         conditions: "",
         construction_type: "",
-        unity_number: "",
-        email: "",
-        type: "",
-        rooms: 0,
-        rent_value: 0
+        rooms: null,
+        rent_value: null,
+        edcenso_city_fk: null,
     }
 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Campo obrigatório"),
-        address: Yup.string().required("Campo obrigatório"),
-        telephone: Yup.string().required("Campo obrigatório"),
-        reference: Yup.string().required("Campo obrigatório"),
-        conditions: Yup.string().required("Campo obrigatório"),
-        construction_type: Yup.string().required("Campo obrigatório"),
         unity_number: Yup.number().required("Campo obrigatório"),
         type: Yup.string().required("Campo obrigatório"),
-        email: Yup.string(),
+        address: Yup.string().nullable(),
+        telephone: Yup.string().nullable(),
+        reference: Yup.string().nullable(),
+        conditions: Yup.string().nullable(),
+        construction_type: Yup.string().nullable(),
+        email: Yup.string().nullable(),
+        edcenso_city_fk: Yup.number().nullable(),
     });
 
     const { handleCreateAttendance } = useContext(CreateAttendanceContext)
@@ -59,7 +68,7 @@ const CreateAttendanceUnityPage = () => {
                                         ) : null}
                                     </Column>
                                     <Column>
-                                        <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone *" />
+                                        <CrasInputMask mask={"(99) 9 9999-9999"} onChange={handleChange} value={values.telephone} name="telephone" label="Telefone" />
                                         <Padding />
                                         {errors.telephone && touched.telephone ? (
                                             <div style={{ color: "red" }}>{errors.telephone}<Padding /></div>
@@ -68,7 +77,7 @@ const CreateAttendanceUnityPage = () => {
                                 </Grid>
                                 <Grid checkMockup={[{}]}>
                                     <Column>
-                                        <CrasInput name="email" onChange={handleChange} value={values.email} label="Email *" />
+                                        <CrasInput name="email" onChange={handleChange} value={values.email} label="Email" />
                                         <Padding />
                                         {errors.email && touched.email ? (
                                             <div style={{ color: "red" }}>{errors.email}<Padding /></div>
@@ -98,14 +107,46 @@ const CreateAttendanceUnityPage = () => {
                                 <h3>Endereço</h3>
                                 <Grid checkMockup={[{}, {}]}>
                                     <Column>
-                                        <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço *" />
+                                        <CrasDropdown
+                                            label="Estado (UF)"
+                                            options={ufs}
+                                            optionLabel="acronym"
+                                            value={selectedUf}
+                                            filter
+                                            onChange={(e) => {
+                                                setSelectedUf(e.value);
+                                                setFieldValue("edcenso_city_fk", null);
+                                            }}
+                                            placeholder="Selecione o estado"
+                                        />
+                                        <Padding />
+                                    </Column>
+                                    <Column>
+                                        <CrasDropdown
+                                            label="Cidade"
+                                            options={cities}
+                                            optionLabel="name"
+                                            value={cities.find(c => c.id === values.edcenso_city_fk) || null}
+                                            filter
+                                            onChange={(e) => setFieldValue("edcenso_city_fk", e.value?.id ?? null)}
+                                            placeholder={selectedUf ? "Selecione a cidade" : "Selecione o estado primeiro"}
+                                        />
+                                        <Padding />
+                                        {errors.edcenso_city_fk && touched.edcenso_city_fk ? (
+                                            <div style={{ color: "red" }}>{errors.edcenso_city_fk}<Padding /></div>
+                                        ) : null}
+                                    </Column>
+                                </Grid>
+                                <Grid checkMockup={[{}, {}]}>
+                                    <Column>
+                                        <CrasInput name="address" onChange={handleChange} value={values.address} label="Endereço" />
                                         <Padding />
                                         {errors.address && touched.address ? (
                                             <div style={{ color: "red" }}>{errors.address}<Padding /></div>
                                         ) : null}
                                     </Column>
                                     <Column>
-                                        <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência *" />
+                                        <CrasInput onChange={handleChange} value={values.reference} name="reference" label="Referência" />
                                         <Padding />
                                         {errors.reference && touched.reference ? (
                                             <div style={{ color: "red" }}>{errors.reference}<Padding /></div>
@@ -114,7 +155,7 @@ const CreateAttendanceUnityPage = () => {
                                 </Grid>
                                 <Row>
                                     <div className="col">
-                                        <label>Condições de Moradia *</label>
+                                        <label>Condições de Moradia</label>
                                         <Padding />
                                         <Row>
                                             <CrasRadioButton
@@ -154,7 +195,7 @@ const CreateAttendanceUnityPage = () => {
                                 <Row>
                                 </Row>
                                 <div className="col">
-                                    <label>Tipo de Construção *</label>
+                                    <label>Tipo de Construção</label>
                                     <Padding />
                                     <Row>
                                         <CrasRadioButton

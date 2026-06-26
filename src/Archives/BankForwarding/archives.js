@@ -131,7 +131,7 @@ const Document = ({ visibleEdit }) => {
         <EncaminhamentoContainer>
             <HeaderContainer>
             <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
-            <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</b></p>
+            <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.address?.edcenso_city?.name}</b></p>
             <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
             {unityAttendance?.type === 'CRAS' ? (
                 <p>CENTRO DE REFERÊNCIA DE ASSISTÊNCIA SOCIAL – {unityAttendance?.name} </p>
@@ -169,7 +169,7 @@ const Document = ({ visibleEdit }) => {
             
             <br /> 
             <BodyText>
-            Encaminhamos o (a) Sr. (a) <u>{name_user_identify?.name}</u>, portador (a) do RG <u>{RG_user_identify?.rg_number}</u> {emission_RG_user_identify?.emission_rg}/{uf_RG_user_identify?.uf_rg}, expedido em <u>{emission_date}</u>, e CPF: <u>{CPF_user_identify?.cpf}</u>, residente e domiciliado  em <u>{familyReferedId?.address.address}</u>, no município de <u>{unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}</u> com o objetivo de proceder a abertura de conta poupança, de forma gratuita.
+            Encaminhamos o (a) Sr. (a) <u>{name_user_identify?.name}</u>, portador (a) do RG <u>{RG_user_identify?.rg_number}</u> {emission_RG_user_identify?.emission_rg}/{uf_RG_user_identify?.uf_rg}, expedido em <u>{emission_date}</u>, e CPF: <u>{CPF_user_identify?.cpf}</u>, residente e domiciliado  em <u>{familyReferedId?.address.address}</u>, no município de <u>{unityAttendance?.address?.edcenso_city?.name}/{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym}</u> com o objetivo de proceder a abertura de conta poupança, de forma gratuita.
             </BodyText>
 
             <br/>
@@ -178,7 +178,7 @@ const Document = ({ visibleEdit }) => {
             </BodyText>
 
             <FooterContainer>
-            <BodyTextDate> {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}, ___/___/_____.</BodyTextDate>
+            <BodyTextDate> {unityAttendance?.address?.edcenso_city?.name}/{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym}, ___/___/_____.</BodyTextDate>
             <br/><br/>
             
             <BodyTextAsign><b>{assistente?.name.toUpperCase()}</b></BodyTextAsign>
@@ -193,7 +193,7 @@ const Document = ({ visibleEdit }) => {
             <br/><br/>
             <BodyTextNoIdent><b>FUNDO MUNICIPAL DE ASSISTÊNCIA SOCIAL - FMAS</b></BodyTextNoIdent>
             <BodyTextNoIdent><b>E-mail: </b>{unityAttendance?.email}</BodyTextNoIdent>
-            <BodyTextNoIdent><b>End.: </b>{unityAttendance?.address.address}, CEP:{unityAttendance?.edcenso_city.cep_final}</BodyTextNoIdent>
+            <BodyTextNoIdent><b>End.: </b>{unityAttendance?.address.address}, CEP:{unityAttendance?.address?.edcenso_city?.cep_final}</BodyTextNoIdent>
 
             
         </EncaminhamentoContainer>

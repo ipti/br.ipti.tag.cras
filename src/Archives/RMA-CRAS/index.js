@@ -102,7 +102,7 @@ const MonthlyForm = () => {
                         <Column style={{ width: "100%" }}>
                             <Row>
                                 <Padding />
-                                <p>{unityAttendance?.edcenso_city?.name}</p>
+                                <p>{unityAttendance?.address?.edcenso_city?.name}</p>
                             </Row>
                             <LineBottom />
                         </Column>
@@ -111,7 +111,7 @@ const MonthlyForm = () => {
                         <p>UF: </p>
                         <Column style={{ width: "100%" }}>
                             <Row id='center'>
-                                <p>{unityAttendance?.edcenso_city?.edcenso_uf?.acronym}</p>
+                                <p>{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym}</p>
                             </Row>
                             <LineBottom />
                         </Column>

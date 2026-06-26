@@ -1,8 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import RmaCras from "../Archives/RMA-CRAS";
-import CreateAttendanceUnity from "../Container/AttendanceUnity/CreateAttendanceUnity";
-import EditAttendanceUnity from "../Container/AttendanceUnity/EditAttendanceUnity";
+import AttendanceUnityForm from "../Container/AttendanceUnity/AttendanceUnityForm";
 import AttendanceUnity from "../Container/AttendanceUnity/ListAttendanceUnity";
 import CreateBenefits from "../Container/Benefits/CreateBenefits";
 import EditBenefits from "../Container/Benefits/EditBenefits";
@@ -23,8 +22,7 @@ import Technician from "../Container/Technician/Technician";
 import CreateTypeService from "../Container/TypeService/CreateTypeService";
 import EditTypeService from "../Container/TypeService/EditTypeService";
 import TypeService from "../Container/TypeService/TypeService";
-import CreateUser from "../Container/Users/Create";
-import EditUser from "../Container/Users/Edit";
+import UserForm from "../Container/Users/UserForm";
 import Users from "../Container/Users/Users";
 import FamilyOnePage from "../Page/FamilyRefered/FamilyOne";
 import NotFoundPage from "../Page/NotFoundPage";
@@ -44,8 +42,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={Dashboard} />} path="/" exact />
 
                 <Route element={<SecretaryRoute Component={Users} permission={Permission.USER_VIEW} />} path="/usuarios" />
-                <Route element={<SecretaryRoute Component={CreateUser} permission={Permission.USER_CREATE} />} path="/criar/usuarios" />
-                <Route element={<SecretaryRoute Component={EditUser} permission={Permission.USER_EDIT} />} path="/edit/usuarios/:id" />
+                <Route element={<SecretaryRoute Component={UserForm} permission={Permission.USER_CREATE} />} path="/criar/usuarios" />
+                <Route element={<SecretaryRoute Component={UserForm} permission={Permission.USER_EDIT} />} path="/edit/usuarios/:id" />
 
                 <Route element={<PrivateRoute Component={ListServices} />} path="/atendimento" />
                 <Route element={<PrivateRoute Component={CreateServices} />} path="/criar/atendimento" />
@@ -73,8 +71,8 @@ const RoutesCras = () => {
                 <Route element={<PrivateRoute Component={Dashboard} />} path="/dashboard" />
 
                 <Route element={<SecretaryRoute Component={AttendanceUnity} permission={Permission.UNIT_VIEW} />} path="/unidades" />
-                <Route element={<SecretaryRoute Component={CreateAttendanceUnity} permission={Permission.UNIT_CREATE} />} path="/criar/unidades" />
-                <Route element={<SecretaryRoute Component={EditAttendanceUnity} permission={Permission.UNIT_EDIT} />} path="/edit/unidades/:id" />
+                <Route element={<SecretaryRoute Component={AttendanceUnityForm} permission={Permission.UNIT_CREATE} />} path="/criar/unidades" />
+                <Route element={<SecretaryRoute Component={AttendanceUnityForm} permission={Permission.UNIT_EDIT} />} path="/edit/unidades/:id" />
 
                 <Route element={<SecretaryRoute Component={Report} permission={Permission.REPORT_VIEW} />} path="/relatorios" />
 
