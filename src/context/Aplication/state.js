@@ -5,12 +5,8 @@ import { AttendanceUnityController } from "../../sdk/AttendanceUnity/ListAttenda
 
 const AplicationState = () => {
 
-    const year = [
-        1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008,
-        2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018,
-        2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028,
-        2029, 2030,
-    ];
+    const currentYear = new Date().getFullYear();
+    const year = Array.from({ length: currentYear - 1998 }, (_, i) => 1999 + i);
 
     // Inicializa do localStorage — disponível imediatamente, sem flash
     const [user, setUser] = useState(() => getUserData());
@@ -33,16 +29,24 @@ const AplicationState = () => {
 
     const { attendancefetch } = AttendanceUnityController();
     const [attendance, setAttendance] = useState([]);
+    const [noUnities, setNoUnities] = useState(false);
 
     useEffect(() => {
-        if (!attendancefetch) return;
+        if (attendancefetch === undefined) return;
         setAttendance(attendancefetch);
-        if (attendancefetch[0] && !GetIdAttendance() && user?.role === "SECRETARY") {
-            idAttendance(attendancefetch[0].id);
+        setNoUnities(attendancefetch.length === 0);
+
+        if (!GetIdAttendance()) {
+            if (user?.role === 'TECHNICIAN') {
+                const firstId = user?.attendance_unity_ids?.[0];
+                if (firstId) idAttendance(firstId);
+            } else if (attendancefetch.length > 0) {
+                idAttendance(attendancefetch[0].id);
+            }
         }
     }, [attendancefetch, user]);
 
-    return { user, handleUser, year, attendance };
+    return { user, handleUser, year, attendance, noUnities };
 };
 
 export default AplicationState;

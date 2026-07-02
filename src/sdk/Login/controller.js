@@ -14,11 +14,14 @@ export const LoginController = ({setError, handleUser}) => {
             setError(error.response.data.message)          
           },
           onSuccess: (data) => {
+            const user = data.data.user;
             logout()
             login(data.data.access_token);
-            idUser(data.data.user.id)
-            idAttendance(data.data.user.attendance_unity_fk)
-            setUserData(data.data.user)
+            idUser(user.id)
+            if (user.attendance_unity_ids?.length > 0) {
+              idAttendance(user.attendance_unity_ids[0]);
+            }
+            setUserData(user)
             history("/");
             menuItem(1)
             window.location.reload()
