@@ -1,11 +1,8 @@
 import axios from "axios";
 import { getToken } from "./localstorage";
 
-// require('dotenv').config();
-
 const http = axios.create({
-  baseURL: "https://br-ong-tag-cras.azurewebsites.net/",
-  // baseURL: "http://localhost:3001/",
+  baseURL: process.env.REACT_APP_API_BASE_URL,
 });
 
 http.interceptors.request.use(async config => {
