@@ -1,77 +1,52 @@
 import { useEffect, useState } from "react";
-import { useFetchOneUserAplication } from "../../sdk/Login/request";
-import { GetIdAttendance, GetIdUser, idAttendance } from "../../services/localstorage";
+import { useFetchMe } from "../../sdk/Login/request";
+import { GetIdAttendance, getUserData, idAttendance, setUserData } from "../../services/localstorage";
 import { AttendanceUnityController } from "../../sdk/AttendanceUnity/ListAttendanceUnity/controller";
 
-
 const AplicationState = () => {
-    const [user, setUser] = useState({})
 
-    const handleUser = (user) => {
-        setUser(user)
-    }
+    const currentYear = new Date().getFullYear();
+    const year = Array.from({ length: currentYear - 1998 }, (_, i) => 1999 + i);
 
-    const year = [
-        1999,
-        2000,
-        2001,
-        2002,
-        2003,
-        2004,
-        2005,
-        2006,
-        2007,
-        2008,
-        2009,
-        2010,
-        2011,
-        2012,
-        2013,
-        2014,
-        2015,
-        2016,
-        2017,
-        2018,
-        2019,
-        2020,
-        2021,
-        2022,
-        2023,
-        2024,
-        2025,
-        2026,
-        2027,
-        2028,
-        2029,
-        2030
-    ]
+    // Inicializa do localStorage — disponível imediatamente, sem flash
+    const [user, setUser] = useState(() => getUserData());
+
+    // GET /auth/me: lê do token JWT no servidor, sem query no banco
+    // staleTime 5min — react-query reutiliza o cache, não refaz a cada mount
+    const { data: meResponse } = useFetchMe();
+
+    useEffect(() => {
+        const fresh = meResponse?.data;
+        if (!fresh) return;
+        setUser(fresh);
+        setUserData(fresh);
+    }, [meResponse]);
+
+    const handleUser = (userData) => {
+        setUser(userData);
+        setUserData(userData);
+    };
 
     const { attendancefetch } = AttendanceUnityController();
     const [attendance, setAttendance] = useState([]);
+    const [noUnities, setNoUnities] = useState(false);
 
     useEffect(() => {
-        if (attendancefetch) {
-            setAttendance(attendancefetch)
-            if (attendancefetch[0] && !GetIdAttendance() && user?.role === "SECRETARY") {
-                idAttendance(attendancefetch[0].id)
+        if (attendancefetch === undefined) return;
+        setAttendance(attendancefetch);
+        setNoUnities(attendancefetch.length === 0);
+
+        if (!GetIdAttendance()) {
+            if (user?.role === 'TECHNICIAN') {
+                const firstId = user?.attendance_unity_ids?.[0];
+                if (firstId) idAttendance(firstId);
+            } else if (attendancefetch.length > 0) {
+                idAttendance(attendancefetch[0].id);
             }
         }
-    }, [attendancefetch, user])
+    }, [attendancefetch, user]);
 
-
-    const { data: userRequest } = useFetchOneUserAplication(GetIdUser())
-
-
-    useEffect(() => {
-        if (userRequest) {
-            setUser(userRequest)
-        }
-    }, [userRequest])
-
-
-    return {
-        user, handleUser, year, attendance
-    }
-}
+    return { user, handleUser, year, attendance, noUnities };
+};
 
 export default AplicationState;

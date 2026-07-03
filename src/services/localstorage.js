@@ -1,8 +1,8 @@
 const TOKEN_KEY = "token";
 const id_key = "cras-id";
-
 const id_attendance = "cras-id-attendance";
 const menu_key = "cras-menu";
+const user_key = "cras-user";
 
 export const isAuthenticated = () => {
   return localStorage.getItem(TOKEN_KEY) !== null;
@@ -19,11 +19,20 @@ export const login = (token) => {
 
 
 export const logout = () => {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(id_key);
-  localStorage.removeItem(id_attendance);
-
   localStorage.clear();
+};
+
+export const setUserData = (user) => {
+  localStorage.setItem(user_key, JSON.stringify(user));
+};
+
+export const getUserData = () => {
+  try {
+    const raw = localStorage.getItem(user_key);
+    return raw ? JSON.parse(raw) : null;
+  } catch {
+    return null;
+  }
 };
 
 export const idUser = (id) => {

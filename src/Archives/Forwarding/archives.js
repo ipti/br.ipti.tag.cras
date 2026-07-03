@@ -119,7 +119,7 @@ const Document = ({ visibleEdit }) => {
       <EncaminhamentoContainer>
         <HeaderContainer>
           <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
-          <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</b></p>
+          <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.address?.edcenso_city?.name}</b></p>
           <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
           {unityAttendance?.type === 'CRAS' ? (
             <p>CENTRO DE REFERÊNCIA DE ASSISTÊNCIA SOCIAL – {unityAttendance?.name} </p>
@@ -135,7 +135,7 @@ const Document = ({ visibleEdit }) => {
         <br/> 
         <Row><BodyTextBold>Nome:</BodyTextBold> <BodyTextPersonal> {name_user_identify?.name} </BodyTextPersonal></Row>
         <Row><BodyTextBold>CPF:</BodyTextBold> <BodyTextPersonal> {CPF_user_identify?.cpf} </BodyTextPersonal> </Row>
-        <Row><BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address}, {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym} </BodyTextPersonal></Row>
+        <Row><BodyTextBold>Endereço:</BodyTextBold> <BodyTextPersonal> {familyReferedId?.address.address}, {unityAttendance?.address?.edcenso_city?.name}/{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym} </BodyTextPersonal></Row>
 
         <Row>
         <SubTitle>II- SETOR/ ÓRGÃO A SER ENCAMINHADO:</SubTitle> 
@@ -151,7 +151,7 @@ const Document = ({ visibleEdit }) => {
         <BodyText> {forwardMotivation?.report} </BodyText>
         
         <FooterContainer>
-        <BodyTextDate>{unityAttendance?.edcenso_city.name}-{unityAttendance?.edcenso_city.edcenso_uf.acronym} , ____ de _____ de __________</BodyTextDate>
+        <BodyTextDate>{unityAttendance?.address?.edcenso_city?.name}-{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym} , ____ de _____ de __________</BodyTextDate>
         <br/>
         <br/>
         <BodyTextAsign>__________________________________________________</BodyTextAsign>

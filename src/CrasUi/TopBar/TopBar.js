@@ -12,12 +12,13 @@ const TopBar = ({ setViewd, viewdMenu }) => {
 
     const larguraTela = window.innerWidth;
 
-    const { attendance, user } = useContext(AplicationContext)
+    const { attendance, user, noUnities } = useContext(AplicationContext)
 
-    const valueAttendance = attendance ? attendance?.find(props => props.id === parseInt(GetIdAttendance())) : {}
+    const availableUnities = user?.role === "TECHNICIAN"
+        ? attendance.filter(a => (user?.attendance_unity_ids ?? []).includes(a.id))
+        : attendance;
 
-
-    
+    const valueAttendance = availableUnities.find(props => props.id === parseInt(GetIdAttendance())) ?? null;
 
     return (
         <Container>
@@ -34,9 +35,31 @@ const TopBar = ({ setViewd, viewdMenu }) => {
                         Voltar
                     </Back>
                     <Padding />
-                    {user?.role === "SECRETARY" ? <Column>
-                        <CrasDropdown placeholder={"Unidades"} options={attendance} value={valueAttendance} optionLabel={"name"} onChange={(e) => { idAttendance(e.target.value.id);history("/"); menuItem(1); window.location.reload(); }} />
-                    </Column> : null}
+                    {noUnities ? (
+                        <Column id="center">
+                            <span
+                                style={{ color: '#e17055', fontSize: '0.85rem', cursor: 'pointer', fontWeight: 500 }}
+                                onClick={() => history("/criar/unidades")}
+                            >
+                                ⚠ Nenhuma unidade cadastrada — clique para criar
+                            </span>
+                        </Column>
+                    ) : availableUnities.length > 0 ? (
+                        <Column>
+                            <CrasDropdown
+                                placeholder={"Unidades"}
+                                options={availableUnities}
+                                value={valueAttendance}
+                                optionLabel={"name"}
+                                onChange={(e) => {
+                                    idAttendance(e.target.value.id);
+                                    history("/");
+                                    menuItem(1);
+                                    window.location.reload();
+                                }}
+                            />
+                        </Column>
+                    ) : null}
                 </Row>
             </Column>
             <Column style={{ width: "auto" }} id="center">

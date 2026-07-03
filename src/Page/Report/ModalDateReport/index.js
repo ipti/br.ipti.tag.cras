@@ -7,7 +7,8 @@ import { useNavigate } from "react-router-dom";
 
 const ModalDateReport = ({ visible, setVisible }) => {
 
-    const year = [2020, 2021, 2022, 2023, 2024, 2025]
+    const currentYear = new Date().getFullYear();
+    const year = Array.from({ length: currentYear - 2019 }, (_, i) => 2020 + i);
     const month = [
         { name: 'Janeiro', id: 1 },
         { name: 'Fevereiro', id: 2 },

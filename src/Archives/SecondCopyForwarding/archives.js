@@ -126,7 +126,7 @@ const Document = ({ visibleEdit }) => {
         <EncaminhamentoContainer>
             <HeaderContainer>
             <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
-            <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.edcenso_city.name}</b></p>
+            <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.address?.edcenso_city?.name}</b></p>
             <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
             {unityAttendance?.type === 'CRAS' ? (
                 <p>CENTRO DE REFERÊNCIA DE ASSISTÊNCIA SOCIAL – {unityAttendance?.name} </p>
@@ -161,12 +161,12 @@ const Document = ({ visibleEdit }) => {
             <DeclaracaoContainer>
                 <Title>DECLARAÇÃO</Title>
                 <BodyTextNoIdent>O abaixo-assinado e qualificado, DECLARA, sob pena de responsabilidade civil e criminal, nos termos do artigo 30, parágrafo 1º, da Lei 6.015/1973, que não possui recursos para arcar com os emolumentos relativos à expedição de certidão. </BodyTextNoIdent>
-                <BodyTextDate> {unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}, ____/____/______.</BodyTextDate>
+                <BodyTextDate> {unityAttendance?.address?.edcenso_city?.name}/{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym}, ____/____/______.</BodyTextDate>
                 <br/>
                 <BodyTextNoIdent>Nome:<u>{user_identify.name}</u></BodyTextNoIdent>
                 <BodyTextNoIdent>Profissão: <u>{user_identify?.profission}</u>  RG:<u>{user_identify?.rg_number}</u> {user_identify?.emission_rg}/{user_identify?.uf_rg}   CPF: <u>{user_identify?.cpf}</u> </BodyTextNoIdent>
                 <BodyTextNoIdent>Endereço: <u>{familyReferedId?.address.address}</u> </BodyTextNoIdent>
-                <BodyTextNoIdent>Cidade: <u>{unityAttendance?.edcenso_city.name}/{unityAttendance?.edcenso_city.edcenso_uf.acronym}</u></BodyTextNoIdent>
+                <BodyTextNoIdent>Cidade: <u>{unityAttendance?.address?.edcenso_city?.name}/{unityAttendance?.address?.edcenso_city?.edcenso_uf?.acronym}</u></BodyTextNoIdent>
                 <br/>
                 <BodyTextAsign>__________________________________________________________________</BodyTextAsign>
                 <BodyTextAsign>Assinatura do Declarante</BodyTextAsign>
@@ -179,7 +179,7 @@ const Document = ({ visibleEdit }) => {
                 <Column><img src={LogoCras} alt="Logo Cras" style={{ width: '80px' }}/></Column>
                 <Column>
                     <BodyTextNoIdent><b>End.: </b>{unityAttendance?.address.address}</BodyTextNoIdent>
-                    <BodyTextNoIdent><b>Cep: </b>{unityAttendance?.edcenso_city.cep_final}</BodyTextNoIdent>
+                    <BodyTextNoIdent><b>Cep: </b>{unityAttendance?.address?.edcenso_city?.cep_final}</BodyTextNoIdent>
                     <BodyTextNoIdent><b>Fone: </b>{unityAttendance?.address.telephone}</BodyTextNoIdent>
                     <BodyTextNoIdent><b>E-mail: </b>{unityAttendance?.email}</BodyTextNoIdent>
                 </Column>
