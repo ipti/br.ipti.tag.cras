@@ -10,6 +10,7 @@ import CrasDropdown from "../../../CrasUi/Dropdown";
 import { Column, Container, Grid, Padding, Row } from "../../../CrasUi/styles/styles";
 import { AttendanceUnityFormContext } from "../../../context/AttendanceUnity/AttendanceUnityForm/context";
 import { useFetchAllState, useFetchAllCity } from "../../../sdk/State/request";
+import FileUpload from "../../../Components/FileUpload";
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required("Campo obrigatório"),
@@ -28,6 +29,7 @@ const AttendanceUnityFormPage = () => {
     const { isEdit, oneAttendance, handleSubmit } = useContext(AttendanceUnityFormContext);
 
     const [selectedUf, setSelectedUf] = useState(null);
+    const [currentLogo, setCurrentLogo] = useState(null);
     const { data: ufs = [] } = useFetchAllState();
     const { data: cities = [] } = useFetchAllCity(selectedUf?.id);
 
@@ -36,6 +38,12 @@ const AttendanceUnityFormPage = () => {
             setSelectedUf(oneAttendance.address.edcenso_city.edcenso_uf);
         }
     }, [isEdit, oneAttendance]);
+
+    useEffect(() => {
+        if (oneAttendance?.logo !== undefined) {
+            setCurrentLogo(oneAttendance.logo ?? null);
+        }
+    }, [oneAttendance?.logo]);
 
     if (isEdit && !oneAttendance) return null;
 
@@ -52,6 +60,7 @@ const AttendanceUnityFormPage = () => {
         rooms: oneAttendance?.address?.rooms ?? null,
         rent_value: oneAttendance?.address?.rent_value ?? null,
         edcenso_city_fk: oneAttendance?.address?.edcenso_city_fk ?? null,
+        logo_fk: oneAttendance?.logo_fk ?? null,
     };
 
     return (
@@ -169,6 +178,22 @@ const AttendanceUnityFormPage = () => {
                                 </Row>
                             </div>
                             <Padding padding="16px" />
+                            <h3>Identidade Visual</h3>
+                            <Grid checkMockup={[{}]}>
+                                <Column>
+                                    <FileUpload
+                                        label="Logo da Prefeitura / Unidade"
+                                        value={currentLogo}
+                                        onChange={(record) => {
+                                            setCurrentLogo(record);
+                                            setFieldValue('logo_fk', record.id);
+                                        }}
+                                        accept="image/png,image/jpeg,image/jpg"
+                                        folder="logos"
+                                    />
+                                    <Padding />
+                                </Column>
+                            </Grid>
                             <Row id="end">
                                 <Padding />
                                 <ButtonPrime label={isEdit ? "Salvar" : "Criar"} type="submit" />
