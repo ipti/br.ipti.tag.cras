@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
-import { UploadFileRequest } from '../../sdk/FileUpload/request';
+import { GetFileStreamRequest, UploadFileRequest } from '../../sdk/FileUpload/request';
 
 const Wrapper = styled.div`
   display: flex;
@@ -100,6 +100,25 @@ const FileUpload = ({
     const inputRef = useRef(null);
     const [uploading, setUploading] = useState(false);
     const [error, setError] = useState(null);
+    const [localPreview, setLocalPreview] = useState(null);
+    const [fetchedPreview, setFetchedPreview] = useState(null);
+
+    useEffect(() => {
+        if (!value?.id) {
+            setFetchedPreview(null);
+            return;
+        }
+        let objectUrl = null;
+        GetFileStreamRequest(value.id)
+            .then((blob) => {
+                objectUrl = URL.createObjectURL(blob);
+                setFetchedPreview(objectUrl);
+            })
+            .catch(() => setFetchedPreview(null));
+        return () => {
+            if (objectUrl) URL.revokeObjectURL(objectUrl);
+        };
+    }, [value?.id]);
 
     const handleBoxClick = () => {
         if (!uploading) inputRef.current?.click();
@@ -111,6 +130,8 @@ const FileUpload = ({
 
         setError(null);
         setUploading(true);
+        const preview = URL.createObjectURL(file);
+        setLocalPreview(preview);
 
         try {
             const record = await UploadFileRequest(file, folder);
@@ -120,31 +141,31 @@ const FileUpload = ({
             setError(Array.isArray(msg) ? msg.join('; ') : msg);
         } finally {
             setUploading(false);
+            URL.revokeObjectURL(preview);
+            setLocalPreview(null);
             e.target.value = '';
         }
     };
 
-    const isImage =
-        value?.mime_type?.startsWith('image/') ||
-        /\.(png|jpe?g|webp|gif)(\?.*)?$/i.test(value?.blob_url ?? '');
+    const previewSrc = localPreview || fetchedPreview;
+    const hasFile = !!value?.id || !!localPreview;
 
     return (
         <Wrapper>
             {label && <FieldLabel>{label}</FieldLabel>}
 
-            <UploadBox $hasFile={!!value?.blob_url} onClick={handleBoxClick}>
-                {isImage && value?.blob_url ? (
+            <UploadBox $hasFile={hasFile} onClick={handleBoxClick}>
+                {previewSrc ? (
                     <PreviewImage
-                        src={value.blob_url}
-                        alt={value.original_name ?? 'Preview'}
-                        crossOrigin="anonymous"
+                        src={previewSrc}
+                        alt={value?.original_name ?? 'Preview'}
                     />
                 ) : null}
 
                 <UploadTextArea>
                     {uploading ? (
                         <UploadHint>Enviando...</UploadHint>
-                    ) : value?.blob_url ? (
+                    ) : value?.id ? (
                         <>
                             <FileName>{value.original_name}</FileName>
                             <UploadHint>Clique para substituir</UploadHint>
@@ -157,7 +178,7 @@ const FileUpload = ({
 
             {error && <ErrorText>{error}</ErrorText>}
 
-            {value?.blob_url && !uploading && (
+            {value?.id && !uploading && (
                 <ChangeButton type="button" onClick={handleBoxClick}>
                     Trocar imagem
                 </ChangeButton>

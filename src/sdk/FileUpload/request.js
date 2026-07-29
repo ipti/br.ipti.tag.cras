@@ -30,3 +30,12 @@ export const GetFileRequest = async (id) => {
         .get(`/bff/file-upload/${id}`, authConfig())
         .then((response) => response.data);
 };
+
+export const GetFileStreamRequest = async (id) => {
+    return http
+        .get(`/bff/file-upload/${id}/stream`, {
+            ...authConfig(),
+            responseType: 'blob',
+        })
+        .then((response) => response.data);
+};
