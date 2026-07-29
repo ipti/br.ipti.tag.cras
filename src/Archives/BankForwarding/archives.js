@@ -6,7 +6,6 @@ import { GetIdAttendance } from '../../services/localstorage';
 import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician} from '../../sdk/Technician/EditTechnician/request';
 import { Row } from '../../CrasUi/styles/styles';
-import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 import BackgroundDoc  from "../../assets/images/nslourdes/backgroud_doc_nslourdes.jpg";
 
 
@@ -130,7 +129,14 @@ const Document = ({ visibleEdit }) => {
         <BackgroundContainer>
         <EncaminhamentoContainer>
             <HeaderContainer>
-            <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
+            {unityAttendance?.logo?.blob_url && (
+            <img
+              src={unityAttendance.logo.blob_url}
+              alt="Logo da Prefeitura"
+              crossOrigin="anonymous"
+              style={{ maxHeight: '80px', maxWidth: '200px', objectFit: 'contain' }}
+            />
+          )}
             <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.address?.edcenso_city?.name}</b></p>
             <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
             {unityAttendance?.type === 'CRAS' ? (

@@ -8,7 +8,6 @@ import { useFetchFamilyReferedId } from '../../sdk/FamilyRefered/request';
 import { useFetchOneTechnician, useFetchOneTechnicianPsico } from '../../sdk/Technician/EditTechnician/request';
 import { useFetchOneForwardByForwarding} from '../../sdk/FOUIForwarding/requests';
 import { Column, Row } from '../../CrasUi/styles/styles';
-import LogoNSLourdes from "../../assets/images/nslourdes/logo-prefeitura-nslourdes.png";
 
 // Estilos globais
 const GlobalStyle = createGlobalStyle`
@@ -118,7 +117,14 @@ const Document = ({ visibleEdit }) => {
       <GlobalStyle />
       <EncaminhamentoContainer>
         <HeaderContainer>
-          <img src={LogoNSLourdes} alt="Logo da Prefeitura de Nossa Senhora de Lourdes"/>
+          {unityAttendance?.logo?.blob_url && (
+            <img
+              src={unityAttendance.logo.blob_url}
+              alt="Logo da Prefeitura"
+              crossOrigin="anonymous"
+              style={{ maxHeight: '80px', maxWidth: '200px', objectFit: 'contain' }}
+            />
+          )}
           <p><b>PREFEITURA MUNICIPAL DE {unityAttendance?.address?.edcenso_city?.name}</b></p>
           <p><b>SECRETARIA MUNICIPAL DE ASSISTÊNCIA SOCIAL</b></p>
           {unityAttendance?.type === 'CRAS' ? (
