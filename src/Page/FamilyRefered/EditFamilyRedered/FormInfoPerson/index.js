@@ -98,7 +98,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInput label="NIS" name="nis" onChange={handleChange} value={values.nis} />
+                    <CrasInputMask mask={"999.99999.99-9"} label="NIS" name="nis" onChange={handleChange} value={values.nis} />
                     <Padding />
                     {errors.nis && touched.nis ? (
                         <div style={{ color: "red" }}>{errors.nis}<Padding /></div>

@@ -176,7 +176,7 @@ const EditRferedState = () => {
       name: values?.name,
       surname: values?.surname === "" ? undefined : values?.surname,
       birthday: values?.birthday,
-      nis: values?.nis === "" ? undefined : parseInt(values?.nis),
+      nis: values?.nis ? String(values.nis).replace(/\D/g, "") || undefined : undefined,
       folder: values.folder,
       archive: values.archive,
       number: values.number,
