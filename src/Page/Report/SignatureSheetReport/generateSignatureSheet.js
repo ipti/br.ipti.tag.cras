@@ -13,6 +13,12 @@ const COL_WIDTHS = [8, 22, 42, 46, 34, 28]; // N°, Data, Nome, Endereço, Técn
 const COL_HEADERS = ['N°', 'Data', 'Nome do Responsável', 'Endereço / Ref.', 'Técnico', 'Assinatura'];
 const ROW_H = 11;
 const HEADER_ROW_H = 7;
+const TOTAL_PAGES = 2;
+
+// Rodapé: linha de assinatura com os textos logo abaixo dela
+const FOOTER_LINE_Y = PAGE_H - MARGIN - 6;
+// A tabela termina antes do rodapé, deixando espaço para assinar sobre a linha
+const TABLE_LIMIT_Y = FOOTER_LINE_Y - 14;
 
 const blobToDataUrl = (blob) =>
     new Promise((resolve, reject) => {
@@ -189,7 +195,7 @@ export const generateSignatureSheet = async () => {
     };
 
     const drawFooter = () => {
-        const footerY = PAGE_H - MARGIN - 10;
+        const footerY = FOOTER_LINE_Y;
         doc.setDrawColor(150);
         doc.setLineWidth(0.3);
         doc.line(MARGIN, footerY, MARGIN + 80, footerY);
@@ -202,26 +208,26 @@ export const generateSignatureSheet = async () => {
         doc.setTextColor(0);
     };
 
-    const ROWS_PER_PAGE = 17;
-    const TOTAL_ROWS = ROWS_PER_PAGE * 2; // 2 pages
-
-    let startY = drawHeader();
-    drawTableRow(doc, startY, COL_WIDTHS, COL_HEADERS, HEADER_ROW_H, true);
-    startY += HEADER_ROW_H;
-
-    for (let i = 0; i < TOTAL_ROWS; i++) {
-        if (i > 0 && i % ROWS_PER_PAGE === 0) {
-            drawFooter();
+    // A altura do cabeçalho varia com os dados da unidade, então a quantidade
+    // de linhas é calculada por página para a tabela nunca invadir o rodapé.
+    let rowNumber = 1;
+    for (let page = 0; page < TOTAL_PAGES; page++) {
+        if (page > 0) {
             doc.addPage();
             pageNum++;
-            startY = drawHeader();
-            drawTableRow(doc, startY, COL_WIDTHS, COL_HEADERS, HEADER_ROW_H, true);
-            startY += HEADER_ROW_H;
         }
-        drawTableRow(doc, startY, COL_WIDTHS, [i + 1, '', '', '', '', ''], ROW_H);
-        startY += ROW_H;
-    }
 
-    drawFooter();
+        let startY = drawHeader();
+        drawTableRow(doc, startY, COL_WIDTHS, COL_HEADERS, HEADER_ROW_H, true);
+        startY += HEADER_ROW_H;
+
+        const rowsThisPage = Math.floor((TABLE_LIMIT_Y - startY) / ROW_H);
+        for (let i = 0; i < rowsThisPage; i++) {
+            drawTableRow(doc, startY, COL_WIDTHS, [rowNumber++, '', '', '', '', ''], ROW_H);
+            startY += ROW_H;
+        }
+
+        drawFooter();
+    }
     doc.output('dataurlnewwindow');
 };
