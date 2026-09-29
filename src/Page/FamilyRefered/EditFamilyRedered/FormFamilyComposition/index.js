@@ -14,6 +14,7 @@ import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
 import { formatarData } from "../../../../services/functions";
 import EditMemberFamily from "./EditMemberFamily";
+import { NIS_MASK, nisValidation } from "../../../../Controller/nis";
 
 const FormFamilyComposition = () => {
     const { open, setOpen, HandleCreateUserIdentify, parentesco, family, addMember, setAddMember, deleteFamilyMember, estadosCivis, escolaridadeNoBrasil, estadosDoBrasil } = useContext(EditFamilyReferedContext)
@@ -55,7 +56,7 @@ const FormFamilyComposition = () => {
         kinship: Yup.object().required("Campo obrigatório"),
         surname: Yup.string(),
         birthday: Yup.string().required("Campo obrigatório"),
-        nis: Yup.number(),
+        nis: nisValidation,
         rg_number: Yup.string().required("Campo obrigatório"),
         rg_date_emission: Yup.string().required("Campo obrigatório"),
         uf_rg: Yup.object().required("Campo obrigatório"),
@@ -124,7 +125,7 @@ const FormFamilyComposition = () => {
                                             ) : null}
                                         </Column>
                                         <Column>
-                                            <CrasInput label="NIS" value={values.nis} name={"nis"} onChange={handleChange} />
+                                            <CrasInputMask mask={NIS_MASK} label="NIS" name="nis" onChange={handleChange} value={values.nis} />
                                             <Padding />
                                             {errors.nis && touched.nis ? (
                                                 <div style={{ color: "red" }}>{errors.nis}<Padding /></div>

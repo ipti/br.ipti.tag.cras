@@ -6,6 +6,7 @@ import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { EditFamilyReferedContext } from "../../../../context/FamilyRefered/EditFamilyRefered/context";
+import { NIS_MASK } from "../../../../Controller/nis";
 
 
 const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
@@ -98,7 +99,7 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
                     ) : null}
                 </Column>
                 <Column>
-                    <CrasInputMask mask={"999.99999.99-9"} label="NIS" name="nis" onChange={handleChange} value={values.nis} />
+                    <CrasInputMask mask={NIS_MASK} label="NIS" name="nis" onChange={handleChange} value={values.nis} />
                     <Padding />
                     {errors.nis && touched.nis ? (
                         <div style={{ color: "red" }}>{errors.nis}<Padding /></div>

@@ -10,6 +10,7 @@ import { EditFamilyReferedContext } from "../../../context/FamilyRefered/EditFam
 import FormAddress from "./FormAddress";
 import FormFinances from "./FormFinances";
 import FormInfoPerson from "./FormInfoPerson";
+import { nisValidation } from "../../../Controller/nis";
 
 const EditFamilyReferedScreen = () => {
 
@@ -91,7 +92,7 @@ const EditFamilyReferedScreen = () => {
         folder: findOwner?.folder ?? "",
         archive: findOwner?.archive ?? "",
         number: family ? findOwner?.number : "",
-        nis: family ? findOwner?.nis : "",
+        nis: family ? findOwner?.nis ?? "" : "",
         rg_number: family ? findOwner?.rg_number : "",
         rg_date_emission: family ? findOwner?.rg_date_emission : "",
         uf_rg: valueUf() ?? "",
@@ -143,6 +144,7 @@ const EditFamilyReferedScreen = () => {
         folder: Yup.string(),
         archives: Yup.string(),
         number: Yup.string(),
+        nis: nisValidation,
         rg_number: Yup.string(),
         rg_date_emission: Yup.string(),
         uf_rg: Yup.object(),    

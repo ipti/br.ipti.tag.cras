@@ -10,6 +10,7 @@ import CrasInputNumber from "../../../../CrasUi/Input/InputNumber";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CompositionFamilyContext } from "../../../../context/FamilyRefered/CompositionFamily/context";
+import { NIS_MASK, nisValidation } from "../../../../Controller/nis";
 
 
 const EditMemberFamily = ({ id, setOpen }) => {
@@ -57,7 +58,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
         kinship: Yup.object().required("Campo obrigatório"),
         surname: Yup.string(),
         birthday: Yup.string().required("Campo obrigatório"),
-        nis: Yup.number(),
+        nis: nisValidation,
         rg_number: Yup.string(),
         rg_date_emission: Yup.string(),
         uf_rg: Yup.object(),
@@ -92,7 +93,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="NIS" value={values.nis} name={"nis"} onChange={handleChange} />
+                                    <CrasInputMask mask={NIS_MASK} label="NIS" name="nis" onChange={handleChange} value={values.nis} />
                                     <Padding />
                                     {errors.nis && touched.nis ? (
                                         <div style={{ color: "red" }}>{errors.nis}<Padding /></div>

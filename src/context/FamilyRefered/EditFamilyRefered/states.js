@@ -4,6 +4,7 @@ import { EditFamilyReferedController } from "../../../sdk/FamilyRefered/EditFami
 import queryClient from "../../../services/react-query";
 import { MemberFamilyController } from "../../../sdk/FamilyRefered/MemberFamily/controller";
 import { GetIdAttendance } from "../../../services/localstorage";
+import { onlyNisDigits } from "../../../Controller/nis";
 
 
 
@@ -176,7 +177,7 @@ const EditRferedState = () => {
       name: values?.name,
       surname: values?.surname === "" ? undefined : values?.surname,
       birthday: values?.birthday,
-      nis: values?.nis ? String(values.nis).replace(/\D/g, "") || undefined : undefined,
+      nis: onlyNisDigits(values?.nis),
       folder: values.folder,
       archive: values.archive,
       number: values.number,
@@ -274,7 +275,7 @@ const EditRferedState = () => {
   const HandleCreateUserIdentify = (data) => {
 
     CreateUserIdentifyWithFamilyRequestMutation.mutate({
-      ...data, nis: parseInt(data.nis),
+      ...data, nis: onlyNisDigits(data.nis),
       cpf: data.cpf.replace(/\D/g, ''),
       rg_number: data.rg_number.replace(/\D/g, ''),
       uf_rg: data.uf_rg.uf,

@@ -9,6 +9,7 @@ import CrasInputMask from "../../../../CrasUi/Input/InputMask";
 import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
+import { NIS_MASK, nisValidation } from "../../../../Controller/nis";
 
 
 const FormInfoPerson = () => {
@@ -49,7 +50,7 @@ const FormInfoPerson = () => {
         folder: Yup.string(),
         archive: Yup.string(),
         number: Yup.string(),
-        nis: Yup.number(),
+        nis: nisValidation,
         rg_number: Yup.string(),
         rg_date_emission: Yup.string(),
         initial_date: Yup.string().required("Campo obrigatório"),
@@ -147,7 +148,7 @@ const FormInfoPerson = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="NIS" name="nis" onChange={handleChange} value={values.nis} />
+                                    <CrasInputMask mask={NIS_MASK} label="NIS" name="nis" onChange={handleChange} value={values.nis} />
                                     <Padding />
                                     {errors.nis && touched.nis ? (
                                         <div style={{ color: "red" }}>{errors.nis}<Padding /></div>

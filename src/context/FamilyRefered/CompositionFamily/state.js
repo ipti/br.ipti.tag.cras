@@ -4,6 +4,7 @@ import { MemberFamilyController } from "../../../sdk/FamilyRefered/MemberFamily/
 import { useFetchFamilyReferedId } from "../../../sdk/FamilyRefered/request"
 import { GetIdAttendance } from "../../../services/localstorage"
 import queryClient from "../../../services/react-query"
+import { onlyNisDigits } from "../../../Controller/nis";
 
 export const CompositionFamily = () => {
 
@@ -116,7 +117,7 @@ export const CompositionFamily = () => {
     const HandleCreateUserIdentify = (data) => {
 
         CreateUserIdentifyWithFamilyRequestMutation.mutate({
-            ...data, nis: parseInt(data.nis),
+            ...data, nis: onlyNisDigits(data.nis),
             cpf: data.cpf.replace(/\D/g, ''),
             rg_number: data.rg_number.replace(/\D/g, ''),
             uf_rg: data.uf_rg.uf,
@@ -136,7 +137,7 @@ export const CompositionFamily = () => {
             surname: values?.surname === "" ? undefined : values?.surname,
             birthday: values?.birthday,
             kinship: values?.kinship.id,
-            nis: values?.nis === "" ? undefined : parseInt(values?.nis),
+            nis: onlyNisDigits(values?.nis),
             rg_number: values?.rg_number.replace(/\D/g, ''),
             rg_date_emission: values?.rg_date_emission,
             uf_rg: values?.uf_rg.uf,
