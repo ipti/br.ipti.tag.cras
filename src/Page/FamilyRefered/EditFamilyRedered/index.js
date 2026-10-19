@@ -193,12 +193,40 @@ const EditFamilyReferedScreen = () => {
                 validationSchema={validationSchema}
             >
                 {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-                        
+
+                    const labelsPt = {
+                        name: "Nome",
+                        surname: "Apelido",
+                        birthday: "Data de Nascimento",
+                        birth_certificate: "Certidão de Nascimento",
+                        nis: "NIS",
+                        rg_number: "RG",
+                        rg_date_emission: "Data de Emissão do RG",
+                        uf_rg: "UF do RG",
+                        emission_rg: "Órgão Emissor",
+                        cpf: "CPF",
+                        is_deficiency: "Deficiente Físico ou Mental",
+                        deficiency: "Tipo de Deficiência",
+                        filiation_1: "Filiação 1",
+                        filiation_2: "Filiação 2",
+                        marital_status: "Estado Civil",
+                        escolarity: "Escolaridade",
+                        initial_date: "Data de Entrada",
+                        profission: "Profissão",
+                        nuclear_family: "Reside com",
+                        address: "Endereço",
+                        telephone: "Telefone",
+                        conditions: "Condições do Imóvel",
+                        construction_type: "Tipo de Construção",
+                        rooms: "Cômodos",
+                    };
+
                     var erroList = [];
 
                     for (const chave in errors) {
                         if (errors.hasOwnProperty(chave) && touched.hasOwnProperty(chave)) {
-                            erroList.push(`${chave}: ${errors[chave]}`)
+                            const label = labelsPt[chave] || chave;
+                            erroList.push(`${label}: ${errors[chave]}`)
                         }
                     }
 
