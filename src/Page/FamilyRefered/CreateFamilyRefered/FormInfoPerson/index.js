@@ -47,7 +47,7 @@ const FormInfoPerson = () => {
         name: Yup.string().required("Campo obrigatório"),
         surname: Yup.string(),
         birthday: Yup.string().required("Campo obrigatório"),
-        birth_certificate: Yup.number(),
+        birth_certificate: Yup.string().matches(/^\d{0,32}$/, "Apenas dígitos, máximo 32 caracteres"),
         folder: Yup.string(),
         archive: Yup.string(),
         number: Yup.string(),
@@ -142,7 +142,7 @@ const FormInfoPerson = () => {
                                     ) : null}
                                 </Column>
                                 <Column>
-                                    <CrasInput label="Certidão de nascimento" name={"birth_certificate"} onChange={handleChange} value={values.birth_certificate} />
+                                    <CrasInput label="Certidão de nascimento" name={"birth_certificate"} onChange={handleChange} value={values.birth_certificate} maxLength={32} />
                                     <Padding />
                                     {errors.birth_certificate && touched.birth_certificate ? (
                                         <div style={{ color: "red" }}>{errors.birth_certificate}<Padding /></div>
