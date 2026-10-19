@@ -2,6 +2,7 @@ import { useState } from "react"
 import { CreateUserIdentifyController } from "../../../sdk/FamilyRefered/CreateUserIdentify/controller";
 import { GetIdAttendance } from "../../../services/localstorage";
 import { onlyNisDigits } from "../../../Controller/nis";
+import { onlyRgChars } from "../../../Controller/rg";
 
 const CreateFamilyReferedState = () => {
     const [activeStep, setActiveStep] = useState(0);
@@ -94,7 +95,7 @@ const CreateFamilyReferedState = () => {
             ...dataValues,
             nis: onlyNisDigits(dataValues.nis),
             cpf: dataValues.cpf.replace(/\D/g, ''),
-            rg_number: dataValues.rg_number.replace(/\D/g, ''),
+            rg_number: onlyRgChars(dataValues.rg_number),
             telephone: dataValues.telephone.replace(/\D/g, ''),
             uf_rg: dataValues.uf_rg.uf,
             attendance_unity: parseInt(GetIdAttendance()),

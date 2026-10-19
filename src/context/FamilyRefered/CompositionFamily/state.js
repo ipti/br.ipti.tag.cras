@@ -5,6 +5,7 @@ import { useFetchFamilyReferedId } from "../../../sdk/FamilyRefered/request"
 import { GetIdAttendance } from "../../../services/localstorage"
 import queryClient from "../../../services/react-query"
 import { onlyNisDigits } from "../../../Controller/nis";
+import { onlyRgChars } from "../../../Controller/rg";
 
 export const CompositionFamily = () => {
 
@@ -119,7 +120,7 @@ export const CompositionFamily = () => {
         CreateUserIdentifyWithFamilyRequestMutation.mutate({
             ...data, nis: onlyNisDigits(data.nis),
             cpf: data.cpf.replace(/\D/g, ''),
-            rg_number: data.rg_number.replace(/\D/g, ''),
+            rg_number: onlyRgChars(data.rg_number),
             uf_rg: data.uf_rg.uf,
             attendance_unity: parseInt(GetIdAttendance()),
             initial_date: new Date(Date.now()),
@@ -138,7 +139,7 @@ export const CompositionFamily = () => {
             birthday: values?.birthday,
             kinship: values?.kinship.id,
             nis: onlyNisDigits(values?.nis),
-            rg_number: values?.rg_number.replace(/\D/g, ''),
+            rg_number: onlyRgChars(values?.rg_number),
             rg_date_emission: values?.rg_date_emission,
             uf_rg: values?.uf_rg.uf,
             emission_rg: values?.emission_rg,

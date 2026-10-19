@@ -10,6 +10,7 @@ import CrasRadioButton from "../../../../CrasUi/RadioButton";
 import { Column, Grid, Padding, Row } from "../../../../CrasUi/styles/styles";
 import { CreateFamilyReferedContext } from "../../../../context/FamilyRefered/CreateFamilyRefered/context";
 import { NIS_MASK, nisValidation } from "../../../../Controller/nis";
+import { RG_MASK, RG_MASK_OPTIONS } from "../../../../Controller/rg";
 
 
 const FormInfoPerson = () => {
@@ -157,7 +158,7 @@ const FormInfoPerson = () => {
                             </Grid>
                             <Grid checkMockup={[{}, {}, {}, {}]}>
                                 <Column>
-                                    <CrasInputMask mask={"99.999-9999"} label="RG" name="rg_number" onChange={handleChange} value={values.rg_number} />
+                                    <CrasInputMask mask={RG_MASK} maskOptions={RG_MASK_OPTIONS} label="RG" name="rg_number" onChange={handleChange} value={values.rg_number} />
                                     <Padding />
                                     {errors.rg_number && touched.rg_number ? (
                                         <div style={{ color: "red" }}>{errors.rg_number}<Padding /></div>
