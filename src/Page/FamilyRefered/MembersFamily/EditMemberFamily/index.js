@@ -36,6 +36,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
         surname: member?.surname ?? "",
         kinship: kinship(member?.kinship) ?? "",
         birthday: member?.birthday ?? null,
+        birth_certificate: member?.birth_certificate ?? "",
         nis: member?.nis ?? "",
         rg_number: member?.rg_number ?? "",
         rg_date_emission: member?.rg_date_emission ?? null,
@@ -59,6 +60,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
         kinship: Yup.object().required("Campo obrigatório"),
         surname: Yup.string(),
         birthday: Yup.string().nullable().required("Campo obrigatório"),
+        birth_certificate: Yup.string().matches(/^\d{0,32}$/, "Apenas dígitos, máximo 32 caracteres"),
         nis: nisValidation,
         rg_number: Yup.string(),
         rg_date_emission: Yup.string().nullable(),
@@ -101,7 +103,7 @@ const EditMemberFamily = ({ id, setOpen }) => {
                                     ) : null}
                                 </Column>
                             </Grid>
-                            <Grid checkMockup={[{}, {}]}>
+                            <Grid checkMockup={[{}, {}, {}]}>
                                 <Column>
                                     <CrasDropdown label="Parentesco" options={parentesco} optionLabel={"name"} value={values.kinship} name="kinship" onChange={handleChange} />
                                     <Padding />
@@ -114,6 +116,13 @@ const EditMemberFamily = ({ id, setOpen }) => {
                                     <Padding />
                                     {errors.birthday && touched.birthday ? (
                                         <div style={{ color: "red" }}>{errors.birthday}<Padding /></div>
+                                    ) : null}
+                                </Column>
+                                <Column>
+                                    <CrasInput label="Certidão de nascimento" name={"birth_certificate"} onChange={handleChange} value={values.birth_certificate} maxLength={32} />
+                                    <Padding />
+                                    {errors.birth_certificate && touched.birth_certificate ? (
+                                        <div style={{ color: "red" }}>{errors.birth_certificate}<Padding /></div>
                                     ) : null}
                                 </Column>
                             </Grid>

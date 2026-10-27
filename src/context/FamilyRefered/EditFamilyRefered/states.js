@@ -198,7 +198,7 @@ const EditRferedState = () => {
       income: values.income,
       nuclear_family: values?.nuclear_family,
       signed_portfolio: values?.signed_portfolio,
-
+      birth_certificate: values?.birth_certificate === "" ? null : values?.birth_certificate,
     }
 
     const bodyVulnerability = {
@@ -289,8 +289,36 @@ const EditRferedState = () => {
   }
 
 
+  const handleEditFamilyMember = (values, id) => {
+    const bodyUserIdentify = {
+      name: values?.name,
+      surname: values?.surname === "" ? undefined : values?.surname,
+      birthday: values?.birthday,
+      kinship: values?.kinship.id,
+      nis: onlyNisDigits(values?.nis),
+      rg_number: onlyRgChars(values?.rg_number),
+      rg_date_emission: values?.rg_date_emission,
+      uf_rg: values?.uf_rg.uf,
+      emission_rg: values?.emission_rg,
+      cpf: values.cpf.replace(/\D/g, ''),
+      is_deficiency: values?.is_deficiency,
+      filiation_1: values?.filiation_1,
+      filiation_2: values.filiation_2,
+      marital_status: values?.marital_status,
+      escolarity: values?.escolarity,
+      initial_date: values?.initial_date,
+      final_date: values?.final_date,
+      profission: values?.profission,
+      income: values?.income,
+      nuclear_family: values?.nuclear_family,
+      signed_portfolio: values?.signed_portfolio,
+      birth_certificate: values?.birth_certificate === "" ? null : values?.birth_certificate,
+    }
+    EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: id });
+  }
+
   return {
-    deleteFamily, handleFamilyIsActive, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember
+    deleteFamily, handleFamilyIsActive, activeStep, setActiveStep, addMember, setAddMember, sexo, nextStep, backStep, HandleCreateUserIdentify, estadosDoBrasil, escolaridadeNoBrasil, values, handleFamiliaRefered, estadosCivis, family, handleCreateMmber, parentesco, deleteMember, toast, show, open, setOpen, benefitsfetch, handleCreateFamilyBenefits, deleteFamilyBenefits, deleteFamilyMember, handleEditFamilyMember
   }
 }
 

@@ -145,7 +145,6 @@ export const CompositionFamily = () => {
             emission_rg: values?.emission_rg,
             cpf: values.cpf.replace(/\D/g, ''),
             is_deficiency: values?.is_deficiency,
-            // deficiencia: ?deficiencia ?? "",
             filiation_1: values?.filiation_1,
             filiation_2: values.filiation_2,
             marital_status: values?.marital_status,
@@ -155,7 +154,8 @@ export const CompositionFamily = () => {
             profission: values?.profission,
             income: values?.income,
             nuclear_family: values?.nuclear_family,
-            signed_portfolio: values?.signed_portfolio
+            signed_portfolio: values?.signed_portfolio,
+            birth_certificate: values?.birth_certificate === "" ? null : values?.birth_certificate,
         }
 
         EditFamilyRequestRequestMutation.mutate({ data: bodyUserIdentify, id: id });
