@@ -36,11 +36,11 @@ const CountFamilyRequest = async () => {
     }
 }
 
-const CountAttendancebyMonthRequest = async () => {
+const CountAttendancebyMonthRequest = async (year) => {
     try {
         return await http.get("/bff/charts/attendance-by-month", {
             params: {
-                year: 2023,
+                year,
                 attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined
             }
         }, config).then(response => response.data)
@@ -56,11 +56,9 @@ const CountAttendancebyMonthRequest = async () => {
     }
 }
 
-const CountAttendanceFinishedorPendingRequest = async () => {
-
-
+const CountAttendanceFinishedorPendingRequest = async (year) => {
     try {
-        return await http.get("/bff/charts/attendance-finished-or-pending", { params: { year: 2023, attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined } }, config).then(response => response.data)
+        return await http.get("/bff/charts/attendance-finished-or-pending", { params: { year, attendance_unity_fk: GetIdAttendance() ? parseInt(GetIdAttendance()) : undefined } }, config).then(response => response.data)
             .catch(err => {
                 if (err.response.status === 401) {
                     logout();
@@ -73,12 +71,12 @@ const CountAttendanceFinishedorPendingRequest = async () => {
     }
 }
 
-export const useFetchAttendanceorPending = () => {
-    return useQuery("ChartAttendanceFinishorPneding", () => CountAttendanceFinishedorPendingRequest());
+export const useFetchAttendanceorPending = (year) => {
+    return useQuery(["ChartAttendanceFinishorPneding", year], () => CountAttendanceFinishedorPendingRequest(year));
 };
 
-export const useFetchCoundAttendanceMonth = () => {
-    return useQuery("ChartCountAttendanceMonth", () => CountAttendancebyMonthRequest());
+export const useFetchCoundAttendanceMonth = (year) => {
+    return useQuery(["ChartCountAttendanceMonth", year], () => CountAttendancebyMonthRequest(year));
 };
 
 export const useFetchCoundUniFamily = () => {

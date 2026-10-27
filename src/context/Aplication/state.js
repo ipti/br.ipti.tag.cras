@@ -7,6 +7,9 @@ const AplicationState = () => {
 
     const currentYear = new Date().getFullYear();
     const year = Array.from({ length: currentYear - 1998 }, (_, i) => 1999 + i);
+    const dashboardYears = Array.from({ length: currentYear - 2022 }, (_, i) => String(2023 + i));
+
+    const [selectedYear, setSelectedYear] = useState(String(currentYear));
 
     // Inicializa do localStorage — disponível imediatamente, sem flash
     const [user, setUser] = useState(() => getUserData());
@@ -46,7 +49,7 @@ const AplicationState = () => {
         }
     }, [attendancefetch, user]);
 
-    return { user, handleUser, year, attendance, noUnities };
+    return { user, handleUser, year, attendance, noUnities, selectedYear, setSelectedYear, dashboardYears };
 };
 
 export default AplicationState;

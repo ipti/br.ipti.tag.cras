@@ -1,15 +1,18 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AplicationContext } from "../../context/Aplication/context";
 import { useFetchAttendanceorPending, useFetchCoundAttendanceMonth, useFetchCoundFamily, useFetchCoundUniFamily } from "../../sdk/Dashboard/request";
 
 export const DashboardState = () => {
+
+    const { selectedYear } = useContext(AplicationContext);
 
     const [countUniFamily, setcountUniFamily] = useState();
     const [countAttendenceMonth, setCountAttendanceMonth] = useState();
     const [attendanceFinishorPending, setattendanceFinishorPending] = useState();
     const [CountFamily, setCountFamily] = useState()
     const { data: CountUniFamilyRequest } = useFetchCoundUniFamily();
-    const { data: attendanceFinishorPendingRequest } = useFetchAttendanceorPending();
-    const { data: CountAttendanceMonthRequest } = useFetchCoundAttendanceMonth();
+    const { data: attendanceFinishorPendingRequest } = useFetchAttendanceorPending(selectedYear);
+    const { data: CountAttendanceMonthRequest } = useFetchCoundAttendanceMonth(selectedYear);
     const { data: CountFamilyRequest } = useFetchCoundFamily()
 
     useEffect(() => {

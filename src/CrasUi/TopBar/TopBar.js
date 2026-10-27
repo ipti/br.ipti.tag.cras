@@ -12,7 +12,7 @@ const TopBar = ({ setViewd, viewdMenu }) => {
 
     const larguraTela = window.innerWidth;
 
-    const { attendance, user, noUnities } = useContext(AplicationContext)
+    const { attendance, user, noUnities, selectedYear, setSelectedYear, dashboardYears } = useContext(AplicationContext)
 
     const availableUnities = user?.role === "TECHNICIAN"
         ? attendance.filter(a => (user?.attendance_unity_ids ?? []).includes(a.id))
@@ -60,6 +60,15 @@ const TopBar = ({ setViewd, viewdMenu }) => {
                             />
                         </Column>
                     ) : null}
+                    <Padding />
+                    <Column>
+                        <CrasDropdown
+                            placeholder={"Ano"}
+                            options={dashboardYears}
+                            value={selectedYear}
+                            onChange={(e) => setSelectedYear(e.target.value)}
+                        />
+                    </Column>
                 </Row>
             </Column>
             <Column style={{ width: "auto" }} id="center">
