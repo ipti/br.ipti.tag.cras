@@ -32,10 +32,10 @@ const FormFamilyComposition = () => {
         name: "",
         surname: "",
         kinship: "",
-        birthday: "",
+        birthday: null,
         nis: "",
         rg_number: "",
-        rg_date_emission: "",
+        rg_date_emission: null,
         uf_rg: "",
         emission_rg: "",
         cpf: "",
@@ -56,10 +56,10 @@ const FormFamilyComposition = () => {
         name: Yup.string().required("Campo obrigatório"),
         kinship: Yup.object().required("Campo obrigatório"),
         surname: Yup.string(),
-        birthday: Yup.string().required("Campo obrigatório"),
+        birthday: Yup.string().nullable().required("Campo obrigatório"),
         nis: nisValidation,
         rg_number: Yup.string().required("Campo obrigatório"),
-        rg_date_emission: Yup.string().required("Campo obrigatório"),
+        rg_date_emission: Yup.string().nullable().required("Campo obrigatório"),
         uf_rg: Yup.object().required("Campo obrigatório"),
         emission_rg: Yup.string().required("Campo obrigatório"),
         cpf: Yup.string().required("Campo obrigatório"),
@@ -113,8 +113,8 @@ const FormFamilyComposition = () => {
                 <Column>
                     <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { HandleCreateUserIdentify(value); setAddMember(false) }}>
                         {({ values, handleChange, handleSubmit, errors, touched, setFieldValue }) => {
-                            const dateEmit = new Date(values.rg_date_emission);
-                            const dateBithrday = new Date(values.birthday)
+                            const dateEmit = values.rg_date_emission ? new Date(values.rg_date_emission) : null;
+                            const dateBithrday = values.birthday ? new Date(values.birthday) : null;
                             return (
                                 <form onSubmit={handleSubmit}>
                                     <Grid checkMockup={[{}, {}]}>

@@ -21,14 +21,14 @@ const FormInfoPerson = () => {
     const initialValue = {
         name: dataValues.name ?? "",
         surname: dataValues.surname ?? "",
-        birthday: dataValues.birthday ?? new Date(Date.now()),
+        birthday: dataValues.birthday ?? null,
         birth_certificate: dataValues.birth_certificate ?? "",
         folder: dataValues.folder ?? "",
         archive: dataValues.arquive ?? "",
         number: dataValues.number ?? "",
         nis: dataValues.nis ?? "",
         rg_number: dataValues.rg_number ?? "",
-        rg_date_emission: dataValues.rg_date_emission ?? new Date(Date.now()),
+        rg_date_emission: dataValues.rg_date_emission ?? null,
         uf_rg: dataValues.uf_rg ?? "",
         emission_rg: dataValues.emission_rg ?? "",
         cpf: dataValues.cpf ?? "",
@@ -46,14 +46,14 @@ const FormInfoPerson = () => {
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Campo obrigatório"),
         surname: Yup.string(),
-        birthday: Yup.string().required("Campo obrigatório"),
+        birthday: Yup.string().nullable().required("Campo obrigatório"),
         birth_certificate: Yup.string().matches(/^\d{0,32}$/, "Apenas dígitos, máximo 32 caracteres"),
         folder: Yup.string(),
         archive: Yup.string(),
         number: Yup.string(),
         nis: nisValidation,
         rg_number: Yup.string(),
-        rg_date_emission: Yup.string(),
+        rg_date_emission: Yup.string().nullable(),
         initial_date: Yup.string().required("Campo obrigatório"),
         final_date: Yup.string(),
         uf_rg: Yup.object(),
@@ -76,8 +76,8 @@ const FormInfoPerson = () => {
             <Formik initialValues={initialValue} onSubmit={values => { nextStep(values) }} validationSchema={validationSchema}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
                     const dateEntry = new Date(values.initial_date);
-                    const dateEmit = new Date(values.rg_date_emission);
-                    const dateBithrday = new Date(values.birthday)
+                    const dateEmit = values.rg_date_emission ? new Date(values.rg_date_emission) : null;
+                    const dateBithrday = values.birthday ? new Date(values.birthday) : null;
 
 
 

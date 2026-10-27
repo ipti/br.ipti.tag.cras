@@ -35,10 +35,10 @@ const EditMemberFamily = ({ id, setOpen }) => {
         name: member?.name ?? "",
         surname: member?.surname ?? "",
         kinship: kinship(member?.kinship) ?? "",
-        birthday: member?.birthday ?? new Date(Date.now()),
+        birthday: member?.birthday ?? null,
         nis: member?.nis ?? "",
         rg_number: member?.rg_number ?? "",
-        rg_date_emission: member?.rg_date_emission ?? new Date(Date.now()),
+        rg_date_emission: member?.rg_date_emission ?? null,
         uf_rg: valueUf() ?? "",
         emission_rg: member?.emission_rg ?? "",
         cpf: member?.cpf ?? "",
@@ -58,10 +58,10 @@ const EditMemberFamily = ({ id, setOpen }) => {
         name: Yup.string().required("Campo obrigatório"),
         kinship: Yup.object().required("Campo obrigatório"),
         surname: Yup.string(),
-        birthday: Yup.string().required("Campo obrigatório"),
+        birthday: Yup.string().nullable().required("Campo obrigatório"),
         nis: nisValidation,
         rg_number: Yup.string(),
-        rg_date_emission: Yup.string(),
+        rg_date_emission: Yup.string().nullable(),
         uf_rg: Yup.object(),
         emission_rg: Yup.string(),
         cpf: Yup.string().required("Campo obrigatório"),
@@ -81,8 +81,8 @@ const EditMemberFamily = ({ id, setOpen }) => {
         <Column>
             <Formik initialValues={initialValue} validationSchema={schema} onSubmit={(value) => { handleEditFamilyMember(value, id); setOpen(false) }}>
                 {({ values, handleChange, handleSubmit, errors, touched }) => {
-                    const dateEmit = new Date(values.rg_date_emission);
-                    const dateBithrday = new Date(values.birthday)
+                    const dateEmit = values.rg_date_emission ? new Date(values.rg_date_emission) : null;
+                    const dateBithrday = values.birthday ? new Date(values.birthday) : null;
                     return (
                         <form onSubmit={handleSubmit}>
                             <Grid checkMockup={[{}, {}]}>

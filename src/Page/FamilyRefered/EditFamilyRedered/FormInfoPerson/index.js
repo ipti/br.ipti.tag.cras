@@ -17,9 +17,9 @@ const FormInfoPerson = ({ values, errors, touched, handleChange }) => {
     if (!family) return null;
 
     const dateEntry = new Date(values.initial_date);
-    const dateExit = new Date(values.final_date);
-    const dateEmit = new Date(values.rg_date_emission);
-    const dateBithrday = new Date(values.birthday)
+    const dateExit = values.final_date ? new Date(values.final_date) : null;
+    const dateEmit = values.rg_date_emission ? new Date(values.rg_date_emission) : null;
+    const dateBithrday = values.birthday ? new Date(values.birthday) : null;
 
     return (
         <Column>
